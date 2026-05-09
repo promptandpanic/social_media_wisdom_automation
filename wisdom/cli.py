@@ -134,8 +134,8 @@ def validate():
 @cli.command("youtube-auth")
 def youtube_auth():
     """Run one-time OAuth2 flow to obtain a YouTube refresh token."""
-    from wisdom.platforms.youtube import YouTubePlatform
-    token = YouTubePlatform.run_oauth_flow()
+    from wisdom.platforms.youtube import run_oauth_flow
+    token = run_oauth_flow()
     click.echo(f"\nYOUTUBE_REFRESH_TOKEN={token}")
     click.echo("Add this to your .env / GitHub Secrets.")
 

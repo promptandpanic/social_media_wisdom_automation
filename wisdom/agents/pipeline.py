@@ -382,7 +382,10 @@ def _send_email_report(state: PipelineState, theme_name: str) -> None:
     msg.attach(MIMEText(html, "html"))
 
     try:
-        server = smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=10)
+        server = smtplib.SMTP("smtp.gmail.com", 587, timeout=15)
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
         server.login(sender, password)
         server.send_message(msg)
         server.quit()

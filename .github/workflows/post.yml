@@ -1,72 +1,90 @@
-name: Post Quote
+name: Post Quotes
 
 on:
+  schedule:
+    - cron: '30 1 * * *'    # Morning Motivation  — 7:00 AM IST  (daily)
+    - cron: '30 4 * * *'    # She Feels           — 10:00 AM IST (daily)
+    - cron: '30 8 * * *'    # Rotating            — 2:00 PM IST  (wisdom/love/mindfulness/goodnight)
+    - cron: '30 17 * * *'   # Late Night Feels    — 11:00 PM IST (daily)
+
   workflow_dispatch:
     inputs:
       theme:
-        description: 'Which theme to post'
+        description: 'Theme to post'
         required: true
         type: choice
-        options:
-          - morning
-          - wisdom
-          - love
-          - mindfulness
-          - goodnight
-          - latenight
-          - womenpower
+        options: [morning, wisdom, love, mindfulness, goodnight, latenight, womenpower]
       offline:
-        description: 'Run offline (Bypass LLM, use curated quotes)'
+        description: 'Offline mode (use curated quotes, skip LLM)'
         required: false
         type: boolean
         default: false
 
 permissions:
-  contents: write   # needed to create/update the 'db' release asset
+  contents: write
 
 jobs:
-  run-pipeline:
+  post:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install dependencies
+      - name: Install system dependencies
         run: |
-          sudo apt-get update
+          sudo apt-get update -qq
           sudo apt-get install -y ffmpeg
-          pip install -r requirements.txt
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
 
       - name: Pre-download fonts
-        run: |
-          python3 -c "from wisdom.composers.card import _ensure_fonts; _ensure_fonts()"
+        run: python3 -c "from wisdom.composers.card import _ensure_fonts; _ensure_fonts()"
 
-      - name: Ensure DB release exists
+      - name: Ensure media-pool release exists
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release view db 2>/dev/null || \
-          gh release create db \
-            --title "Database" \
-            --notes "SQLite DB for posted quotes — managed by CI, do not edit manually" \
+          gh release view media-pool 2>/dev/null || \
+          gh release create media-pool \
+            --title "Media Pool" \
+            --notes "Auto-managed CDN bucket for Instagram uploads." \
             --prerelease
 
-      - name: Run pipeline
+      - name: Resolve theme
+        id: theme
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "name=${{ github.event.inputs.theme }}" >> $GITHUB_OUTPUT
+
+          elif [ "${{ github.event.schedule }}" = "30 1 * * *" ]; then
+            echo "name=morning" >> $GITHUB_OUTPUT
+
+          elif [ "${{ github.event.schedule }}" = "30 4 * * *" ]; then
+            echo "name=womenpower" >> $GITHUB_OUTPUT
+
+          elif [ "${{ github.event.schedule }}" = "30 17 * * *" ]; then
+            echo "name=latenight" >> $GITHUB_OUTPUT
+
+          else
+            # 2 PM slot — rotate: wisdom → love → mindfulness → goodnight
+            THEMES=(wisdom love mindfulness goodnight)
+            IDX=$(( $(date +%j) % 4 ))
+            echo "name=${THEMES[$IDX]}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run pipeline — ${{ steps.theme.outputs.name }}
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          HF_API_KEY: ${{ secrets.HF_API_KEY }}
           LEONARDO_API_KEY: ${{ secrets.LEONARDO_API_KEY }}
-          INSTAGRAM_APP_ID: ${{ secrets.INSTAGRAM_APP_ID }}
-          INSTAGRAM_APP_SECRET: ${{ secrets.INSTAGRAM_APP_SECRET }}
+          HF_API_KEY: ${{ secrets.HF_API_KEY }}
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
-          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          INSTAGRAM_BUSINESS_ID: ${{ secrets.INSTAGRAM_BUSINESS_ID }}
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
@@ -79,5 +97,4 @@ jobs:
           if [ "${{ github.event.inputs.offline }}" = "true" ]; then
             OFFLINE_FLAG="--offline"
           fi
-
-          python -m wisdom.cli run ${{ github.event.inputs.theme }} $OFFLINE_FLAG
+          python -m wisdom.cli run ${{ steps.theme.outputs.name }} $OFFLINE_FLAG

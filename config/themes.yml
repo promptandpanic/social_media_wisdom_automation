@@ -21,7 +21,7 @@ themes:
     platforms: [instagram, youtube]
     hashtags: ["#MorningMotivation", "#DailyStoic", "#MindsetMastery", "#PhilosophyQuotes", "#SuccessMindset"]
     youtube:
-      title_template: "{quote_snippet} | Morning Motivation"
+      title_template: "Morning Motivation"
       tags: ["morning motivation", "daily stoic", "mindset mastery", "philosophical quotes", "success mindset", "daily quotes"]
       category_id: "22"
       privacy: public
@@ -34,7 +34,7 @@ themes:
     platforms: [instagram, youtube]
     hashtags: ["#Stoicism", "#DeepThoughts", "#WisdomQuotes", "#PhilosophyOfLife", "#CarlJung"]
     youtube:
-      title_template: "{quote_snippet} | Life Wisdom"
+      title_template: "Life Wisdom"
       tags: ["stoicism", "life wisdom", "deep thoughts", "philosophy quotes", "carl jung", "ancient wisdom"]
       category_id: "22"
       privacy: public
@@ -47,7 +47,7 @@ themes:
     platforms: [instagram, youtube]
     hashtags: ["#LoveQuotes", "#RelationshipAdvice", "#Heartbreak", "#TwinFlame", "#DeepLoveQuotes"]
     youtube:
-      title_template: "{quote_snippet} | Love & Relationships"
+      title_template: "Love & Relationships"
       tags: ["love quotes", "relationship advice", "twin flame", "heartbreak quotes", "deep emotional quotes"]
       category_id: "22"
       privacy: public
@@ -60,7 +60,7 @@ themes:
     platforms: [instagram, youtube]
     hashtags: ["#MindfulnessPractice", "#SpiritualAwakening", "#InnerPeace", "#MentalClarity", "#ZenLife"]
     youtube:
-      title_template: "{quote_snippet} | Mindfulness"
+      title_template: "Mindfulness & Inner Peace"
       tags: ["mindfulness", "spiritual awakening", "inner peace", "zen quotes", "mental clarity", "meditation quotes"]
       category_id: "22"
       privacy: public
@@ -73,7 +73,7 @@ themes:
     platforms: [instagram, youtube]
     hashtags: ["#GoodNight", "#NightThoughts", "#GratitudePractice", "#PeacefulMind", "#SleepWell"]
     youtube:
-      title_template: "{quote_snippet} | Goodnight"
+      title_template: "Goodnight & Gratitude"
       tags: ["goodnight quotes", "night thoughts", "gratitude practice", "peaceful mind", "bedtime quotes"]
       category_id: "22"
       privacy: public
@@ -86,7 +86,7 @@ themes:
     platforms: [instagram, youtube]
     hashtags: ["#LateNightThoughts", "#Overthinking", "#MidnightThoughts", "#Melancholy", "#DeepQuotes"]
     youtube:
-      title_template: "{quote_snippet} | Late Night Feels"
+      title_template: "Late Night Feels"
       tags: ["late night thoughts", "3am quotes", "overthinking", "melancholy", "deep emotional quotes"]
       category_id: "22"
       privacy: public
@@ -100,7 +100,7 @@ themes:
     styles: [cinematic_female_protagonist]
     hashtags: ["#DivineFeminine", "#WomenEmpowerment", "#IndependentWoman", "#DarkFeminine", "#SheQuotes"]
     youtube:
-      title_template: "{quote_snippet} | She Feels"
+      title_template: "She Feels"
       tags: ["divine feminine", "women empowerment", "independent woman", "dark feminine energy", "she feels"]
       category_id: "22"
       privacy: public
