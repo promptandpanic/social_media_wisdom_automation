@@ -16,8 +16,8 @@ _API = "https://api.github.com"
 
 class GitHubUploader:
     def __init__(self):
-        self._token = os.environ.get("GITHUB_TOKEN", "")
-        self._repo = os.environ.get("GITHUB_REPO") or os.environ.get("GITHUB_REPOSITORY", "")
+        self._token = os.environ.get("GITPROVIDER_TOKEN") or os.environ.get("GITHUB_TOKEN", "")
+        self._repo = os.environ.get("GITPROVIDER_REPO") or os.environ.get("GITHUB_REPO") or os.environ.get("GITHUB_REPOSITORY", "")
         self._uploaded: list[str] = []
 
     def _headers(self) -> dict:
@@ -35,7 +35,7 @@ class GitHubUploader:
 
     def upload(self, data: bytes, filename: str | None = None) -> str | None:
         if not self._token or not self._repo:
-            logger.warning("GitHub uploader: GITHUB_TOKEN or GITHUB_REPOSITORY not set")
+            logger.warning("GitHub uploader: GITPROVIDER_TOKEN or GITPROVIDER_REPO not set")
             return None
 
         release_id = self._release_id()

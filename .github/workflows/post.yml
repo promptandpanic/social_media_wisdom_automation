@@ -91,7 +91,8 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITPROVIDER_TOKEN: ${{ secrets.GITPROVIDER_TOKEN }}
+          GITPROVIDER_REPO: ${{ github.repository }}
         run: |
           OFFLINE_FLAG=""
           if [ "${{ github.event.inputs.offline }}" = "true" ]; then

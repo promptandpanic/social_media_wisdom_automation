@@ -41,12 +41,12 @@ def _is_ci() -> bool:
 
 
 def _gh_headers() -> dict:
-    token = os.environ.get("GITHUB_TOKEN", "")
+    token = os.environ.get("GITPROVIDER_TOKEN") or os.environ.get("GITHUB_TOKEN", "")
     return {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
 
 
 def _repo() -> str:
-    return os.environ.get("GITHUB_REPOSITORY", "")
+    return os.environ.get("GITPROVIDER_REPO") or os.environ.get("GITHUB_REPOSITORY", "")
 
 
 def _release_id() -> int | None:
@@ -61,7 +61,7 @@ def _release_id() -> int | None:
 
 
 def _download_db(path: Path) -> None:
-    if not _is_ci() or not _repo() or not os.environ.get("GITHUB_TOKEN"):
+    if not _is_ci() or not _repo() or not (os.environ.get("GITPROVIDER_TOKEN") or os.environ.get("GITHUB_TOKEN")):
         return
 
     release_id = _release_id()
