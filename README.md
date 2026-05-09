@@ -238,7 +238,7 @@ That's it. Add the cron line to the workflow and it runs.
 | Rotating¹ | 2:00 PM | `30 8 * * *` | Daily |
 | Late Night Feels | 1:15 AM | `45 19 * * *` | Daily |
 
-¹ Rotates through: Wisdom → Love → Mindfulness → Goodnight (cycles by day-of-year mod 4)
+¹ Rotates through: Wisdom → Love → Mindfulness → Dark Academia (cycles by day-of-year mod 4)
 
 Manual trigger available via `workflow_dispatch` with theme selection and offline mode toggle.
 

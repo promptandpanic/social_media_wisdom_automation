@@ -49,7 +49,7 @@ styles:
 
   dark_academia_classical:
     summary: "Classical statues, old libraries, gothic shadows, intellectual"
-    categories: [wisdom, morning]
+    categories: [wisdom, morning, darkacademia]
     weight: high
     description: >
       The viral "Dark Academia" and stoic philosophy aesthetic, perfect for quotes from Kafka, Nietzsche, or Aurelius.

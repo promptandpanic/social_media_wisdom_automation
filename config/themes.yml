@@ -77,6 +77,20 @@ themes:
       tags: ["goodnight quotes", "night thoughts", "gratitude practice", "peaceful mind", "bedtime quotes"]
       category_id: "22"
       privacy: public
+    enabled: false
+
+  darkacademia:
+    name: Dark Academia
+    format: reel
+    max_words: 22
+    platforms: [instagram, youtube]
+    styles: [dark_academia_classical]
+    hashtags: ["#DarkAcademia", "#PhilosophyQuotes", "#Nietzsche", "#AcademicAesthetic", "#ClassicalWisdom"]
+    youtube:
+      title_template: "Dark Academia"
+      tags: ["dark academia", "philosophy quotes", "nietzsche", "kafka", "classical wisdom", "intellectual quotes", "stoicism"]
+      category_id: "22"
+      privacy: public
     enabled: true
 
   latenight:
