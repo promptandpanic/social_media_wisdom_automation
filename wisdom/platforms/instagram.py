@@ -31,6 +31,17 @@ class InstagramPlatform(BasePlatform):
     def _biz_id(self) -> str:
         return os.environ["INSTAGRAM_BUSINESS_ID"]
 
+    def _permalink(self, post_id: str, token: str) -> str:
+        try:
+            r = requests.get(
+                f"{_GRAPH}/{post_id}",
+                params={"fields": "permalink", "access_token": token},
+                timeout=15,
+            )
+            return r.json().get("permalink", "")
+        except Exception:
+            return ""
+
     def _caption(self, meta: PostMeta) -> str:
         tags = " ".join(meta.hashtags)
         return f"{meta.caption}\n\n{tags}" if tags else meta.caption
@@ -81,7 +92,8 @@ class InstagramPlatform(BasePlatform):
             )
             pub.raise_for_status()
             post_id = pub.json()["id"]
-            return PlatformResult("instagram", "posted", post_id=post_id)
+            url = self._permalink(post_id, token)
+            return PlatformResult("instagram", "posted", post_id=post_id, url=url)
 
         except Exception as exc:
             return PlatformResult("instagram", "failed", error=str(exc))
@@ -116,7 +128,8 @@ class InstagramPlatform(BasePlatform):
             )
             pub.raise_for_status()
             post_id = pub.json()["id"]
-            return PlatformResult("instagram", "posted", post_id=post_id)
+            url = self._permalink(post_id, token)
+            return PlatformResult("instagram", "posted", post_id=post_id, url=url)
 
         except Exception as exc:
             return PlatformResult("instagram", "failed", error=str(exc))
