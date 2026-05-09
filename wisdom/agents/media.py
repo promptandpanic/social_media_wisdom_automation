@@ -156,6 +156,9 @@ def _judge_image(image_bytes: bytes, quote) -> tuple[int, bool, bool]:
             score = int(data.get("score", 5))
             hard_gate = bool(data.get("hard_gate_failure", False))
             accepted = bool(data.get("accept", False)) and score >= threshold
+            issues = data.get("issues", "")
+            if issues:
+                logger.info(f"  Judge reason: {issues}")
             return score, accepted, hard_gate
     except Exception as exc:
         logger.warning(f"Judge failed ({exc}) — accepting with score 7")
