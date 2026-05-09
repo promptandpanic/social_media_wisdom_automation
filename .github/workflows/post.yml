@@ -1,0 +1,83 @@
+name: Post Quote
+
+on:
+  workflow_dispatch:
+    inputs:
+      theme:
+        description: 'Which theme to post'
+        required: true
+        type: choice
+        options:
+          - morning
+          - wisdom
+          - love
+          - mindfulness
+          - goodnight
+          - latenight
+          - womenpower
+      offline:
+        description: 'Run offline (Bypass LLM, use curated quotes)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # needed to create/update the 'db' release asset
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          pip install -r requirements.txt
+
+      - name: Pre-download fonts
+        run: |
+          python3 -c "from wisdom.composers.card import _ensure_fonts; _ensure_fonts()"
+
+      - name: Ensure DB release exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view db 2>/dev/null || \
+          gh release create db \
+            --title "Database" \
+            --notes "SQLite DB for posted quotes — managed by CI, do not edit manually" \
+            --prerelease
+
+      - name: Run pipeline
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          HF_API_KEY: ${{ secrets.HF_API_KEY }}
+          LEONARDO_API_KEY: ${{ secrets.LEONARDO_API_KEY }}
+          INSTAGRAM_APP_ID: ${{ secrets.INSTAGRAM_APP_ID }}
+          INSTAGRAM_APP_SECRET: ${{ secrets.INSTAGRAM_APP_SECRET }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OFFLINE_FLAG=""
+          if [ "${{ github.event.inputs.offline }}" = "true" ]; then
+            OFFLINE_FLAG="--offline"
+          fi
+
+          python -m wisdom.cli run ${{ github.event.inputs.theme }} $OFFLINE_FLAG

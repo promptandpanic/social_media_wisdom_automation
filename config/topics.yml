@@ -1,0 +1,130 @@
+# Quote topic configuration
+# Strategy: broad emotional territory only — let the LLM pick its own angle.
+# No prescriptive sub-lists or angle hints. Less is more.
+
+categories:
+
+  morning:
+    name: "Morning Motivation"
+    max_words: 18
+    brief: >
+      Effort before results, quiet discipline, starting despite resistance,
+      the gap between wanting and doing, confidence earned through action,
+      showing up when no one is watching. Specific and felt — not hustle slogans.
+
+  wisdom:
+    name: "Life Wisdom"
+    max_words: 24
+    brief: >
+      Truths that arrive slowly through experience, patterns people repeat without
+      seeing, clarity after disappointment, the cost of avoidance, what time
+      teaches that advice cannot. Should feel like naming something already known
+      but never said quite this way.
+
+    featured_authors:
+      - name: "Rumi"
+        note: "13th-century Sufi poet — soul, longing, love, spiritual depth"
+      - name: "Swami Vivekananda"
+        note: "Indian monk — strength, fearlessness, duty, self-belief"
+      - name: "Kabir Das"
+        note: "15th-century Indian saint-poet — raw honest wisdom, non-attachment"
+      - name: "APJ Abdul Kalam"
+        note: "India's beloved president/scientist — dreams, youth, resilience"
+      - name: "Khalil Gibran"
+        note: "Lebanese poet (The Prophet) — love, pain, grief, beauty of life"
+      - name: "Paulo Coelho"
+        note: "Brazilian novelist — destiny, courage, following your heart"
+      - name: "Chanakya"
+        note: "Ancient Indian strategist — sharp life wisdom, power, self-discipline"
+      - name: "Rabindranath Tagore"
+        note: "Nobel laureate Indian poet — beauty, humanity, spiritual depth"
+      - name: "Osho"
+        note: "Indian mystic — awareness, ego, freedom, presence"
+      - name: "Marcus Aurelius"
+        note: "Roman emperor, Stoic — duty, impermanence, self-mastery"
+      - name: "Seneca"
+        note: "Roman Stoic — time, mortality, living deliberately"
+      - name: "Carl Jung"
+        note: "Swiss psychologist — shadow, archetypes, the unconscious"
+      - name: "Alan Watts"
+        note: "British philosopher — Zen, acceptance, the nature of reality"
+
+  love:
+    name: "Love & Relationships"
+    max_words: 24
+    brief: >
+      Being chosen in ordinary moments, the difference between attention and care,
+      who you become in safe versus anxious love, the slow drift apart, things
+      people feel but never say, the specific ache of almost-love. Precise and
+      recognised — not romantic clichés.
+
+  mindfulness:
+    name: "Mindfulness & Inner Peace"
+    max_words: 20
+    brief: >
+      Rest without guilt, the cost of constant noise, returning to yourself,
+      attention as a finite resource, slowing down before life forces you to.
+      Should feel like relief — recognition, not instruction.
+
+  goodnight:
+    name: "Goodnight & Gratitude"
+    max_words: 22
+    brief: >
+      Letting the day end gently, releasing what you couldn't control, forgiving
+      yourself without ceremony, gratitude for ordinary comfort, tomorrow as a
+      blank page. Gentle — never saccharine. Something read in bed that feels
+      less alone.
+
+  latenight:
+    name: "Late Night Feels"
+    max_words: 26
+    topic_groups:
+      - name: "relationships_loss"
+        weight: 21
+        brief: >
+          Missing someone, grief without closure, the silence after something
+          ended, loving who a person was rather than who they became, being left
+          with memories but no answers.
+
+      - name: "ambition_pressure"
+        weight: 25
+        brief: >
+          The gap between who you are and who you promised to become. Feeling
+          behind while everyone else looks settled. Working without visible
+          results yet. Comparing your beginning to someone's highlight reel.
+
+      - name: "identity_belonging"
+        weight: 17
+        brief: >
+          Feeling like a stranger in your own life. Being surrounded but not
+          understood. Belonging nowhere completely. Not knowing which version
+          of yourself is real.
+
+      - name: "nostalgia_change"
+        weight: 13
+        brief: >
+          Missing simpler times. Friendships that faded without a goodbye.
+          Growing apart from people you meant to keep. Something ending quietly
+          before you noticed.
+
+      - name: "existential_overthinking"
+        weight: 14
+        brief: >
+          Small worries that become enormous after midnight. Questioning whether
+          you're building the right life. The thoughts that only arrive when the
+          world goes quiet.
+
+      - name: "emotional_unsaid"
+        weight: 10
+        brief: >
+          The things that go unsaid. Silence as self-protection. Feeling
+          something before you can name it. Being understood only after going quiet.
+
+  womenpower:
+    name: "She Feels"
+    max_words: 18
+    brief: >
+      Raw, emotionally precise feelings women instantly recognise — the unsaid,
+      the almost-chosen, the effort gap, being the strong one nobody checks on,
+      gut feelings before the mind catches up, small moments of choosing yourself.
+      Hyper-specific, not empowerment speeches.

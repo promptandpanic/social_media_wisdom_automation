@@ -1,0 +1,25 @@
+# Environment
+.env
+
+# Database — managed via GitHub Releases, never committed
+data/wisdom.db
+data/wisdom.db-shm
+data/wisdom.db-wal
+data/posted_quotes.json
+
+# Generated content
+output/
+data/pending/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# macOS
+.DS_Store

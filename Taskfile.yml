@@ -1,0 +1,117 @@
+version: "3"
+
+# social_media_wisdom_automation — go-task command runner
+# Install: brew install go-task
+# Usage:   task <command>
+
+dotenv: [".env"]
+
+vars:
+  THEME: '{{.THEME | default "wisdom"}}'
+
+tasks:
+
+  # ─── Local dev ─────────────────────────────────────────────────────────────
+
+  run:
+    desc: "Full pipeline for a theme (THEME=morning task run)"
+    cmd: python -m wisdom.cli run {{.THEME}}
+
+  dry-run:
+    desc: "Generate locally, save to output/, never post  (THEME=latenight task dry-run)"
+    cmd: python -m wisdom.cli dry-run {{.THEME}}
+
+  generate:
+    desc: "Generate + store content without posting  (THEME=wisdom task generate)"
+    cmd: python -m wisdom.cli generate {{.THEME}}
+
+  post:
+    desc: "Post oldest pending record for a theme  (THEME=morning task post)"
+    cmd: python -m wisdom.cli post {{.THEME}}
+
+  # ─── Config & validation ───────────────────────────────────────────────────
+
+  validate:
+    desc: "Parse all YAML config files and report errors"
+    cmd: python -m wisdom.cli validate
+
+  themes:
+    desc: "List all enabled themes and their schedule"
+    cmd: python -m wisdom.cli themes
+
+  styles:
+    desc: "Print all available visual styles"
+    cmd: python3 -c "import yaml; d=yaml.safe_load(open('config/styles.yml')); [print(f'  {k:30s} {v.get(\"weight\",\"medium\"):6s} {v.get(\"summary\",\"\")[:60]}') for k,v in d['styles'].items()]"
+
+  topics:
+    desc: "Print topic categories and their keys"
+    cmd: python3 -c "import yaml; d=yaml.safe_load(open('config/topics.yml')); [print(f'  {k}: {list(v.keys())}') for k,v in d['categories'].items()]"
+
+  # ─── Auth & setup ──────────────────────────────────────────────────────────
+
+  youtube-auth:
+    desc: "One-time OAuth2 flow to get YOUTUBE_REFRESH_TOKEN"
+    cmd: python -m wisdom.cli youtube-auth
+
+  fonts:
+    desc: "Pre-download all fonts to assets/fonts/"
+    cmd: python3 -c "from wisdom.composers.card import _ensure_fonts; _ensure_fonts(); print('Fonts ready.')"
+
+  # ─── DB / content ──────────────────────────────────────────────────────────
+
+  db-stats:
+    desc: "Print DB summary"
+    cmd: python3 -c "
+import sqlite3, pathlib
+p = pathlib.Path('data/wisdom.db')
+if not p.exists():
+    print('No local DB found.')
+else:
+    conn = sqlite3.connect(str(p))
+    posted = conn.execute('SELECT COUNT(*) FROM posted').fetchone()[0]
+    pending = conn.execute('SELECT COUNT(*) FROM pending').fetchone()[0]
+    print(f'Posted: {posted}')
+    print(f'Pending: {pending}')
+"
+
+  db-reset-pending:
+    desc: "Delete all pending (unposted) records — use with care"
+    cmd: python3 -c "
+import sqlite3, pathlib
+p = pathlib.Path('data/wisdom.db')
+if p.exists():
+    conn = sqlite3.connect(str(p))
+    conn.execute('DELETE FROM pending')
+    conn.commit()
+    print('Pending cleared.')
+else:
+    print('No local DB found.')
+"
+
+  # ─── All-theme batch ───────────────────────────────────────────────────────
+
+  generate-all:
+    desc: "Generate content for all enabled themes (no posting)"
+    cmd: python3 -c "
+import wisdom.config as cfg
+import subprocess, sys
+for key in cfg.enabled_themes():
+    print(f'=== Generating: {key} ===')
+    r = subprocess.run([sys.executable, '-m', 'wisdom.cli', 'generate', key])
+    if r.returncode != 0:
+        print(f'  FAILED: {key}')
+"
+
+  # ─── Dev tooling ───────────────────────────────────────────────────────────
+
+  install:
+    desc: "Install Python dependencies"
+    cmd: pip install -r requirements.txt
+
+  lint:
+    desc: "Run ruff linter"
+    cmd: ruff check wisdom/
+
+  fmt:
+    desc: "Auto-format with ruff"
+    cmd: ruff format wisdom/

@@ -1,0 +1,107 @@
+# Theme configuration — adding a new theme = add a block here, zero Python needed.
+#
+# Fields:
+#   name          Display name
+#   ist_time      IST posting time (HH:MM)
+#   utc_cron      GitHub Actions cron expression (IST = UTC+5:30)
+#   format        reel | image  (reel = video with Ken Burns, image = static)
+#   max_words     Hard limit on quote word count
+#   platforms     Which platforms to post to: instagram | youtube
+#   hashtags      Instagram caption hashtags (3-5 recommended)
+#   youtube       YouTube-specific metadata (required if youtube in platforms)
+#   styles        Optional: lock theme to specific style names (else all applicable styles)
+#   enabled       Set false to pause without deleting
+
+themes:
+
+  morning:
+    name: Morning Motivation
+    format: reel
+    max_words: 18
+    platforms: [instagram, youtube]
+    hashtags: ["#MorningMotivation", "#DailyStoic", "#MindsetMastery", "#PhilosophyQuotes", "#SuccessMindset"]
+    youtube:
+      title_template: "{quote_snippet} | Morning Motivation"
+      tags: ["morning motivation", "daily stoic", "mindset mastery", "philosophical quotes", "success mindset", "daily quotes"]
+      category_id: "22"
+      privacy: public
+    enabled: true
+
+  wisdom:
+    name: Life Wisdom
+    format: reel
+    max_words: 24
+    platforms: [instagram, youtube]
+    hashtags: ["#Stoicism", "#DeepThoughts", "#WisdomQuotes", "#PhilosophyOfLife", "#CarlJung"]
+    youtube:
+      title_template: "{quote_snippet} | Life Wisdom"
+      tags: ["stoicism", "life wisdom", "deep thoughts", "philosophy quotes", "carl jung", "ancient wisdom"]
+      category_id: "22"
+      privacy: public
+    enabled: true
+
+  love:
+    name: Love & Relationships
+    format: reel
+    max_words: 24
+    platforms: [instagram, youtube]
+    hashtags: ["#LoveQuotes", "#RelationshipAdvice", "#Heartbreak", "#TwinFlame", "#DeepLoveQuotes"]
+    youtube:
+      title_template: "{quote_snippet} | Love & Relationships"
+      tags: ["love quotes", "relationship advice", "twin flame", "heartbreak quotes", "deep emotional quotes"]
+      category_id: "22"
+      privacy: public
+    enabled: true
+
+  mindfulness:
+    name: Mindfulness & Inner Peace
+    format: reel
+    max_words: 20
+    platforms: [instagram, youtube]
+    hashtags: ["#MindfulnessPractice", "#SpiritualAwakening", "#InnerPeace", "#MentalClarity", "#ZenLife"]
+    youtube:
+      title_template: "{quote_snippet} | Mindfulness"
+      tags: ["mindfulness", "spiritual awakening", "inner peace", "zen quotes", "mental clarity", "meditation quotes"]
+      category_id: "22"
+      privacy: public
+    enabled: true
+
+  goodnight:
+    name: Goodnight & Gratitude
+    format: reel
+    max_words: 22
+    platforms: [instagram, youtube]
+    hashtags: ["#GoodNight", "#NightThoughts", "#GratitudePractice", "#PeacefulMind", "#SleepWell"]
+    youtube:
+      title_template: "{quote_snippet} | Goodnight"
+      tags: ["goodnight quotes", "night thoughts", "gratitude practice", "peaceful mind", "bedtime quotes"]
+      category_id: "22"
+      privacy: public
+    enabled: true
+
+  latenight:
+    name: Late Night Feels
+    format: reel
+    max_words: 26
+    platforms: [instagram, youtube]
+    hashtags: ["#LateNightThoughts", "#Overthinking", "#MidnightThoughts", "#Melancholy", "#DeepQuotes"]
+    youtube:
+      title_template: "{quote_snippet} | Late Night Feels"
+      tags: ["late night thoughts", "3am quotes", "overthinking", "melancholy", "deep emotional quotes"]
+      category_id: "22"
+      privacy: public
+    enabled: true
+
+  womenpower:
+    name: She Feels
+    format: reel
+    max_words: 18
+    platforms: [instagram, youtube]
+    styles: [cinematic_female_protagonist]
+    hashtags: ["#DivineFeminine", "#WomenEmpowerment", "#IndependentWoman", "#DarkFeminine", "#SheQuotes"]
+    youtube:
+      title_template: "{quote_snippet} | She Feels"
+      tags: ["divine feminine", "women empowerment", "independent woman", "dark feminine energy", "she feels"]
+      category_id: "22"
+      privacy: public
+    enabled: true

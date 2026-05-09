@@ -1,0 +1,36 @@
+# LLM provider configuration
+# Keys come from .env / GitHub Secrets — not here
+#
+# Model strings use LiteLLM format — changing provider = change model name only:
+#   gemini/gemini-2.5-flash  →  anthropic/claude-opus-4-7
+#   see: https://docs.litellm.ai/docs/providers
+
+providers:
+  gemini:
+    model: gemini/gemini-2.5-flash
+    key_env: GEMINI_API_KEY
+
+# Per-role temperature/token settings — gemini handles all roles.
+roles:
+  quote_generation:
+    providers: [gemini]
+    temperature: 0.95
+    max_tokens: 8192
+    disable_thinking: true
+
+  style_picker:
+    providers: [gemini]
+    temperature: 0.7
+    max_tokens: 2048
+    disable_thinking: true
+
+  creative_brief:
+    providers: [gemini]
+    temperature: 0.85
+    max_tokens: 8192
+
+  image_judge:
+    providers: [gemini]
+    temperature: 0.2
+    max_tokens: 2048
+    disable_thinking: true
