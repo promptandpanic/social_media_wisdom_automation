@@ -156,55 +156,22 @@ def _wrap_words(words: list[str], font: ImageFont.FreeTypeFont,
 
 
 def pixel_wrap(text: str, font: ImageFont.FreeTypeFont,
-               max_width: int = TEXT_MAX_W,
-               keep_phrase: str = "") -> list[str]:
+               max_width: int = TEXT_MAX_W) -> list[str]:
     words = text.split()
-    lines = _wrap_words(words, font, max_width) or [text]
-
-    if not keep_phrase:
-        return lines
-
-    pl = keep_phrase.lower()
-    if any(pl in ln.lower() for ln in lines):
-        return lines
-
-    import string
-    _strip = string.punctuation
-    pwords = [w.lower().strip(_strip) for w in keep_phrase.split()]
-    wnorm  = [w.lower().strip(_strip) for w in words]
-    n = len(pwords)
-    start = -1
-    for i in range(len(wnorm) - n + 1):
-        if wnorm[i:i + n] == pwords:
-            start = i
-            break
-    if start <= 0:
-        return lines
-
-    phrase_line = " ".join(words[start:start + n])
-    pb = font.getbbox(phrase_line)
-    if pb[2] - pb[0] > max_width:
-        return lines
-
-    left  = _wrap_words(words[:start], font, max_width)
-    right = _wrap_words(words[start:], font, max_width)
-    if right and pl in right[0].lower():
-        return left + right
-    return lines
+    return _wrap_words(words, font, max_width) or [text]
 
 
 def _layout_lines(disp_text: str, font: ImageFont.FreeTypeFont,
-                  layout: str, keep_phrase: str = "") -> list[str]:
+                  layout: str) -> list[str]:
     if layout == "sentence_reveal":
         sentences = [s.strip() for s in re.split(r'(?<=[.!?])\s+', disp_text.strip())
                      if s.strip()]
         if len(sentences) > 1:
             lines: list[str] = []
             for sent in sentences:
-                kp = keep_phrase if (keep_phrase and keep_phrase.lower() in sent.lower()) else ""
-                lines.extend(pixel_wrap(sent, font, keep_phrase=kp))
+                lines.extend(pixel_wrap(sent, font))
             return lines
-    return pixel_wrap(disp_text, font, keep_phrase=keep_phrase)
+    return pixel_wrap(disp_text, font)
 
 
 # Fonts that need bigger starting sizes for legibility
@@ -231,19 +198,18 @@ _FONT_SIZE_SCALE: dict[str, float] = {
 
 
 def _fit_text(disp_text: str, font_key: str, font_size: int,
-              layout: str, zone: str,
-              keep_phrase: str = "") -> tuple[list[str], ImageFont.FreeTypeFont, int]:
+              layout: str, zone: str) -> tuple[list[str], ImageFont.FreeTypeFont, int]:
     scale = _FONT_SIZE_SCALE.get(font_key, 1.0)
     font_size = max(64, int(font_size * scale))
     max_h = _ZONE_MAX_H.get(zone, int(IMAGE_HEIGHT * 0.70))
     for size in range(font_size, 62, -2):
         f = _font(font_key, size)
-        lines = _layout_lines(disp_text, f, layout, keep_phrase=keep_phrase)
+        lines = _layout_lines(disp_text, f, layout)
         if len(lines) * int(size * 1.28) <= max_h:
             return lines, f, size
     size = 64
     f = _font(font_key, size)
-    return _layout_lines(disp_text, f, layout, keep_phrase=keep_phrase), f, size
+    return _layout_lines(disp_text, f, layout), f, size
 
 
 def _sanitize(text: str) -> str:
@@ -261,22 +227,7 @@ def _sanitize(text: str) -> str:
     )
 
 
-def _split_at_phrase(line: str, phrase: str) -> tuple[str, str, str] | None:
-    idx = line.lower().find(phrase.lower())
-    if idx == -1:
-        return None
-    return line[:idx], line[idx:idx + len(phrase)], line[idx + len(phrase):]
-
-
 _CURSIVE_FONTS = {"dancing", "satisfy", "pacifico", "caveat", "kalam", "indieflower"}
-
-
-def _highlight_font(base_key: str, hi_style: str, size: int) -> ImageFont.FreeTypeFont:
-    if hi_style in ("italic", "caps_italic"):
-        return _font("playfair_it", size)
-    if hi_style == "script":
-        return _font("dancing", size)
-    return _font(base_key, size)
 
 
 def _stroke_text(draw, xy, text, font, fill, stroke_color=(0, 0, 0), stroke=3):
@@ -289,37 +240,10 @@ def _stroke_text(draw, xy, text, font, fill, stroke_color=(0, 0, 0), stroke=3):
 
 
 def _render_line(draw, img_width: int, y: int, line: str,
-                 font: ImageFont.FreeTypeFont, fill: tuple,
-                 hi_font: ImageFont.FreeTypeFont, hi_fill: tuple,
-                 hi_phrase: str, hi_style: str, stroke: int = 3) -> None:
-    segs = _split_at_phrase(line, hi_phrase) if hi_phrase else None
-
-    if segs is None:
-        bb = font.getbbox(line)
-        x = (img_width - (bb[2] - bb[0])) // 2
-        _stroke_text(draw, (x, y), line, font, fill=fill, stroke=stroke)
-        return
-
-    before, match, after = segs
-    hi_disp = match.upper() if hi_style == "caps" else match
-
-    bw = (font.getbbox(before)[2] - font.getbbox(before)[0]) if before else 0
-    hw = (hi_font.getbbox(hi_disp)[2] - hi_font.getbbox(hi_disp)[0]) if hi_disp else 0
-    aw = (font.getbbox(after)[2] - font.getbbox(after)[0]) if after else 0
-    x = (img_width - bw - hw - aw) // 2
-
-    hi_stroke = min(1, stroke)
-    if before:
-        _stroke_text(draw, (x, y), before, font, fill=fill, stroke=stroke)
-        x += bw
-    if hi_disp:
-        _stroke_text(draw, (x, y), hi_disp, hi_font, fill=hi_fill, stroke=hi_stroke)
-        if hi_style == "underline":
-            uy = y + hi_font.getbbox(hi_disp)[3] + 2
-            draw.rectangle([(x, uy), (x + hw, uy + 3)], fill=(*hi_fill, 255))
-        x += hw
-    if after:
-        _stroke_text(draw, (x, y), after, font, fill=fill, stroke=stroke)
+                 font: ImageFont.FreeTypeFont, fill: tuple, stroke: int = 3) -> None:
+    bb = font.getbbox(line)
+    x = (img_width - (bb[2] - bb[0])) // 2
+    _stroke_text(draw, (x, y), line, font, fill=fill, stroke=stroke)
 
 
 # ---------------------------------------------------------------------------
@@ -432,7 +356,7 @@ def _ensure_readable(color: tuple, bg_lum: float) -> tuple:
 def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
                n_lines: int | None = None,
                lum_img: Image.Image | None = None) -> Image.Image:
-    _QC = '"\'""\'\'«»„‟'
+    _QC = '"\'“”\'\'«»„‟'
     text       = _sanitize(quote.text).strip(_QC).strip()
     author     = quote.author
     font_key   = brief.font
@@ -443,8 +367,6 @@ def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
     text_zone  = brief.text_zone
     decoration = brief.decoration
     layout     = brief.layout
-    hi_style   = brief.highlight_style
-    hi_phrase  = _sanitize(brief.highlight or "").strip(_QC).strip().lower()
 
     upper     = font_key == "bebas"
     disp_text = text.upper() if upper else text
@@ -453,14 +375,7 @@ def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
     txt_color = _ensure_readable(txt_color, bg_lum)
 
     font_size = max(64, brief.font_size)
-    all_lines, f, font_size = _fit_text(disp_text, font_key, font_size, layout, text_zone,
-                                        keep_phrase=hi_phrase)
-    hi_f = _highlight_font(font_key, hi_style, font_size)
-
-    if hi_phrase:
-        on_line = any(hi_phrase in ln.lower() for ln in all_lines)
-        if not on_line:
-            logger.warning(f'  highlight not rendered: "{hi_phrase}"')
+    all_lines, f, font_size = _fit_text(disp_text, font_key, font_size, layout, text_zone)
 
     lines = all_lines[:n_lines] if n_lines is not None else all_lines
     line_h = int(font_size * 1.28)
@@ -485,15 +400,7 @@ def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
     text_stroke = 0 if font_key in _CURSIVE_FONTS else 3
 
     for line in lines:
-        has_hi = bool(hi_phrase and hi_phrase in line.lower())
-        _render_line(
-            draw, TEXT_ZONE_CX * 2, y, line,
-            font=f, fill=txt_color,
-            hi_font=hi_f, hi_fill=hi_color,
-            hi_phrase=hi_phrase if has_hi else "",
-            hi_style=hi_style,
-            stroke=text_stroke,
-        )
+        _render_line(draw, TEXT_ZONE_CX * 2, y, line, font=f, fill=txt_color, stroke=text_stroke)
         y += line_h
 
     _SKIP_AUTHOR = {"unknown", "anonymous", "original"}
