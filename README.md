@@ -236,7 +236,7 @@ That's it. Add the cron line to the workflow and it runs.
 | Morning Motivation | 7:00 AM | `30 1 * * *` | Daily |
 | She Feels | 10:00 AM | `30 4 * * *` | Daily |
 | Rotating¹ | 2:00 PM | `30 8 * * *` | Daily |
-| Late Night Feels | 11:00 PM | `30 17 * * *` | Daily |
+| Late Night Feels | 1:15 AM | `45 19 * * *` | Daily |
 
 ¹ Rotates through: Wisdom → Love → Mindfulness → Goodnight (cycles by day-of-year mod 4)
 

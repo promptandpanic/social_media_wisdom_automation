@@ -5,7 +5,7 @@ on:
     - cron: '30 1 * * *'    # Morning Motivation  — 7:00 AM IST  (daily)
     - cron: '30 4 * * *'    # She Feels           — 10:00 AM IST (daily)
     - cron: '30 8 * * *'    # Rotating            — 2:00 PM IST  (wisdom/love/mindfulness/goodnight)
-    - cron: '30 17 * * *'   # Late Night Feels    — 11:00 PM IST (daily)
+    - cron: '45 19 * * *'   # Late Night Feels    — 1:15 AM IST  (daily)
 
   workflow_dispatch:
     inputs:
@@ -68,7 +68,7 @@ jobs:
           elif [ "${{ github.event.schedule }}" = "30 4 * * *" ]; then
             echo "name=womenpower" >> $GITHUB_OUTPUT
 
-          elif [ "${{ github.event.schedule }}" = "30 17 * * *" ]; then
+          elif [ "${{ github.event.schedule }}" = "45 19 * * *" ]; then
             echo "name=latenight" >> $GITHUB_OUTPUT
 
           else
