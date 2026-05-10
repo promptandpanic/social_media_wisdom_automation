@@ -331,6 +331,15 @@ def _save_dry_run(state: PipelineState, theme_key: str) -> None:
         print("─" * 60)
 
 
+def _load_font_b64(filename: str) -> str:
+    """Return base64-encoded font for @font-face embedding, or empty string if not found."""
+    import base64
+    font_path = Path(__file__).parents[2] / "assets" / "fonts" / filename
+    if font_path.exists():
+        return base64.b64encode(font_path.read_bytes()).decode()
+    return ""
+
+
 def _build_email_html(state: PipelineState, theme_name: str) -> str:
     """Build the HTML email body."""
     quote = state.get("quote")
@@ -338,6 +347,11 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
     author = quote.author if quote else "Unknown"
     llm_caption = state.get("llm_caption", "")
     results = state.get("platform_results", [])
+    architects_b64 = _load_font_b64("architects_daughter.ttf")
+    font_face = (
+        f"@font-face {{ font-family: 'Architects Daughter'; src: url('data:font/truetype;base64,{architects_b64}') format('truetype'); font-weight: normal; font-style: normal; }}"
+        if architects_b64 else ""
+    )
 
     has_success = any(r.status == "posted" for r in results)
     has_failure = any(r.status == "failed" for r in results)
@@ -383,14 +397,15 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0; padding:0; background-color:#0a0a0a; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">
   <style>
+    {font_face}
     @keyframes pulse {{ 0%, 100% {{ opacity: 1; }} 50% {{ opacity: 0.15; }} }}
     .live-dot {{ animation: pulse 1.4s ease-in-out infinite; }}
   </style>
-</head>
-<body style="margin:0; padding:0; background-color:#0a0a0a; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a; padding: 40px 20px;">
+  <div style="background-color:#0a0a0a; margin:0; padding:0;">
+  <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#0a0a0a" style="background:#0a0a0a; padding: 40px 20px;">
     <tr><td align="center">
       <table width="580" cellpadding="0" cellspacing="0" style="max-width:580px; width:100%;">
 
@@ -461,6 +476,7 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
       </table>
     </td></tr>
   </table>
+  </div>
 </body>
 </html>"""
 
