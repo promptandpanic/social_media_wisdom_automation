@@ -6,6 +6,9 @@
 #   see: https://docs.litellm.ai/docs/providers
 
 providers:
+  kimi:
+    model: moonshot/kimi-latest-128k
+    key_env: MOONSHOT_API_KEY
   gemini:
     model: gemini/gemini-2.5-flash
     key_env: GEMINI_API_KEY
@@ -13,22 +16,24 @@ providers:
     model: huggingface/Qwen/Qwen2.5-7B-Instruct
     key_env: HF_API_KEY
 
-# Per-role temperature/token settings — gemini handles all roles.
+# Per-role temperature/token settings.
+# kimi runs first for text roles (burns $1 Moonshot credit), falls back to gemini.
+# image_judge stays gemini-only — kimi has no vision support.
 roles:
   quote_generation:
-    providers: [gemini]
+    providers: [kimi, gemini]
     temperature: 0.95
     max_tokens: 8192
     disable_thinking: true
 
   style_picker:
-    providers: [gemini]
+    providers: [kimi, gemini]
     temperature: 0.7
     max_tokens: 2048
     disable_thinking: true
 
   creative_brief:
-    providers: [gemini]
+    providers: [kimi, gemini]
     temperature: 0.85
     max_tokens: 8192
 
