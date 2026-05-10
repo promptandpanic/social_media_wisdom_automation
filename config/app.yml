@@ -7,8 +7,6 @@ app:
   pending_dir: data/pending
   db_path: data/wisdom.db
 
-  design_attempts: 3        # max image generation retries before using best result
-  judge_threshold: 7        # minimum score (1–10) to accept image without retry
 
 image:
   width: 1080

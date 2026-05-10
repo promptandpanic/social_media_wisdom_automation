@@ -36,9 +36,3 @@ roles:
     providers: [kimi, gemini]
     temperature: 0.85
     max_tokens: 8192
-
-  image_judge:
-    providers: [gemini]
-    temperature: 0.2
-    max_tokens: 2048
-    disable_thinking: true
