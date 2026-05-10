@@ -8,12 +8,12 @@ An end-to-end AI pipeline that generates, composes, and publishes daily wisdom c
 
 Every day, at scheduled times, the system:
 
-1. Generates a unique, non-repetitive quote using Gemini
-2. Creates a cinematic AI image matched to the quote's mood
-3. Composes the image with typography, gradient overlays, and branding
+1. Generates a unique, non-repetitive quote using Kimi (Moonshot) with Gemini as fallback
+2. Creates a cinematic AI image via Leonardo FLUX.2 Pro with multi-provider fallback
+3. Composes the image with per-style typography, color-coded text, gradient overlays
 4. Renders a 23-second Reel with Ken Burns zoom, static text, and background music
 5. Posts to Instagram and YouTube Shorts simultaneously
-6. Sends an email report with live links
+6. Sends a styled email report with live links
 
 Zero manual work after setup.
 
@@ -38,9 +38,9 @@ Zero manual work after setup.
 └──────────┬──────────────┬───────────────┬────────────┬─────────┘
            │              │               │            │
            ▼              ▼               ▼            ▼
-      Gemini 2.5     Gemini 2.5      Gemini Flash  Ken Burns
-      Flash (LLM)    Flash (LLM)     Image Gen     Zoom +
-                                     + Judge       Text Overlay
+      Kimi / Gemini  Kimi / Gemini   Leonardo      Ken Burns
+      (LiteLLM)      (LiteLLM)       FLUX.2 Pro    Zoom +
+                                     + fallbacks   Text Overlay
                                                    + Music Fade
            │
            ▼
@@ -91,25 +91,15 @@ Picks a visual style and generates a full creative brief for the image.
 - Falls back to a sensible default brief if the LLM call fails
 - Brief is a typed `DesignBrief` dataclass — no raw dicts escape this stage
 
-### 3 — Media: Image + Compose + Judge (`wisdom/agents/media.py`)
+### 3 — Media: Image + Compose (`wisdom/agents/media.py`)
 
-Generates an image, composites it with text and overlays, then judges quality.
+Generates an image and composites it with text and overlays.
 
 ```
-attempt → generate image → compose → judge (vision LLM)
-        ↑                              │
-        └──────── score < 7 ──────────┘  (up to 3 attempts)
-                                       │
-                        hard gate (face/watermark) → GradientFallback
-                        score ≥ 7 → accept best
+generate image → compose → done
 ```
 
-**Hard gates** — instant fallback, not retried:
-- Recognisable face with clear features
-- Watermark or logo visible
-- Image quality anomaly (artifacts, corruption)
-
-The best-scoring image across all attempts is kept, not just the last one.
+Image generation uses the provider fallback chain (see Provider Architecture). In offline mode, a PIL gradient fallback is used instead.
 
 ### 4 — Video Composition (`wisdom/composers/reel.py`)
 
@@ -142,7 +132,7 @@ PIL-based renderer that produces three outputs per run:
 
 Supports 6 gradient types: `gradient_bottom`, `gradient_top`, `gradient_center`, `solid`, `vignette`, `none`.
 
-Text rendering: auto word-wrap, font size scaling, highlight phrase in accent color, `@handle` attribution card.
+Text rendering: auto word-wrap, font size scaling, highlight phrase in accent color. Each style has its own `text_color`, `highlight_color`, and `author_color` — no style uses plain white text. The `cinematic_female_protagonist` style uses the **Architects Daughter** handwritten font.
 
 ---
 
@@ -152,21 +142,22 @@ Text rendering: auto word-wrap, font size scaling, highlight phrase in accent co
 
 Powered by **LiteLLM** — swap any provider by changing a single model string in `config/llm.yml`.
 
-| Role | Model | Thinking | Purpose |
+Primary provider is **Kimi** (`moonshot/kimi-latest-128k`), with **Gemini 2.5 Flash** as fallback. If `MOONSHOT_API_KEY` is missing or exhausted, Gemini takes over automatically.
+
+| Role | Primary | Fallback | Purpose |
 |---|---|---|---|
-| `quote_generation` | gemini/gemini-2.5-flash | off | Quote + uniqueness score |
-| `style_picker` | gemini/gemini-2.5-flash | off | Style selection |
-| `creative_brief` | gemini/gemini-2.5-flash | on | Image prompt + design brief |
-| `image_judge` | gemini/gemini-2.5-flash | off | Vision quality scoring |
+| `quote_generation` | kimi | gemini | Quote + uniqueness score |
+| `style_picker` | kimi | gemini | Style selection |
+| `creative_brief` | kimi | gemini | Image prompt + design brief |
 
 ### Image (`wisdom/providers/image.py`)
 
 Six-provider fallback chain — tried in order until one succeeds:
 
 ```
-gemini_flash  →  gemini_imagen  →  leonardo  →  pollinations  →  gradient
-(2.5-flash-   (imagen-4.0-fast- (API)         (free API)       (PIL local
- image)        generate-001)                                     fallback)
+leonardo_flux_pro  →  gemini_flash  →  gemini_imagen  →  leonardo  →  pollinations  →  gradient
+(FLUX.2 Pro,          (2.5-flash-      (imagen-4.0-      (API)        (free API)       (PIL local
+ 810×1440 → resize)    image)           fast-001)                                        fallback)
 ```
 
 `GradientFallback` always succeeds — guarantees the pipeline never crashes on image generation.
@@ -261,7 +252,7 @@ Manual trigger available via `workflow_dispatch` with theme selection and offlin
 │   │   ├── pipeline.py       Top-level orchestrator
 │   │   ├── quote.py          Quote generation LangGraph agent
 │   │   ├── design.py         Design brief LangGraph agent
-│   │   ├── media.py          Image generation + judge LangGraph agent
+│   │   ├── media.py          Image generation + compose LangGraph agent
 │   │   ├── _prompt_builder.py  Quote prompt construction
 │   │   └── _topic_builder.py   Topic selection helpers
 │   ├── composers/
@@ -271,7 +262,7 @@ Manual trigger available via `workflow_dispatch` with theme selection and offlin
 │   │   ├── instagram.py      Instagram Graph API (Reels + images)
 │   │   └── youtube.py        YouTube Data API v3 (Shorts + OAuth)
 │   ├── providers/
-│   │   ├── llm.py            LiteLLM provider registry (text + vision)
+│   │   ├── llm.py            LiteLLM provider registry (Kimi → Gemini fallback)
 │   │   └── image.py          Multi-provider image generation + fallback
 │   ├── storage/
 │   │   ├── db.py             SQLite + GitHub Releases sync
@@ -315,7 +306,8 @@ python -m wisdom.cli youtube-auth
 
 | Secret | Description |
 |---|---|
-| `GEMINI_API_KEY` | Gemini 2.5 Flash — LLM + image generation |
+| `MOONSHOT_API_KEY` | Moonshot Kimi — primary LLM provider |
+| `GEMINI_API_KEY` | Gemini 2.5 Flash — LLM fallback + image generation |
 | `LEONARDO_API_KEY` | Leonardo.ai — image fallback |
 | `HF_API_KEY` | HuggingFace — image fallback |
 | `INSTAGRAM_ACCESS_TOKEN` | Instagram Graph API token |
