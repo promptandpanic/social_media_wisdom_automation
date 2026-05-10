@@ -372,11 +372,22 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
 
     caption_html = llm_caption.replace("\n", "<br>") if llm_caption else ""
 
+    live_dot = (
+        '<span class="live-dot" style="display:inline-block; width:7px; height:7px; '
+        'background:#e74c3c; border-radius:50%; margin-right:6px; vertical-align:middle;"></span>'
+        if status_text == "LIVE" else ""
+    )
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+  <style>
+    @keyframes pulse {{ 0%, 100% {{ opacity: 1; }} 50% {{ opacity: 0.15; }} }}
+    .live-dot {{ animation: pulse 1.4s ease-in-out infinite; }}
+  </style>
 </head>
 <body style="margin:0; padding:0; background-color:#0a0a0a; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a; padding: 40px 20px;">
@@ -403,7 +414,7 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
               <td align="right" valign="bottom">
                 <div style="font-size:9px; letter-spacing:2px; color:#4a6a7a; text-align:right; line-height:1.8;">
                   {date_str}<br>
-                  <span style="color:{status_color}; font-weight:bold; letter-spacing:3px;">{status_text}</span>
+                  {live_dot}<span style="color:{status_color}; font-weight:bold; letter-spacing:3px;">{status_text}</span>
                   &nbsp;&bull;&nbsp;
                   <span style="color:#4a9eba;">{theme_name.upper()}</span>
                 </div>
@@ -422,7 +433,7 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
         <!-- Quote block -->
         <tr><td style="padding-bottom: 48px;">
           <div style="font-size:9px; letter-spacing:3px; color:#4a9eba; text-transform:uppercase; margin-bottom:24px;">The Insight</div>
-          <div style="font-size:22px; line-height:1.65; color:#e8e8e8; font-weight:300; font-style:italic; padding-left:20px; border-left: 2px solid #c9a96e;">{quote_text}</div>
+          <div style="font-family:'Architects Daughter', cursive; font-size:24px; line-height:1.7; color:#e8e8e8; padding-left:20px; border-left: 2px solid #c9a96e;">{quote_text}</div>
           <div style="margin-top:20px; padding-left:20px; font-size:11px; letter-spacing:3px; color:#c9a96e; text-transform:uppercase;">{author}</div>
         </td></tr>
 
@@ -468,14 +479,27 @@ def _send_email_report(state: PipelineState, theme_name: str) -> None:
         logger.info("Skipping email report (SMTP_USER or SMTP_PASS not set).")
         return
 
+    from email.utils import formataddr
+
     html = _build_email_html(state, theme_name)
-    date_str = datetime.datetime.now().strftime("%d-%b-%y")
+    ist = datetime.datetime.utcnow() + datetime.timedelta(hours=5, minutes=30)
+    date_str = ist.strftime("%d-%b-%y")
     quote = state.get("quote")
     author = quote.author if quote else ""
+    results = state.get("platform_results", [])
+    has_success = any(r.status == "posted" for r in results)
+    has_failure = any(r.status == "failed" for r in results)
+
+    if has_failure and not has_success:
+        subject = f"[POST FAILED] {theme_name} — Wisdom Dispatch ({date_str})"
+    elif has_failure:
+        subject = f"[Partial] Wisdom Dispatch ({date_str}) | {theme_name}{' — ' + author if author else ''}"
+    else:
+        subject = f"Wisdom Dispatch ({date_str}) | {theme_name}{' — ' + author if author else ''}"
 
     msg = MIMEMultipart("alternative")
-    msg["Subject"] = f"Wisdom Dispatch ({date_str}) | {theme_name}{' — ' + author if author else ''}"
-    msg["From"] = sender
+    msg["Subject"] = subject
+    msg["From"] = formataddr(("Wisdom Dispatch", sender))
     msg["To"] = recipient
     msg.attach(MIMEText(html, "html"))
 

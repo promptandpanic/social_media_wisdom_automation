@@ -122,7 +122,7 @@ styles:
       Color Palette: Warm peach, bright whites, vibrant reds, or soft pinks.
       Composition: Like a high-end Vogue lifestyle shot, extremely cheerful and aspirational. Center open for text.
     rendering:
-      font: playfair
+      font: architects_daughter
       text_color: "#FFFFFF"
       highlight_color: "#F06292"
       author_color: "#F06292"
