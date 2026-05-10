@@ -64,6 +64,7 @@ jobs:
 
       - name: Run pipeline — ${{ steps.theme.outputs.name }}
         env:
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           LEONARDO_API_KEY: ${{ secrets.LEONARDO_API_KEY }}
           HF_API_KEY: ${{ secrets.HF_API_KEY }}
