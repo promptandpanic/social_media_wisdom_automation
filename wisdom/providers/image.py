@@ -109,6 +109,45 @@ class LeonardoProvider(BaseImageProvider):
         raise TimeoutError("Leonardo generation timed out")
 
 
+class LeonardoFluxProProvider(BaseImageProvider):
+    """Leonardo FLUX.2 Pro via v2 API — generates 810x1440 (9:16), resized to 1080x1920."""
+    name = "leonardo_flux_pro"
+
+    def __init__(self, timeout: int = 120, **_):
+        self.timeout = timeout
+
+    def available(self) -> bool:
+        return bool(os.environ.get("LEONARDO_API_KEY"))
+
+    def generate(self, prompt: str) -> bytes:
+        import time
+        key = os.environ["LEONARDO_API_KEY"]
+        headers = {"Authorization": f"Bearer {key}", "Content-Type": "application/json"}
+
+        r = requests.post(
+            "https://cloud.leonardo.ai/api/rest/v2/generations",
+            headers=headers,
+            json={"model": "flux-pro-2.0", "prompt": prompt + _SAFETY_SUFFIX,
+                  "width": 810, "height": 1440, "quantity": 1},
+            timeout=30,
+        )
+        r.raise_for_status()
+        gen_id = r.json()["sdGenerationJob"]["generationId"]
+
+        for _ in range(30):
+            time.sleep(4)
+            poll = requests.get(
+                f"https://cloud.leonardo.ai/api/rest/v1/generations/{gen_id}",
+                headers=headers, timeout=15,
+            )
+            poll.raise_for_status()
+            imgs = poll.json().get("generations_by_pk", {}).get("generated_images", [])
+            if imgs:
+                return _resize(requests.get(imgs[0]["url"], timeout=30).content)
+
+        raise TimeoutError("Leonardo FLUX.2 Pro generation timed out")
+
+
 class GeminiImagenProvider(BaseImageProvider):
     """Imagen 3 via Google Gen AI SDK."""
     name = "gemini_imagen"
