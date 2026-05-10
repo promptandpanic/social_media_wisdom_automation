@@ -28,6 +28,14 @@ _SAFETY_SUFFIX = (
     " 9:16 portrait format."
 )
 
+_NEGATIVE_PROMPT = (
+    "text, letters, words, watermark, logo, signature, handwritten name, "
+    "artist signature, corner signature, monogram, initials, copyright, © symbol, "
+    "studio mark, caption, label, typography, graffiti, banner, hashtag, # symbol, "
+    "code, url, numbers, equation, symbol, glyph, "
+    "written character, photorealistic human, portrait photo"
+)
+
 
 # ---------------------------------------------------------------------------
 # Base interface
@@ -132,6 +140,7 @@ class LeonardoFluxProProvider(BaseImageProvider):
                 "public": False,
                 "parameters": {
                     "prompt": prompt + _SAFETY_SUFFIX,
+                    "negativePrompt": _NEGATIVE_PROMPT,
                     "width": 810,
                     "height": 1440,
                     "quantity": 1,

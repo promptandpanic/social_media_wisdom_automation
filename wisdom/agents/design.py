@@ -78,7 +78,7 @@ Write 4–6 rich sentences describing the scene:
 
 Constraints:
   - DO NOT generate abstract, surreal, painting-like, or overly "AI-stylized" art.
-  - Scene MUST be a hyper-realistic, vibrant, and cheerful photograph (e.g., 35mm film or high-end lifestyle photography).
+  - Scene MUST feel like a real photograph — cinematic, high-resolution, emotionally matched to the style (e.g., 35mm film, high-end editorial or lifestyle photography).
   - TEXT OVERLAY: {text_zone_instruction}
   - No text, words, signs, logos, watermarks, or explicitly recognizable faces.
   - 9:16 portrait format.
