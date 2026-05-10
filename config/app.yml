@@ -3,13 +3,6 @@
 
 app:
   recent_posts_window_days: 30  # days of posted quotes to send to LLM as context
-
-  # Per-platform handles — used in captions, not injected into LLM prompts
-  platforms:
-    instagram:
-      handle: "@your_instagram_handle"
-    youtube:
-      handle: "@your_youtube_handle"
   output_dir: output
   pending_dir: data/pending
   db_path: data/wisdom.db

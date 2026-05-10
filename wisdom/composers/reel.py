@@ -4,7 +4,6 @@ FFmpeg-based Reel composer — Ken Burns zoom + static text overlay + background
 Layout:
   Background image → Ken Burns continuous zoom throughout
   Text layer       → static RGBA PNG overlaid on top, fades out 2s before end
-  Handle card      → "Follow @handle" zooms in at the end
 
 Audio: background music loop, ducked at end, no TTS.
 
