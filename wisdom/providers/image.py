@@ -127,8 +127,16 @@ class LeonardoFluxProProvider(BaseImageProvider):
         r = requests.post(
             "https://cloud.leonardo.ai/api/rest/v2/generations",
             headers=headers,
-            json={"model": "flux-pro-2.0", "prompt": prompt + _SAFETY_SUFFIX,
-                  "width": 810, "height": 1440, "quantity": 1},
+            json={
+                "model": "flux-pro-2.0",
+                "public": False,
+                "parameters": {
+                    "prompt": prompt + _SAFETY_SUFFIX,
+                    "width": 810,
+                    "height": 1440,
+                    "quantity": 1,
+                },
+            },
             timeout=30,
         )
         r.raise_for_status()

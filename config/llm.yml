@@ -7,7 +7,7 @@
 
 providers:
   kimi:
-    model: moonshot/kimi-latest-128k
+    model: moonshot/moonshot-v1-128k
     key_env: MOONSHOT_API_KEY
   gemini:
     model: gemini/gemini-2.5-flash
