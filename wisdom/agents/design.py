@@ -79,7 +79,7 @@ Write 4–6 rich sentences describing the scene:
 Constraints:
   - DO NOT generate abstract, surreal, painting-like, or overly "AI-stylized" art.
   - Scene MUST be a hyper-realistic, vibrant, and cheerful photograph (e.g., 35mm film or high-end lifestyle photography).
-  - Leave a clean, uncluttered space (negative space) for the text overlay to be readable.
+  - TEXT OVERLAY: {text_zone_instruction}
   - No text, words, signs, logos, watermarks, or explicitly recognizable faces.
   - 9:16 portrait format.
 
@@ -127,11 +127,22 @@ def generate_brief(state: PipelineState) -> PipelineState:
     text = quote.text if quote else ""
 
     try:
+        r = style_data.get("rendering", {})
+        ov = r.get("overlay", {})
+        overlay_type = ov.get("type", "gradient_bottom")
+        text_color = r.get("text_color", "#FFFFFF")
+        zone = "bottom third" if overlay_type == "gradient_bottom" else "top third" if overlay_type == "gradient_top" else "center"
+        text_zone_instruction = (
+            f"The {zone} of the frame will have {text_color} text overlaid on it. "
+            f"That zone MUST be naturally dark, shadowed, or low-contrast in the scene itself — "
+            f"not bright or busy — so the text is legible without heavy post-processing."
+        )
         prompt = _IMAGE_PROMPT_TEMPLATE.format(
             text=text,
             style_name=style_name,
             style_description=style_desc,
             image_hint_block=f"ADDITIONAL DIRECTION: {image_hint}\n" if image_hint else "",
+            text_zone_instruction=text_zone_instruction,
         )
         image_prompt = providers.llm.generate(prompt, role="creative_brief").strip()
         if len(image_prompt.split()) >= 20:
@@ -200,7 +211,14 @@ def _build_brief(image_prompt: str, style_name: str, style_data: dict,
 def _default_brief(style_name: str, style_data: dict, text: str, quote) -> DesignBrief:
     desc = style_data.get("description", "Beautiful inspirational scene.").strip()
     first_line = desc.split("\n")[0].strip()
-    image_prompt = f"{first_line} Centre band left clear and dark for text overlay. 9:16 portrait."
+    r = style_data.get("rendering", {})
+    ov = r.get("overlay", {})
+    overlay_type = ov.get("type", "gradient_bottom")
+    zone = "bottom third" if overlay_type == "gradient_bottom" else "top third" if overlay_type == "gradient_top" else "center band"
+    text_color = r.get("text_color", "#FFFFFF")
+    image_prompt = (
+        f"{first_line} The {zone} must be naturally dark and uncluttered for {text_color} text overlay. 9:16 portrait."
+    )
     return _build_brief(image_prompt, style_name, style_data, text, quote)
 
 
