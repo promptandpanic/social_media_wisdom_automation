@@ -165,19 +165,23 @@ def _generate_caption_and_tags(quote, theme: ThemeConfig) -> tuple[str, list[str
     if not quote:
         return "", theme.hashtags
     prompt = f"""
-You are the social media manager for an inspirational channel.
-Quote: "{quote.text}" - {quote.author}
+You are the social media manager for an inspirational quotes channel.
 Theme: {theme.name}
 
-Write a highly engaging Instagram caption based on this quote.
-Format requirements:
-1. Start with a strong, relatable hook (e.g., "Save this for when you need a reminder 📌", "Read this if you're feeling lost right now ⬇️").
-2. 2-3 short, spaced-out sentences expanding on the quote (use emojis naturally).
-3. End with a strong Call-To-Action (CTA) (e.g., "Drop a 💯 if you agree", "Tag someone who needs to hear this 👇").
-4. Provide exactly 5 highly relevant, niche hashtags.
+The post already opens with this quote and attribution — do NOT repeat or echo it.
 
-Return ONLY valid JSON in this format (use \\n for newlines):
-{{"caption": "Hook\\n\\nBody sentence 1.\\n\\nBody sentence 2.\\n\\nCTA", "hashtags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"]}}
+Write the body of the Instagram caption that goes BELOW the quote:
+1. One strong hook sentence that captures the feeling of the quote (e.g. "Save this for when you feel stuck.", "This one hits different at 2am."). No emojis in the hook.
+2. 2 short sentences expanding the idea. Emojis are fine here.
+3. One CTA line (e.g. "Tag someone who needs this.", "Drop a comment if this is you.").
+
+Keep it tight — 4 lines total, each separated by a blank line.
+Provide exactly 5 niche hashtags relevant to this quote and theme.
+
+Return ONLY valid JSON (use \\n for newlines):
+{{"caption": "Hook\\n\\nBody 1.\\n\\nBody 2.\\n\\nCTA", "hashtags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"]}}
+
+Quote context (do NOT include in output): "{quote.text}" — {quote.author}
 """
     try:
         from wisdom import providers
@@ -196,20 +200,21 @@ def _build_meta(state: PipelineState, theme: ThemeConfig) -> PipelineState:
     text = quote.text if quote else ""
     author = quote.author if quote else ""
 
-    caption_lines = [text]
-    if author and author.lower() not in ("original", "unknown"):
-        caption_lines.append(f"— {author}")
-
     if state.get("offline"):
         llm_caption, hashtags = "", theme.hashtags
     else:
         llm_caption, hashtags = _generate_caption_and_tags(quote, theme)
 
+    # Build caption: quote + attribution + body. No quote = body only.
+    parts = []
+    if text:
+        attribution = f"— {author}" if author and author.lower() not in ("original", "unknown") else ""
+        parts.append(text + (f"\n{attribution}" if attribution else ""))
     if llm_caption:
-        caption_lines.append(f"\n{llm_caption}")
+        parts.append(llm_caption)
 
-    caption = "\n".join(caption_lines)
-    snippet = text.split(".")[0][:80]
+    caption = "\n\n".join(parts)
+    snippet = text.split(".")[0][:80] if text else theme.name
     title = f"{snippet} | {theme.name}"
 
     meta = PostMeta(
@@ -326,12 +331,135 @@ def _save_dry_run(state: PipelineState, theme_key: str) -> None:
         print("─" * 60)
 
 
+def _build_email_html(state: PipelineState, theme_name: str) -> str:
+    """Build the HTML email body."""
+    quote = state.get("quote")
+    quote_text = quote.text if quote else "N/A"
+    author = quote.author if quote else "Unknown"
+    llm_caption = state.get("llm_caption", "")
+    results = state.get("platform_results", [])
+
+    has_success = any(r.status == "posted" for r in results)
+    has_failure = any(r.status == "failed" for r in results)
+    status_text = "LIVE" if not has_failure else "PARTIAL" if has_success else "FAILED"
+    status_color = "#2ecc71" if not has_failure else "#e67e22" if has_success else "#e74c3c"
+    ist = datetime.datetime.utcnow() + datetime.timedelta(hours=5, minutes=30)
+    date_str = f"{ist.strftime('%B %d, %Y').upper()} &nbsp;&bull;&nbsp; {ist.strftime('%A').upper()} &nbsp;&bull;&nbsp; {ist.strftime('%I:%M %p')} IST"
+
+    platforms_html = ""
+    for r in results:
+        if r.status == "posted":
+            label = "Instagram" if r.platform == "instagram" else "YouTube"
+            platforms_html += f"""
+            <tr>
+              <td style="padding: 14px 0; border-bottom: 1px solid #1e3a5f;">
+                <span style="font-size:11px; letter-spacing:2px; color:#4a9eba; text-transform:uppercase;">{label}</span>
+              </td>
+              <td style="padding: 14px 0; border-bottom: 1px solid #1e3a5f; text-align:right;">
+                <a href="{r.url}" style="font-size:11px; letter-spacing:1.5px; color:#c9a96e; text-decoration:none; text-transform:uppercase; border-bottom: 1px solid #c9a96e; padding-bottom:2px;">View Post</a>
+              </td>
+            </tr>"""
+        else:
+            platforms_html += f"""
+            <tr>
+              <td style="padding: 14px 0; border-bottom: 1px solid #1e3a5f;">
+                <span style="font-size:11px; letter-spacing:2px; color:#4a9eba; text-transform:uppercase;">{r.platform}</span>
+              </td>
+              <td style="padding: 14px 0; border-bottom: 1px solid #1e3a5f; text-align:right;">
+                <span style="font-size:11px; color:#e74c3c; letter-spacing:1px;">Failed</span>
+              </td>
+            </tr>"""
+
+    caption_html = llm_caption.replace("\n", "<br>") if llm_caption else ""
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="margin:0; padding:0; background-color:#0a0a0a; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a; padding: 40px 20px;">
+    <tr><td align="center">
+      <table width="580" cellpadding="0" cellspacing="0" style="max-width:580px; width:100%;">
+
+        <!-- Top rule -->
+        <tr><td style="padding-bottom: 28px;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="border-top: 1px solid #1e3a5f;"></td>
+              <td width="40" style="border-top: 3px solid #c9a96e;"></td>
+            </tr>
+          </table>
+        </td></tr>
+
+        <!-- Masthead -->
+        <tr><td style="padding-bottom: 8px;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td>
+                <div style="font-size:28px; letter-spacing:6px; color:#f0f0f0; font-weight:300; text-transform:uppercase; line-height:1;">Wisdom <span style="color:#c9a96e;">Dispatch</span></div>
+              </td>
+              <td align="right" valign="bottom">
+                <div style="font-size:9px; letter-spacing:2px; color:#4a6a7a; text-align:right; line-height:1.8;">
+                  {date_str}<br>
+                  <span style="color:{status_color}; font-weight:bold; letter-spacing:3px;">{status_text}</span>
+                  &nbsp;&bull;&nbsp;
+                  <span style="color:#4a9eba;">{theme_name.upper()}</span>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td></tr>
+
+        <!-- Rule under masthead -->
+        <tr><td style="padding: 20px 0 40px 0;">
+          <table width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td style="border-top: 1px solid #1e3a5f;"></td>
+          </tr></table>
+        </td></tr>
+
+        <!-- Quote block -->
+        <tr><td style="padding-bottom: 48px;">
+          <div style="font-size:9px; letter-spacing:3px; color:#4a9eba; text-transform:uppercase; margin-bottom:24px;">The Insight</div>
+          <div style="font-size:22px; line-height:1.65; color:#e8e8e8; font-weight:300; font-style:italic; padding-left:20px; border-left: 2px solid #c9a96e;">{quote_text}</div>
+          <div style="margin-top:20px; padding-left:20px; font-size:11px; letter-spacing:3px; color:#c9a96e; text-transform:uppercase;">{author}</div>
+        </td></tr>
+
+        <!-- Caption block (only if present) -->
+        {'<tr><td style="padding-bottom: 48px;"><div style="font-size:9px; letter-spacing:3px; color:#4a9eba; text-transform:uppercase; margin-bottom:20px;">Caption</div><div style="background:#0f1a24; border: 1px solid #1e3a5f; padding: 24px; font-size:13px; line-height:1.8; color:#8aafbf;">' + caption_html + '</div></td></tr>' if caption_html else ''}
+
+        <!-- Published to -->
+        <tr><td style="padding-bottom: 0;">
+          <div style="font-size:9px; letter-spacing:3px; color:#4a9eba; text-transform:uppercase; margin-bottom:4px;">Published To</div>
+          <table width="100%" cellpadding="0" cellspacing="0">
+            {platforms_html if platforms_html else '<tr><td style="padding:14px 0; color:#555; font-size:12px;">No platforms posted.</td></tr>'}
+          </table>
+        </td></tr>
+
+        <!-- Bottom rule -->
+        <tr><td style="padding-top: 28px;">
+          <table width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td style="border-top: 1px solid #1e3a5f;"></td>
+          </tr></table>
+          <div style="padding-top:20px; font-size:9px; letter-spacing:4px; color:#4a6a7a; text-transform:uppercase; text-align:center;">
+            Wisdom Engine &nbsp;&nbsp;&bull;&nbsp;&nbsp; Publishing Log
+          </div>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>"""
+
+
 def _send_email_report(state: PipelineState, theme_name: str) -> None:
-    """Send a premium, aesthetic HTML report of the post results."""
+    """Send the HTML report email."""
     import smtplib
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
-    
+
     sender = os.environ.get("SMTP_USER")
     password = os.environ.get("SMTP_PASS")
     recipient = os.environ.get("EMAIL_RECIPIENT") or sender
@@ -340,103 +468,13 @@ def _send_email_report(state: PipelineState, theme_name: str) -> None:
         logger.info("Skipping email report (SMTP_USER or SMTP_PASS not set).")
         return
 
+    html = _build_email_html(state, theme_name)
+    date_str = datetime.datetime.now().strftime("%d-%b-%y")
     quote = state.get("quote")
-    quote_text = quote.text if quote else "N/A"
-    author = quote.author if quote else "Unknown"
-    meta = state.get("meta")
-    caption = meta.caption if meta else "N/A"
-    results = state.get("platform_results", [])
-    
-    # Status Badge Logic
-    has_success = any(r.status == "posted" for r in results)
-    has_failure = any(r.status == "failed" for r in results)
-    
-    status_color = "#27ae60" if not has_failure else "#e67e22" if has_success else "#c0392b"
-    status_text = "SUCCESS" if not has_failure else "PARTIAL SUCCESS" if has_success else "FAILED"
-
-    html = f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <style>
-        body {{ font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f9; margin: 0; padding: 40px 20px; }}
-        .container {{ max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }}
-        .header {{ background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); padding: 30px; text-align: center; color: white; }}
-        .status-badge {{ display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; letter-spacing: 1px; background: rgba(255,255,255,0.2); margin-top: 10px; border: 1px solid rgba(255,255,255,0.3); }}
-        .content {{ padding: 40px; }}
-        .section-title {{ font-size: 14px; font-weight: bold; color: #888; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px; }}
-        .quote-card {{ background: #f8faff; border-left: 4px solid #4A90E2; padding: 25px; margin-bottom: 30px; border-radius: 0 8px 8px 0; }}
-        .quote-text {{ font-size: 20px; line-height: 1.5; color: #2c3e50; font-style: italic; margin: 0; }}
-        .quote-author {{ margin-top: 15px; font-weight: bold; color: #7f8c8d; font-size: 15px; }}
-        .caption-box {{ background: #ffffff; border: 1px solid #e1e8ed; border-radius: 8px; padding: 20px; color: #333; font-size: 14px; line-height: 1.6; white-space: pre-wrap; }}
-        .platform-row {{ display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f0f0f0; }}
-        .platform-info {{ display: flex; align-items: center; }}
-        .platform-icon {{ font-size: 20px; margin-right: 12px; }}
-        .btn {{ display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: bold; text-decoration: none; transition: all 0.2s; }}
-        .btn-insta {{ background: #E1306C; color: white; }}
-        .btn-youtube {{ background: #FF0000; color: white; }}
-        .footer {{ text-align: center; padding: 30px; font-size: 12px; color: #aaa; background: #fafafa; }}
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h1 style="margin:0; font-size: 24px; letter-spacing: 1px; font-weight: 300;">WISDOM DISPATCH</h1>
-          <div class="status-badge">{status_text} | {theme_name.upper()}</div>
-        </div>
-        
-        <div class="content">
-          <div class="section-title">The Insight</div>
-          <div class="quote-card">
-            <p class="quote-text">"{quote_text}"</p>
-            <div class="quote-author">— {author}</div>
-          </div>
-
-          <div class="section-title">Content Manifest</div>
-          <div class="caption-box">{caption}</div>
-
-          <div class="section-title" style="margin-top: 30px;">Digital Assets</div>
-          <div style="margin-top: 10px;">
-    """
-
-    for r in results:
-        btn_class = "btn-insta" if r.platform == "instagram" else "btn-youtube"
-        label = "INSTAGRAM" if r.platform == "instagram" else "YOUTUBE"
-        
-        if r.status == "posted":
-            html += f"""
-            <div class="platform-row">
-              <div class="platform-info">
-                <span style="font-weight:bold; color:#444; font-size: 12px; letter-spacing: 1px;">{r.platform.upper()}</span>
-              </div>
-              <a href="{r.url}" class="btn {btn_class}">{label}</a>
-            </div>
-            """
-        else:
-            html += f"""
-            <div class="platform-row" style="opacity: 0.6;">
-              <div class="platform-info">
-                <span style="font-weight:bold; color:#c0392b; font-size: 12px; letter-spacing: 1px;">{r.platform.upper()} FAILED</span>
-              </div>
-              <span style="font-size: 11px; color: #c0392b;">{r.error}</span>
-            </div>
-            """
-
-    html += """
-          </div>
-        </div>
-        <div class="footer">
-          WISDOM ENGINE &bull; AUTOMATED INTELLIGENCE &bull; PUBLISHING LOG
-        </div>
-      </div>
-    </body>
-    </html>
-    """
+    author = quote.author if quote else ""
 
     msg = MIMEMultipart("alternative")
-    date_str = datetime.datetime.now().strftime("%d-%b-%y")
-    msg["Subject"] = f"Wisdom Dispatch ({date_str}) | {theme_name}"
+    msg["Subject"] = f"Wisdom Dispatch ({date_str}) | {theme_name}{' — ' + author if author else ''}"
     msg["From"] = sender
     msg["To"] = recipient
     msg.attach(MIMEText(html, "html"))
@@ -449,6 +487,6 @@ def _send_email_report(state: PipelineState, theme_name: str) -> None:
         server.login(sender, password)
         server.send_message(msg)
         server.quit()
-        logger.info(f"High-grade email report sent to {recipient}")
+        logger.info(f"Email report sent to {recipient}")
     except Exception as e:
         logger.error(f"Failed to send email report: {e}")

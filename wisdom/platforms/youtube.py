@@ -63,7 +63,8 @@ class YouTubePlatform(BasePlatform):
 
         yt_cfg = theme.youtube if theme else None
         title = _build_title(meta, theme)
-        description = meta.caption
+        hashtag_line = " ".join(meta.hashtags)
+        description = f"{meta.caption}\n\n{hashtag_line}" if hashtag_line else meta.caption
         tags = (yt_cfg.tags if yt_cfg else []) + meta.tags
         category_id = yt_cfg.category_id if yt_cfg else "22"
         privacy = yt_cfg.privacy if yt_cfg else "public"
