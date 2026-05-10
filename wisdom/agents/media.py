@@ -60,6 +60,11 @@ def compose(state: PipelineState) -> PipelineState:
 
 
 def judge(state: PipelineState) -> PipelineState:
+    if state.get("dry_run") or state.get("offline"):
+        logger.info("  Skipping judge (dry-run/offline) — automatically accepting")
+        return {**state, "best_score": 10, "_accepted": True,
+                "_hard_gate": False, "best_state": None}
+
     composed = state.get("composed_image", b"")
     quote = state.get("quote")
     score, accepted, hard_gate = _judge_image(composed, quote)
