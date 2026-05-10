@@ -327,6 +327,11 @@ def _save_dry_run(state: PipelineState, theme_key: str) -> None:
 
 
 def _send_email_report(state: PipelineState, theme_name: str) -> None:
+    """Send a premium, aesthetic HTML report of the post results."""
+    import smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+    
     sender = os.environ.get("SMTP_USER")
     password = os.environ.get("SMTP_PASS")
     recipient = os.environ.get("EMAIL_RECIPIENT") or sender
@@ -338,55 +343,100 @@ def _send_email_report(state: PipelineState, theme_name: str) -> None:
     quote = state.get("quote")
     quote_text = quote.text if quote else "N/A"
     author = quote.author if quote else "Unknown"
-    meaning = state.get("llm_caption", "N/A")
+    meta = state.get("meta")
+    caption = meta.caption if meta else "N/A"
     results = state.get("platform_results", [])
+    
+    # Status Badge Logic
+    has_success = any(r.status == "posted" for r in results)
+    has_failure = any(r.status == "failed" for r in results)
+    
+    status_color = "#27ae60" if not has_failure else "#e67e22" if has_success else "#c0392b"
+    status_text = "SUCCESS" if not has_failure else "PARTIAL SUCCESS" if has_success else "FAILED"
 
     html = f"""
+    <!DOCTYPE html>
     <html>
-      <body style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2 style="color: #4A90E2; border-bottom: 2px solid #eee; padding-bottom: 10px;">✨ Daily Dose of Wisdom: {theme_name} ✨</h2>
-
-        <div style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #4A90E2; margin: 20px 0;">
-          <p style="font-size: 16px; font-style: italic; margin: 0 0 10px 0;">"{quote_text}"</p>
-          <p style="margin: 0; font-weight: bold; color: #555;">— {author}</p>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body {{ font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f9; margin: 0; padding: 40px 20px; }}
+        .container {{ max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }}
+        .header {{ background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); padding: 30px; text-align: center; color: white; }}
+        .status-badge {{ display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; letter-spacing: 1px; background: rgba(255,255,255,0.2); margin-top: 10px; border: 1px solid rgba(255,255,255,0.3); }}
+        .content {{ padding: 40px; }}
+        .section-title {{ font-size: 14px; font-weight: bold; color: #888; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px; }}
+        .quote-card {{ background: #f8faff; border-left: 4px solid #4A90E2; padding: 25px; margin-bottom: 30px; border-radius: 0 8px 8px 0; }}
+        .quote-text {{ font-size: 20px; line-height: 1.5; color: #2c3e50; font-style: italic; margin: 0; }}
+        .quote-author {{ margin-top: 15px; font-weight: bold; color: #7f8c8d; font-size: 15px; }}
+        .caption-box {{ background: #ffffff; border: 1px solid #e1e8ed; border-radius: 8px; padding: 20px; color: #333; font-size: 14px; line-height: 1.6; white-space: pre-wrap; }}
+        .platform-row {{ display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f0f0f0; }}
+        .platform-info {{ display: flex; align-items: center; }}
+        .platform-icon {{ font-size: 20px; margin-right: 12px; }}
+        .btn {{ display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: bold; text-decoration: none; transition: all 0.2s; }}
+        .btn-insta {{ background: #E1306C; color: white; }}
+        .btn-youtube {{ background: #FF0000; color: white; }}
+        .footer {{ text-align: center; padding: 30px; font-size: 12px; color: #aaa; background: #fafafa; }}
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1 style="margin:0; font-size: 24px; letter-spacing: 1px; font-weight: 300;">WISDOM DISPATCH</h1>
+          <div class="status-badge">{status_text} | {theme_name.upper()}</div>
         </div>
+        
+        <div class="content">
+          <div class="section-title">The Insight</div>
+          <div class="quote-card">
+            <p class="quote-text">"{quote_text}"</p>
+            <div class="quote-author">— {author}</div>
+          </div>
 
-        <h3 style="color: #444;">Meaning:</h3>
-        <p style="line-height: 1.6; color: #555;">{meaning}</p>
+          <div class="section-title">Content Manifest</div>
+          <div class="caption-box">{caption}</div>
 
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
-
-        <h3 style="color: #444;">Live Links:</h3>
-        <ul style="list-style-type: none; padding: 0;">
+          <div class="section-title" style="margin-top: 30px;">Digital Assets</div>
+          <div style="margin-top: 10px;">
     """
 
     for r in results:
+        btn_class = "btn-insta" if r.platform == "instagram" else "btn-youtube"
+        label = "INSTAGRAM" if r.platform == "instagram" else "YOUTUBE"
+        
         if r.status == "posted":
-            link = f'<a href="{r.url}" style="color: #4A90E2; text-decoration: none;">{r.url}</a>'
-            if r.platform == "instagram":
-                html += f'<li style="margin-bottom: 10px;">📸 <b>Instagram:</b> {link}</li>'
-            elif r.platform == "youtube":
-                html += f'<li style="margin-bottom: 10px;">🎥 <b>YouTube Shorts:</b> {link}</li>'
-    html += "</ul>"
-
-    failures = [r for r in results if r.status == "failed"]
-    if failures:
-        html += """
-        <div style="background-color: #ffebee; border: 1px solid #ffcdd2; padding: 15px; border-radius: 4px; margin-top: 20px;">
-          <h3 style="color: #c62828; margin-top: 0;">⚠️ Failures:</h3>
-          <ul style="color: #c62828; margin-bottom: 0;">
-        """
-        for f in failures:
-            html += f"<li><b>{f.platform.capitalize()}:</b> {f.error}</li>"
-        html += "</ul></div>"
+            html += f"""
+            <div class="platform-row">
+              <div class="platform-info">
+                <span style="font-weight:bold; color:#444; font-size: 12px; letter-spacing: 1px;">{r.platform.upper()}</span>
+              </div>
+              <a href="{r.url}" class="btn {btn_class}">{label}</a>
+            </div>
+            """
+        else:
+            html += f"""
+            <div class="platform-row" style="opacity: 0.6;">
+              <div class="platform-info">
+                <span style="font-weight:bold; color:#c0392b; font-size: 12px; letter-spacing: 1px;">{r.platform.upper()} FAILED</span>
+              </div>
+              <span style="font-size: 11px; color: #c0392b;">{r.error}</span>
+            </div>
+            """
 
     html += """
-      </body>
+          </div>
+        </div>
+        <div class="footer">
+          WISDOM ENGINE &bull; AUTOMATED INTELLIGENCE &bull; PUBLISHING LOG
+        </div>
+      </div>
+    </body>
     </html>
     """
 
     msg = MIMEMultipart("alternative")
-    msg["Subject"] = f"Wisdom Bot: {theme_name} Post Report"
+    date_str = datetime.datetime.now().strftime("%d-%b-%y")
+    msg["Subject"] = f"Wisdom Dispatch ({date_str}) | {theme_name}"
     msg["From"] = sender
     msg["To"] = recipient
     msg.attach(MIMEText(html, "html"))
@@ -399,6 +449,6 @@ def _send_email_report(state: PipelineState, theme_name: str) -> None:
         server.login(sender, password)
         server.send_message(msg)
         server.quit()
-        logger.info(f"Email report sent to {recipient}")
+        logger.info(f"High-grade email report sent to {recipient}")
     except Exception as e:
         logger.error(f"Failed to send email report: {e}")
