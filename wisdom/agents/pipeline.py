@@ -490,16 +490,17 @@ def _send_email_report(state: PipelineState, theme_name: str) -> None:
     has_success = any(r.status == "posted" for r in results)
     has_failure = any(r.status == "failed" for r in results)
 
+    author_part = f" · {author}" if author and author.lower() not in ("unknown", "") else " · Internet Wisdom"
     if has_failure and not has_success:
-        subject = f"[POST FAILED] {theme_name} — Wisdom Dispatch ({date_str})"
+        subject = f"[FAILED] {theme_name} · {date_str}"
     elif has_failure:
-        subject = f"[Partial] Wisdom Dispatch ({date_str}) | {theme_name}{' — ' + author if author else ''}"
+        subject = f"[PARTIAL FAILURE] {theme_name}{author_part} · {date_str}"
     else:
-        subject = f"Wisdom Dispatch ({date_str}) | {theme_name}{' — ' + author if author else ''}"
+        subject = f"{theme_name}{author_part} · {date_str}"
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
-    msg["From"] = formataddr(("Wisdom Dispatch", sender))
+    msg["From"] = formataddr(("Wisdom Engine", sender))
     msg["To"] = recipient
     msg.attach(MIMEText(html, "html"))
 

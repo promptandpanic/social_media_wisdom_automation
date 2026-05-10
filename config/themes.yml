@@ -112,10 +112,10 @@ themes:
     max_words: 18
     platforms: [instagram, youtube]
     styles: [cinematic_female_protagonist]
-    hashtags: ["#DivineFeminine", "#WomenEmpowerment", "#IndependentWoman", "#DarkFeminine", "#SheQuotes"]
+    hashtags: ["#SheFeels", "#WomenEmpowerment", "#StrongWomen", "#DivineFeminine", "#IndependentWoman", "#WomenWhoLead", "#DarkFeminine", "#HerWords"]
     youtube:
       title_template: "She Feels"
-      tags: ["divine feminine", "women empowerment", "independent woman", "dark feminine energy", "she feels"]
+      tags: ["she feels", "women empowerment", "strong women quotes", "divine feminine", "independent woman", "women who lead", "dark feminine energy", "female empowerment"]
       category_id: "22"
       privacy: public
     enabled: true

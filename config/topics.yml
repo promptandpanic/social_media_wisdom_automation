@@ -10,7 +10,9 @@ categories:
     brief: >
       Effort before results, quiet discipline, starting despite resistance,
       the gap between wanting and doing, confidence earned through action,
-      showing up when no one is watching. Specific and felt — not hustle slogans.
+      showing up when no one is watching. Also: the unglamorous side of ambition —
+      doing the work before the world rewards it, building in obscurity, choosing
+      the hard path because it is the right one. Specific and felt — not hustle slogans.
 
     featured_authors:
       - name: "Naval Ravikant"
@@ -27,6 +29,14 @@ categories:
         note: "Basketball legend — Mamba mentality, obsession with the craft"
       - name: "MS Dhoni"
         note: "Legendary Indian cricketer — calmness under pressure, process over results"
+      - name: "Ratan Tata"
+        note: "Indian industrialist — humility with ambition, ethics in success, building with purpose"
+      - name: "Mel Robbins"
+        note: "Author/speaker — action despite fear, the 5-second rule, self-confidence"
+      - name: "Elon Musk"
+        note: "Entrepreneur — obsession with the mission, working when others don't"
+      - name: "Narendra Modi"
+        note: "Indian PM — self-reliance, nation-building, rising from humble beginnings"
 
   wisdom:
     name: "Life Wisdom"
@@ -34,7 +44,9 @@ categories:
     brief: >
       Truths that arrive slowly through experience, patterns people repeat without
       seeing, clarity after disappointment, the cost of avoidance, what time
-      teaches that advice cannot. Should feel like naming something already known
+      teaches that advice cannot. Also: the paradoxes — how loss clarifies, how
+      slowing down is not falling behind, how the things we resist most are often
+      the things we need. Should feel like naming something already known
       but never said quite this way.
 
     featured_authors:
@@ -60,10 +72,14 @@ categories:
         note: "Roman emperor, Stoic — duty, impermanence, self-mastery"
       - name: "Seneca"
         note: "Roman Stoic — time, mortality, living deliberately"
+      - name: "Epictetus"
+        note: "Stoic philosopher (former slave) — what is and isn't in your control"
       - name: "Carl Jung"
         note: "Swiss psychologist — shadow, archetypes, the unconscious"
       - name: "Alan Watts"
         note: "British philosopher — Zen, acceptance, the nature of reality"
+      - name: "Lao Tzu"
+        note: "Ancient Chinese philosopher — effortless action, the Tao, simplicity"
       - name: "Charlie Munger"
         note: "Investor/polymath — mental models, elementary worldly wisdom"
       - name: "Friedrich Nietzsche"
@@ -75,18 +91,32 @@ categories:
     brief: >
       Being chosen in ordinary moments, the difference between attention and care,
       who you become in safe versus anxious love, the slow drift apart, things
-      people feel but never say, the specific ache of almost-love. Precise and
-      recognised — not romantic clichés.
+      people feel but never say, the specific ache of almost-love. Also: modern
+      dynamics — situationships, the person who was right but at the wrong time,
+      loving someone whose attachment style collides with yours, the grief of
+      outgrowing people you once needed. Precise and recognised — not romantic clichés.
 
     featured_authors:
       - name: "Esther Perel"
-        note: "Relationship therapist — erotic intelligence, safe vs adventure"
+        note: "Relationship therapist — erotic intelligence, safe vs adventure in long-term love"
       - name: "Alain de Botton"
-        note: "Philosopher — the reality of marriage, safe love, the unsaid"
+        note: "Philosopher — the reality of marriage, safe love, love as a skill"
       - name: "bell hooks"
-        note: "Author — love as action, the courage to be vulnerable"
+        note: "Author — love as action, the courage to be vulnerable, love as choice"
       - name: "Khalil Gibran"
-        note: "Poet — the beauty and pain of shared life"
+        note: "Poet — the beauty and pain of shared life, loving without possession"
+      - name: "C.S. Lewis"
+        note: "Author — the four loves, grief as the price of deep love"
+      - name: "Atticus"
+        note: "Modern poet (Instagram) — short, precise, the unsaid between two people"
+      - name: "Lang Leav"
+        note: "Modern poet — longing, heartbreak, love that didn't survive"
+      - name: "Nikita Gill"
+        note: "Modern poet — fierce love, healing, loving yourself first"
+      - name: "Nayyirah Waheed"
+        note: "Modern poet — softness as strength, loving without losing yourself"
+      - name: "John Gottman"
+        note: "Relationship researcher — what makes love last, contempt as the killer"
 
   mindfulness:
     name: "Mindfulness & Inner Peace"
@@ -94,17 +124,30 @@ categories:
     brief: >
       Rest without guilt, the cost of constant noise, returning to yourself,
       attention as a finite resource, slowing down before life forces you to.
+      Also: anxiety that won't switch off, the mind replaying what the day is done with,
+      the particular exhaustion of overthinking, finding stillness not as an escape
+      but as the only honest place to start from.
       Should feel like relief — recognition, not instruction.
 
     featured_authors:
       - name: "Eckhart Tolle"
-        note: "Spiritual teacher — The Power of Now, presence, the ego"
+        note: "Spiritual teacher — The Power of Now, presence, the ego as the source of suffering"
       - name: "Thich Nhat Hanh"
-        note: "Zen monk — peace is every step, deep listening, breathing"
-      - name: "Brianna Wiest"
-        note: "Modern author — emotional maturity, self-sabotage, quiet growth"
+        note: "Zen monk — peace is every step, deep listening, breathing as practice"
       - name: "Pema Chödrön"
-        note: "Buddhist nun — failing well, compassion in difficulty"
+        note: "Buddhist nun — failing well, sitting with discomfort, compassion in difficulty"
+      - name: "Brianna Wiest"
+        note: "Modern author — emotional maturity, self-sabotage, the mountain is you"
+      - name: "Jon Kabat-Zinn"
+        note: "Mindfulness researcher — attention, acceptance, arriving in the present moment"
+      - name: "Rumi"
+        note: "Sufi poet — silence as the language of God, the soul's longing for peace"
+      - name: "Lao Tzu"
+        note: "Ancient philosopher — stillness as power, the way of non-resistance"
+      - name: "Adyashanti"
+        note: "Spiritual teacher — awakening, the end of seeking, resting as you are"
+      - name: "Deepak Chopra"
+        note: "Author/physician — mind-body connection, consciousness, inner stillness"
 
   goodnight:
     name: "Goodnight & Gratitude"
@@ -112,16 +155,28 @@ categories:
     brief: >
       Letting the day end gently, releasing what you couldn't control, forgiving
       yourself without ceremony, gratitude for ordinary comfort, tomorrow as a
-      blank page. Gentle — never saccharine. Something read in bed that feels
-      less alone.
+      blank page. Also: the quietness of night as its own kind of gift — the
+      permission to stop, small blessings that went unnoticed in the rush,
+      the grace in imperfect days. Gentle — never saccharine. Something read
+      in bed that feels less alone.
 
     featured_authors:
       - name: "Marcus Aurelius"
-        note: "Stoic — evening reflections on virtue and peace"
+        note: "Stoic — evening reflections on virtue, what was enough today"
       - name: "Mary Oliver"
-        note: "Poet — nature, attention as prayer, simple gratitude"
+        note: "Poet — nature, attention as prayer, simple gratitude for being alive"
       - name: "Hafez"
-        note: "Persian poet — the soul's joy, the beauty of the night"
+        note: "Persian Sufi poet — the soul's joy, beauty of the night, divine love"
+      - name: "Thich Nhat Hanh"
+        note: "Zen monk — ending the day in peace, non-attachment, rest as practice"
+      - name: "Rumi"
+        note: "Sufi poet — the night as a time of longing, surrender, and grace"
+      - name: "David Whyte"
+        note: "Poet — consolations, the conversational nature of reality, rest as belonging"
+      - name: "Rupi Kaur"
+        note: "Modern poet — healing as quiet work done in the small hours"
+      - name: "Lang Leav"
+        note: "Modern poet — the tender ache of a day that passed too fast"
 
   latenight:
     name: "Late Night Feels"
@@ -177,28 +232,55 @@ categories:
         note: "Novelist — magical realism, urban loneliness, nostalgic silence"
       - name: "Sylvia Plath"
         note: "Poet — intense emotional precision, the heavy weight of being"
+      - name: "Albert Camus"
+        note: "French philosopher — absurdity, the question of meaning, living anyway"
+      - name: "Virginia Woolf"
+        note: "Author — the interior life, loneliness that language barely reaches"
+      - name: "Atticus"
+        note: "Modern poet (Instagram) — late-night thoughts, the unsaid, quiet heartbreak"
+      - name: "R.M. Drake"
+        note: "Modern poet — 3am thoughts, beautiful chaos, the rawness of being human"
+      - name: "Tyler Knott Gregson"
+        note: "Modern poet — typewriter poems, longing, the specific feeling of midnight"
 
   womenpower:
     name: "She Feels"
     max_words: 18
     brief: >
-      Raw, emotionally precise feelings women instantly recognise — the unsaid,
-      the almost-chosen, the effort gap, being the strong one nobody checks on,
-      gut feelings before the mind catches up, small moments of choosing yourself.
-      Hyper-specific, not empowerment speeches.
+      Three equal territories — rotate between them.
+      FEELINGS: Raw, emotionally precise truths women instantly recognise — the unsaid,
+      the almost-chosen, being the strong one nobody checks on, gut feelings before
+      the mind catches up, the weight of holding everyone else together.
+      EMPOWERMENT: Choosing yourself without apology, refusing to shrink, the moment
+      she stopped waiting for permission, healing as an act of defiance, boundaries
+      as self-respect not selfishness.
+      STRENGTH: Women who broke things to build better ones — ambition that refuses
+      to be polite, leading without losing yourself, the particular courage it takes
+      to be a woman who does not dim her light.
+      Hyper-specific and felt. No generic girl-boss slogans.
 
     featured_authors:
       - name: "Maya Angelou"
-        note: "Poet/Activist — phenomenal woman, resilience, self-worth, courage"
+        note: "Poet/Activist — phenomenal woman, resilience, self-worth, still I rise"
       - name: "Frida Kahlo"
         note: "Mexican painter — raw emotion, surviving pain, fierce independence"
       - name: "Rupi Kaur"
         note: "Modern poet — heartbreak, healing, divine feminine, self-love"
-      - name: "Sudha Murty"
-        note: "Indian author/philanthropist — quiet strength, simplicity, profound values"
+      - name: "Chimamanda Ngozi Adichie"
+        note: "Nigerian author/feminist — gender, identity, the cost of silence"
       - name: "Brené Brown"
         note: "Researcher — vulnerability, shame, the courage to be seen"
+      - name: "Michelle Obama"
+        note: "Author/former First Lady — ambition, rising, being a first and the weight of it"
+      - name: "Viola Davis"
+        note: "Actress — on being a Black woman, refusing erasure, art as survival"
+      - name: "Malala Yousafzai"
+        note: "Activist — education as defiance, refusing to be silenced by fear"
       - name: "Coco Chanel"
         note: "Designer — independence, style as power, choosing oneself"
+      - name: "Sudha Murty"
+        note: "Indian author/philanthropist — quiet strength, simplicity, profound values"
       - name: "Bianca Sparacino"
         note: "Modern author — healing, self-love, the strength in softness"
+      - name: "Serena Williams"
+        note: "Tennis champion — power without apology, excellence as a woman and mother"
