@@ -17,8 +17,12 @@ categories:
         note: "Modern philosopher/investor — wealth, happiness, clear thinking"
       - name: "David Goggins"
         note: "Former Navy SEAL — mental toughness, overcoming limits, raw discipline"
+      - name: "Alex Hormozi"
+        note: "Modern entrepreneur — extreme effort, anti-excuse, business philosophy"
       - name: "James Clear"
         note: "Author of Atomic Habits — systems, small daily improvements"
+      - name: "Ryan Holiday"
+        note: "Modern Stoic — ego as the enemy, discipline is destiny"
       - name: "Kobe Bryant"
         note: "Basketball legend — Mamba mentality, obsession with the craft"
       - name: "MS Dhoni"
@@ -60,6 +64,10 @@ categories:
         note: "Swiss psychologist — shadow, archetypes, the unconscious"
       - name: "Alan Watts"
         note: "British philosopher — Zen, acceptance, the nature of reality"
+      - name: "Charlie Munger"
+        note: "Investor/polymath — mental models, elementary worldly wisdom"
+      - name: "Friedrich Nietzsche"
+        note: "German philosopher — the will to power, self-overcoming, honesty"
 
   love:
     name: "Love & Relationships"
@@ -70,6 +78,16 @@ categories:
       people feel but never say, the specific ache of almost-love. Precise and
       recognised — not romantic clichés.
 
+    featured_authors:
+      - name: "Esther Perel"
+        note: "Relationship therapist — erotic intelligence, safe vs adventure"
+      - name: "Alain de Botton"
+        note: "Philosopher — the reality of marriage, safe love, the unsaid"
+      - name: "bell hooks"
+        note: "Author — love as action, the courage to be vulnerable"
+      - name: "Khalil Gibran"
+        note: "Poet — the beauty and pain of shared life"
+
   mindfulness:
     name: "Mindfulness & Inner Peace"
     max_words: 20
@@ -77,6 +95,16 @@ categories:
       Rest without guilt, the cost of constant noise, returning to yourself,
       attention as a finite resource, slowing down before life forces you to.
       Should feel like relief — recognition, not instruction.
+
+    featured_authors:
+      - name: "Eckhart Tolle"
+        note: "Spiritual teacher — The Power of Now, presence, the ego"
+      - name: "Thich Nhat Hanh"
+        note: "Zen monk — peace is every step, deep listening, breathing"
+      - name: "Brianna Wiest"
+        note: "Modern author — emotional maturity, self-sabotage, quiet growth"
+      - name: "Pema Chödrön"
+        note: "Buddhist nun — failing well, compassion in difficulty"
 
   goodnight:
     name: "Goodnight & Gratitude"
@@ -86,6 +114,14 @@ categories:
       yourself without ceremony, gratitude for ordinary comfort, tomorrow as a
       blank page. Gentle — never saccharine. Something read in bed that feels
       less alone.
+
+    featured_authors:
+      - name: "Marcus Aurelius"
+        note: "Stoic — evening reflections on virtue and peace"
+      - name: "Mary Oliver"
+        note: "Poet — nature, attention as prayer, simple gratitude"
+      - name: "Hafez"
+        note: "Persian poet — the soul's joy, the beauty of the night"
 
   latenight:
     name: "Late Night Feels"
@@ -132,6 +168,16 @@ categories:
           The things that go unsaid. Silence as self-protection. Feeling
           something before you can name it. Being understood only after going quiet.
 
+    featured_authors:
+      - name: "Franz Kafka"
+        note: "Author — existential dread, the isolation of the unsaid"
+      - name: "Charles Bukowski"
+        note: "Poet — raw reality, the beauty in the dirt, lonely nights"
+      - name: "Haruki Murakami"
+        note: "Novelist — magical realism, urban loneliness, nostalgic silence"
+      - name: "Sylvia Plath"
+        note: "Poet — intense emotional precision, the heavy weight of being"
+
   womenpower:
     name: "She Feels"
     max_words: 18
@@ -150,3 +196,9 @@ categories:
         note: "Modern poet — heartbreak, healing, divine feminine, self-love"
       - name: "Sudha Murty"
         note: "Indian author/philanthropist — quiet strength, simplicity, profound values"
+      - name: "Brené Brown"
+        note: "Researcher — vulnerability, shame, the courage to be seen"
+      - name: "Coco Chanel"
+        note: "Designer — independence, style as power, choosing oneself"
+      - name: "Bianca Sparacino"
+        note: "Modern author — healing, self-love, the strength in softness"
