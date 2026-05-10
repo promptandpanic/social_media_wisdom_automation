@@ -49,6 +49,7 @@ def generate(prompt: str, role: str) -> str:
                 temperature=role_cfg.temperature,
                 max_tokens=role_cfg.max_tokens,
                 num_retries=1,
+                api_key=os.environ.get(p.key_env),
                 **extra,
             )
             content = resp.choices[0].message.content or ""
@@ -95,6 +96,7 @@ def judge_image(image_bytes: bytes, prompt: str, role: str = "image_judge") -> s
                 }],
                 temperature=role_cfg.temperature,
                 max_tokens=role_cfg.max_tokens,
+                api_key=os.environ.get(p.key_env),
             )
             logger.info(f"[{role}] ✓ {p_name} ({p.model})")
             return resp.choices[0].message.content

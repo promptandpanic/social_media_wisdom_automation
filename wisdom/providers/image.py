@@ -187,8 +187,8 @@ class GradientFallback(BaseImageProvider):
     def generate(self, prompt: str) -> bytes:
         img = Image.new("RGB", (_W, _H))
         d = ImageDraw.Draw(img)
-        top = (20, 20, 40)
-        bot = (60, 30, 80)
+        top = (15, 15, 20)  # Charcoal
+        bot = (40, 40, 45)  # Dark Gray
         for y in range(_H):
             t = y / _H
             r = int(top[0] + (bot[0] - top[0]) * t)
