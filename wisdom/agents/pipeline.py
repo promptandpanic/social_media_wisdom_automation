@@ -347,10 +347,10 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
     author = quote.author if quote else "Unknown"
     llm_caption = state.get("llm_caption", "")
     results = state.get("platform_results", [])
-    architects_b64 = _load_font_b64("architects_daughter.ttf")
+    playfair_b64 = _load_font_b64("playfair_it.ttf")
     font_face = (
-        f"@font-face {{ font-family: 'Architects Daughter'; src: url('data:font/truetype;base64,{architects_b64}') format('truetype'); font-weight: normal; font-style: normal; }}"
-        if architects_b64 else ""
+        f"@font-face {{ font-family: 'Playfair Display'; src: url('data:font/truetype;base64,{playfair_b64}') format('truetype'); font-weight: normal; font-style: italic; }}"
+        if playfair_b64 else ""
     )
 
     has_success = any(r.status == "posted" for r in results)
@@ -405,8 +405,8 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
     .live-dot {{ animation: pulse 1.4s ease-in-out infinite; }}
   </style>
   <div style="background-color:#0a0a0a; margin:0; padding:0;">
-  <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#0a0a0a" style="background:#0a0a0a; padding: 40px 20px;">
-    <tr><td align="center">
+  <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#0a0a0a" style="background-color:#0a0a0a; padding: 40px 20px;">
+    <tr><td align="center" bgcolor="#0a0a0a" style="background-color:#0a0a0a;">
       <table width="580" cellpadding="0" cellspacing="0" style="max-width:580px; width:100%;">
 
         <!-- Top rule -->
@@ -448,7 +448,7 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
         <!-- Quote block -->
         <tr><td style="padding-bottom: 48px;">
           <div style="font-size:9px; letter-spacing:3px; color:#4a9eba; text-transform:uppercase; margin-bottom:24px;">The Insight</div>
-          <div style="font-family:'Architects Daughter', cursive; font-size:24px; line-height:1.7; color:#e8e8e8; padding-left:20px; border-left: 2px solid #c9a96e;">{quote_text}</div>
+          <div style="font-family:'Playfair Display', Didot, 'Hoefler Text', Baskerville, Georgia, serif; font-style:italic; font-size:24px; line-height:1.7; color:#e8e8e8; padding-left:20px; border-left: 2px solid #c9a96e;">{quote_text}</div>
           <div style="margin-top:20px; padding-left:20px; font-size:11px; letter-spacing:3px; color:#c9a96e; text-transform:uppercase;">{author}</div>
         </td></tr>
 

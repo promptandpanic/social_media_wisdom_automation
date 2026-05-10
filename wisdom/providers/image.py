@@ -149,7 +149,8 @@ class LeonardoFluxProProvider(BaseImageProvider):
             timeout=30,
         )
         r.raise_for_status()
-        gen_id = r.json()["sdGenerationJob"]["generationId"]
+        body = r.json()
+        gen_id = body["generate"]["generationId"]
 
         for _ in range(30):
             time.sleep(4)
