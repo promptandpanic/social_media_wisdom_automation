@@ -13,9 +13,9 @@ styles:
       Composition: Clean, modern, highly relatable lifestyle shot. Leave a clear space in the center for the quote.
     rendering:
       font: poppins
-      text_color: "#FFFFFF"
-      highlight_color: "#FFD700"
-      author_color: "#FFD700"
+      text_color: "#F5E642"
+      highlight_color: "#FF6B6B"
+      author_color: "#FF6B6B"
       overlay: {type: gradient_center, opacity: 110, color: "#000000"}
       decoration: none
       highlight_style: color
@@ -35,8 +35,8 @@ styles:
       Composition: Highly atmospheric but positive and cozy. Center must be slightly shaded or clear for text.
     rendering:
       font: nunito
-      text_color: "#FFFFFF"
-      highlight_color: "#FF9E80"
+      text_color: "#FFAB91"
+      highlight_color: "#FFFFFF"
       author_color: "#FF9E80"
       overlay: {type: gradient_bottom, opacity: 130, color: "#000000"}
       decoration: none
@@ -57,7 +57,7 @@ styles:
       Composition: Very clean and organized. Center must have negative space for text.
     rendering:
       font: montserrat
-      text_color: "#FFFFFF"
+      text_color: "#E8D5B7"
       highlight_color: "#81C784"
       author_color: "#81C784"
       overlay: {type: gradient_center, opacity: 120, color: "#000000"}
@@ -101,8 +101,8 @@ styles:
       Composition: Center must be a calm, slightly darker space for text readability.
     rendering:
       font: lato_bold
-      text_color: "#FFFFFF"
-      highlight_color: "#64B5F6"
+      text_color: "#FF5252"
+      highlight_color: "#FFFFFF"
       author_color: "#64B5F6"
       overlay: {type: gradient_bottom, opacity: 140, color: "#000000"}
       decoration: none
@@ -123,7 +123,7 @@ styles:
       Composition: Like a high-end Vogue lifestyle shot, extremely cheerful and aspirational. Center open for text.
     rendering:
       font: architects_daughter
-      text_color: "#FFFFFF"
+      text_color: "#FCE4EC"
       highlight_color: "#F06292"
       author_color: "#F06292"
       overlay: {type: gradient_bottom, opacity: 130, color: "#000000"}
