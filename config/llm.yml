@@ -9,6 +9,9 @@ providers:
   gemini:
     model: gemini/gemini-2.5-flash
     key_env: GEMINI_API_KEY
+  huggingface:
+    model: huggingface/mistralai/Mistral-7B-Instruct-v0.3
+    key_env: HF_API_KEY
 
 # Per-role temperature/token settings — gemini handles all roles.
 roles:

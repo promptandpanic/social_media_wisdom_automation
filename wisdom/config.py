@@ -103,8 +103,14 @@ def llm_role(role: str) -> LLMRoleConfig:
     raw = _llm_raw()["roles"].get(role)
     if not raw:
         raise ValueError(f"Unknown LLM role: {role!r}")
+        
+    providers = raw["providers"]
+    env_override = os.environ.get("LLM_PROVIDER_ORDER")
+    if env_override:
+        providers = [p.strip() for p in env_override.split(",")]
+        
     return LLMRoleConfig(
-        providers=raw["providers"],
+        providers=providers,
         temperature=raw.get("temperature", 0.85),
         max_tokens=raw.get("max_tokens", 1024),
         disable_thinking=raw.get("disable_thinking", False),

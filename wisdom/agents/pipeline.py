@@ -124,11 +124,17 @@ def _select_audio_file(theme_key: str) -> str:
     audio_dir = Path("assets/audio")
     if not audio_dir.exists():
         return ""
+    # Try theme-specific audio first
     candidates = list(audio_dir.glob(f"{theme_key}_*.mp3"))
     if candidates:
         return str(random.choice(candidates))
-    fallback = audio_dir / "background.mp3"
-    return str(fallback) if fallback.exists() else ""
+    
+    # Fallback to ANY available audio for variety, instead of just one file
+    all_audio = list(audio_dir.glob("*.mp3"))
+    if all_audio:
+        return str(random.choice(all_audio))
+        
+    return ""
 
 
 def _create_video(state: PipelineState, theme: ThemeConfig) -> PipelineState:
@@ -163,11 +169,15 @@ You are the social media manager for an inspirational channel.
 Quote: "{quote.text}" - {quote.author}
 Theme: {theme.name}
 
-Write a profound, engaging caption (2-4 sentences) that expands on the quote's meaning. Do not include the quote itself.
-Also provide exactly 5 highly relevant hashtags.
+Write a highly engaging Instagram caption based on this quote.
+Format requirements:
+1. Start with a strong, relatable hook (e.g., "Save this for when you need a reminder 📌", "Read this if you're feeling lost right now ⬇️").
+2. 2-3 short, spaced-out sentences expanding on the quote (use emojis naturally).
+3. End with a strong Call-To-Action (CTA) (e.g., "Drop a 💯 if you agree", "Tag someone who needs to hear this 👇").
+4. Provide exactly 5 highly relevant, niche hashtags.
 
-Return ONLY valid JSON in this format:
-{{"caption": "Your thought-provoking caption...", "hashtags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"]}}
+Return ONLY valid JSON in this format (use \\n for newlines):
+{{"caption": "Hook\\n\\nBody sentence 1.\\n\\nBody sentence 2.\\n\\nCTA", "hashtags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"]}}
 """
     try:
         from wisdom import providers

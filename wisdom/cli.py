@@ -100,6 +100,12 @@ def post(theme: str, pending_id: str | None):
 @click.option("--offline", is_flag=True, help="Bypass LLM, use local curated quotes")
 def dry_run_cmd(theme: str, offline: bool):
     """Generate for THEME, save locally to output/, never post."""
+    # Force pollinations for local testing to save Gemini credits
+    os.environ["IMAGE_PROVIDER_ORDER"] = "pollinations,gradient"
+    # Force free HuggingFace model for local testing to save LLM credits
+    # It will automatically fall back to Gemini if a vision call is required
+    os.environ["LLM_PROVIDER_ORDER"] = "huggingface,gemini"
+    
     from wisdom.agents.pipeline import run as _run
     _run(theme, dry_run=True, offline=offline)
 

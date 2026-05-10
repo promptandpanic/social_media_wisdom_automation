@@ -230,20 +230,44 @@ def _sanitize(text: str) -> str:
 _CURSIVE_FONTS = {"dancing", "satisfy", "pacifico", "caveat", "kalam", "indieflower"}
 
 
-def _stroke_text(draw, xy, text, font, fill, stroke_color=(0, 0, 0), stroke=3):
+def _drop_shadow_text(draw, xy, text, font, fill, shadow_color=(0, 0, 0, 180), offset=(4, 6), blur=0):
     x, y = xy
-    for dx in range(-stroke, stroke + 1):
-        for dy in range(-stroke, stroke + 1):
-            if dx != 0 or dy != 0:
-                draw.text((x + dx, y + dy), text, font=font, fill=stroke_color)
+    # For a sharp 3D shadow (which looks modern), we just draw multiple offset layers
+    for i in range(1, 4):
+        draw.text((x + (offset[0] * i / 3), y + (offset[1] * i / 3)), text, font=font, fill=(*shadow_color[:3], int(shadow_color[3] * (4-i)/3)))
     draw.text((x, y), text, font=font, fill=fill)
 
 
 def _render_line(draw, img_width: int, y: int, line: str,
-                 font: ImageFont.FreeTypeFont, fill: tuple, stroke: int = 3) -> None:
+                 font: ImageFont.FreeTypeFont, fill: tuple, stroke: int = 3,
+                 highlight_text: str = "", hi_color: tuple = None) -> None:
     bb = font.getbbox(line)
     x = (img_width - (bb[2] - bb[0])) // 2
-    _stroke_text(draw, (x, y), line, font, fill=fill, stroke=stroke)
+    # Use drop shadow instead of basic stroke
+    shadow_color = (0, 0, 0, 180) if stroke > 0 else (0, 0, 0, 80)
+    
+    if not highlight_text or not hi_color:
+        _drop_shadow_text(draw, (x, y), line, font, fill=fill, shadow_color=shadow_color)
+        return
+        
+    hl_words = [re.sub(r'[^\w\s]', '', hw).lower() for hw in highlight_text.split() if hw.strip()]
+    if not hl_words:
+        _drop_shadow_text(draw, (x, y), line, font, fill=fill, shadow_color=shadow_color)
+        return
+
+    words = line.split(" ")
+    current_x = x
+    space_w = draw.textlength(" ", font=font)
+    
+    for w in words:
+        clean_w = re.sub(r'[^\w\s]', '', w).lower()
+        is_highlight = clean_w in hl_words and len(clean_w) > 0
+        
+        word_fill = hi_color if is_highlight else fill
+        if w:
+            _drop_shadow_text(draw, (current_x, y), w, font, fill=word_fill, shadow_color=shadow_color)
+            current_x += draw.textlength(w, font=font)
+        current_x += space_w
 
 
 # ---------------------------------------------------------------------------
@@ -400,7 +424,8 @@ def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
     text_stroke = 0 if font_key in _CURSIVE_FONTS else 3
 
     for line in lines:
-        _render_line(draw, TEXT_ZONE_CX * 2, y, line, font=f, fill=txt_color, stroke=text_stroke)
+        _render_line(draw, TEXT_ZONE_CX * 2, y, line, font=f, fill=txt_color, stroke=text_stroke,
+                     highlight_text=quote.highlight, hi_color=hi_color)
         y += line_h
 
     _SKIP_AUTHOR = {"unknown", "anonymous", "original"}

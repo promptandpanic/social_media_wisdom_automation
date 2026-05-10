@@ -77,10 +77,11 @@ Write 4–6 rich sentences describing the scene:
   subject → setting → technique/medium → colour palette (use hex values) → lighting → composition
 
 Constraints:
-  - Scene must be emotionally specific to THIS quote — not a generic illustration of the theme
-  - Leave the centre band completely clear and dark for the text overlay
-  - No text, words, signs, logos, watermarks, or clearly recognisable faces
-  - 9:16 portrait format
+  - DO NOT generate abstract, surreal, painting-like, or overly "AI-stylized" art.
+  - Scene MUST be a hyper-realistic, vibrant, and cheerful photograph (e.g., 35mm film or high-end lifestyle photography).
+  - Leave a clean, uncluttered space (negative space) for the text overlay to be readable.
+  - No text, words, signs, logos, watermarks, or explicitly recognizable faces.
+  - 9:16 portrait format.
 
 Reply with ONLY the image prompt — plain text, no JSON, no preamble."""
 
@@ -155,13 +156,21 @@ def _build_brief(image_prompt: str, style_name: str, style_data: dict,
 
     word_count = len(text.split())
     layout = "big_center" if word_count <= 12 else "full_card"
-    font_size = (96 if layout == "big_center" and word_count <= 7
-                 else 88 if layout == "big_center"
-                 else max(60, 78 - max(0, word_count - 12)))
+    # Modern aesthetic: slightly smaller text, more negative space
+    font_size = (84 if layout == "big_center" and word_count <= 7
+                 else 76 if layout == "big_center"
+                 else max(56, 68 - max(0, word_count - 12)))
 
     font = r.get("font", "playfair")
-    if font not in _VALID_FONTS:
-        font = "playfair"
+
+    # Dynamically align text with the dark gradient overlay
+    overlay_type = ov.get("type", "gradient_bottom")
+    if overlay_type == "gradient_bottom":
+        text_zone = "bottom"
+    elif overlay_type == "gradient_top":
+        text_zone = "top"
+    else:
+        text_zone = "center"
 
     return DesignBrief(
         image_prompt=image_prompt,
@@ -171,11 +180,11 @@ def _build_brief(image_prompt: str, style_name: str, style_data: dict,
         highlight_color=r.get("highlight_color", "#FFD700"),
         author_color=r.get("author_color", "#FFD700"),
         overlay=Overlay(
-            type=ov.get("type", "gradient_bottom"),
+            type=overlay_type,
             opacity=int(ov.get("opacity", 150)),
             color=ov.get("color", "#000000"),
         ),
-        text_zone="center",
+        text_zone=text_zone,
         layout=layout,
         decoration=r.get("decoration", "none"),
         highlight=quote.highlight if quote else "",

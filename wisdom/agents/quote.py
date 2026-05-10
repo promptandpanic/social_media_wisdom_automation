@@ -116,9 +116,15 @@ def generate(state: PipelineState) -> PipelineState:
         if (text and author and len(text.split()) >= 3
                 and len(text.split()) <= max_words + 5
                 and uniqueness >= MIN_UNIQUENESS):
+            
+            # Use LLM-selected highlight if available, else fallback to math rule
+            hl = data.get("highlight", "").strip()
+            if not hl or len(hl.split()) < 2:
+                hl = _extract_highlight(text)
+                
             quote = Quote(
                 text=text, author=author,
-                highlight=_extract_highlight(text),
+                highlight=hl,
                 image_hint=image_hint,
                 score=uniqueness,
                 source=_source_name(mode),
@@ -148,9 +154,12 @@ def curated_fallback(state: PipelineState) -> PipelineState:
     if below_bar:
         text = _clean(below_bar.get("quote", ""))
         author = (below_bar.get("author") or "").strip()
+        hl = below_bar.get("highlight", "").strip()
+        if not hl:
+            hl = _extract_highlight(text)
         if text and author:
             logger.warning("Using below-bar candidate as fallback")
-            q = Quote(text=text, author=author, highlight=_extract_highlight(text),
+            q = Quote(text=text, author=author, highlight=hl,
                       image_hint=image_hint, source="fallback")
             return {**state, "quote": q}
 

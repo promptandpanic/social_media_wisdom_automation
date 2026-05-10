@@ -52,12 +52,16 @@ Rules:
 - Named author — not "Unknown"
 - Choose lesser-known gems over widely-circulated lines
 - Specific and concrete — not vague philosophy
+- Must be a visceral, raw truth about modern life, ambition, or relationships
+- It should make the reader instantly think "This is exactly how I feel"
+
+Highlight: Select the most impactful 2-4 words from the quote (the punchline) to be drawn in a different color. Do NOT include punctuation. It MUST be an exact substring of the quote.
 
 Uniqueness score (1–10): how fresh and non-clichéd is this exact phrasing?
   10 = almost nobody has seen this line  |  1 = posted on every motivational page
 {avoid}
 Return ONLY a JSON array with 1 item:
-[{{"quote":"exact text","author":"Full Name","uniqueness":7}}]
+[{{"quote":"exact text","author":"Full Name","highlight":"exact 2-4 words","uniqueness":7}}]
 Replace 7 with your actual score."""
 
     else:  # internet_found
@@ -74,11 +78,15 @@ Rules:
 - DO NOT write or invent — find something that genuinely exists
 - Maximum {max_words} words
 - Must feel instantly shareable — the kind people screenshot and send
+- Must be a visceral, raw truth about modern life, ambition, or relationships
+- It should make the reader instantly think "This is exactly how I feel"
 - Author: real name if known, "Unknown" otherwise
+
+Highlight: Select the most impactful 2-4 words from the quote (the punchline) to be drawn in a different color. Do NOT include punctuation. It MUST be an exact substring of the quote.
 
 Uniqueness score (1–10): how fresh and non-clichéd is this exact phrasing?
   10 = almost nobody has seen this line  |  1 = posted on every motivational page
 {avoid}
 Return ONLY a JSON array with 1 item:
-[{{"quote":"exact text","author":"Name or Unknown","uniqueness":7}}]
+[{{"quote":"exact text","author":"Name or Unknown","highlight":"exact 2-4 words","uniqueness":7}}]
 Replace 7 with your actual score."""

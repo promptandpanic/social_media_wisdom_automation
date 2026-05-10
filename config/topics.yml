@@ -12,6 +12,18 @@ categories:
       the gap between wanting and doing, confidence earned through action,
       showing up when no one is watching. Specific and felt — not hustle slogans.
 
+    featured_authors:
+      - name: "Naval Ravikant"
+        note: "Modern philosopher/investor — wealth, happiness, clear thinking"
+      - name: "David Goggins"
+        note: "Former Navy SEAL — mental toughness, overcoming limits, raw discipline"
+      - name: "James Clear"
+        note: "Author of Atomic Habits — systems, small daily improvements"
+      - name: "Kobe Bryant"
+        note: "Basketball legend — Mamba mentality, obsession with the craft"
+      - name: "MS Dhoni"
+        note: "Legendary Indian cricketer — calmness under pressure, process over results"
+
   wisdom:
     name: "Life Wisdom"
     max_words: 24
@@ -128,3 +140,13 @@ categories:
       the almost-chosen, the effort gap, being the strong one nobody checks on,
       gut feelings before the mind catches up, small moments of choosing yourself.
       Hyper-specific, not empowerment speeches.
+
+    featured_authors:
+      - name: "Maya Angelou"
+        note: "Poet/Activist — phenomenal woman, resilience, self-worth, courage"
+      - name: "Frida Kahlo"
+        note: "Mexican painter — raw emotion, surviving pain, fierce independence"
+      - name: "Rupi Kaur"
+        note: "Modern poet — heartbreak, healing, divine feminine, self-love"
+      - name: "Sudha Murty"
+        note: "Indian author/philanthropist — quiet strength, simplicity, profound values"

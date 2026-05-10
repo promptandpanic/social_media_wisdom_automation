@@ -1,138 +1,133 @@
 styles:
 
   quiet_luxury_dark:
-    summary: "Old money aesthetic, cinematic dark mode, quiet ambition"
+    summary: "Vibrant luxury lifestyle, bright aesthetic, wealthy morning"
     categories: [wisdom, morning, latenight]
     weight: high
     description: >
-      The current pinnacle of viral hustle/motivation aesthetics: "Quiet Luxury" and "Old Money."
-      Avoid cheap neon or overly flashy sports cars. Think understated, intense, cinematic power.
-      Scenes: A vintage Porsche driving through rain, an espresso on a dark marble table overlooking a misty Lake Como,
-      a sharply tailored silhouette walking through a grand, dimly lit financial district at dawn,
-      or a luxury watch catching a single beam of light in a dark room.
-      Lighting: Low-key cinematic lighting, rich shadows, moody atmosphere.
-      Color Palette: Deep onyx, charcoal, rich mahogany, muted gold, and storm grey.
-      Composition: Must feel incredibly expensive and grounded. Leave a massive dark void in the center for the quote.
+      A bright, vibrant, and highly aesthetic luxury lifestyle. Extremely cheerful and aspirational.
+      Think of an expensive modern apartment with floor-to-ceiling windows, sunlight pouring in, a perfectly made espresso,
+      or a beautiful high-end resort overlooking crystal clear water.
+      Lighting: Bright, natural sunlight, highly realistic, 35mm film photography style.
+      Color Palette: Bright whites, warm gold, azure blue, lush green.
+      Composition: Clean, modern, highly relatable lifestyle shot. Leave a clear space in the center for the quote.
     rendering:
-      font: bebas
+      font: poppins
       text_color: "#FFFFFF"
-      highlight_color: "#C9A84C"
-      author_color: "#C9A84C"
-      overlay: {type: gradient_bottom, opacity: 160, color: "#000000"}
-      decoration: rule
+      highlight_color: "#FFD700"
+      author_color: "#FFD700"
+      overlay: {type: gradient_center, opacity: 110, color: "#000000"}
+      decoration: none
       highlight_style: color
       skip_kenburns: false
       voice_gender: male
 
   cinematic_melancholia:
-    summary: "Wong Kar-wai style, 35mm film, neon reflections, rainy nights"
+    summary: "Bright & cozy morning, warm sunlight, coffee shop vibes"
     categories: [love, latenight, wisdom]
     weight: high
     description: >
-      A deeply emotional, nostalgic 35mm film aesthetic designed for heartbreak, love, and late-night thoughts.
-      Think of the visual style of Wong Kar-wai or moody 90s cinema.
-      Scenes: A blurry figure seen through a rain-streaked taxi window at night, glowing red tail lights reflecting on wet pavement,
-      a lonely figure in a late-night diner bathed in green neon, or two hands slightly apart on a table.
-      Lighting: Heavy film grain, bokeh, soft halation, anamorphic lens flares.
-      Color Palette: Muted teal, crimson red, amber streetlights, and deep shadows.
-      Composition: Highly atmospheric, heavily blurred background, with perfect negative space in the center for profound text.
+      A highly cheerful, cozy, and vibrant morning aesthetic. Highly relatable and warm.
+      Scenes: A beautiful cup of latte art bathed in warm golden hour sunlight on a wooden table,
+      a cozy reading nook with string lights and plants, or two hands holding coffee in a bright, aesthetic cafe.
+      Lighting: Warm, glowing, sunny, soft natural light, highly realistic photography.
+      Color Palette: Warm amber, soft peach, vibrant whites, and pastel tones.
+      Composition: Highly atmospheric but positive and cozy. Center must be slightly shaded or clear for text.
     rendering:
-      font: cormorant
-      text_color: "#F0EAE0"
-      highlight_color: "#E07070"
-      author_color: "#E07070"
-      overlay: {type: gradient_bottom, opacity: 150, color: "#000000"}
+      font: nunito
+      text_color: "#FFFFFF"
+      highlight_color: "#FF9E80"
+      author_color: "#FF9E80"
+      overlay: {type: gradient_bottom, opacity: 130, color: "#000000"}
       decoration: none
       highlight_style: italic
       skip_kenburns: false
       voice_gender: female
 
   dark_academia_classical:
-    summary: "Classical statues, old libraries, gothic shadows, intellectual"
+    summary: "Modern minimalist desk, bright study, clean aesthetic"
     categories: [wisdom, morning, darkacademia]
     weight: high
     description: >
-      The viral "Dark Academia" and stoic philosophy aesthetic, perfect for quotes from Kafka, Nietzsche, or Aurelius.
-      Scenes: A dramatic close-up of a classical marble statue (like Marcus Aurelius or an angel) half-swallowed by shadow,
-      a dusty beam of light illuminating an ancient library, an ink pen resting on worn leather, or Gothic architecture in the fog.
-      Lighting: Chiaroscuro (extreme contrast between light and dark), moody, mysterious.
-      Color Palette: Monochrome, pure marble white, deep obsidian black, faded parchment, and dark bronze.
-      Composition: Very stark, intellectual, and majestic. Center must be pure shadow or empty wall for the text.
+      A very clean, bright, and modern minimalist aesthetic. Relatable for students or ambitious professionals.
+      Scenes: A pristine modern desk setup with an open notebook, a sleek pen, and natural sunlight streaming over it,
+      or a beautiful bright library with white marble and plants.
+      Lighting: Bright, airy, crisp, realistic daylight.
+      Color Palette: Pure white, soft beige, light oak, and subtle greens.
+      Composition: Very clean and organized. Center must have negative space for text.
     rendering:
-      font: cinzel
-      text_color: "#F5F0E8"
-      highlight_color: "#C9A84C"
-      author_color: "#C9A84C"
-      overlay: {type: gradient_bottom, opacity: 150, color: "#000000"}
-      decoration: quote_mark
+      font: montserrat
+      text_color: "#FFFFFF"
+      highlight_color: "#81C784"
+      author_color: "#81C784"
+      overlay: {type: gradient_center, opacity: 120, color: "#000000"}
+      decoration: none
       highlight_style: italic
       skip_kenburns: false
       voice_gender: male
 
   vast_surreal_scale:
-    summary: "Tiny human, massive awe-inspiring landscape (Interstellar/Dune vibes)"
+    summary: "Beautiful nature aesthetics, vibrant sunsets, awe-inspiring"
     categories: [mindfulness, goodnight, wisdom]
     weight: medium
     description: >
-      A viral visual hook built on awe and scale. A tiny human silhouette against a massive, breathtaking environment.
-      Scenes: A solitary figure standing before a massive glowing nebula, walking across infinite mirrored water reflecting the sky,
-      standing before a colossal mountain peak at twilight, or watching a gigantic moon rise over a silent ocean.
-      Lighting: Ethereal, glowing, atmospheric haze, cinematic rim light.
-      Color Palette: Bioluminescent blues, deep space purples, glowing sunset gold, and misty cyan.
-      Composition: The subject must be tiny at the very bottom. The center and top must be a vast, glowing, empty sky/space for the text.
+      Awe-inspiring, vibrant, and stunning real-world nature photography. Highly realistic and breathtaking.
+      Scenes: A vibrant golden-hour sunset over a calm ocean, a crystal-clear mountain lake reflecting a bright blue sky,
+      or a beautiful flower field in the spring.
+      Lighting: Golden hour, vibrant, clear, hyper-realistic.
+      Color Palette: Vibrant orange, deep pinks, bright cyan, and lush greens.
+      Composition: Vast and beautiful landscape. Center must be clear for text overlay.
     rendering:
-      font: cinzel
-      text_color: "#E8F4FF"
-      highlight_color: "#88CCEE"
-      author_color: "#88CCEE"
-      overlay: {type: gradient_bottom, opacity: 140, color: "#000000"}
+      font: raleway
+      text_color: "#FFFFFF"
+      highlight_color: "#FFD54F"
+      author_color: "#FFD54F"
+      overlay: {type: gradient_center, opacity: 120, color: "#000000"}
       decoration: none
       highlight_style: color
       skip_kenburns: false
       voice_gender: female
 
   late_night_drive:
-    summary: "Liminal spaces, empty roads, late-night overthinking"
+    summary: "Cozy neon city lights, inviting late-night vibes"
     categories: [latenight, mindfulness]
     weight: medium
     description: >
-      The ultimate aesthetic for 3 AM thoughts and overthinking.
-      Scenes: The view from the driver's seat of an empty highway illuminated only by headlights,
-      a solitary gas station glowing in the middle of nowhere, a quiet city skyline viewed from an empty balcony,
-      or staring up at streetlamps cutting through dense fog.
-      Lighting: Artificial, moody, isolating but peaceful.
-      Color Palette: Midnight blue, sodium-vapor orange (streetlights), fog grey, and pitch black.
-      Composition: Very atmospheric, highly relatable. Center must be a calm, dark void for text.
+      A highly relatable, aesthetic late-night city vibe. Not depressing, but reflective and beautiful.
+      Scenes: Looking out a high-rise window at glowing city lights, a cozy car interior driving through a vibrant neon city,
+      or a beautiful late-night diner that feels safe and warm.
+      Lighting: Vibrant neon, cinematic but realistic, 35mm film photography.
+      Color Palette: Vibrant magenta, glowing cyan, warm gold, deep navy.
+      Composition: Center must be a calm, slightly darker space for text readability.
     rendering:
-      font: montserrat
-      text_color: "#E0E0E0"
-      highlight_color: "#6CB8D0"
-      author_color: "#6CB8D0"
-      overlay: {type: gradient_bottom, opacity: 160, color: "#000000"}
+      font: lato_bold
+      text_color: "#FFFFFF"
+      highlight_color: "#64B5F6"
+      author_color: "#64B5F6"
+      overlay: {type: gradient_bottom, opacity: 140, color: "#000000"}
       decoration: none
       highlight_style: color
       skip_kenburns: false
       voice_gender: male
 
   cinematic_female_protagonist:
-    summary: "Main character energy, elegant, fearless woman in cinematic lighting"
+    summary: "Attractive, confident, vibrant female lifestyle"
     categories: [womenpower, love, wisdom]
     weight: high
     description: >
-      A high-end cinematic aesthetic focusing on a confident, independent woman—radiating "main character energy."
-      Scenes: A woman in a trench coat walking away down a misty cobblestone street,
-      a sophisticated silhouette looking out a high-rise window at the city lights,
-      fixing her hair in the rearview mirror of a classic car, or a quiet, powerful portrait in soft golden hour light.
-      Lighting: Flattering, dramatic, soft studio or golden hour.
-      Color Palette: Warm neutrals, elegant beige, deep emerald, or classic black-and-white.
-      Composition: Must look like a still from an Oscar-winning drama or Vogue cover. Center must remain entirely open for text.
+      A stunning, highly attractive, and confident female protagonist in a vibrant lifestyle setting.
+      Scenes: A beautiful young woman walking confidently in a bright, sunlit European city,
+      smiling genuinely in a beautiful sun-drenched cafe, or a highly aesthetic, cheerful fashion lifestyle shot.
+      Lighting: Flattering, bright, golden hour or soft natural daylight, highly realistic and appealing.
+      Color Palette: Warm peach, bright whites, vibrant reds, or soft pinks.
+      Composition: Like a high-end Vogue lifestyle shot, extremely cheerful and aspirational. Center open for text.
     rendering:
-      font: cinzel
-      text_color: "#F5F0EB"
-      highlight_color: "#C0395A"
-      author_color: "#C0395A"
+      font: playfair
+      text_color: "#FFFFFF"
+      highlight_color: "#F06292"
+      author_color: "#F06292"
       overlay: {type: gradient_bottom, opacity: 130, color: "#000000"}
       decoration: none
       highlight_style: color
-      skip_kenburns: true
+      skip_kenburns: false
       voice_gender: female
