@@ -24,16 +24,17 @@ _W = 1080
 _H = 1920
 
 _SAFETY_SUFFIX = (
-    " No text, signs, words, letters, numbers, logos, or watermarks anywhere in the image."
-    " 9:16 portrait format."
+    " ABSOLUTELY NO text, signs, words, letters, numbers, logos, brand marks, or watermarks anywhere in the scene. "
+    "Focus on high-aesthetic lifestyle photography. "
+    "9:16 portrait format."
 )
 
 _NEGATIVE_PROMPT = (
-    "text, letters, words, watermark, logo, signature, handwritten name, "
-    "artist signature, corner signature, monogram, initials, copyright, © symbol, "
+    "text, letters, words, watermark, logo, brand mark, clothing brand, jersey logo, "
+    "signature, handwritten name, artist signature, corner signature, monogram, initials, copyright, © symbol, "
     "studio mark, caption, label, typography, graffiti, banner, hashtag, # symbol, "
-    "code, url, numbers, equation, symbol, glyph, "
-    "written character, photorealistic human, portrait photo"
+    "code, url, numbers, equation, symbol, glyph, written character, "
+    "distorted face, extra fingers, anatomical anomalies, low quality, blurry"
 )
 
 
@@ -151,7 +152,7 @@ class GeminiImagenProvider(BaseImageProvider):
             config=types.GenerateImagesConfig(
                 number_of_images=1,
                 aspect_ratio="9:16",
-                safety_filter_level="BLOCK_ONLY_HIGH",
+                safety_filter_level="BLOCK_LOW_AND_ABOVE",
             ),
         )
         return _resize(resp.generated_images[0].image.image_bytes)

@@ -15,7 +15,7 @@ providers:
 
   gemini_imagen:
     class: wisdom.providers.image.GeminiImagenProvider
-    model: imagen-4.0-fast-generate-001
+    model: imagen-3.0-generate-001
     key_env: GEMINI_API_KEY
     timeout: 60
 

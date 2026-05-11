@@ -154,9 +154,8 @@ You are judging a composed inspirational image for a global social media account
 Quote: "{text}"
 
 Hard gates (automatic rejection — score 0):
-  - Clearly visible faces with recognisable features (silhouettes and backs of heads are fine)
-  - Visible text artifacts, gibberish letters, words, signatures, or watermarks in the background
-  - Anatomical anomalies (e.g., 3 legs, extra fingers) or obvious AI glitches/warped bodies
+  - Obvious gibberish text artifacts, signatures, or watermarks in the background
+  - Anatomical anomalies (e.g., 3 legs, extra fingers, distorted eyes) or obvious AI glitches/warped bodies
   - Completely black, corrupted, or "not needed" artifacts
   - Anything that looks like a technical error or ruined reputation
 
