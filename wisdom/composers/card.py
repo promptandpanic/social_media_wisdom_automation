@@ -84,6 +84,8 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     "poppins":      ("poppins_bold.ttf",      "https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Bold.ttf"),
     "montserrat":   ("montserrat_bold.ttf",   "https://github.com/google/fonts/raw/main/ofl/montserrat/Montserrat-Bold.ttf"),
     "lato":         ("lato.ttf",              "https://github.com/google/fonts/raw/main/ofl/lato/Lato-Regular.ttf"),
+    "lato_light":   ("lato_light.ttf",        "https://github.com/google/fonts/raw/main/ofl/lato/Lato-Light.ttf"),
+    "lato_bold":    ("lato_bold.ttf",         "https://github.com/google/fonts/raw/main/ofl/lato/Lato-Bold.ttf"),
 }
 
 _font_cache: dict = {}
@@ -427,6 +429,15 @@ def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
 
     bg_lum    = _bg_luminance(lum_img if lum_img is not None else img, text_zone)
     txt_color = _ensure_readable(txt_color, bg_lum)
+    
+    # Force text contrast for glass overlays
+    if brief.overlay.type == "glass":
+        if bg_lum > 128:
+            # Bright BG -> Dark glass box -> Light text
+            txt_color = (255, 255, 255)
+        else:
+            # Dark BG -> Light glass box -> Dark text
+            txt_color = (30, 30, 30)
 
     font_size = max(64, brief.font_size)
     all_lines, f, font_size = _fit_text(disp_text, font_key, font_size, layout, text_zone)
@@ -470,9 +481,8 @@ def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
         region = region.filter(ImageFilter.GaussianBlur(radius=brief.overlay.blur))
         
         # 2. Add a semi-transparent tint to the blurred region
-        # When drawing on an RGBA image (like a video layer), we must ensure the background is translucent
-        alpha = int(brief.overlay.opacity * 0.8) # Slightly less than configured opacity for glass
-        tint = Image.new("RGBA", region.size, (*txt_color, 15)) 
+        # If background is bright, use a dark glass box. If dark, use a light glass box.
+        alpha = int(brief.overlay.opacity * 0.8)
         if bg_lum > 128:
             tint = Image.new("RGBA", region.size, (0, 0, 0, alpha)) 
         else:
@@ -670,7 +680,18 @@ def _load(image_bytes: bytes) -> Image.Image:
     img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
     if img.size != (IMAGE_WIDTH, IMAGE_HEIGHT):
         img = img.resize((IMAGE_WIDTH, IMAGE_HEIGHT), Image.LANCZOS)
-    return img
+    
+    # Apply subtle film grain for a more premium, cinematic feel
+    return _apply_film_grain(img)
+
+
+def _apply_film_grain(img: Image.Image, intensity: float = 0.04) -> Image.Image:
+    """Adds a very subtle high-end film grain texture."""
+    import numpy as np
+    arr = np.array(img).astype(np.float32)
+    grain = np.random.normal(0, 255 * intensity, arr.shape).astype(np.float32)
+    arr = np.clip(arr + grain, 0, 255).astype(np.uint8)
+    return Image.fromarray(arr)
 
 
 def _to_jpeg(img: Image.Image) -> bytes:
