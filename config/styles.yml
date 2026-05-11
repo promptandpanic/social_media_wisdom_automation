@@ -1,13 +1,20 @@
 styles:
 
   indian_ethnic_aesthetic:
-    summary: "Stunning Indian woman in a Saree with flowing open hair; highly attractive ethnic vibe"
+    summary: "Diverse, stunning Indian women in varied attire engaging in authentic activities."
     categories: [wisdom, love, womenpower]
     weight: high
     description: >
-      A breathtaking, highly attractive Indian woman wearing a gorgeous Saree with flowing open hair. 
-      Setting: A stunning, sun-drenched architectural courtyard, a palace balcony, or an elegant indoor space.
-      Lighting: Soft natural light, golden hour, highly flattering and radiant.
+      A high-end, cinematic capture of a woman in India.
+      Diversity is Key: Each post MUST feel unique. 
+      Examples to vary: 
+      1) A young architect in a cotton salwar kameez with hair tied in a neat bun, reviewing blueprints in a modern sunlit office.
+      2) A woman in a chic oversized shirt and jeans, wearing heavy silver Jhumkas, walking through a rain-slicked street at night.
+      3) An artist in a traditional saree with a messy braid, working on a large canvas in a courtyard.
+      4) A hiker in technical gear with a traditional bindi, standing on a misty Himalayan ridge.
+      Settings: Modern offices, ancient libraries, lush tea gardens, bustling neon cityscapes, or quiet Himalayan balconies.
+      Vibe-Matching: Choose the scene based on the quote's soul. For a 'hard work' quote, show a woman focused on her craft; for 'peace', show her in nature.
+      Constraint: Avoid all "orientalist" or "tourist" stereotypes. Focus on authentic, modern, and high-fashion aesthetics.
     rendering:
       font: playfair
       text_color: "#FFFFFF"
@@ -26,9 +33,13 @@ styles:
     weight: high
     description: >
       A cutting-edge, high-fashion lifestyle shot.
-      Fashion: Oversized, minimalist 'Uniqlo-style' loose clothing. Artistic layering for women; structured streetwear for men.
-      Accessories: Weirdly-shaped designer bags, chunky geometric glasses, and avant-garde accessories.
-      Setting: Minimalist urban ramps or brutalist buildings.
+      Variety is Essential: Each post should feel like a new 'look' from a high-end fashion magazine.
+      Examples: 
+      1) A person in an structural origami-like coat standing in a brutalist concrete tunnel.
+      2) A model with geometric chrome accessories in a minimalist glass-walled gallery.
+      3) High-fashion streetwear featuring bold asymmetrical silhouettes against a stark white architectural backdrop.
+      Hairstyles: Sharp bobs, slicked-back high-fashion looks, or artistic messy styles.
+      Setting: Minimalist urban ramps, brutalist buildings, or stark architectural spaces.
     rendering:
       font: poppins
       text_color: "#FFFFFF"
@@ -47,10 +58,14 @@ styles:
     weight: high
     description: >
       Awe-inspiring 'Middle of Nowhere' nature photography.
-      Scenes: The Canadian Rockies at sunrise, a misty empty road in the rain, vast desert dunes under a starry sky, 
-      a sleek white yacht in the middle of a crystal-clear turquoise ocean, or a lone figure atop a massive snow-capped mountain.
-      Lighting: Breathtaking, cinematic lighting—ranging from misty rain to vibrant golden hour.
-      Color Palette: Deep glacial blues, fiery sunset oranges, and crisp mountain whites.
+      Infinite Variety: Explore the globe. Do not repeat regions.
+      Examples: 
+      1) The pink salt lakes of Australia at sunrise.
+      2) The neon-blue bioluminescent waves of the Maldives at night.
+      3) The stark white silence of an Antarctic blizzard with a lone researcher.
+      4) The emerald-green rice terraces of Bali under a heavy morning mist.
+      5) A sleek white yacht in the middle of a crystal-clear turquoise ocean.
+      Lighting: Cinematic, ranging from misty rain to vibrant golden hour.
     rendering:
       font: montserrat
       text_color: "#FFFFFF"
@@ -69,7 +84,12 @@ styles:
     weight: high
     description: >
       An understated, high-end 'Quiet Luxury' aesthetic.
-      Scene: A minimalist, expensive modern interior with marble and designer furniture.
+      Variety in Texture: Vary the materials (marble, silk, velvet, raw concrete, walnut wood).
+      Examples: 
+      1) A sun-drenched penthouse with floor-to-ceiling glass and soft linen textures.
+      2) A private library with dark walnut wood and a single designer leather chair.
+      3) A minimalist patio overlooking a calm, foggy lake at sunrise.
+      4) A high-end gallery space with a single sculpture and soft recessed lighting.
     rendering:
       font: playfair
       text_color: "#1A1A1A"
@@ -102,12 +122,14 @@ styles:
       voice_gender: male
 
   fitness_active_vibe:
-    summary: "Sexy, high-energy fitness/workout aesthetic in modern gyms"
+    summary: "High-energy, diverse fitness aesthetic; from modern gyms to scenic outdoor movement"
     categories: [wisdom, womenpower, morning]
     weight: medium
     description: >
-      A high-energy, attractive person in trendy, sexy athleisure.
-      Setting: A modern, high-end gym with glowing lights.
+      A high-energy, cinematic shot of a person engaging in fitness or movement.
+      Setting: Can range from a high-tech, neon-lit modern gym to a serene outdoor location like yoga on a mountain ridge, 
+      running along a misty coastline, or a gritty, urban boxing gym.
+      Vibe: Empowering, disciplined, and visually striking.
     rendering:
       font: montserrat
       text_color: "#FFFFFF"
@@ -121,11 +143,14 @@ styles:
       voice_gender: female
 
   modern_romance_vibe:
-    summary: "Cinematic, aesthetic shots of couples or romance (not dull)"
+    summary: "Cinematic, authentic moments of connection and modern love"
     categories: [love, latenight]
     weight: high
     description: >
-      A cinematic, aesthetic shot depicting romance or modern relationships.
+      A cinematic, deeply aesthetic shot depicting authentic human connection.
+      Scenes: A couple sharing a quiet moment in a cozy, sunlit kitchen; a late-night stroll through a rain-slicked neon city; 
+      a sunset silhouette on a rooftop; or a playful, candid moment in a crowded cafe.
+      Vibe: Intimate, emotive, and visually rich.
     rendering:
       font: playfair
       text_color: "#FFFFFF"
@@ -139,11 +164,20 @@ styles:
       voice_gender: female
 
   surreal_nature_vision:
-    summary: "Artistic, unique nature shots (e.g., human-shaped trees) that grab attention"
+    summary: "Artistic, unique nature shots that stop the scroll with impossible beauty."
     categories: [wisdom, mindfulness]
-    weight: medium
+    weight: high
     description: >
-      An artistic, slightly surreal take on nature.
+      An artistic, high-concept take on nature photography. 
+      Infinite Variety: Do not repeat concepts. Use these examples to invent NEW ones: 
+      1) A forest where the trees have bioluminescent veins pulsing with light at dusk.
+      2) A desert where sand dunes are made of crushed obsidian, sparkling under a green aurora.
+      3) A mountain range that looks like a row of giant, petrified sleeping creatures.
+      4) A waterfall where the water turns into liquid gold as it hits the basin.
+      5) A lake so still it acts as a perfect portal to another season in its reflection.
+      Atmosphere: Dreamlike and high-resolution. The scene should feel like a 'National Geographic' shot from a parallel dimension.
+      Composition: Use extreme scales (e.g., a tiny person next to a giant glowing flower) or impossible reflections.
+      Note: The goal is "Attention-Grabbing Awe." Every prompt should feel like a 'first-time-seen' visual.
     rendering:
       font: montserrat
       text_color: "#FFFFFF"
