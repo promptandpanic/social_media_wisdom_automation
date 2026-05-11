@@ -10,6 +10,7 @@ Text generation:
 """
 from __future__ import annotations
 
+import base64
 import logging
 import os
 
@@ -61,4 +62,50 @@ def generate(prompt: str, role: str) -> str:
     raise RuntimeError(
         f"All LLM providers exhausted for role '{role}'. "
         f"Chain: {role_cfg.providers}. Last error: {last_err}"
+    )
+
+
+def judge_image(image_bytes: bytes, prompt: str, role: str) -> str:
+    """Evaluate an image using a vision-capable LLM (Gemini Flash)."""
+    role_cfg = cfg.llm_role(role)
+    providers_cfg = cfg.llm_providers()
+    b64_image = base64.b64encode(image_bytes).decode("utf-8")
+    last_err: Exception | None = None
+
+    for p_name in role_cfg.providers:
+        p = providers_cfg.get(p_name)
+        if not p or not p.model:
+            continue
+        if p.key_env and not os.environ.get(p.key_env):
+            continue
+        try:
+            resp = litellm.completion(
+                model=p.model,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": prompt},
+                            {
+                                "type": "image_url",
+                                "image_url": {"url": f"data:image/jpeg;base64,{b64_image}"},
+                            },
+                        ],
+                    }
+                ],
+                temperature=role_cfg.temperature,
+                max_tokens=role_cfg.max_tokens,
+                api_key=os.environ.get(p.key_env),
+            )
+            content = resp.choices[0].message.content or ""
+            if not content:
+                raise ValueError("Empty response content")
+            logger.info(f"[{role}] ✓ {p_name} ({p.model})")
+            return content
+        except Exception as exc:
+            logger.warning(f"[{role}] {p_name} failed: {exc}")
+            last_err = exc
+
+    raise RuntimeError(
+        f"All LLM providers exhausted for role '{role}'. Last error: {last_err}"
     )

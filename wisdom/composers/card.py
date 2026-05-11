@@ -19,7 +19,7 @@ import re
 from pathlib import Path
 
 import requests
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 import wisdom.config as cfg
 from wisdom.schemas import DesignBrief, Quote
@@ -81,9 +81,9 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     "kalam":        ("kalam.ttf",             "https://github.com/google/fonts/raw/main/ofl/kalam/Kalam-Regular.ttf"),
     "indieflower":  ("indieflower.ttf",       "https://github.com/google/fonts/raw/main/ofl/indieflower/IndieFlower-Regular.ttf"),
     "specialelite": ("specialelite.ttf",      "https://fonts.gstatic.com/s/specialelite/v20/XLYgIZbkc4JPUL5CVArUVL0nhnc.ttf"),
+    "poppins":      ("poppins_bold.ttf",      "https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Bold.ttf"),
+    "montserrat":   ("montserrat_bold.ttf",   "https://github.com/google/fonts/raw/main/ofl/montserrat/Montserrat-Bold.ttf"),
     "lato":         ("lato.ttf",              "https://github.com/google/fonts/raw/main/ofl/lato/Lato-Regular.ttf"),
-    "lato_bold":    ("lato_bold.ttf",         "https://github.com/google/fonts/raw/main/ofl/lato/Lato-Bold.ttf"),
-    "lato_light":   ("lato_light.ttf",        "https://github.com/google/fonts/raw/main/ofl/lato/Lato-Light.ttf"),
 }
 
 _font_cache: dict = {}
@@ -195,6 +195,9 @@ _FONT_SIZE_SCALE: dict[str, float] = {
     "specialelite":  1.05,
     "pacifico":      0.92,
     "montserrat":    0.95,
+    "outfit":        1.05,
+    "lexend":        1.05,
+    "bodoni":        1.10,
 }
 
 
@@ -241,9 +244,20 @@ def _drop_shadow_text(draw, xy, text, font, fill, shadow_color=(0, 0, 0, 180), o
 
 def _render_line(draw, img_width: int, y: int, line: str,
                  font: ImageFont.FreeTypeFont, fill: tuple, stroke: int = 3,
-                 highlight_text: str = "", hi_color: tuple = None) -> None:
+                 highlight_text: str = "", hi_color: tuple = None,
+                 text_zone: str = "center") -> None:
     bb = font.getbbox(line)
-    x = (img_width - (bb[2] - bb[0])) // 2
+    line_w = bb[2] - bb[0]
+    
+    if text_zone == "center":
+        x = (img_width - line_w) // 2
+    elif "left" in text_zone:
+        x = MARGIN_X
+    elif "right" in text_zone:
+        x = img_width - MARGIN_X_R - line_w
+    else:
+        x = (img_width - line_w) // 2
+        
     # Use drop shadow instead of basic stroke
     shadow_color = (0, 0, 0, 180) if stroke > 0 else (0, 0, 0, 80)
     
@@ -256,19 +270,31 @@ def _render_line(draw, img_width: int, y: int, line: str,
         _drop_shadow_text(draw, (x, y), line, font, fill=fill, shadow_color=shadow_color)
         return
 
+    letter_spacing = 0
+    if "minimalist" in text_zone or font.path.lower().endswith(("poppins", "montserrat")):
+        letter_spacing = 4 if "minimalist" in text_zone else 1
+
     words = line.split(" ")
     current_x = x
-    space_w = draw.textlength(" ", font=font)
     
+    # Custom render function to handle letter spacing
+    def _draw_text_custom(draw, xy, text, font, fill, ls):
+        curr_x, curr_y = xy
+        for char in text:
+            _drop_shadow_text(draw, (curr_x, curr_y), char, font, fill=fill, shadow_color=shadow_color)
+            curr_x += draw.textlength(char, font=font) + ls
+        return curr_x
+
     for w in words:
         clean_w = re.sub(r'[^\w\s]', '', w).lower()
         is_highlight = clean_w in hl_words and len(clean_w) > 0
         
         word_fill = hi_color if is_highlight else fill
         if w:
-            _drop_shadow_text(draw, (current_x, y), w, font, fill=word_fill, shadow_color=shadow_color)
-            current_x += draw.textlength(w, font=font)
-        current_x += space_w
+            current_x = _draw_text_custom(draw, (current_x, y), w, font, fill=word_fill, ls=letter_spacing)
+        
+        # Add space with letter spacing
+        current_x += draw.textlength(" ", font=font) + letter_spacing
 
 
 # ---------------------------------------------------------------------------
@@ -340,6 +366,9 @@ def _apply_overlay(img: Image.Image, brief: DesignBrief) -> Image.Image:
         return _solid_overlay(img, opacity, color=color)
     elif otype == "vignette":
         return _vignette(img, intensity=opacity)
+    elif otype == "glass":
+        # Handled in _draw_text for precise bounding box
+        return img
     return img  # "none"
 
 
@@ -406,12 +435,72 @@ def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
     line_h = int(font_size * 1.28)
     block_h = len(all_lines) * line_h
 
-    if text_zone == "top":
-        y = int(IMAGE_HEIGHT * 0.08)
-    elif text_zone == "center":
+    if text_zone == "top" or text_zone == "top_minimalist":
+        y = int(IMAGE_HEIGHT * 0.15)
+    elif text_zone == "center" or text_zone == "center_minimalist":
         y = (IMAGE_HEIGHT - block_h) // 2
-    else:
+    elif text_zone.startswith("bottom_"):
         y = INSTAGRAM_SAFE_BOTTOM - block_h
+    else:
+        y = (IMAGE_HEIGHT - block_h) // 2
+
+    # Glass effect - draw a blurred box behind the text area
+    if brief.overlay.type == "glass":
+        # Draw glass box slightly larger than text block
+        box_padding = 60
+        box_w = TEXT_MAX_W + (box_padding * 2)
+        box_h = block_h + (box_padding * 2)
+        
+        if text_zone == "center":
+            bx = (IMAGE_WIDTH - box_w) // 2
+            by = y - box_padding
+        elif "left" in text_zone:
+            bx = MARGIN_X - box_padding
+            by = y - box_padding
+        elif "right" in text_zone:
+            bx = IMAGE_WIDTH - MARGIN_X_R - TEXT_MAX_W - box_padding
+            by = y - box_padding
+        else:
+            bx = (IMAGE_WIDTH - box_w) // 2
+            by = y - box_padding
+            
+        # 1. Crop the region and blur it
+        crop_box = (max(0, bx), max(0, by), min(IMAGE_WIDTH, bx + box_w), min(IMAGE_HEIGHT, by + box_h))
+        region = img.crop(crop_box)
+        region = region.filter(ImageFilter.GaussianBlur(radius=brief.overlay.blur))
+        
+        # 2. Add a semi-transparent tint to the blurred region
+        # When drawing on an RGBA image (like a video layer), we must ensure the background is translucent
+        alpha = int(brief.overlay.opacity * 0.8) # Slightly less than configured opacity for glass
+        tint = Image.new("RGBA", region.size, (*txt_color, 15)) 
+        if bg_lum > 128:
+            tint = Image.new("RGBA", region.size, (0, 0, 0, alpha)) 
+        else:
+            tint = Image.new("RGBA", region.size, (255, 255, 255, alpha)) 
+            
+        region_rgba = region.convert("RGBA")
+        region_rgba = Image.alpha_composite(region_rgba, tint)
+        
+        # 3. Paste it back with rounded corners
+        mask = Image.new("L", region.size, 0)
+        mask_draw = ImageDraw.Draw(mask)
+        mask_draw.rounded_rectangle([0, 0, region.size[0], region.size[1]], radius=40, fill=255)
+        
+        # If the destination image is RGBA (video layer), we want the box to be translucent
+        if img.mode == "RGBA":
+            # For video layers, we don't paste the blurred RGB, we paste a translucent tinted box
+            # because we can't blur the moving video frames with a static PNG.
+            glass_layer = Image.new("RGBA", region.size, (0, 0, 0, 0))
+            glass_layer.paste(region_rgba, (0, 0), mask=mask)
+            img.alpha_composite(glass_layer, (int(bx), int(by)))
+        else:
+            # For static images, we paste the blurred and tinted region
+            img.paste(region_rgba.convert("RGB"), (int(bx), int(by)), mask=mask)
+        
+        # 4. Draw a subtle rounded border
+        draw_box = ImageDraw.Draw(img, "RGBA")
+        border_color = (255, 255, 255, 80) if bg_lum < 128 else (0, 0, 0, 80)
+        draw_box.rounded_rectangle([bx, by, bx + box_w, by + box_h], radius=40, outline=border_color, width=2)
 
     draw = ImageDraw.Draw(img)
 
@@ -426,7 +515,8 @@ def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
 
     for line in lines:
         _render_line(draw, TEXT_ZONE_CX * 2, y, line, font=f, fill=txt_color, stroke=text_stroke,
-                     highlight_text=quote.highlight, hi_color=hi_color)
+                     highlight_text=quote.highlight, hi_color=hi_color,
+                     text_zone=text_zone)
         y += line_h
 
     _SKIP_AUTHOR = {"unknown", "anonymous", "original"}
@@ -449,6 +539,15 @@ def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
         draw.text((ax, ay), dash, font=dash_font, fill=hi_color)
         draw.text((ax + (d_bb[2] - d_bb[0]), ay), author, font=a_font, fill=ac)
 
+    # 5. Add Brand Handle at the bottom center
+    handle_text = cfg.app().get("brand_handle", "")
+    if handle_text:
+        handle_font = _font("poppins", 28)
+        h_bb = handle_font.getbbox(handle_text)
+        hx = (IMAGE_WIDTH - (h_bb[2] - h_bb[0])) // 2
+        hy = IMAGE_HEIGHT - 60
+        # Semi-transparent for that "aesthetic" look
+        draw.text((hx, hy), handle_text, font=handle_font, fill=(255, 255, 255, 120))
 
     return img
 

@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 _ACCOUNT = "global inspirational quotes account (ages 18–35, large Indian following)"
 
-_VALID_FONTS = frozenset({"playfair", "cormorant", "cinzel", "montserrat", "bebas"})
+_VALID_FONTS = frozenset({"playfair", "montserrat", "bebas", "poppins"})
 
 
 # ---------------------------------------------------------------------------
@@ -131,11 +131,22 @@ def generate_brief(state: PipelineState) -> PipelineState:
         ov = r.get("overlay", {})
         overlay_type = ov.get("type", "gradient_bottom")
         text_color = r.get("text_color", "#FFFFFF")
-        zone = "bottom third" if overlay_type == "gradient_bottom" else "top third" if overlay_type == "gradient_top" else "center"
+        zone_desc = {
+            "top": "top third",
+            "bottom": "bottom third",
+            "center": "center area",
+            "top_minimalist": "top area with lots of negative space",
+            "center_minimalist": "center area with lots of negative space",
+            "top_left": "top-left corner",
+            "top_right": "top-right corner",
+            "bottom_left": "bottom-left corner",
+            "bottom_right": "bottom-right corner"
+        }.get(r.get("text_zone", "center"), "center")
+        
         text_zone_instruction = (
-            f"The {zone} of the frame will have {text_color} text overlaid on it. "
-            f"That zone MUST be naturally dark, shadowed, or low-contrast in the scene itself — "
-            f"not bright or busy — so the text is legible without heavy post-processing."
+            f"The {zone_desc} of the frame will have {text_color} text overlaid on it. "
+            f"That area MUST be naturally clean, shadowed, or low-contrast in the scene itself — "
+            f"not bright or busy — so the text is legible."
         )
         prompt = _IMAGE_PROMPT_TEMPLATE.format(
             text=text,
@@ -166,22 +177,21 @@ def _build_brief(image_prompt: str, style_name: str, style_data: dict,
     ov = r.get("overlay", {})
 
     word_count = len(text.split())
-    layout = "big_center" if word_count <= 12 else "full_card"
-    # Modern aesthetic: slightly smaller text, more negative space
-    font_size = (84 if layout == "big_center" and word_count <= 7
-                 else 76 if layout == "big_center"
-                 else max(56, 68 - max(0, word_count - 12)))
+    layout = r.get("layout", "big_center")
+    if layout == "minimalist":
+        font_size = 48
+    elif layout == "asymmetric":
+        font_size = 72
+    else:
+        # Modern aesthetic: slightly smaller text, more negative space
+        font_size = (84 if layout == "big_center" and word_count <= 7
+                     else 76 if layout == "big_center"
+                     else max(56, 68 - max(0, word_count - 12)))
 
     font = r.get("font", "playfair")
 
-    # Dynamically align text with the dark gradient overlay
+    text_zone = r.get("text_zone", "center")
     overlay_type = ov.get("type", "gradient_bottom")
-    if overlay_type == "gradient_bottom":
-        text_zone = "bottom"
-    elif overlay_type == "gradient_top":
-        text_zone = "top"
-    else:
-        text_zone = "center"
 
     return DesignBrief(
         image_prompt=image_prompt,
@@ -194,6 +204,7 @@ def _build_brief(image_prompt: str, style_name: str, style_data: dict,
             type=overlay_type,
             opacity=int(ov.get("opacity", 150)),
             color=ov.get("color", "#000000"),
+            blur=int(ov.get("blur", 20)),
         ),
         text_zone=text_zone,
         layout=layout,

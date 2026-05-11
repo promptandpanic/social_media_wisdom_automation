@@ -19,7 +19,7 @@ themes:
     format: reel
     max_words: 18
     platforms: [instagram, youtube]
-    hashtags: ["#MorningMotivation", "#DailyStoic", "#MindsetMastery", "#PhilosophyQuotes", "#SuccessMindset"]
+    hashtags: ["#MorningVibes", "#WorkoutMotivation", "#FreshStart", "#DailyDiscipline", "#SuccessMindset", "#FitnessAesthetic"]
     youtube:
       title_template: "Morning Motivation"
       tags: ["morning motivation", "daily stoic", "mindset mastery", "philosophical quotes", "success mindset", "daily quotes"]
@@ -84,8 +84,8 @@ themes:
     format: reel
     max_words: 22
     platforms: [instagram, youtube]
-    styles: [dark_academia_classical]
-    hashtags: ["#DarkAcademia", "#PhilosophyQuotes", "#Nietzsche", "#AcademicAesthetic", "#ClassicalWisdom"]
+    # styles: [dark_academia_classical] # Removed lock for fresh vibes
+    hashtags: ["#AestheticVibes", "#DeepThinking", "#DarkAcademia", "#PhilosophyQuotes", "#Intellectual"]
     youtube:
       title_template: "Dark Academia"
       tags: ["dark academia", "philosophy quotes", "nietzsche", "kafka", "classical wisdom", "intellectual quotes", "stoicism"]
@@ -111,8 +111,8 @@ themes:
     format: reel
     max_words: 18
     platforms: [instagram, youtube]
-    styles: [cinematic_female_protagonist]
-    hashtags: ["#SheFeels", "#WomenEmpowerment", "#StrongWomen", "#DivineFeminine", "#IndependentWoman", "#WomenWhoLead", "#DarkFeminine", "#HerWords"]
+    # styles: [cinematic_female_protagonist] # Removed lock for fresh vibes
+    hashtags: ["#SheFeels", "#WomenEmpowerment", "#DarkFeminine", "#GlowUp", "#IndependentWoman", "#Aesthetic"]
     youtube:
       title_template: "She Feels"
       tags: ["she feels", "women empowerment", "strong women quotes", "divine feminine", "independent woman", "women who lead", "dark feminine energy", "female empowerment"]

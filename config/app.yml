@@ -6,6 +6,9 @@ app:
   output_dir: output
   pending_dir: data/pending
   db_path: data/wisdom.db
+  design_attempts: 3
+  judge_threshold: 7
+  brand_handle: "@wisdom.vibes"  # Change this to your actual handle or leave empty "" to remove
 
 
 image:

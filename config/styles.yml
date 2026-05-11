@@ -1,133 +1,157 @@
 styles:
 
-  quiet_luxury_dark:
-    summary: "Vibrant luxury lifestyle, bright aesthetic, wealthy morning"
-    categories: [wisdom, morning, latenight]
+  indian_ethnic_aesthetic:
+    summary: "Stunning Indian woman in a Saree with flowing open hair; highly attractive ethnic vibe"
+    categories: [wisdom, love, womenpower]
     weight: high
     description: >
-      A bright, vibrant, and highly aesthetic luxury lifestyle. Extremely cheerful and aspirational.
-      Think of an expensive modern apartment with floor-to-ceiling windows, sunlight pouring in, a perfectly made espresso,
-      or a beautiful high-end resort overlooking crystal clear water.
-      Lighting: Bright, natural sunlight, highly realistic, 35mm film photography style.
-      Color Palette: Bright whites, warm gold, azure blue, lush green.
-      Composition: Clean, modern, highly relatable lifestyle shot. Leave a clear space in the center for the quote.
+      A breathtaking, highly attractive Indian woman wearing a gorgeous Saree with flowing open hair. 
+      Setting: A stunning, sun-drenched architectural courtyard, a palace balcony, or an elegant indoor space.
+      Lighting: Soft natural light, golden hour, highly flattering and radiant.
+    rendering:
+      font: playfair
+      text_color: "#FFFFFF"
+      highlight_color: "#FFD700"
+      author_color: "#F5F5F5"
+      overlay: {type: glass, opacity: 80, color: "#000000", blur: 25}
+      text_zone: bottom
+      layout: big_center
+      decoration: rule
+      highlight_style: color
+      voice_gender: female
+
+  avant_garde_lifestyle:
+    summary: "High-fashion 'Ramp' style; oversized/loose clothing, weird bags, and noticeable accessories"
+    categories: [wisdom, morning, womenpower, love]
+    weight: high
+    description: >
+      A cutting-edge, high-fashion lifestyle shot.
+      Fashion: Oversized, minimalist 'Uniqlo-style' loose clothing. Artistic layering for women; structured streetwear for men.
+      Accessories: Weirdly-shaped designer bags, chunky geometric glasses, and avant-garde accessories.
+      Setting: Minimalist urban ramps or brutalist buildings.
     rendering:
       font: poppins
-      text_color: "#F5E642"
-      highlight_color: "#FF6B6B"
-      author_color: "#FF6B6B"
-      overlay: {type: gradient_center, opacity: 110, color: "#000000"}
-      decoration: none
-      highlight_style: color
-      skip_kenburns: false
-      voice_gender: male
-
-  cinematic_melancholia:
-    summary: "Bright & cozy morning, warm sunlight, coffee shop vibes"
-    categories: [love, latenight, wisdom]
-    weight: high
-    description: >
-      A highly cheerful, cozy, and vibrant morning aesthetic. Highly relatable and warm.
-      Scenes: A beautiful cup of latte art bathed in warm golden hour sunlight on a wooden table,
-      a cozy reading nook with string lights and plants, or two hands holding coffee in a bright, aesthetic cafe.
-      Lighting: Warm, glowing, sunny, soft natural light, highly realistic photography.
-      Color Palette: Warm amber, soft peach, vibrant whites, and pastel tones.
-      Composition: Highly atmospheric but positive and cozy. Center must be slightly shaded or clear for text.
-    rendering:
-      font: nunito
-      text_color: "#FFAB91"
-      highlight_color: "#FFFFFF"
-      author_color: "#FF9E80"
-      overlay: {type: gradient_bottom, opacity: 130, color: "#000000"}
+      text_color: "#FFFFFF"
+      highlight_color: "#FFEB3B"
+      author_color: "#FFFFFF"
+      overlay: {type: glass, opacity: 70, color: "#000000", blur: 30}
+      text_zone: center
+      layout: big_center
       decoration: none
       highlight_style: italic
-      skip_kenburns: false
       voice_gender: female
 
-  dark_academia_classical:
-    summary: "Modern minimalist desk, bright study, clean aesthetic"
-    categories: [wisdom, morning, darkacademia]
+  breathtaking_nature_vision:
+    summary: "Epic 'Middle of Nowhere' landscapes; Canadian Rockies, desert dunes, yachts in ocean, snowy peaks"
+    categories: [mindfulness, wisdom, morning]
     weight: high
     description: >
-      A very clean, bright, and modern minimalist aesthetic. Relatable for students or ambitious professionals.
-      Scenes: A pristine modern desk setup with an open notebook, a sleek pen, and natural sunlight streaming over it,
-      or a beautiful bright library with white marble and plants.
-      Lighting: Bright, airy, crisp, realistic daylight.
-      Color Palette: Pure white, soft beige, light oak, and subtle greens.
-      Composition: Very clean and organized. Center must have negative space for text.
+      Awe-inspiring 'Middle of Nowhere' nature photography.
+      Scenes: The Canadian Rockies at sunrise, a misty empty road in the rain, vast desert dunes under a starry sky, 
+      a sleek white yacht in the middle of a crystal-clear turquoise ocean, or a lone figure atop a massive snow-capped mountain.
+      Lighting: Breathtaking, cinematic lighting—ranging from misty rain to vibrant golden hour.
+      Color Palette: Deep glacial blues, fiery sunset oranges, and crisp mountain whites.
     rendering:
       font: montserrat
-      text_color: "#E8D5B7"
+      text_color: "#FFFFFF"
       highlight_color: "#81C784"
       author_color: "#81C784"
-      overlay: {type: gradient_center, opacity: 120, color: "#000000"}
-      decoration: none
+      overlay: {type: glass, opacity: 60, color: "#000000", blur: 20}
+      text_zone: center
+      layout: full_card
+      decoration: quote_mark
       highlight_style: italic
-      skip_kenburns: false
       voice_gender: male
 
-  vast_surreal_scale:
-    summary: "Beautiful nature aesthetics, vibrant sunsets, awe-inspiring"
-    categories: [mindfulness, goodnight, wisdom]
-    weight: medium
-    description: >
-      Awe-inspiring, vibrant, and stunning real-world nature photography. Highly realistic and breathtaking.
-      Scenes: A vibrant golden-hour sunset over a calm ocean, a crystal-clear mountain lake reflecting a bright blue sky,
-      or a beautiful flower field in the spring.
-      Lighting: Golden hour, vibrant, clear, hyper-realistic.
-      Color Palette: Vibrant orange, deep pinks, bright cyan, and lush greens.
-      Composition: Vast and beautiful landscape. Center must be clear for text overlay.
-    rendering:
-      font: raleway
-      text_color: "#FFFFFF"
-      highlight_color: "#FFD54F"
-      author_color: "#FFD54F"
-      overlay: {type: gradient_center, opacity: 120, color: "#000000"}
-      decoration: none
-      highlight_style: color
-      skip_kenburns: false
-      voice_gender: female
-
-  late_night_drive:
-    summary: "Cozy neon city lights, inviting late-night vibes"
-    categories: [latenight, mindfulness]
-    weight: medium
-    description: >
-      A highly relatable, aesthetic late-night city vibe. Not depressing, but reflective and beautiful.
-      Scenes: Looking out a high-rise window at glowing city lights, a cozy car interior driving through a vibrant neon city,
-      or a beautiful late-night diner that feels safe and warm.
-      Lighting: Vibrant neon, cinematic but realistic, 35mm film photography.
-      Color Palette: Vibrant magenta, glowing cyan, warm gold, deep navy.
-      Composition: Center must be a calm, slightly darker space for text readability.
-    rendering:
-      font: lato_bold
-      text_color: "#FF5252"
-      highlight_color: "#FFFFFF"
-      author_color: "#64B5F6"
-      overlay: {type: gradient_bottom, opacity: 140, color: "#000000"}
-      decoration: none
-      highlight_style: color
-      skip_kenburns: false
-      voice_gender: male
-
-  cinematic_female_protagonist:
-    summary: "Attractive, confident, vibrant female lifestyle"
-    categories: [womenpower, love, wisdom]
+  quiet_luxury_minimalist:
+    summary: "High-end 'Old Money' aesthetic; minimalist luxury interiors and understated fashion"
+    categories: [wisdom, morning, mindfulness]
     weight: high
     description: >
-      A stunning, highly attractive, and confident female protagonist in a vibrant lifestyle setting.
-      Scenes: A beautiful young woman walking confidently in a bright, sunlit European city,
-      smiling genuinely in a beautiful sun-drenched cafe, or a highly aesthetic, cheerful fashion lifestyle shot.
-      Lighting: Flattering, bright, golden hour or soft natural daylight, highly realistic and appealing.
-      Color Palette: Warm peach, bright whites, vibrant reds, or soft pinks.
-      Composition: Like a high-end Vogue lifestyle shot, extremely cheerful and aspirational. Center open for text.
+      An understated, high-end 'Quiet Luxury' aesthetic.
+      Scene: A minimalist, expensive modern interior with marble and designer furniture.
     rendering:
-      font: architects_daughter
-      text_color: "#FCE4EC"
-      highlight_color: "#F06292"
-      author_color: "#F06292"
-      overlay: {type: gradient_bottom, opacity: 130, color: "#000000"}
+      font: playfair
+      text_color: "#1A1A1A"
+      highlight_color: "#C5A059"
+      author_color: "#4A4A4A"
+      overlay: {type: glass, opacity: 30, color: "#FFFFFF", blur: 40}
+      text_zone: center_minimalist
+      layout: minimalist
+      decoration: none
+      highlight_style: italic
+      voice_gender: female
+
+  digital_nomad_adventure:
+    summary: "Trending remote-work aesthetic; modern workspaces with stunning mountain or beach views"
+    categories: [wisdom, morning, mindfulness]
+    weight: medium
+    description: >
+      The trending 'Digital Nomad' lifestyle.
+      Scene: A modern, high-tech workspace on a wooden deck overlooking a turquoise beach or misty pine forest.
+    rendering:
+      font: montserrat
+      text_color: "#FFFFFF"
+      highlight_color: "#FFD54F"
+      author_color: "#FFFFFF"
+      overlay: {type: glass, opacity: 60, color: "#000000", blur: 20}
+      text_zone: top_minimalist
+      layout: minimalist
       decoration: none
       highlight_style: color
-      skip_kenburns: false
+      voice_gender: male
+
+  fitness_active_vibe:
+    summary: "Sexy, high-energy fitness/workout aesthetic in modern gyms"
+    categories: [wisdom, womenpower, morning]
+    weight: medium
+    description: >
+      A high-energy, attractive person in trendy, sexy athleisure.
+      Setting: A modern, high-end gym with glowing lights.
+    rendering:
+      font: montserrat
+      text_color: "#FFFFFF"
+      highlight_color: "#00E676"
+      author_color: "#FFFFFF"
+      overlay: {type: glass, opacity: 60, color: "#000000", blur: 20}
+      text_zone: bottom_left
+      layout: asymmetric
+      decoration: none
+      highlight_style: caps
       voice_gender: female
+
+  modern_romance_vibe:
+    summary: "Cinematic, aesthetic shots of couples or romance (not dull)"
+    categories: [love, latenight]
+    weight: high
+    description: >
+      A cinematic, aesthetic shot depicting romance or modern relationships.
+    rendering:
+      font: playfair
+      text_color: "#FFFFFF"
+      highlight_color: "#FF80AB"
+      author_color: "#F8BBD0"
+      overlay: {type: glass, opacity: 90, color: "#000000", blur: 35}
+      text_zone: bottom_right
+      layout: asymmetric
+      decoration: none
+      highlight_style: script
+      voice_gender: female
+
+  surreal_nature_vision:
+    summary: "Artistic, unique nature shots (e.g., human-shaped trees) that grab attention"
+    categories: [wisdom, mindfulness]
+    weight: medium
+    description: >
+      An artistic, slightly surreal take on nature.
+    rendering:
+      font: montserrat
+      text_color: "#FFFFFF"
+      highlight_color: "#FFD54F"
+      author_color: "#FFFFFF"
+      overlay: {type: glass, opacity: 50, color: "#000000", blur: 20}
+      text_zone: top
+      layout: big_center
+      decoration: none
+      highlight_style: color
+      voice_gender: male

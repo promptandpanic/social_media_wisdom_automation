@@ -66,9 +66,10 @@ class Quote:
 
 @dataclass
 class Overlay:
-    type: Literal["gradient_bottom", "gradient_top", "gradient_center", "solid", "vignette", "none"]
+    type: Literal["gradient_bottom", "gradient_top", "gradient_center", "solid", "vignette", "glass", "none"]
     opacity: int = 150
     color: str = "#000000"
+    blur: int = 20  # For glass effect
 
 
 @dataclass
@@ -80,9 +81,9 @@ class DesignBrief:
     highlight_color: str
     author_color: str
     overlay: Overlay
-    text_zone: Literal["top", "center", "bottom"]
-    layout: Literal["big_center", "sentence_reveal", "full_card"]
-    decoration: Literal["rule", "quote_mark", "none"]
+    text_zone: Literal["top", "center", "bottom", "top_left", "top_right", "bottom_left", "bottom_right"]
+    layout: Literal["big_center", "sentence_reveal", "full_card", "asymmetric"]
+    decoration: Literal["rule", "quote_mark", "corner_accent", "none"]
     highlight: str
     highlight_style: Literal["color", "italic", "underline", "caps", "caps_italic", "script"]
     font_size: int
@@ -148,6 +149,8 @@ class PipelineState(TypedDict, total=False):
     best_state: dict[str, Any] | None
     _accepted: bool
     _hard_gate: bool
+    current_provider: str
+    failed_providers: list[str]
 
     # Post metadata
     meta: PostMeta | None

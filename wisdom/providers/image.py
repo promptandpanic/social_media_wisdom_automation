@@ -79,42 +79,6 @@ class HuggingFaceProvider(BaseImageProvider):
         return _resize(resp.content)
 
 
-class LeonardoProvider(BaseImageProvider):
-    name = "leonardo"
-
-    def __init__(self, timeout: int = 90, **_):
-        self.timeout = timeout
-
-    def available(self) -> bool:
-        return bool(os.environ.get("LEONARDO_API_KEY"))
-
-    def generate(self, prompt: str) -> bytes:
-        import time
-        key = os.environ["LEONARDO_API_KEY"]
-        headers = {"Authorization": f"Bearer {key}", "Content-Type": "application/json"}
-
-        r = requests.post(
-            "https://cloud.leonardo.ai/api/rest/v1/generations",
-            headers=headers,
-            json={"prompt": prompt + _SAFETY_SUFFIX, "width": _W, "height": _H,
-                  "num_images": 1, "modelId": os.environ.get("LEONARDO_MODEL_ID", "")},
-            timeout=30,
-        )
-        r.raise_for_status()
-        gen_id = r.json()["sdGenerationJob"]["generationId"]
-
-        for _ in range(20):
-            time.sleep(4)
-            poll = requests.get(
-                f"https://cloud.leonardo.ai/api/rest/v1/generations/{gen_id}",
-                headers=headers, timeout=15,
-            )
-            poll.raise_for_status()
-            imgs = poll.json().get("generations_by_pk", {}).get("generated_images", [])
-            if imgs:
-                return _resize(requests.get(imgs[0]["url"], timeout=30).content)
-
-        raise TimeoutError("Leonardo generation timed out")
 
 
 class LeonardoFluxProProvider(BaseImageProvider):
@@ -228,7 +192,9 @@ class PollinationsProvider(BaseImageProvider):
         pass
 
     def generate(self, prompt: str) -> bytes:
-        encoded = url_encode(prompt[:500])
+        # Remove newlines and excess spaces for URL safety
+        clean_prompt = " ".join(prompt.split())
+        encoded = url_encode(clean_prompt[:500])
         url = f"https://image.pollinations.ai/prompt/{encoded}?width={_W}&height={_H}&nologo=true"
         resp = requests.get(url, timeout=30)
         resp.raise_for_status()
@@ -303,12 +269,16 @@ def _get(name: str) -> BaseImageProvider | None:
     return p
 
 
-def generate(prompt: str) -> bytes:
-    """Run prompt through the image fallback chain. Always returns bytes."""
+def generate(prompt: str, exclude: list[str] | None = None) -> tuple[bytes, str]:
+    """Run prompt through the image fallback chain. Returns (bytes, provider_name)."""
     chain = cfg.image_fallback_chain()
+    exclude = exclude or []
     last_error: Exception | None = None
 
     for name in chain:
+        if name in exclude:
+            logger.debug(f"Image: skipping {name} (blacklisted for this run)")
+            continue
         provider = _get(name)
         if provider is None:
             logger.debug(f"Image provider {name!r} not found — skipping")
@@ -320,10 +290,10 @@ def generate(prompt: str) -> bytes:
             logger.info(f"Image: trying {name}")
             result = provider.generate(prompt)
             logger.info(f"Image: ✓ {name} ({len(result)//1024} KB)")
-            return result
+            return result, name
         except Exception as exc:
             logger.warning(f"Image: {name} failed: {exc}")
             last_error = exc
 
     logger.error("Image: all providers failed — returning gradient fallback")
-    return GradientFallback().generate(prompt)
+    return GradientFallback().generate(prompt), "gradient"
