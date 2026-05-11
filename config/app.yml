@@ -8,7 +8,7 @@ app:
   db_path: data/wisdom.db
   design_attempts: 3
   judge_threshold: 7
-  brand_handle: "@wisdom.vibes"  # Change this to your actual handle or leave empty "" to remove
+  brand_handle: ""  # Change this to your actual handle or leave empty "" to remove
 
 
 image:
