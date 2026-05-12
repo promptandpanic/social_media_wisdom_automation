@@ -30,6 +30,8 @@ MIN_UNIQUENESS = 7
 
 def _clean(text: str) -> str:
     text = text.strip().strip('""\'\'„"«»‹›').strip()
+    # Strip markdown bolding (double asterisks)
+    text = text.replace("**", "")
     text = re.sub(r'\s*[-—–~]\s*[A-Z][^—–\n]{1,60}$', '', text).strip()
     return text.strip('"""\'').strip()
 
