@@ -189,14 +189,31 @@ class ContentDB:
     # ── Posted quote dedup ────────────────────────────────────────────────────
 
     def recent_quotes(self, days: int | None = None) -> list[str]:
-        """Return quote texts posted in the last N days (for LLM context)."""
+        """Return quote texts posted OR pending in the last N days (for LLM context)."""
         days = days if days is not None else cfg.app().get("recent_posts_window_days", 30)
         cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
-        rows = self._conn.execute(
+        
+        # 1. From posted table
+        rows_posted = self._conn.execute(
             "SELECT quote_text FROM posted WHERE posted_at > ? ORDER BY posted_at DESC",
             (cutoff,),
         ).fetchall()
-        return [r["quote_text"] for r in rows]
+        posted = [r["quote_text"] for r in rows_posted]
+        
+        # 2. From pending table (LLM should avoid what we've already generated but not yet 'promoted')
+        rows_pending = self._conn.execute(
+            "SELECT quote FROM pending WHERE created_at > ?", (cutoff,)
+        ).fetchall()
+        pending = []
+        for r in rows_pending:
+            try:
+                q_data = json.loads(r["quote"])
+                if isinstance(q_data, dict) and q_data.get("text"):
+                    pending.append(q_data["text"])
+            except Exception:
+                continue
+                
+        return list(set(posted + pending))
 
     def recent_styles(self, max_entries: int = 10) -> list[str]:
         rows = self._conn.execute(
