@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 _ACCOUNT = "global inspirational quotes account (ages 18–35, large Indian following)"
 
-_VALID_FONTS = frozenset({"inter", "outfit", "spectral", "jost", "satisfy", "playfair", "cormorant", "bebas", "poppins"})
+_VALID_FONTS = frozenset({"inter", "outfit", "spectral", "jost", "satisfy", "playfair", "cormorant", "bebas", "poppins", "anton", "cinzel", "great_vibes", "montserrat"})
 
 
 # ---------------------------------------------------------------------------
@@ -76,9 +76,13 @@ STYLE: {style_name}
 {style_description}
 
 GUIDELINES FOR CREATIVITY:
-1. SOUL-MATCHING: The scene MUST reflect the emotion of the quote. If the quote is about solitude, show a vast, peaceful landscape. If it's about struggle, show grit and determination.
-2. NO MISMATCHES: Never show romantic connection for a quote about independent hustle. Never show high-energy fitness for a quote about quiet reflection.
-3. VISUAL METAPHOR: Instead of being literal, use atmosphere, lighting, and composition to tell the story.
+1. SOUL-MATCHING: Match the "energy" of the quote. 
+   - Spiritual/Classical -> Use 'artistic_spiritual_mixed' or 'artistic_spiritual_serif'.
+   - Brutal/Modern Impact -> Use 'artistic_bold_impact'.
+   - Cinematic/Moody -> Use 'artistic_cinematic_minimal'.
+   - Peaceful/Self-Care -> Use 'artistic_handwritten_peace' or 'elegant_illustrated_portrait'.
+2. NO MISMATCHES: Never use romantic imagery for business/hustle quotes.
+3. VISUAL METAPHOR: Favor mood and atmosphere over literal subjects.
 4. {image_hint_block}
 
 Write 4–6 rich sentences describing the scene:
