@@ -52,18 +52,18 @@ _ZONE_MAX_H = {
 # ---------------------------------------------------------------------------
 
 _FONT_URLS: dict[str, tuple[str, str]] = {
-    "inter":        ("inter.ttf",             "https://github.com/google/fonts/raw/main/ofl/inter/static/Inter-Regular.ttf"),
-    "inter_bold":   ("inter_bold.ttf",        "https://github.com/google/fonts/raw/main/ofl/inter/static/Inter-Bold.ttf"),
-    "outfit":       ("outfit.ttf",            "https://github.com/google/fonts/raw/main/ofl/outfit/static/Outfit-Regular.ttf"),
-    "spectral":     ("spectral.ttf",          "https://github.com/google/fonts/raw/main/ofl/spectral/Spectral-Regular.ttf"),
-    "jost":         ("jost.ttf",              "https://github.com/google/fonts/raw/main/ofl/jost/Jost-Regular.ttf"),
-    "satisfy":      ("satisfy.ttf",           "https://github.com/google/fonts/raw/main/ofl/satisfy/Satisfy-Regular.ttf"),
-    "playfair":     ("playfair.ttf",          "https://github.com/google/fonts/raw/main/ofl/playfairdisplay/PlayfairDisplay-Regular.ttf"),
-    "cormorant":    ("cormorant.ttf",         "https://github.com/google/fonts/raw/main/ofl/cormorantgaramond/CormorantGaramond-Regular.ttf"),
-    "dancing":      ("dancing.ttf",           "https://github.com/google/fonts/raw/main/ofl/dancing_script/static/DancingScript-Regular.ttf"),
-    "caveat":       ("caveat.ttf",            "https://github.com/google/fonts/raw/main/ofl/caveat/static/Caveat-Regular.ttf"),
-    "bebas":        ("bebas.ttf",             "https://github.com/google/fonts/raw/main/ofl/bebas_neue/BebasNeue-Regular.ttf"),
-    "poppins":      ("poppins.ttf",           "https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Regular.ttf"),
+    "inter":        ("inter.ttf",             "https://fonts.gstatic.com/s/inter/v18/UcCO3FwrX2iL9_CQA00uaC8.ttf"),
+    "inter_bold":   ("inter_bold.ttf",        "https://fonts.gstatic.com/s/inter/v18/UcC73FwrX2iL9_CQA1ZubC8.ttf"),
+    "outfit":       ("outfit.ttf",            "https://fonts.gstatic.com/s/outfit/v11/Q8bcSvev6sn6iT76S285.ttf"),
+    "spectral":     ("spectral.ttf",          "https://fonts.gstatic.com/s/spectral/v13/rnCr-sh_Y39_n_8ZzZxhbW_y.ttf"),
+    "jost":         ("jost.ttf",              "https://fonts.gstatic.com/s/jost/v20/92zPtBhPNqw79Ij1E865zBUv7mxEIgVG.ttf"),
+    "satisfy":      ("satisfy.ttf",           "https://fonts.gstatic.com/s/satisfy/v22/rP2Hp2yn6lkG50LoOZQ.ttf"),
+    "playfair":     ("playfair.ttf",          "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTbtY.ttf"),
+    "cormorant":    ("cormorant.ttf",         "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5LDfOjw.ttf"),
+    "dancing":      ("dancing.ttf",           "https://fonts.gstatic.com/s/dancingscript/v29/If2cXTr6YS-zF4S-kcSWSVi_sxjsohD9F50Ruu7B1i0HTQ.ttf"),
+    "caveat":       ("caveat.ttf",            "https://fonts.gstatic.com/s/caveat/v23/WnznHAc5bAfYB2QRah7pcpNvOx-pjRV6SII.ttf"),
+    "bebas":        ("bebas.ttf",             "https://fonts.gstatic.com/s/bebasneue/v14/JTUSjIg1_i6t8kCHKm45xO5ZgCt_L33z.ttf"),
+    "poppins":      ("poppins.ttf",           "https://fonts.gstatic.com/s/poppins/v22/pxiEyp8kv8JHgFVrFJM.ttf"),
 }
 
 _font_cache: dict = {}
