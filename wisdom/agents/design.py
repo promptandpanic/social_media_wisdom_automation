@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 _ACCOUNT = "global inspirational quotes account (ages 18–35, large Indian following)"
 
-_VALID_FONTS = frozenset({"playfair", "montserrat", "bebas", "poppins"})
+_VALID_FONTS = frozenset({"playfair", "montserrat", "bebas", "poppins", "inter", "outfit", "spectral"})
 
 
 # ---------------------------------------------------------------------------
@@ -51,39 +51,49 @@ def _picker_prompt(quote_text: str, theme_key: str,
         lines.append(f"  {s['name']}{star} — {s.get('summary', '')}{avoid}")
 
     return f"""\
-You are the creative director for a {_ACCOUNT}.
-Pick ONE visual style for this post.
+You are a world-class Creative Director specialized in emotional storytelling.
+Your goal is to pick ONE visual style that perfectly matches the "SOUL" and "ENERGY" of the quote.
+
+CRITICAL RULES:
+1. Vibe-Matching: Do NOT pick a romantic style for a quote about business or discipline. Do NOT pick a minimalist style for a quote that feels chaotic or intense.
+2. Emotional Resonance: The image should feel like a visual extension of the words. 
+3. Avoid Clichés: Don't just pick the first style that fits the category; pick the one that fits the "feeling."
 
 QUOTE: "{quote_text}"
 THEME: {theme_key}
 
 {chr(10).join(lines)}
 
-Choose the style whose aesthetic creates the strongest emotional match for this quote.
-Favour styles not used recently.
-
 Return ONLY valid JSON: {{"style": "chosen_style_name"}}"""
 
 
 _IMAGE_PROMPT_TEMPLATE = """\
-Write a vivid image generation prompt for this quote and visual style.
+Write a vivid image generation prompt that captures the deep emotional essence of this quote.
 
 QUOTE: "{text}"
 STYLE: {style_name}
 
 {style_description}
-{image_hint_block}
+
+GUIDELINES FOR CREATIVITY:
+1. SOUL-MATCHING: The scene MUST reflect the emotion of the quote. If the quote is about solitude, show a vast, peaceful landscape. If it's about struggle, show grit and determination.
+2. NO MISMATCHES: Never show romantic connection for a quote about independent hustle. Never show high-energy fitness for a quote about quiet reflection.
+3. VISUAL METAPHOR: Instead of being literal, use atmosphere, lighting, and composition to tell the story.
+4. {image_hint_block}
+
 Write 4–6 rich sentences describing the scene:
   subject → setting → technique/medium → colour palette (use hex values) → lighting → composition
 
 Constraints:
-  - DO NOT generate abstract, surreal, painting-like, or overly "AI-stylized" art.
-  - Scene MUST feel like a real photograph — cinematic, high-resolution, emotionally matched to the style (e.g., 35mm film, high-end editorial or lifestyle photography).
+  - DO NOT generate abstract or overly "AI-stylized" art unless specified.
+  - Scene MUST feel intentional, high-end, and crystal clear.
+  - COMPOSITION: The area for text must be naturally clean, high-contrast, and COMPLETELY UNCLUTTERED.
   - TEXT OVERLAY: {text_zone_instruction}
   - No text, words, signs, logos, watermarks, or explicitly recognizable faces.
   - 9:16 portrait format.
 
-Reply with ONLY the image prompt — plain text, no JSON, no preamble."""
+Reply with ONLY the image prompt — plain text, no JSON, no preamble.
+"""
 
 
 # ---------------------------------------------------------------------------
@@ -179,14 +189,14 @@ def _build_brief(image_prompt: str, style_name: str, style_data: dict,
     word_count = len(text.split())
     layout = r.get("layout", "big_center")
     if layout == "minimalist":
-        font_size = 48
+        font_size = 40
     elif layout == "asymmetric":
-        font_size = 72
+        font_size = 56
     else:
-        # Modern aesthetic: slightly smaller text, more negative space
-        font_size = (84 if layout == "big_center" and word_count <= 7
-                     else 76 if layout == "big_center"
-                     else max(56, 68 - max(0, word_count - 12)))
+        # Ultra-elegant aesthetic: smaller text, maximum negative space
+        font_size = (72 if layout == "big_center" and word_count <= 7
+                     else 64 if layout == "big_center"
+                     else max(48, 60 - max(0, word_count - 12)))
 
     font = r.get("font", "playfair")
 

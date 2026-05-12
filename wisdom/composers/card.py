@@ -86,6 +86,9 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     "lato":         ("lato.ttf",              "https://github.com/google/fonts/raw/main/ofl/lato/Lato-Regular.ttf"),
     "lato_light":   ("lato_light.ttf",        "https://github.com/google/fonts/raw/main/ofl/lato/Lato-Light.ttf"),
     "lato_bold":    ("lato_bold.ttf",         "https://github.com/google/fonts/raw/main/ofl/lato/Lato-Bold.ttf"),
+    "inter":        ("inter.ttf",             "https://github.com/google/fonts/raw/main/ofl/inter/static/Inter-Regular.ttf"),
+    "inter_bold":   ("inter_bold.ttf",        "https://github.com/google/fonts/raw/main/ofl/inter/static/Inter-Bold.ttf"),
+    "outfit":       ("outfit.ttf",            "https://github.com/google/fonts/raw/main/ofl/outfit/static/Outfit-Regular.ttf"),
 }
 
 _font_cache: dict = {}
@@ -200,6 +203,8 @@ _FONT_SIZE_SCALE: dict[str, float] = {
     "outfit":        1.05,
     "lexend":        1.05,
     "bodoni":        1.10,
+    "inter":         1.00,
+    "outfit":        1.02,
 }
 
 
@@ -685,8 +690,8 @@ def _load(image_bytes: bytes) -> Image.Image:
     return _apply_film_grain(img)
 
 
-def _apply_film_grain(img: Image.Image, intensity: float = 0.04) -> Image.Image:
-    """Adds a very subtle high-end film grain texture."""
+def _apply_film_grain(img: Image.Image, intensity: float = 0.015) -> Image.Image:
+    """Adds an extremely subtle high-end film grain texture. Reduced for crystal clarity."""
     import numpy as np
     arr = np.array(img).astype(np.float32)
     grain = np.random.normal(0, 255 * intensity, arr.shape).astype(np.float32)

@@ -1,191 +1,154 @@
 styles:
 
-  indian_ethnic_aesthetic:
-    summary: "Diverse, stunning Indian women in varied attire engaging in authentic activities."
-    categories: [wisdom, love, womenpower]
-    weight: high
-    description: >
-      A high-end, cinematic capture of a woman in India.
-      Diversity is Key: Each post MUST feel unique. 
-      Examples to vary: 
-      1) A young architect in a cotton salwar kameez with hair tied in a neat bun, reviewing blueprints in a modern sunlit office.
-      2) A woman in a chic oversized shirt and jeans, wearing heavy silver Jhumkas, walking through a rain-slicked street at night.
-      3) An artist in a traditional saree with a messy braid, working on a large canvas in a courtyard.
-      4) A hiker in technical gear with a traditional bindi, standing on a misty Himalayan ridge.
-      Settings: Modern offices, ancient libraries, lush tea gardens, bustling neon cityscapes, or quiet Himalayan balconies.
-      Vibe-Matching: Choose the scene based on the quote's soul. For a 'hard work' quote, show a woman focused on her craft; for 'peace', show her in nature.
-      Constraint: Avoid all "orientalist" or "tourist" stereotypes. Focus on authentic, modern, and high-fashion aesthetics.
-    rendering:
-      font: playfair
-      text_color: "#FFFFFF"
-      highlight_color: "#FFD700"
-      author_color: "#F5F5F5"
-      overlay: {type: glass, opacity: 80, color: "#000000", blur: 25}
-      text_zone: bottom
-      layout: big_center
-      decoration: rule
-      highlight_style: color
-      voice_gender: female
-
-  avant_garde_lifestyle:
-    summary: "High-fashion 'Ramp' style; oversized/loose clothing, weird bags, and noticeable accessories"
-    categories: [wisdom, morning, womenpower, love]
-    weight: high
-    description: >
-      A cutting-edge, high-fashion lifestyle shot.
-      Variety is Essential: Each post should feel like a new 'look' from a high-end fashion magazine.
-      Examples: 
-      1) A person in an structural origami-like coat standing in a brutalist concrete tunnel.
-      2) A model with geometric chrome accessories in a minimalist glass-walled gallery.
-      3) High-fashion streetwear featuring bold asymmetrical silhouettes against a stark white architectural backdrop.
-      Hairstyles: Sharp bobs, slicked-back high-fashion looks, or artistic messy styles.
-      Setting: Minimalist urban ramps, brutalist buildings, or stark architectural spaces.
-    rendering:
-      font: poppins
-      text_color: "#FFFFFF"
-      highlight_color: "#FFEB3B"
-      author_color: "#FFFFFF"
-      overlay: {type: glass, opacity: 70, color: "#000000", blur: 30}
-      text_zone: center
-      layout: big_center
-      decoration: none
-      highlight_style: italic
-      voice_gender: female
-
-  breathtaking_nature_vision:
-    summary: "Epic 'Middle of Nowhere' landscapes; Canadian Rockies, desert dunes, yachts in ocean, snowy peaks"
-    categories: [mindfulness, wisdom, morning]
-    weight: high
-    description: >
-      Awe-inspiring 'Middle of Nowhere' nature photography.
-      Infinite Variety: Explore the globe. Do not repeat regions.
-      Examples: 
-      1) The pink salt lakes of Australia at sunrise.
-      2) The neon-blue bioluminescent waves of the Maldives at night.
-      3) The stark white silence of an Antarctic blizzard with a lone researcher.
-      4) The emerald-green rice terraces of Bali under a heavy morning mist.
-      5) A sleek white yacht in the middle of a crystal-clear turquoise ocean.
-      Lighting: Cinematic, ranging from misty rain to vibrant golden hour.
-    rendering:
-      font: montserrat
-      text_color: "#FFFFFF"
-      highlight_color: "#81C784"
-      author_color: "#81C784"
-      overlay: {type: glass, opacity: 60, color: "#000000", blur: 20}
-      text_zone: center
-      layout: full_card
-      decoration: quote_mark
-      highlight_style: italic
-      voice_gender: male
-
-  quiet_luxury_minimalist:
-    summary: "High-end 'Old Money' aesthetic; minimalist luxury interiors and understated fashion"
+  timeless_minimalist_sans:
+    summary: "Clean, modern, and high-end sans-serif aesthetic with focus on negative space."
     categories: [wisdom, morning, mindfulness]
     weight: high
     description: >
-      An understated, high-end 'Quiet Luxury' aesthetic.
-      Variety in Texture: Vary the materials (marble, silk, velvet, raw concrete, walnut wood).
-      Examples: 
-      1) A sun-drenched penthouse with floor-to-ceiling glass and soft linen textures.
-      2) A private library with dark walnut wood and a single designer leather chair.
-      3) A minimalist patio overlooking a calm, foggy lake at sunrise.
-      4) A high-end gallery space with a single sculpture and soft recessed lighting.
+      A high-end, cinematic lifestyle photograph. 
+      The scene must be ultra-clean, minimalist, and high-resolution.
+      Examples: A single cup of coffee on a textured stone table in soft morning light; 
+      a lone person walking on a misty beach; a minimalist modern architectural detail.
+      Vibe: Quiet luxury, intentional, and calm.
     rendering:
-      font: playfair
-      text_color: "#1A1A1A"
-      highlight_color: "#C5A059"
-      author_color: "#4A4A4A"
-      overlay: {type: glass, opacity: 30, color: "#FFFFFF", blur: 40}
+      font: inter
+      text_color: "#FFFFFF"
+      highlight_color: "#FFFFFF"
+      author_color: "#F0F0F0"
+      overlay: {type: gradient_bottom, opacity: 120, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: italic
+      highlight_style: none
       voice_gender: female
 
-  digital_nomad_adventure:
-    summary: "Trending remote-work aesthetic; modern workspaces with stunning mountain or beach views"
-    categories: [wisdom, morning, mindfulness]
-    weight: medium
+  timeless_minimalist_serif:
+    summary: "Classic, elegant serif typography on dark, moody, or artistic backgrounds."
+    categories: [wisdom, mindfulness, love]
+    weight: high
     description: >
-      The trending 'Digital Nomad' lifestyle.
-      Scene: A modern, high-tech workspace on a wooden deck overlooking a turquoise beach or misty pine forest.
+      A moody, artistic, and cinematic photograph with deep shadows and rich textures.
+      Examples: A vintage library with soft light hitting old books; a dark mountain range under a starry sky;
+      a high-end restaurant interior with candlelight.
+      Vibe: Intellectual, timeless, and sophisticated.
     rendering:
-      font: montserrat
+      font: spectral
       text_color: "#FFFFFF"
-      highlight_color: "#FFD54F"
-      author_color: "#FFFFFF"
-      overlay: {type: glass, opacity: 60, color: "#000000", blur: 20}
+      highlight_color: "#FFFFFF"
+      author_color: "#E0E0E0"
+      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
+      text_zone: center
+      layout: big_center
+      decoration: none
+      highlight_style: none
+      voice_gender: male
+
+  minimalist_doodle_wisdom:
+    summary: "2D minimalist digital illustration with clean typography in the negative space at the top."
+    categories: [wisdom, womenpower, morning]
+    weight: high
+    description: >
+      A clean, 2D minimalist digital illustration. 
+      Style: Flat art, soft pastel or earth-tone palette, simple lines.
+      Subject: A person engaging in a simple activity (drinking coffee, walking, looking at a mirror, working).
+      Background: Simple, solid-color or very clean background area at the top of the frame for text.
+      Vibe: Relatable, modern, and lighthearted.
+    rendering:
+      font: jost
+      text_color: "#1A1A1A"
+      highlight_color: "#1A1A1A"
+      author_color: "#4A4A4A"
+      overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: color
-      voice_gender: male
-
-  fitness_active_vibe:
-    summary: "High-energy, diverse fitness aesthetic; from modern gyms to scenic outdoor movement"
-    categories: [wisdom, womenpower, morning]
-    weight: medium
-    description: >
-      A high-energy, cinematic shot of a person engaging in fitness or movement.
-      Setting: Can range from a high-tech, neon-lit modern gym to a serene outdoor location like yoga on a mountain ridge, 
-      running along a misty coastline, or a gritty, urban boxing gym.
-      Vibe: Empowering, disciplined, and visually striking.
-    rendering:
-      font: montserrat
-      text_color: "#FFFFFF"
-      highlight_color: "#00E676"
-      author_color: "#FFFFFF"
-      overlay: {type: glass, opacity: 60, color: "#000000", blur: 20}
-      text_zone: bottom_left
-      layout: asymmetric
-      decoration: none
-      highlight_style: caps
+      highlight_style: none
       voice_gender: female
 
-  modern_romance_vibe:
-    summary: "Cinematic, authentic moments of connection and modern love"
-    categories: [love, latenight]
+  elegant_illustrated_portrait:
+    summary: "Soft digital painting/illustration with elegant handwritten script fonts."
+    categories: [love, womenpower, wisdom]
     weight: high
     description: >
-      A cinematic, deeply aesthetic shot depicting authentic human connection.
-      Scenes: A couple sharing a quiet moment in a cozy, sunlit kitchen; a late-night stroll through a rain-slicked neon city; 
-      a sunset silhouette on a rooftop; or a playful, candid moment in a crowded cafe.
-      Vibe: Intimate, emotive, and visually rich.
+      A soft, beautiful digital painting or stylized illustration.
+      Style: Flat 2D minimalist art, soft edges, rich colors.
+      Subject: A woman in a stylish outfit, or a scene of connection.
+      Background: Artistic but with a large, clean, solid-color area at the top for text.
+      Vibe: Emotive, artistic, and premium.
+    rendering:
+      font: satisfy
+      text_color: "#1A1A1A"
+      highlight_color: "#1A1A1A"
+      author_color: "#333333"
+      overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
+      text_zone: top_minimalist
+      layout: asymmetric
+      decoration: none
+      highlight_style: none
+      voice_gender: female
+
+  indian_ethnic_aesthetic:
+    summary: "Diverse Indian women in authentic, high-fashion settings. Now ultra-minimalist."
+    categories: [wisdom, love, womenpower]
+    weight: high
+    description: >
+      A high-end, cinematic illustration or photograph of a woman in India.
+      Scenes: Modern sunlit offices, quiet Himalayan balconies, or lush tea gardens.
+      Subject: An expressive, modern Indian woman in elegant attire.
+      Composition: Ensure a large, clean, high-contrast area at the top for dark text.
+      Vibe: Authentic, powerful, and serene.
     rendering:
       font: playfair
-      text_color: "#FFFFFF"
-      highlight_color: "#FF80AB"
-      author_color: "#F8BBD0"
-      overlay: {type: glass, opacity: 90, color: "#000000", blur: 35}
-      text_zone: bottom_right
-      layout: asymmetric
-      decoration: none
-      highlight_style: script
-      voice_gender: female
-
-  surreal_nature_vision:
-    summary: "Artistic, unique nature shots that stop the scroll with impossible beauty."
-    categories: [wisdom, mindfulness]
-    weight: high
-    description: >
-      An artistic, high-concept take on nature photography. 
-      Infinite Variety: Do not repeat concepts. Use these examples to invent NEW ones: 
-      1) A forest where the trees have bioluminescent veins pulsing with light at dusk.
-      2) A desert where sand dunes are made of crushed obsidian, sparkling under a green aurora.
-      3) A mountain range that looks like a row of giant, petrified sleeping creatures.
-      4) A waterfall where the water turns into liquid gold as it hits the basin.
-      5) A lake so still it acts as a perfect portal to another season in its reflection.
-      Atmosphere: Dreamlike and high-resolution. The scene should feel like a 'National Geographic' shot from a parallel dimension.
-      Composition: Use extreme scales (e.g., a tiny person next to a giant glowing flower) or impossible reflections.
-      Note: The goal is "Attention-Grabbing Awe." Every prompt should feel like a 'first-time-seen' visual.
-    rendering:
-      font: montserrat
-      text_color: "#FFFFFF"
-      highlight_color: "#FFD54F"
-      author_color: "#FFFFFF"
-      overlay: {type: glass, opacity: 50, color: "#000000", blur: 20}
-      text_zone: top
+      text_color: "#1A1A1A"
+      highlight_color: "#1A1A1A"
+      author_color: "#333333"
+      overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
+      text_zone: top_minimalist
       layout: big_center
       decoration: none
-      highlight_style: color
-      voice_gender: male
+      highlight_style: none
+      voice_gender: female
+
+  avant_garde_lifestyle:
+    summary: "High-fashion 'Ramp' style; structural clothing and minimalist settings. Now ultra-clean."
+    categories: [wisdom, morning, womenpower, love]
+    weight: high
+    description: >
+      A cutting-edge, high-fashion illustration or clean photograph.
+      Setting: Minimalist architectural spaces, brutalist concrete, or stark white runways.
+      Subject: A person in a structural outfit with an expressive pose.
+      Composition: Ensure a large, clean, shadowed area at the top for white text overlay.
+      Vibe: Bold, structural, and ultra-modern.
+    rendering:
+      font: outfit
+      text_color: "#FFFFFF"
+      highlight_color: "#FFFFFF"
+      author_color: "#F0F0F0"
+      overlay: {type: gradient_top, opacity: 120, color: "#000000", blur: 0}
+      text_zone: top_minimalist
+      layout: big_center
+      decoration: none
+      highlight_style: none
+      voice_gender: female
+
+  quiet_luxury_minimalist:
+    summary: "High-end 'Old Money' aesthetic; minimalist luxury interiors. Ultra-clean negative space."
+    categories: [wisdom, morning, mindfulness]
+    weight: high
+    description: >
+      An understated, high-end 'Quiet Luxury' illustration or photograph.
+      Scenes: Sun-drenched minimalist interiors with large windows and soft linen textures.
+      Subject: A single object or a person in a calm, reflective moment.
+      Composition: Focus on negative space and clean backgrounds for dark text.
+      Vibe: Wealthy, calm, and perfectly curated.
+    rendering:
+      font: spectral
+      text_color: "#1A1A1A"
+      highlight_color: "#1A1A1A"
+      author_color: "#4A4A4A"
+      overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
+      text_zone: top_minimalist
+      layout: minimalist
+      decoration: none
+      highlight_style: none
+      voice_gender: female
