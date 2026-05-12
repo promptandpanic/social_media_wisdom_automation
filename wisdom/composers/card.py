@@ -92,12 +92,12 @@ def _font(key: str, size: int) -> ImageFont.FreeTypeFont:
         try:
             _font_cache[ck] = ImageFont.truetype(str(path), size)
         except Exception:
-            lato_path = FONTS_DIR / _FONT_URLS["lato"][0]
+            fallback_path = FONTS_DIR / _FONT_URLS["inter"][0]
             try:
-                logger.warning(f"Font '{key}' unavailable — falling back to lato")
-                _font_cache[ck] = ImageFont.truetype(str(lato_path), size)
+                logger.warning(f"Font '{key}' unavailable — falling back to inter")
+                _font_cache[ck] = ImageFont.truetype(str(fallback_path), size)
             except Exception:
-                _font_cache[ck] = ImageFont.truetype(str(FONTS_DIR / _FONT_URLS["lato_bold"][0]), size)
+                _font_cache[ck] = ImageFont.truetype(str(FONTS_DIR / _FONT_URLS["inter_bold"][0]), size)
     return _font_cache[ck]
 
 
@@ -157,29 +157,18 @@ def _layout_lines(disp_text: str, font: ImageFont.FreeTypeFont,
 
 # Fonts that need bigger starting sizes for legibility
 _FONT_SIZE_SCALE: dict[str, float] = {
-    "poppins_light": 1.25,
-    "nunito_light":  1.25,
-    "lato_light":    1.20,
+    "inter":         1.00,
+    "inter_bold":    1.00,
+    "outfit":        1.02,
+    "spectral":      1.05,
+    "jost":          1.00,
+    "satisfy":       1.12,
+    "playfair":      1.08,
     "cormorant":     1.15,
     "dancing":       1.15,
-    "satisfy":       1.12,
-    "indieflower":   1.15,
     "caveat":        1.12,
-    "kalam":         1.10,
-    "playfair":      1.08,
-    "playfair_it":   1.12,
-    "merriweather":  1.05,
-    "spectral":      1.05,
-    "vollkorn":      1.05,
-    "cinzel":        1.05,
-    "specialelite":  1.05,
-    "pacifico":      0.92,
-    "montserrat":    0.95,
-    "outfit":        1.05,
-    "lexend":        1.05,
-    "bodoni":        1.10,
-    "inter":         1.00,
-    "outfit":        1.02,
+    "bebas":         1.00,
+    "poppins":       1.00,
 }
 
 
@@ -518,8 +507,8 @@ def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
             ac = tuple(int(brief.author_color.lstrip("#")[i:i+2], 16) for i in (0, 2, 4))
         except Exception:
             ac = (204, 204, 204)
-        a_font    = _font("lato_light", 38)
-        dash_font = _font("lato_light", 38)
+        a_font    = _font("inter", 38)
+        dash_font = _font("inter", 38)
         dash = "— "
         d_bb = dash_font.getbbox(dash)
         n_bb = a_font.getbbox(author)
