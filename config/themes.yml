@@ -30,7 +30,7 @@ themes:
   wisdom:
     name: Life Wisdom
     format: reel
-    max_words: 24
+    max_words: 18
     platforms: [instagram, youtube]
     hashtags: ["#Stoicism", "#DeepThoughts", "#WisdomQuotes", "#PhilosophyOfLife", "#CarlJung"]
     youtube:
@@ -43,7 +43,7 @@ themes:
   love:
     name: Love & Relationships
     format: reel
-    max_words: 24
+    max_words: 18
     platforms: [instagram, youtube]
     hashtags: ["#LoveQuotes", "#RelationshipAdvice", "#Heartbreak", "#TwinFlame", "#DeepLoveQuotes"]
     youtube:
@@ -56,7 +56,7 @@ themes:
   mindfulness:
     name: Mindfulness & Inner Peace
     format: reel
-    max_words: 20
+    max_words: 16
     platforms: [instagram, youtube]
     hashtags: ["#MindfulnessPractice", "#SpiritualAwakening", "#InnerPeace", "#MentalClarity", "#ZenLife"]
     youtube:
@@ -96,7 +96,7 @@ themes:
   latenight:
     name: Late Night Feels
     format: reel
-    max_words: 26
+    max_words: 20
     platforms: [instagram, youtube]
     hashtags: ["#LateNightThoughts", "#Overthinking", "#MidnightThoughts", "#Melancholy", "#DeepQuotes"]
     youtube:

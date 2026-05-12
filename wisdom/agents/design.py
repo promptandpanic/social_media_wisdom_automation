@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 _ACCOUNT = "global inspirational quotes account (ages 18–35, large Indian following)"
 
-_VALID_FONTS = frozenset({"playfair", "montserrat", "bebas", "poppins", "inter", "outfit", "spectral"})
+_VALID_FONTS = frozenset({"inter", "outfit", "spectral", "jost", "satisfy", "playfair", "cormorant", "bebas", "poppins"})
 
 
 # ---------------------------------------------------------------------------

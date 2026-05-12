@@ -48,6 +48,7 @@ Find ONE real quote from a real named person for a {_AUDIENCE}.
 
 Rules:
 - REAL quote — do not invent, paraphrase, or composite
+- BREVITY: Favor shorter quotes (10-15 words) that hit hard immediately.
 - Maximum {max_words} words
 - Named author — not "Unknown"
 - Choose lesser-known gems over widely-circulated lines
@@ -76,6 +77,7 @@ or a traditional proverb / folk saying. Author may be known or unknown.
 
 Rules:
 - DO NOT write or invent — find something that genuinely exists
+- BREVITY: Favor shorter quotes (8-15 words) that hit hard immediately.
 - Maximum {max_words} words
 - Must feel instantly shareable — the kind people screenshot and send
 - Must be a visceral, raw truth about modern life, ambition, or relationships
