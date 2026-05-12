@@ -52,18 +52,21 @@ _ZONE_MAX_H = {
 # ---------------------------------------------------------------------------
 
 _FONT_URLS: dict[str, tuple[str, str]] = {
-    "inter":        ("inter.ttf",             "https://fonts.gstatic.com/s/inter/v18/UcCO3FwrX2iL9_CQA00uaC8.ttf"),
-    "inter_bold":   ("inter_bold.ttf",        "https://fonts.gstatic.com/s/inter/v18/UcC73FwrX2iL9_CQA1ZubC8.ttf"),
-    "outfit":       ("outfit.ttf",            "https://fonts.gstatic.com/s/outfit/v11/Q8bcSvev6sn6iT76S285.ttf"),
-    "spectral":     ("spectral.ttf",          "https://fonts.gstatic.com/s/spectral/v13/rnCr-sh_Y39_n_8ZzZxhbW_y.ttf"),
-    "jost":         ("jost.ttf",              "https://fonts.gstatic.com/s/jost/v20/92zPtBhPNqw79Ij1E865zBUv7mxEIgVG.ttf"),
-    "satisfy":      ("satisfy.ttf",           "https://fonts.gstatic.com/s/satisfy/v22/rP2Hp2yn6lkG50LoOZQ.ttf"),
-    "playfair":     ("playfair.ttf",          "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTbtY.ttf"),
-    "cormorant":    ("cormorant.ttf",         "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5LDfOjw.ttf"),
-    "dancing":      ("dancing.ttf",           "https://fonts.gstatic.com/s/dancingscript/v29/If2cXTr6YS-zF4S-kcSWSVi_sxjsohD9F50Ruu7B1i0HTQ.ttf"),
-    "caveat":       ("caveat.ttf",            "https://fonts.gstatic.com/s/caveat/v23/WnznHAc5bAfYB2QRah7pcpNvOx-pjRV6SII.ttf"),
-    "bebas":        ("bebas.ttf",             "https://fonts.gstatic.com/s/bebasneue/v14/JTUSjIg1_i6t8kCHKm45xO5ZgCt_L33z.ttf"),
-    "poppins":      ("poppins.ttf",           "https://fonts.gstatic.com/s/poppins/v22/pxiEyp8kv8JHgFVrFJM.ttf"),
+    "poppins":      ("poppins.ttf",           "https://raw.githubusercontent.com/google/fonts/main/ofl/poppins/Poppins-Regular.ttf"),
+    "poppins_bold": ("poppins_bold.ttf",      "https://raw.githubusercontent.com/google/fonts/main/ofl/poppins/Poppins-Bold.ttf"),
+    "outfit":       ("outfit.ttf",            "https://raw.githubusercontent.com/google/fonts/main/ofl/outfit/static/Outfit-Regular.ttf"),
+    "spectral":     ("spectral.ttf",          "https://raw.githubusercontent.com/google/fonts/main/ofl/spectral/Spectral-Regular.ttf"),
+    "jost":         ("jost.ttf",              "https://raw.githubusercontent.com/google/fonts/main/ofl/jost/static/Jost-Regular.ttf"),
+    "satisfy":      ("satisfy.ttf",           "https://raw.githubusercontent.com/google/fonts/main/ofl/satisfy/Satisfy-Regular.ttf"),
+    "playfair":     ("playfair.ttf",          "https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/static/PlayfairDisplay-Regular.ttf"),
+    "cormorant":    ("cormorant.ttf",         "https://raw.githubusercontent.com/google/fonts/main/ofl/cormorantgaramond/static/CormorantGaramond-Regular.ttf"),
+    "dancing":      ("dancing.ttf",           "https://raw.githubusercontent.com/google/fonts/main/ofl/dancingscript/static/DancingScript-Regular.ttf"),
+    "caveat":       ("caveat.ttf",            "https://raw.githubusercontent.com/google/fonts/main/ofl/caveat/static/Caveat-Regular.ttf"),
+    "bebas":        ("bebas.ttf",             "https://raw.githubusercontent.com/google/fonts/main/ofl/bebasneue/BebasNeue-Regular.ttf"),
+    "anton":        ("anton.ttf",             "https://raw.githubusercontent.com/google/fonts/main/ofl/anton/Anton-Regular.ttf"),
+    "cinzel":       ("cinzel.ttf",            "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/static/Cinzel-Regular.ttf"),
+    "great_vibes":  ("great_vibes.ttf",       "https://raw.githubusercontent.com/google/fonts/main/ofl/greatvibes/GreatVibes-Regular.ttf"),
+    "montserrat":   ("montserrat.ttf",        "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/static/Montserrat-Regular.ttf"),
 }
 
 _font_cache: dict = {}
@@ -92,12 +95,12 @@ def _font(key: str, size: int) -> ImageFont.FreeTypeFont:
         try:
             _font_cache[ck] = ImageFont.truetype(str(path), size)
         except Exception:
-            fallback_path = FONTS_DIR / _FONT_URLS["inter"][0]
+            fallback_path = FONTS_DIR / _FONT_URLS["poppins"][0]
             try:
-                logger.warning(f"Font '{key}' unavailable — falling back to inter")
+                logger.warning(f"Font '{key}' unavailable — falling back to poppins")
                 _font_cache[ck] = ImageFont.truetype(str(fallback_path), size)
             except Exception:
-                _font_cache[ck] = ImageFont.truetype(str(FONTS_DIR / _FONT_URLS["inter_bold"][0]), size)
+                _font_cache[ck] = ImageFont.truetype(str(FONTS_DIR / _FONT_URLS["poppins_bold"][0]), size)
     return _font_cache[ck]
 
 
@@ -507,8 +510,8 @@ def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
             ac = tuple(int(brief.author_color.lstrip("#")[i:i+2], 16) for i in (0, 2, 4))
         except Exception:
             ac = (204, 204, 204)
-        a_font    = _font("inter", 38)
-        dash_font = _font("inter", 38)
+        a_font    = _font("poppins", 38)
+        dash_font = _font("poppins", 38)
         dash = "— "
         d_bb = dash_font.getbbox(dash)
         n_bb = a_font.getbbox(author)

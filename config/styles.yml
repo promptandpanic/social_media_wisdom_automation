@@ -11,7 +11,7 @@ styles:
       a lone person walking on a misty beach; a minimalist modern architectural detail.
       Vibe: Quiet luxury, intentional, and calm.
     rendering:
-      font: inter
+      font: poppins
       text_color: "#FFFFFF"
       highlight_color: "#FFFFFF"
       author_color: "#F0F0F0"
@@ -54,7 +54,7 @@ styles:
       Background: Simple, solid-color or very clean background area at the top of the frame for text.
       Vibe: Relatable, modern, and lighthearted.
     rendering:
-      font: jost
+      font: montserrat
       text_color: "#1A1A1A"
       highlight_color: "#1A1A1A"
       author_color: "#4A4A4A"
@@ -76,7 +76,7 @@ styles:
       Background: Artistic but with a large, clean, solid-color area at the top for text.
       Vibe: Emotive, artistic, and premium.
     rendering:
-      font: satisfy
+      font: great_vibes
       text_color: "#1A1A1A"
       highlight_color: "#1A1A1A"
       author_color: "#333333"
@@ -152,3 +152,40 @@ styles:
       decoration: none
       highlight_style: none
       voice_gender: female
+
+  # ---------------------------------------------------------------------------
+  # Artistic & Illustrative (Inspiration from user screenshots)
+  # ---------------------------------------------------------------------------
+
+  artistic_bold_impact:
+    name: "Bold Impact (All-Caps/Extreme)"
+    description: "Massive, high-contrast all-caps sans-serif. Scroll-stopping."
+    categories: [morning, wisdom, love, womenpower, mindfulness, darkacademia, latenight]
+    font_key: "anton"
+    font_size: 84
+    layout: "center_minimalist"
+    highlight_style: "none"
+    overlay_type: "none"
+    brief_template: "A high-contrast, professional studio portrait or a bold architectural shot with a flat, light background (gray/white). Clean, sharp, and modern. Designed to make the black text pop."
+
+  artistic_cinematic_minimal:
+    name: "Cinematic Minimal (Tiny/Elegant)"
+    description: "Tiny, elegant serif in the center of a vast landscape."
+    categories: [morning, wisdom, love, womenpower, mindfulness, darkacademia, latenight]
+    font_key: "spectral"
+    font_size: 32
+    layout: "center_minimalist"
+    highlight_style: "none"
+    overlay_type: "vignette"
+    brief_template: "A breathtaking, moody cinematic landscape (misty forests, rainy streets, vast oceans). High-end cinematography feel. The text should feel like a small, deep thought in a big world."
+
+  artistic_spiritual_mixed:
+    name: "Spiritual Mixed (Script/Serif)"
+    description: "Mix of elegant script and serif with decorative elements."
+    categories: [morning, wisdom, love, womenpower, mindfulness, darkacademia, latenight]
+    font_key: "great_vibes"
+    font_size: 52
+    layout: "center_minimalist"
+    highlight_style: "none"
+    overlay_type: "none"
+    brief_template: "A warm, illustrative scene (watercolor or digital painting) of a woman in a sunlit garden or a cozy room. The aesthetic should be 'earthy' and 'soulful'. Background-aware for mixed-font layout."
