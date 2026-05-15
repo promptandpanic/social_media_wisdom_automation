@@ -25,6 +25,10 @@ _RETRY_SUFFIXES = [
     "Go bolder — extreme contrast, dramatic scale, or stark minimalism.",
 ]
 
+_THEME_PROMPT_PREFIXES: dict[str, str] = {
+    "womenpower": "A woman — ",
+}
+
 
 # ---------------------------------------------------------------------------
 # Nodes
@@ -44,6 +48,9 @@ def generate_image(state: PipelineState) -> PipelineState:
         provider_name = "gradient"
     else:
         base_prompt = brief.image_prompt if brief else f"Beautiful inspirational {theme_key} image, 9:16."
+        prefix = _THEME_PROMPT_PREFIXES.get(theme_key, "")
+        if prefix and not base_prompt.lower().startswith(prefix.lower().strip(" —").strip()):
+            base_prompt = f"{prefix}{base_prompt}"
         suffix = _RETRY_SUFFIXES[min(attempt - 1, len(_RETRY_SUFFIXES) - 1)]
         prompt = f"{base_prompt} {suffix}".strip() if suffix else base_prompt
         

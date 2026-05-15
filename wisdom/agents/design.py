@@ -76,7 +76,7 @@ STYLE: {style_name}
 {style_description}
 
 GUIDELINES FOR CREATIVITY:
-1. SOUL-MATCHING: Match the "energy" of the quote. 
+1. SOUL-MATCHING: Match the "energy" of the quote.
    - Spiritual/Classical -> Use 'artistic_spiritual_mixed' or 'artistic_spiritual_serif'.
    - Brutal/Modern Impact -> Use 'artistic_bold_impact'.
    - Cinematic/Moody -> Use 'artistic_cinematic_minimal'.
@@ -94,10 +94,17 @@ Constraints:
   - COMPOSITION: The area for text must be naturally clean, high-contrast, and COMPLETELY UNCLUTTERED.
   - TEXT OVERLAY: {text_zone_instruction}
   - No text, words, signs, logos, watermarks, or explicitly recognizable faces.
-  - 9:16 portrait format.
+  - 9:16 portrait format.{subject_constraint}
 
 Reply with ONLY the image prompt — plain text, no JSON, no preamble.
 """
+
+_THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
+    "womenpower": (
+        "\n  - MANDATORY: Subject must be a woman or women ONLY. "
+        "Absolutely no male figures, men, or boys in the scene."
+    ),
+}
 
 
 # ---------------------------------------------------------------------------
@@ -162,12 +169,14 @@ def generate_brief(state: PipelineState) -> PipelineState:
             f"That area MUST be naturally clean, shadowed, or low-contrast in the scene itself — "
             f"not bright or busy — so the text is legible."
         )
+        subject_constraint = _THEME_SUBJECT_CONSTRAINTS.get(theme_key, "")
         prompt = _IMAGE_PROMPT_TEMPLATE.format(
             text=text,
             style_name=style_name,
             style_description=style_desc,
             image_hint_block=f"ADDITIONAL DIRECTION: {image_hint}\n" if image_hint else "",
             text_zone_instruction=text_zone_instruction,
+            subject_constraint=subject_constraint,
         )
         image_prompt = providers.llm.generate(prompt, role="creative_brief").strip()
         if len(image_prompt.split()) >= 20:

@@ -69,9 +69,9 @@ class InstagramPlatform(BasePlatform):
             r.raise_for_status()
             container_id = r.json()["id"]
 
-            # Step 2: wait for processing
-            for _ in range(15):
-                time.sleep(4)
+            # Step 2: wait for processing (Reels can take time)
+            for i in range(25):
+                time.sleep(5)
                 s = requests.get(
                     f"{_GRAPH}/{container_id}",
                     params={"fields": "status_code", "access_token": token},
@@ -90,12 +90,16 @@ class InstagramPlatform(BasePlatform):
                 data={"creation_id": container_id, "access_token": token},
                 timeout=30,
             )
-            pub.raise_for_status()
+            if pub.status_code != 200:
+                logger.error(f"Instagram publish failed: {pub.text}")
+                pub.raise_for_status()
+
             post_id = pub.json()["id"]
             url = self._permalink(post_id, token)
             return PlatformResult("instagram", "posted", post_id=post_id, url=url)
 
         except Exception as exc:
+            logger.error(f"Instagram post_video failed: {exc}")
             return PlatformResult("instagram", "failed", error=str(exc))
         finally:
             uploader.cleanup()
@@ -120,13 +124,29 @@ class InstagramPlatform(BasePlatform):
             r.raise_for_status()
             container_id = r.json()["id"]
 
-            time.sleep(3)
+            # Wait for image processing (usually fast but can spike)
+            for i in range(10):
+                time.sleep(3)
+                s = requests.get(
+                    f"{_GRAPH}/{container_id}",
+                    params={"fields": "status_code", "access_token": token},
+                    timeout=15,
+                ).json()
+                status = s.get("status_code", "")
+                if status == "FINISHED":
+                    break
+                if status == "ERROR":
+                    return PlatformResult("instagram", "failed", error=f"Image error: {s}")
+
             pub = requests.post(
                 f"{_GRAPH}/{biz}/media_publish",
                 data={"creation_id": container_id, "access_token": token},
                 timeout=30,
             )
-            pub.raise_for_status()
+            if pub.status_code != 200:
+                logger.error(f"Instagram image publish failed: {pub.text}")
+                pub.raise_for_status()
+
             post_id = pub.json()["id"]
             url = self._permalink(post_id, token)
             return PlatformResult("instagram", "posted", post_id=post_id, url=url)
