@@ -68,30 +68,31 @@ Return ONLY valid JSON: {{"style": "chosen_style_name"}}"""
 
 
 _IMAGE_PROMPT_TEMPLATE = """\
-Write a vivid image generation prompt that captures the deep emotional essence of this quote.
+Write a vivid, high-end image generation prompt that captures the deep emotional essence of this quote.
 
 QUOTE: "{text}"
 STYLE: {style_name}
 
 {style_description}
 
-GUIDELINES FOR CREATIVITY:
+CORE CINEMATIC DIRECTIVES:
 1. SOUL-MATCHING: Match the "energy" of the quote.
    - Spiritual/Classical -> Use 'artistic_spiritual_mixed' or 'artistic_spiritual_serif'.
    - Brutal/Modern Impact -> Use 'artistic_bold_impact'.
    - Cinematic/Moody -> Use 'artistic_cinematic_minimal'.
    - Peaceful/Self-Care -> Use 'artistic_handwritten_peace' or 'elegant_illustrated_portrait'.
-2. NO MISMATCHES: Never use romantic imagery for business/hustle quotes.
-3. VISUAL METAPHOR: Favor mood and atmosphere over literal subjects.
+2. CINEMATIC REALISM: The scene MUST feel like a frame from an award-winning film.
+   - Lighting: Use volumetric lighting, dramatic shadows, rim lighting, or natural golden hour.
+   - Camera: Specify 35mm or 85mm lens, shallow depth of field (bokeh), shot on Sony A7R IV or Canon EOS R5.
+   - Quality: Hyper-realistic textures, visible film grain, 8k resolution, National Geographic quality.
+3. VISUAL METAPHOR: Favor mood, atmosphere, and vast landscapes over literal subjects. Favor silhouettes or back-views of people to maintain mystery and aesthetic.
 4. {image_hint_block}
 
 Write 4–6 rich sentences describing the scene:
-  subject → setting → technique/medium → colour palette (use hex values) → lighting → composition
+  subject → setting → technique/medium → colour palette (use hex values) → lighting → camera/composition
 
 Constraints:
-  - DO NOT generate abstract or overly "AI-stylized" art unless specified.
-  - Scene MUST feel intentional, high-end, and crystal clear.
-  - COMPOSITION: The area for text must be naturally clean, high-contrast, and COMPLETELY UNCLUTTERED.
+  - COMPOSITION: The area for text must be naturally clean, high-contrast, and contain VAST NEGATIVE SPACE (sky, empty wall, water).
   - TEXT OVERLAY: {text_zone_instruction}
   - No text, words, signs, logos, watermarks, or explicitly recognizable faces.
   - 9:16 portrait format.{subject_constraint}
@@ -202,14 +203,14 @@ def _build_brief(image_prompt: str, style_name: str, style_data: dict,
     word_count = len(text.split())
     layout = r.get("layout", "big_center")
     if layout == "minimalist":
-        font_size = 40
+        font_size = 38
     elif layout == "asymmetric":
-        font_size = 56
+        font_size = 48
     else:
         # Ultra-elegant aesthetic: smaller text, maximum negative space
-        font_size = (72 if layout == "big_center" and word_count <= 7
-                     else 64 if layout == "big_center"
-                     else max(48, 60 - max(0, word_count - 12)))
+        font_size = (60 if layout == "big_center" and word_count <= 7
+                     else 52 if layout == "big_center"
+                     else max(42, 56 - max(0, word_count - 12)))
 
     font = r.get("font", "playfair")
 

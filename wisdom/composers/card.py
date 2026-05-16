@@ -67,6 +67,8 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     "cinzel":       ("cinzel.ttf",            "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/static/Cinzel-Regular.ttf"),
     "great_vibes":  ("great_vibes.ttf",       "https://raw.githubusercontent.com/google/fonts/main/ofl/greatvibes/GreatVibes-Regular.ttf"),
     "montserrat":   ("montserrat.ttf",        "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/static/Montserrat-Regular.ttf"),
+    "inter":        ("inter.ttf",             "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/Inter-Regular.ttf"),
+    "inter_bold":   ("inter_bold.ttf",        "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/Inter-Bold.ttf"),
 }
 
 _font_cache: dict = {}
@@ -205,7 +207,7 @@ def _sanitize(text: str) -> str:
     )
 
 
-_CURSIVE_FONTS = {"dancing", "satisfy", "pacifico", "caveat", "kalam", "indieflower"}
+_CURSIVE_FONTS = {"dancing", "satisfy", "pacifico", "caveat", "kalam", "indieflower", "great_vibes"}
 
 
 def _drop_shadow_text(draw, xy, text, font, fill, shadow_color=(0, 0, 0, 180), offset=(4, 6), blur=0):

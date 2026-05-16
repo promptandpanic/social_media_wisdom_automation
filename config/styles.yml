@@ -5,10 +5,10 @@ styles:
     categories: [wisdom, morning, mindfulness]
     weight: high
     description: >
-      A high-end, cinematic lifestyle photograph. 
-      The scene must be ultra-clean, minimalist, and high-resolution.
-      Examples: A single cup of coffee on a textured stone table in soft morning light; 
-      a lone person walking on a misty beach; a minimalist modern architectural detail.
+      A high-end, cinematic lifestyle photograph shot on a 35mm lens. 
+      The scene must be ultra-clean, minimalist, and hyper-realistic.
+      Examples: A single cup of coffee on a textured stone table in soft morning light with volumetric dust motes; 
+      a lone silhouette walking on a vast, misty beach at dawn; minimalist modern architectural detail with harsh geometric shadows.
       Vibe: Quiet luxury, intentional, and calm.
     rendering:
       font: poppins
@@ -27,9 +27,9 @@ styles:
     categories: [wisdom, mindfulness, love]
     weight: high
     description: >
-      A moody, artistic, and cinematic photograph with deep shadows and rich textures.
-      Examples: A vintage library with soft light hitting old books; a dark mountain range under a starry sky;
-      a high-end restaurant interior with candlelight.
+      A moody, artistic, and cinematic photograph with deep shadows and rich textures. Shot on an 85mm lens with shallow depth of field.
+      Examples: A vintage library with soft rim light hitting old leather books; a dark, jagged mountain range under a vast starry sky;
+      a high-end restaurant interior with single flickering candlelight and heavy shadows.
       Vibe: Intellectual, timeless, and sophisticated.
     rendering:
       font: spectral
@@ -48,11 +48,11 @@ styles:
     categories: [wisdom, womenpower, morning]
     weight: high
     description: >
-      A clean, 2D minimalist digital illustration. 
-      Style: Flat art, soft pastel or earth-tone palette, simple lines.
-      Subject: A person engaging in a simple activity (drinking coffee, walking, looking at a mirror, working).
-      Background: Simple, solid-color or very clean background area at the top of the frame for text.
-      Vibe: Relatable, modern, and lighthearted.
+      A clean, 2D minimalist digital illustration with premium textures. 
+      Style: Flat art, soft pastel or earthy desert-tone palette, clean vector lines with subtle grain.
+      Subject: A solitary figure engaging in a simple, mindful activity (pouring tea, looking at the moon, meditative pose).
+      Background: Simple, solid-color or very clean background area with VAST negative space at the top for text.
+      Vibe: Relatable, modern, and lighthearted but high-end.
     rendering:
       font: montserrat
       text_color: "#1A1A1A"
@@ -66,17 +66,17 @@ styles:
       voice_gender: female
 
   elegant_illustrated_portrait:
-    summary: "Soft digital painting/illustration with elegant handwritten script fonts."
+    summary: "Soft digital painting with elegant plain typography (formerly script)."
     categories: [love, womenpower, wisdom]
     weight: high
     description: >
-      A soft, beautiful digital painting or stylized illustration.
-      Style: Flat 2D minimalist art, soft edges, rich colors.
-      Subject: A woman in a stylish outfit, or a scene of connection.
+      A soft, beautiful digital painting or stylized illustration with cinematic lighting.
+      Style: Modern flat 2D minimalist art with rich, harmonious colors and soft-box lighting feel.
+      Subject: A woman in a stylish outfit or a silhouette of connection.
       Background: Artistic but with a large, clean, solid-color area at the top for text.
       Vibe: Emotive, artistic, and premium.
     rendering:
-      font: great_vibes
+      font: outfit
       text_color: "#1A1A1A"
       highlight_color: "#1A1A1A"
       author_color: "#333333"
@@ -92,13 +92,13 @@ styles:
     categories: [wisdom, love, womenpower]
     weight: high
     description: >
-      A high-end, cinematic illustration or photograph of a woman in India.
-      Scenes: Modern sunlit offices, quiet Himalayan balconies, or lush tea gardens.
-      Subject: An expressive, modern Indian woman in elegant attire.
-      Composition: Ensure a large, clean, high-contrast area at the top for dark text.
+      A high-end, cinematic illustration or photograph of a woman in India. Shot on 35mm film with warm golden tones.
+      Scenes: Modern sunlit offices with massive windows, quiet Himalayan balconies overlooking mist, or lush tea gardens.
+      Subject: An expressive, modern Indian woman in elegant, structural attire.
+      Composition: Ensure a large, clean, high-contrast area at the top for dark text overlay.
       Vibe: Authentic, powerful, and serene.
     rendering:
-      font: playfair
+      font: inter
       text_color: "#1A1A1A"
       highlight_color: "#1A1A1A"
       author_color: "#333333"
@@ -114,13 +114,13 @@ styles:
     categories: [wisdom, morning, womenpower, love]
     weight: high
     description: >
-      A cutting-edge, high-fashion illustration or clean photograph.
-      Setting: Minimalist architectural spaces, brutalist concrete, or stark white runways.
-      Subject: A person in a structural outfit with an expressive pose.
+      A cutting-edge, high-fashion illustration or clean photograph. Brutalist aesthetic.
+      Setting: Minimalist architectural spaces, brutalist concrete, or stark white runways with dramatic shadows.
+      Subject: A person in a structural outfit with an expressive, editorial pose.
       Composition: Ensure a large, clean, shadowed area at the top for white text overlay.
       Vibe: Bold, structural, and ultra-modern.
     rendering:
-      font: outfit
+      font: inter
       text_color: "#FFFFFF"
       highlight_color: "#FFFFFF"
       author_color: "#F0F0F0"
@@ -136,10 +136,10 @@ styles:
     categories: [wisdom, morning, mindfulness]
     weight: high
     description: >
-      An understated, high-end 'Quiet Luxury' illustration or photograph.
-      Scenes: Sun-drenched minimalist interiors with large windows and soft linen textures.
-      Subject: A single object or a person in a calm, reflective moment.
-      Composition: Focus on negative space and clean backgrounds for dark text.
+      An understated, high-end 'Quiet Luxury' illustration or photograph. Soft, diffused lighting.
+      Scenes: Sun-drenched minimalist interiors with large windows and soft linen textures; a single high-end watch or book on a marble slab.
+      Subject: A single object or a person (back-view) in a calm, reflective moment.
+      Composition: Focus on VAST negative space and clean backgrounds for dark text.
       Vibe: Wealthy, calm, and perfectly curated.
     rendering:
       font: spectral
@@ -158,34 +158,58 @@ styles:
   # ---------------------------------------------------------------------------
 
   artistic_bold_impact:
-    name: "Bold Impact (All-Caps/Extreme)"
-    description: "Massive, high-contrast all-caps sans-serif. Scroll-stopping."
+    summary: "Massive, high-contrast all-caps sans-serif. Scroll-stopping."
     categories: [morning, wisdom, love, womenpower, mindfulness, darkacademia, latenight]
-    font_key: "anton"
-    font_size: 84
-    layout: "center_minimalist"
-    highlight_style: "none"
-    overlay_type: "none"
-    brief_template: "A high-contrast, professional studio portrait or a bold architectural shot with a flat, light background (gray/white). Clean, sharp, and modern. Designed to make the black text pop."
+    weight: high
+    description: >
+      A high-contrast, professional studio portrait or a bold architectural shot with a flat, light background.
+      Clean, sharp, and modern. Designed to make the black text pop. Vibe is aggressive and powerful.
+    rendering:
+      font: anton
+      text_color: "#000000"
+      highlight_color: "#000000"
+      author_color: "#333333"
+      overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
+      text_zone: center_minimalist
+      layout: minimalist
+      decoration: none
+      highlight_style: none
+      voice_gender: male
 
   artistic_cinematic_minimal:
-    name: "Cinematic Minimal (Tiny/Elegant)"
-    description: "Tiny, elegant serif in the center of a vast landscape."
+    summary: "Tiny, elegant serif in the center of a vast landscape."
     categories: [morning, wisdom, love, womenpower, mindfulness, darkacademia, latenight]
-    font_key: "spectral"
-    font_size: 32
-    layout: "center_minimalist"
-    highlight_style: "none"
-    overlay_type: "vignette"
-    brief_template: "A breathtaking, moody cinematic landscape (misty forests, rainy streets, vast oceans). High-end cinematography feel. The text should feel like a small, deep thought in a big world."
+    weight: high
+    description: >
+      A breathtaking, moody cinematic landscape (misty forests, rainy streets, vast oceans). Shot on 35mm film.
+      High-end cinematography feel with deep shadows and rim lighting. The text should feel like a small, deep thought in a big world.
+    rendering:
+      font: spectral
+      text_color: "#FFFFFF"
+      highlight_color: "#FFFFFF"
+      author_color: "#CCCCCC"
+      overlay: {type: vignette, opacity: 150, color: "#000000", blur: 0}
+      text_zone: center_minimalist
+      layout: minimalist
+      decoration: none
+      highlight_style: none
+      voice_gender: male
 
   artistic_spiritual_mixed:
-    name: "Spiritual Mixed (Script/Serif)"
-    description: "Mix of elegant script and serif with decorative elements."
+    summary: "Elegant plain typography with decorative elements (formerly mixed script)."
     categories: [morning, wisdom, love, womenpower, mindfulness, darkacademia, latenight]
-    font_key: "great_vibes"
-    font_size: 52
-    layout: "center_minimalist"
-    highlight_style: "none"
-    overlay_type: "none"
-    brief_template: "A warm, illustrative scene (watercolor or digital painting) of a woman in a sunlit garden or a cozy room. The aesthetic should be 'earthy' and 'soulful'. Background-aware for mixed-font layout."
+    weight: high
+    description: >
+      A warm, illustrative scene (watercolor or digital painting) of a figure in a sunlit garden or a cozy room.
+      The aesthetic should be 'earthy' and 'soulful' with volumetric lighting and soft textures.
+    rendering:
+      font: outfit
+      text_color: "#1A1A1A"
+      highlight_color: "#D4AF37"
+      author_color: "#4A4A4A"
+      overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
+      text_zone: center_minimalist
+      layout: minimalist
+      decoration: quote_mark
+      highlight_style: color
+      voice_gender: female
