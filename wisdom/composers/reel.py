@@ -96,9 +96,10 @@ def _build_reel(image_bytes: bytes, quote: Quote, brief: DesignBrief,
 
         parts = []
         if not skip_kenburns:
-            parts.append(f"[0:v]{sc},{_zoompan_at(total_frames, 0)}[bg]")
+            # Added temporal noise for high-end cinematic 'motion texture' (film grain)
+            parts.append(f"[0:v]{sc},{_zoompan_at(total_frames, 0)},noise=alls=12:allf=t+u[bg]")
         else:
-            parts.append(f"[0:v]{sc},setsar=1,fps={FPS}[bg]")
+            parts.append(f"[0:v]{sc},setsar=1,fps={FPS},noise=alls=12:allf=t+u[bg]")
 
         # Overlay and text are both fully static — no zoom
         parts.append(f"[1:v]format=rgba,setsar=1,fps={FPS}[ov_static]")

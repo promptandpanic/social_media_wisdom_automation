@@ -213,3 +213,70 @@ styles:
       decoration: quote_mark
       highlight_style: color
       voice_gender: female
+
+  # ---------------------------------------------------------------------------
+  # Surreal Minimalist (Next-Level Engagement)
+  # ---------------------------------------------------------------------------
+
+  surreal_cosmic_minimalism:
+    summary: "Floating geometric orbs and impossible cosmic phenomena in vast, empty landscapes."
+    categories: [wisdom, mindfulness, latenight]
+    weight: high
+    description: >
+      A surreal, high-end editorial photograph of a massive, glowing geometric orb (gold or glass) floating silently over a black sand desert at twilight.
+      Atmosphere: Volumetric fog, soft amber rim lighting, vast starry sky with a faint nebula.
+      Composition: Central subject with VAST negative space. Hyper-realistic textures.
+      Vibe: Transcendent, mysterious, and awe-inspiring.
+    rendering:
+      font: inter
+      text_color: "#FFFFFF"
+      highlight_color: "#FFD700"
+      author_color: "#E0E0E0"
+      overlay: {type: gradient_bottom, opacity: 100, color: "#000000", blur: 0}
+      text_zone: center_minimalist
+      layout: minimalist
+      decoration: none
+      highlight_style: color
+      voice_gender: male
+
+  metaphorical_abstract_installation:
+    summary: "Impossible art installations in natural settings. Visual metaphors for the mind."
+    categories: [wisdom, mindfulness, darkacademia]
+    weight: high
+    description: >
+      A cinematic photograph of a surreal art installation in a misty forest. 
+      Examples: A series of glowing glass doorways leading into a void; a massive floating stone block tethered by golden threads.
+      Lighting: Soft-box lighting feel, volumetric rays of light through trees, deep shadows.
+      Vibe: Intellectual, metaphorical, and high-production value.
+    rendering:
+      font: spectral
+      text_color: "#FFFFFF"
+      highlight_color: "#FFFFFF"
+      author_color: "#F0F0F0"
+      overlay: {type: vignette, opacity: 130, color: "#000000", blur: 0}
+      text_zone: bottom_left
+      layout: asymmetric
+      decoration: rule
+      highlight_style: none
+      voice_gender: male
+
+  dream_logic_architectural:
+    summary: "Brutalist architecture in impossible, dream-like environments."
+    categories: [morning, wisdom, latenight]
+    weight: high
+    description: >
+      A stark, brutalist concrete structure rising out of a vast, calm ocean under a blood-red moon or a bright neon sun.
+      Style: Architectural editorial, harsh geometric shadows, clean lines, minimalist color palette (concrete gray and one bold accent color).
+      Composition: High-contrast, minimalist, focus on structural purity.
+      Vibe: Bold, structural, and dream-like.
+    rendering:
+      font: outfit
+      text_color: "#FFFFFF"
+      highlight_color: "#FF3366"
+      author_color: "#F0F0F0"
+      overlay: {type: gradient_top, opacity: 120, color: "#000000", blur: 0}
+      text_zone: top_minimalist
+      layout: minimalist
+      decoration: none
+      highlight_style: color
+      voice_gender: female
