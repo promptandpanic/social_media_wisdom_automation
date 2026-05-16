@@ -96,14 +96,19 @@ Constraints:
   - TEXT OVERLAY: {text_zone_instruction}
   - No text, words, signs, logos, watermarks, or explicitly recognizable faces.
   - 9:16 portrait format.{subject_constraint}
+  - VARIATION SEED: {random_seed}
+  - ATMOSPHERIC TWIST: {atmospheric_twist}
 
 Reply with ONLY the image prompt — plain text, no JSON, no preamble.
 """
 
 _THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
     "womenpower": (
-        "\n  - MANDATORY: Subject must be a woman or women ONLY. "
-        "Absolutely no male figures, men, or boys in the scene."
+        "\n  - MANDATORY: Subject must be a woman in HIGH-FASHION EDITORIAL attire. "
+        "Think Vogue/Harper's Bazaar. Outfits: Dark sunglasses, long coats with high heels, "
+        "minimalist turtlenecks with loose-fit jeans, or chic summer street-style. "
+        "Settings: Busy NYC crosswalks, elegant Paris streets, minimalist Milan office floors, or structural architectural backdrops. "
+        "Match the weather/season to the quote's emotion (e.g., winter coats for somber quotes, breezy summer for light ones)."
     ),
 }
 
@@ -171,6 +176,20 @@ def generate_brief(state: PipelineState) -> PipelineState:
             f"not bright or busy — so the text is legible."
         )
         subject_constraint = _THEME_SUBJECT_CONSTRAINTS.get(theme_key, "")
+        
+        import random
+        variation_seeds = ["Prism", "Vortex", "Horizon", "Pulse", "Void", "Echo", "Loom", "Fractal", "Aether", "Obsidian"]
+        atmospheric_twists = [
+            "Heavy volumetric fog with light rays.",
+            "Subtle chromatic aberration at the edges.",
+            "Dramatic long shadows and extreme high-contrast lighting.",
+            "Soft, dream-like bokeh with floating dust motes.",
+            "Minimalist composition with a single bold accent color.",
+            "Ethereal glow from an unseen source below the horizon.",
+            "Crisp, clear atmosphere with hyper-realistic sharpness.",
+            "Moody, rain-slicked textures and reflective surfaces.",
+        ]
+
         prompt = _IMAGE_PROMPT_TEMPLATE.format(
             text=text,
             style_name=style_name,
@@ -178,6 +197,8 @@ def generate_brief(state: PipelineState) -> PipelineState:
             image_hint_block=f"ADDITIONAL DIRECTION: {image_hint}\n" if image_hint else "",
             text_zone_instruction=text_zone_instruction,
             subject_constraint=subject_constraint,
+            random_seed=random.choice(variation_seeds),
+            atmospheric_twist=random.choice(atmospheric_twists),
         )
         image_prompt = providers.llm.generate(prompt, role="creative_brief").strip()
         if len(image_prompt.split()) >= 20:

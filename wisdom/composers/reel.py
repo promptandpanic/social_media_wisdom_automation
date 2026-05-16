@@ -96,10 +96,10 @@ def _build_reel(image_bytes: bytes, quote: Quote, brief: DesignBrief,
 
         parts = []
         if not skip_kenburns:
-            # Added temporal noise for high-end cinematic 'motion texture' (film grain)
-            parts.append(f"[0:v]{sc},{_zoompan_at(total_frames, 0)},noise=alls=12:allf=t+u[bg]")
+            # Added subtle cinematic grain + sharp color grade
+            parts.append(f"[0:v]{sc},{_zoompan_at(total_frames, 0)},noise=alls=5:allf=t,eq=contrast=1.06:saturation=1.1,unsharp=3:3:0.5:3:3:0.0[bg]")
         else:
-            parts.append(f"[0:v]{sc},setsar=1,fps={FPS},noise=alls=12:allf=t+u[bg]")
+            parts.append(f"[0:v]{sc},setsar=1,fps={FPS},noise=alls=5:allf=t,eq=contrast=1.06:saturation=1.1,unsharp=3:3:0.5:3:3:0.0[bg]")
 
         # Overlay and text are both fully static — no zoom
         parts.append(f"[1:v]format=rgba,setsar=1,fps={FPS}[ov_static]")
@@ -128,7 +128,7 @@ def _build_reel(image_bytes: bytes, quote: Quote, brief: DesignBrief,
 
         logger.info(f"Reel: {total}s | kenburns={'yes' if not skip_kenburns else 'no'} | music={'yes' if has_audio else 'no'}")
         try:
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
             if result.returncode != 0:
                 logger.error(f"ffmpeg error:\n{result.stderr[-2000:]}")
                 return None

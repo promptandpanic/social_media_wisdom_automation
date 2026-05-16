@@ -66,9 +66,10 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     "anton":        ("anton.ttf",             "https://raw.githubusercontent.com/google/fonts/main/ofl/anton/Anton-Regular.ttf"),
     "cinzel":       ("cinzel.ttf",            "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/static/Cinzel-Regular.ttf"),
     "great_vibes":  ("great_vibes.ttf",       "https://raw.githubusercontent.com/google/fonts/main/ofl/greatvibes/GreatVibes-Regular.ttf"),
-    "montserrat":   ("montserrat.ttf",        "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/static/Montserrat-Regular.ttf"),
-    "inter":        ("inter.ttf",             "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/Inter-Regular.ttf"),
-    "inter_bold":   ("inter_bold.ttf",        "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/Inter-Bold.ttf"),
+    "montserrat":   ("montserrat_bold.ttf",   "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/static/Montserrat-Bold.ttf"),
+    "oswald":       ("oswald_bold.ttf",       "https://raw.githubusercontent.com/google/fonts/main/ofl/oswald/static/Oswald-Bold.ttf"),
+    "raleway":      ("raleway_bold.ttf",      "https://raw.githubusercontent.com/google/fonts/main/ofl/raleway/static/Raleway-Bold.ttf"),
+    "cormorant":    ("cormorant.ttf",         "https://raw.githubusercontent.com/google/fonts/main/ofl/cormorantgaramond/static/CormorantGaramond-Regular.ttf"),
 }
 
 _font_cache: dict = {}

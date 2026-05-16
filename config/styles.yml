@@ -165,7 +165,7 @@ styles:
       A high-contrast, professional studio portrait or a bold architectural shot with a flat, light background.
       Clean, sharp, and modern. Designed to make the black text pop. Vibe is aggressive and powerful.
     rendering:
-      font: anton
+      font: raleway
       text_color: "#000000"
       highlight_color: "#000000"
       author_color: "#333333"
@@ -228,10 +228,10 @@ styles:
       Composition: Central subject with VAST negative space. Hyper-realistic textures.
       Vibe: Transcendent, mysterious, and awe-inspiring.
     rendering:
-      font: inter
+      font: montserrat
       text_color: "#FFFFFF"
-      highlight_color: "#FFD700"
-      author_color: "#E0E0E0"
+      highlight_color: "#E0E0E0"
+      author_color: "#CCCCCC"
       overlay: {type: gradient_bottom, opacity: 100, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
@@ -249,7 +249,7 @@ styles:
       Lighting: Soft-box lighting feel, volumetric rays of light through trees, deep shadows.
       Vibe: Intellectual, metaphorical, and high-production value.
     rendering:
-      font: spectral
+      font: cormorant
       text_color: "#FFFFFF"
       highlight_color: "#FFFFFF"
       author_color: "#F0F0F0"
@@ -270,11 +270,57 @@ styles:
       Composition: High-contrast, minimalist, focus on structural purity.
       Vibe: Bold, structural, and dream-like.
     rendering:
-      font: outfit
+      font: oswald
       text_color: "#FFFFFF"
       highlight_color: "#FF3366"
       author_color: "#F0F0F0"
       overlay: {type: gradient_top, opacity: 120, color: "#000000", blur: 0}
+      text_zone: top_minimalist
+      layout: minimalist
+      decoration: none
+      highlight_style: color
+      voice_gender: female
+
+  editorial_black_white_portrait:
+    summary: "High-end Vogue-style black and white editorial photography of women."
+    categories: [womenpower]
+    weight: high
+    description: >
+      A high-end editorial black and white photograph of a woman in high-fashion attire (long coats, dark sunglasses, or minimalist chic).
+      Setting: An elegant urban environment (NYC, Paris, or Milan).
+      Lighting: Hard, high-contrast 'Chiaroscuro' lighting, dramatic shadows, sharp rim light.
+      Medium: 35mm monochrome film with visible, artistic grain.
+      Vibe: Empowering, sophisticated, and high-fashion.
+      Composition: Focus on the subject's posture and movement (e.g., walking across a busy road or standing against a brutalist wall).
+    rendering:
+      font: raleway
+      text_color: "#FFFFFF"
+      highlight_color: "#FFFFFF"
+      author_color: "#CCCCCC"
+      overlay: {type: vignette, opacity: 150, color: "#000000", blur: 0}
+      text_zone: bottom_minimalist
+      layout: minimalist
+      decoration: rule
+      highlight_style: underline
+      voice_gender: female
+
+  street_style_editorial_color:
+    summary: "Cinematic color street-style fashion editorial."
+    categories: [womenpower]
+    weight: high
+    description: >
+      A cinematic, color-graded street photography shot of a fashionable woman (Parisian chic or NYC street style).
+      Outfit: Loose-fit jeans with a turtleneck, or a mini skirt with a stylish top.
+      Setting: A busy city street with natural movement and bokeh.
+      Lighting: Golden hour or moody overcast light, soft volumetric glow.
+      Vibe: Relatable yet aspirational, emotional, and visually rich.
+      Composition: Wide angle 35mm shot showing the environment and the subject's full outfit.
+    rendering:
+      font: cormorant
+      text_color: "#FFFFFF"
+      highlight_color: "#FFFFFF"
+      author_color: "#E0E0E0"
+      overlay: {type: gradient_bottom, opacity: 120, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: minimalist
       decoration: none
