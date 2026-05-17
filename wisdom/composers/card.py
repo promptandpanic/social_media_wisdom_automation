@@ -223,7 +223,7 @@ def _drop_shadow_text(draw, xy, text, font, fill, shadow_color=(0, 0, 0, 180), o
 def _render_line(draw, img_width: int, y: int, line: str,
                  font: ImageFont.FreeTypeFont, fill: tuple, stroke: int = 3,
                  highlight_text: str = "", hi_color: tuple = None,
-                 text_zone: str = "center") -> None:
+                 text_zone: str = "center", hl_style: str = "color") -> None:
     bb = font.getbbox(line)
     line_w = bb[2] - bb[0]
     
@@ -269,9 +269,18 @@ def _render_line(draw, img_width: int, y: int, line: str,
         clean_w = re.sub(r'[^\w\s]', '', w).lower()
         is_highlight = clean_w in hl_words and len(clean_w) > 0
         
-        word_fill = hi_color if is_highlight else fill
+        word_fill = hi_color if (is_highlight and hl_style == "color") else fill
         if w:
+            start_x = current_x
             current_x = _draw_text_custom(draw, (current_x, y), w, font, fill=word_fill, ls=letter_spacing)
+            if is_highlight and hl_style == "underline":
+                # Draw underline just below the text
+                underline_y = y + int(font.size * 1.1)
+                thickness = max(2, int(font.size * 0.05))
+                # Shadow for the underline
+                draw.line([(start_x, underline_y), (current_x - letter_spacing, underline_y)], fill=(*shadow_color[:3], shadow_color[3]), width=thickness+2)
+                # Actual underline
+                draw.line([(start_x, underline_y), (current_x - letter_spacing, underline_y)], fill=fill, width=thickness)
         
         # Add space with letter spacing
         current_x += draw.textlength(" ", font=font) + letter_spacing
@@ -504,7 +513,7 @@ def _draw_text(img: Image.Image, quote: Quote, brief: DesignBrief,
     for line in lines:
         _render_line(draw, TEXT_ZONE_CX * 2, y, line, font=f, fill=txt_color, stroke=text_stroke,
                      highlight_text=quote.highlight, hi_color=hi_color,
-                     text_zone=text_zone)
+                     text_zone=text_zone, hl_style=brief.highlight_style)
         y += line_h
 
     _SKIP_AUTHOR = {"unknown", "anonymous", "original"}

@@ -297,7 +297,7 @@ styles:
       text_color: "#FFFFFF"
       highlight_color: "#FFFFFF"
       author_color: "#CCCCCC"
-      overlay: {type: vignette, opacity: 150, color: "#000000", blur: 0}
+      overlay: {type: vignette, opacity: 200, color: "#000000", blur: 0}
       text_zone: bottom_minimalist
       layout: minimalist
       decoration: rule
@@ -320,9 +320,9 @@ styles:
       text_color: "#FFFFFF"
       highlight_color: "#FFFFFF"
       author_color: "#E0E0E0"
-      overlay: {type: gradient_bottom, opacity: 120, color: "#000000", blur: 0}
+      overlay: {type: gradient_bottom, opacity: 180, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: color
+      highlight_style: underline
       voice_gender: female
