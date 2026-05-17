@@ -15,11 +15,11 @@ styles:
       text_color: "#FFFFFF"
       highlight_color: "#FFFFFF"
       author_color: "#F0F0F0"
-      overlay: {type: gradient_bottom, opacity: 120, color: "#000000", blur: 0}
+      overlay: {type: gradient_bottom, opacity: 180, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: none
+      highlight_style: underline
       voice_gender: female
 
   timeless_minimalist_serif:
@@ -36,11 +36,11 @@ styles:
       text_color: "#FFFFFF"
       highlight_color: "#FFFFFF"
       author_color: "#E0E0E0"
-      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
+      overlay: {type: vignette, opacity: 180, color: "#000000", blur: 0}
       text_zone: center
       layout: big_center
       decoration: none
-      highlight_style: none
+      highlight_style: underline
       voice_gender: male
 
   minimalist_doodle_wisdom:
@@ -62,7 +62,7 @@ styles:
       text_zone: top_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: none
+      highlight_style: underline
       voice_gender: female
 
   elegant_illustrated_portrait:
@@ -84,7 +84,7 @@ styles:
       text_zone: top_minimalist
       layout: asymmetric
       decoration: none
-      highlight_style: none
+      highlight_style: underline
       voice_gender: female
 
   indian_ethnic_aesthetic:
@@ -106,7 +106,7 @@ styles:
       text_zone: top_minimalist
       layout: big_center
       decoration: none
-      highlight_style: none
+      highlight_style: underline
       voice_gender: female
 
   avant_garde_lifestyle:
@@ -124,11 +124,11 @@ styles:
       text_color: "#FFFFFF"
       highlight_color: "#FFFFFF"
       author_color: "#F0F0F0"
-      overlay: {type: gradient_top, opacity: 120, color: "#000000", blur: 0}
+      overlay: {type: gradient_top, opacity: 180, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: big_center
       decoration: none
-      highlight_style: none
+      highlight_style: underline
       voice_gender: female
 
   quiet_luxury_minimalist:
@@ -150,7 +150,7 @@ styles:
       text_zone: top_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: none
+      highlight_style: underline
       voice_gender: female
 
   # ---------------------------------------------------------------------------
@@ -173,7 +173,7 @@ styles:
       text_zone: center_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: none
+      highlight_style: underline
       voice_gender: male
 
   artistic_cinematic_minimal:
@@ -188,11 +188,11 @@ styles:
       text_color: "#FFFFFF"
       highlight_color: "#FFFFFF"
       author_color: "#CCCCCC"
-      overlay: {type: vignette, opacity: 150, color: "#000000", blur: 0}
+      overlay: {type: vignette, opacity: 180, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: none
+      highlight_style: underline
       voice_gender: male
 
   artistic_spiritual_mixed:
@@ -205,13 +205,13 @@ styles:
     rendering:
       font: outfit
       text_color: "#1A1A1A"
-      highlight_color: "#D4AF37"
+      highlight_color: "#1A1A1A"
       author_color: "#4A4A4A"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
       decoration: quote_mark
-      highlight_style: color
+      highlight_style: underline
       voice_gender: female
 
   # ---------------------------------------------------------------------------
@@ -230,13 +230,13 @@ styles:
     rendering:
       font: montserrat
       text_color: "#FFFFFF"
-      highlight_color: "#E0E0E0"
+      highlight_color: "#FFFFFF"
       author_color: "#CCCCCC"
-      overlay: {type: gradient_bottom, opacity: 100, color: "#000000", blur: 0}
+      overlay: {type: gradient_bottom, opacity: 180, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: color
+      highlight_style: underline
       voice_gender: male
 
   metaphorical_abstract_installation:
@@ -253,11 +253,11 @@ styles:
       text_color: "#FFFFFF"
       highlight_color: "#FFFFFF"
       author_color: "#F0F0F0"
-      overlay: {type: vignette, opacity: 130, color: "#000000", blur: 0}
+      overlay: {type: vignette, opacity: 180, color: "#000000", blur: 0}
       text_zone: bottom_left
       layout: asymmetric
       decoration: rule
-      highlight_style: none
+      highlight_style: underline
       voice_gender: male
 
   dream_logic_architectural:
@@ -272,13 +272,13 @@ styles:
     rendering:
       font: oswald
       text_color: "#FFFFFF"
-      highlight_color: "#FF3366"
+      highlight_color: "#FFFFFF"
       author_color: "#F0F0F0"
-      overlay: {type: gradient_top, opacity: 120, color: "#000000", blur: 0}
+      overlay: {type: gradient_top, opacity: 180, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: color
+      highlight_style: underline
       voice_gender: female
 
   editorial_black_white_portrait:
