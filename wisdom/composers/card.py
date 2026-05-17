@@ -66,6 +66,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     "anton":        ("anton.ttf",             "https://raw.githubusercontent.com/google/fonts/main/ofl/anton/Anton-Regular.ttf"),
     "cinzel":       ("cinzel.ttf",            "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/static/Cinzel-Regular.ttf"),
     "great_vibes":  ("great_vibes.ttf",       "https://raw.githubusercontent.com/google/fonts/main/ofl/greatvibes/GreatVibes-Regular.ttf"),
+    "shadows_into_light": ("shadows_into_light.ttf", "https://raw.githubusercontent.com/google/fonts/main/ofl/shadowsintolight/ShadowsIntoLight-Regular.ttf"),
     "montserrat":   ("montserrat_bold.ttf",   "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/static/Montserrat-Bold.ttf"),
     "oswald":       ("oswald_bold.ttf",       "https://raw.githubusercontent.com/google/fonts/main/ofl/oswald/static/Oswald-Bold.ttf"),
     "raleway":      ("raleway_bold.ttf",      "https://raw.githubusercontent.com/google/fonts/main/ofl/raleway/static/Raleway-Bold.ttf"),
@@ -235,8 +236,10 @@ def _render_line(draw, img_width: int, y: int, line: str,
     else:
         x = (img_width - line_w) // 2
         
-    # Use drop shadow instead of basic stroke
-    shadow_color = (0, 0, 0, 180) if stroke > 0 else (0, 0, 0, 80)
+    # Smart shadow: white shadow for dark text, black shadow for light text
+    is_dark_text = (fill[0]*0.299 + fill[1]*0.587 + fill[2]*0.114) < 128
+    base_alpha = 180 if stroke > 0 else 80
+    shadow_color = (255, 255, 255, base_alpha) if is_dark_text else (0, 0, 0, base_alpha)
     
     if not highlight_text or not hi_color:
         _drop_shadow_text(draw, (x, y), line, font, fill=fill, shadow_color=shadow_color)
@@ -351,9 +354,9 @@ def _apply_overlay(img: Image.Image, brief: DesignBrief) -> Image.Image:
 
 def _bg_luminance(img: Image.Image, zone: str) -> float:
     W, H = IMAGE_WIDTH, IMAGE_HEIGHT
-    if zone == "top":
+    if "top" in zone:
         box = (MARGIN_X, int(H * 0.06), W - MARGIN_X, int(H * 0.45))
-    elif zone == "center":
+    elif "center" in zone:
         box = (MARGIN_X, int(H * 0.18), W - MARGIN_X, int(H * 0.82))
     else:
         box = (MARGIN_X, int(H * 0.38), W - MARGIN_X, H - 80)

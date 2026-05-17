@@ -304,19 +304,19 @@ styles:
       highlight_style: underline
       voice_gender: female
 
-  street_style_editorial_color:
-    summary: "Cinematic color street-style fashion editorial."
+  street_style_editorial_bw:
+    summary: "Cinematic black and white street-style fashion editorial."
     categories: [womenpower]
     weight: high
     description: >
-      A cinematic, color-graded street photography shot of a fashionable woman (Parisian chic or NYC street style).
+      A cinematic, strictly black and white street photography shot of a fashionable woman (Parisian chic or NYC street style).
       Outfit: Loose-fit jeans with a turtleneck, or a mini skirt with a stylish top.
       Setting: A busy city street with natural movement and bokeh.
-      Lighting: Golden hour or moody overcast light, soft volumetric glow.
+      Lighting: High-contrast monochrome, deep shadows, soft volumetric glow.
       Vibe: Relatable yet aspirational, emotional, and visually rich.
       Composition: Wide angle 35mm shot showing the environment and the subject's full outfit.
     rendering:
-      font: cormorant
+      font: caveat
       text_color: "#FFFFFF"
       highlight_color: "#FFFFFF"
       author_color: "#E0E0E0"
