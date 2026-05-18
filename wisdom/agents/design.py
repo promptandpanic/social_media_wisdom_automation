@@ -5,6 +5,7 @@ Phase 1 (pick_style): LLM picks the best visual style for the quote.
 Phase 2 (generate_brief): LLM writes a vivid, quote-specific image prompt.
 Rendering parameters (font, colors, overlay) come from the style's config — not LLM.
 """
+
 from __future__ import annotations
 
 import logging
@@ -20,15 +21,33 @@ logger = logging.getLogger(__name__)
 
 _ACCOUNT = "global inspirational quotes account (ages 18–35, large Indian following)"
 
-_VALID_FONTS = frozenset({"inter", "outfit", "spectral", "jost", "satisfy", "playfair", "cormorant", "bebas", "poppins", "anton", "cinzel", "great_vibes", "montserrat"})
+_VALID_FONTS = frozenset(
+    {
+        "inter",
+        "outfit",
+        "spectral",
+        "jost",
+        "satisfy",
+        "playfair",
+        "cormorant",
+        "bebas",
+        "poppins",
+        "anton",
+        "cinzel",
+        "great_vibes",
+        "montserrat",
+    }
+)
 
 
 # ---------------------------------------------------------------------------
 # Style helpers
 # ---------------------------------------------------------------------------
 
-def _styles_for_theme(theme_key: str, locked: list[str] | None,
-                      recent: list[str]) -> list[dict]:
+
+def _styles_for_theme(
+    theme_key: str, locked: list[str] | None, recent: list[str]
+) -> list[dict]:
     all_styles = cfg.styles()
     result = []
     for name, s in all_styles.items():
@@ -38,12 +57,15 @@ def _styles_for_theme(theme_key: str, locked: list[str] | None,
             continue
         result.append({"name": name, **s})
     weight_order = {"high": 3, "medium": 2, "low": 1}
-    result.sort(key=lambda s: weight_order.get(s.get("weight", "medium"), 2), reverse=True)
+    result.sort(
+        key=lambda s: weight_order.get(s.get("weight", "medium"), 2), reverse=True
+    )
     return result
 
 
-def _picker_prompt(quote_text: str, theme_key: str,
-                   styles: list[dict], recent: list[str]) -> str:
+def _picker_prompt(
+    quote_text: str, theme_key: str, styles: list[dict], recent: list[str]
+) -> str:
     lines = ["Available styles (pick the ONE that fits this quote best):"]
     for s in styles:
         avoid = " [used recently — avoid if possible]" if s["name"] in recent else ""
@@ -117,6 +139,7 @@ _THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
 # Graph nodes
 # ---------------------------------------------------------------------------
 
+
 def pick_style(state: PipelineState) -> PipelineState:
     theme_key = state["theme_key"]
     theme = state["theme"]
@@ -133,6 +156,7 @@ def pick_style(state: PipelineState) -> PipelineState:
         m = re.search(r"\{.*?\}", raw, re.DOTALL)
         if m:
             import json
+
             style_name = json.loads(m.group()).get("style", "")
             if style_name and style_name in cfg.styles():
                 logger.info(f"Style: {style_name}")
@@ -140,7 +164,9 @@ def pick_style(state: PipelineState) -> PipelineState:
     except Exception as exc:
         logger.warning(f"Style picker failed ({exc}) — using top style")
 
-    fallback = next((s["name"] for s in styles if s["name"] not in recent), styles[0]["name"])
+    fallback = next(
+        (s["name"] for s in styles if s["name"] not in recent), styles[0]["name"]
+    )
     return {**state, "_chosen_style": fallback}
 
 
@@ -167,18 +193,30 @@ def generate_brief(state: PipelineState) -> PipelineState:
             "top_left": "top-left corner",
             "top_right": "top-right corner",
             "bottom_left": "bottom-left corner",
-            "bottom_right": "bottom-right corner"
+            "bottom_right": "bottom-right corner",
         }.get(r.get("text_zone", "center"), "center")
-        
+
         text_zone_instruction = (
             f"The {zone_desc} of the frame will have {text_color} text overlaid on it. "
             f"That area MUST be naturally clean, shadowed, or low-contrast in the scene itself — "
             f"not bright or busy — so the text is legible."
         )
         subject_constraint = _THEME_SUBJECT_CONSTRAINTS.get(theme_key, "")
-        
+
         import random
-        variation_seeds = ["Prism", "Vortex", "Horizon", "Pulse", "Void", "Echo", "Loom", "Fractal", "Aether", "Obsidian"]
+
+        variation_seeds = [
+            "Prism",
+            "Vortex",
+            "Horizon",
+            "Pulse",
+            "Void",
+            "Echo",
+            "Loom",
+            "Fractal",
+            "Aether",
+            "Obsidian",
+        ]
         atmospheric_twists = [
             "Heavy volumetric fog with light rays.",
             "Subtle chromatic aberration at the edges.",
@@ -194,7 +232,9 @@ def generate_brief(state: PipelineState) -> PipelineState:
             text=text,
             style_name=style_name,
             style_description=style_desc,
-            image_hint_block=f"ADDITIONAL DIRECTION: {image_hint}\n" if image_hint else "",
+            image_hint_block=f"ADDITIONAL DIRECTION: {image_hint}\n"
+            if image_hint
+            else "",
             text_zone_instruction=text_zone_instruction,
             subject_constraint=subject_constraint,
             random_seed=random.choice(variation_seeds),
@@ -203,7 +243,9 @@ def generate_brief(state: PipelineState) -> PipelineState:
         image_prompt = providers.llm.generate(prompt, role="creative_brief").strip()
         if len(image_prompt.split()) >= 20:
             brief = _build_brief(image_prompt, style_name, style_data, text, quote)
-            logger.info(f"Brief: style={style_name} layout={brief.layout} font={brief.font}")
+            logger.info(
+                f"Brief: style={style_name} layout={brief.layout} font={brief.font}"
+            )
             return {**state, "brief": brief}
     except Exception as exc:
         logger.warning(f"Brief generation failed ({exc}) — using style default")
@@ -216,8 +258,10 @@ def generate_brief(state: PipelineState) -> PipelineState:
 # Brief construction
 # ---------------------------------------------------------------------------
 
-def _build_brief(image_prompt: str, style_name: str, style_data: dict,
-                 text: str, quote) -> DesignBrief:
+
+def _build_brief(
+    image_prompt: str, style_name: str, style_data: dict, text: str, quote
+) -> DesignBrief:
     r = style_data.get("rendering", {})
     ov = r.get("overlay", {})
 
@@ -229,9 +273,13 @@ def _build_brief(image_prompt: str, style_name: str, style_data: dict,
         font_size = 48
     else:
         # Ultra-elegant aesthetic: smaller text, maximum negative space
-        font_size = (60 if layout == "big_center" and word_count <= 7
-                     else 52 if layout == "big_center"
-                     else max(42, 56 - max(0, word_count - 12)))
+        font_size = (
+            60
+            if layout == "big_center" and word_count <= 7
+            else 52
+            if layout == "big_center"
+            else max(42, 56 - max(0, word_count - 12))
+        )
 
     font = r.get("font", "playfair")
 
@@ -270,17 +318,22 @@ def _default_brief(style_name: str, style_data: dict, text: str, quote) -> Desig
     r = style_data.get("rendering", {})
     ov = r.get("overlay", {})
     overlay_type = ov.get("type", "gradient_bottom")
-    zone = "bottom third" if overlay_type == "gradient_bottom" else "top third" if overlay_type == "gradient_top" else "center band"
-    text_color = r.get("text_color", "#FFFFFF")
-    image_prompt = (
-        f"{first_line} The {zone} must be naturally dark and uncluttered for {text_color} text overlay. 9:16 portrait."
+    zone = (
+        "bottom third"
+        if overlay_type == "gradient_bottom"
+        else "top third"
+        if overlay_type == "gradient_top"
+        else "center band"
     )
+    text_color = r.get("text_color", "#FFFFFF")
+    image_prompt = f"{first_line} The {zone} must be naturally dark and uncluttered for {text_color} text overlay. 9:16 portrait."
     return _build_brief(image_prompt, style_name, style_data, text, quote)
 
 
 # ---------------------------------------------------------------------------
 # Build graph
 # ---------------------------------------------------------------------------
+
 
 def build() -> any:
     g = StateGraph(PipelineState)

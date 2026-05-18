@@ -12,14 +12,12 @@ styles:
       Vibe: Quiet luxury, intentional, and calm.
     rendering:
       font: poppins
-      text_color: "#FFFFFF"
-      highlight_color: "#FFFFFF"
-      author_color: "#F0F0F0"
-      overlay: {type: gradient_bottom, opacity: 180, color: "#000000", blur: 0}
+      text_color: "#FAF9F6"
+      author_color: "#EBEBEB"
+      overlay: {type: glass, opacity: 140, color: "#000000", blur: 20}
       text_zone: center_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: underline
       voice_gender: female
 
   timeless_minimalist_serif:
@@ -33,14 +31,12 @@ styles:
       Vibe: Intellectual, timeless, and sophisticated.
     rendering:
       font: spectral
-      text_color: "#FFFFFF"
-      highlight_color: "#FFFFFF"
+      text_color: "#FAF9F6"
       author_color: "#E0E0E0"
-      overlay: {type: vignette, opacity: 180, color: "#000000", blur: 0}
+      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
       text_zone: center
       layout: big_center
       decoration: none
-      highlight_style: underline
       voice_gender: male
 
   minimalist_doodle_wisdom:
@@ -54,15 +50,13 @@ styles:
       Background: Simple, solid-color or very clean background area with VAST negative space at the top for text.
       Vibe: Relatable, modern, and lighthearted but high-end.
     rendering:
-      font: montserrat
+      font: fredoka
       text_color: "#1A1A1A"
-      highlight_color: "#1A1A1A"
       author_color: "#4A4A4A"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: underline
       voice_gender: female
 
   elegant_illustrated_portrait:
@@ -78,13 +72,11 @@ styles:
     rendering:
       font: outfit
       text_color: "#1A1A1A"
-      highlight_color: "#1A1A1A"
       author_color: "#333333"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: asymmetric
       decoration: none
-      highlight_style: underline
       voice_gender: female
 
   indian_ethnic_aesthetic:
@@ -100,13 +92,11 @@ styles:
     rendering:
       font: inter
       text_color: "#1A1A1A"
-      highlight_color: "#1A1A1A"
       author_color: "#333333"
       overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
       text_zone: top_minimalist
       layout: big_center
       decoration: none
-      highlight_style: underline
       voice_gender: female
 
   avant_garde_lifestyle:
@@ -121,14 +111,12 @@ styles:
       Vibe: Bold, structural, and ultra-modern.
     rendering:
       font: inter
-      text_color: "#FFFFFF"
-      highlight_color: "#FFFFFF"
-      author_color: "#F0F0F0"
-      overlay: {type: gradient_top, opacity: 180, color: "#000000", blur: 0}
+      text_color: "#FAF9F6"
+      author_color: "#EBEBEB"
+      overlay: {type: gradient_top, opacity: 140, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: big_center
       decoration: none
-      highlight_style: underline
       voice_gender: female
 
   quiet_luxury_minimalist:
@@ -144,13 +132,11 @@ styles:
     rendering:
       font: spectral
       text_color: "#1A1A1A"
-      highlight_color: "#1A1A1A"
       author_color: "#4A4A4A"
       overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
       text_zone: top_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: underline
       voice_gender: female
 
   # ---------------------------------------------------------------------------
@@ -166,14 +152,12 @@ styles:
       Clean, sharp, and modern. Designed to make the black text pop. Vibe is aggressive and powerful.
     rendering:
       font: raleway
-      text_color: "#000000"
-      highlight_color: "#000000"
+      text_color: "#1A1A1A"
       author_color: "#333333"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: underline
       voice_gender: male
 
   artistic_cinematic_minimal:
@@ -184,15 +168,13 @@ styles:
       A breathtaking, moody cinematic landscape (misty forests, rainy streets, vast oceans). Shot on 35mm film.
       High-end cinematography feel with deep shadows and rim lighting. The text should feel like a small, deep thought in a big world.
     rendering:
-      font: spectral
-      text_color: "#FFFFFF"
-      highlight_color: "#FFFFFF"
+      font: cormorant
+      text_color: "#FAF9F6"
       author_color: "#CCCCCC"
-      overlay: {type: vignette, opacity: 180, color: "#000000", blur: 0}
+      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: underline
       voice_gender: male
 
   artistic_spiritual_mixed:
@@ -205,13 +187,11 @@ styles:
     rendering:
       font: outfit
       text_color: "#1A1A1A"
-      highlight_color: "#1A1A1A"
       author_color: "#4A4A4A"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
       decoration: quote_mark
-      highlight_style: underline
       voice_gender: female
 
   # ---------------------------------------------------------------------------
@@ -229,14 +209,12 @@ styles:
       Vibe: Transcendent, mysterious, and awe-inspiring.
     rendering:
       font: montserrat
-      text_color: "#FFFFFF"
-      highlight_color: "#FFFFFF"
+      text_color: "#FAF9F6"
       author_color: "#CCCCCC"
-      overlay: {type: gradient_bottom, opacity: 180, color: "#000000", blur: 0}
+      overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: underline
       voice_gender: male
 
   metaphorical_abstract_installation:
@@ -250,14 +228,12 @@ styles:
       Vibe: Intellectual, metaphorical, and high-production value.
     rendering:
       font: cormorant
-      text_color: "#FFFFFF"
-      highlight_color: "#FFFFFF"
+      text_color: "#FAF9F6"
       author_color: "#F0F0F0"
-      overlay: {type: vignette, opacity: 180, color: "#000000", blur: 0}
+      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
       text_zone: bottom_left
       layout: asymmetric
       decoration: rule
-      highlight_style: underline
       voice_gender: male
 
   dream_logic_architectural:
@@ -271,14 +247,12 @@ styles:
       Vibe: Bold, structural, and dream-like.
     rendering:
       font: oswald
-      text_color: "#FFFFFF"
-      highlight_color: "#FFFFFF"
+      text_color: "#FAF9F6"
       author_color: "#F0F0F0"
-      overlay: {type: gradient_top, opacity: 180, color: "#000000", blur: 0}
+      overlay: {type: gradient_top, opacity: 140, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: underline
       voice_gender: female
 
   editorial_black_white_portrait:
@@ -294,14 +268,12 @@ styles:
       Composition: Focus on the subject's posture and movement (e.g., walking across a busy road or standing against a brutalist wall).
     rendering:
       font: raleway
-      text_color: "#FFFFFF"
-      highlight_color: "#FFFFFF"
+      text_color: "#FAF9F6"
       author_color: "#CCCCCC"
-      overlay: {type: vignette, opacity: 200, color: "#000000", blur: 0}
+      overlay: {type: vignette, opacity: 160, color: "#000000", blur: 0}
       text_zone: bottom_minimalist
       layout: minimalist
       decoration: rule
-      highlight_style: underline
       voice_gender: female
 
   street_style_editorial_bw:
@@ -317,12 +289,10 @@ styles:
       Composition: Wide angle 35mm shot showing the environment and the subject's full outfit.
     rendering:
       font: caveat
-      text_color: "#FFFFFF"
-      highlight_color: "#FFFFFF"
+      text_color: "#FAF9F6"
       author_color: "#E0E0E0"
-      overlay: {type: gradient_bottom, opacity: 180, color: "#000000", blur: 0}
+      overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: minimalist
       decoration: none
-      highlight_style: underline
       voice_gender: female

@@ -4,6 +4,7 @@ Media agent — image generation, composition, judge, and retry loop.
 Graph:
   generate_image → compose → judge → [accept | retry (max N) | use_best]
 """
+
 from __future__ import annotations
 
 import json
@@ -34,6 +35,7 @@ _THEME_PROMPT_PREFIXES: dict[str, str] = {
 # Nodes
 # ---------------------------------------------------------------------------
 
+
 def generate_image(state: PipelineState) -> PipelineState:
     brief = state.get("brief")
     theme_key = state["theme_key"]
@@ -43,35 +45,43 @@ def generate_image(state: PipelineState) -> PipelineState:
 
     if state.get("offline"):
         from wisdom.providers.image import GradientFallback
+
         logger.info("  Offline mode: using gradient fallback image")
         image_bytes = GradientFallback().generate("offline fallback")
         provider_name = "gradient"
     else:
-        base_prompt = brief.image_prompt if brief else f"Beautiful inspirational {theme_key} image, 9:16."
+        base_prompt = (
+            brief.image_prompt
+            if brief
+            else f"Beautiful inspirational {theme_key} image, 9:16."
+        )
         prefix = _THEME_PROMPT_PREFIXES.get(theme_key, "")
-        if prefix and not base_prompt.lower().startswith(prefix.lower().strip(" —").strip()):
+        if prefix and not base_prompt.lower().startswith(
+            prefix.lower().strip(" —").strip()
+        ):
             base_prompt = f"{prefix}{base_prompt}"
         suffix = _RETRY_SUFFIXES[min(attempt - 1, len(_RETRY_SUFFIXES) - 1)]
         prompt = f"{base_prompt} {suffix}".strip() if suffix else base_prompt
-        
+
         exclude = state.get("failed_providers", [])
         image_bytes, provider_name = providers.image.generate(prompt, exclude=exclude)
-        
+
     return {
-        **state, 
-        "image_bytes": image_bytes, 
-        "design_attempt": attempt, 
-        "current_provider": provider_name
+        **state,
+        "image_bytes": image_bytes,
+        "design_attempt": attempt,
+        "current_provider": provider_name,
     }
 
 
 def compose(state: PipelineState) -> PipelineState:
     from wisdom.composers.card import compose_image
+
     image_bytes = state.get("image_bytes", b"")
     quote = state.get("quote")
     brief = state.get("brief")
     composed = compose_image(image_bytes, quote, brief)
-    logger.info(f"  Composed ({len(composed)//1024} KB)")
+    logger.info(f"  Composed ({len(composed) // 1024} KB)")
     return {**state, "composed_image": composed}
 
 
@@ -105,7 +115,7 @@ def judge(state: PipelineState) -> PipelineState:
         "best_score": score,
         "_accepted": accepted,
         "_hard_gate": hard_gate,
-        "best_state": best
+        "best_state": best,
     }
 
     if not accepted:
@@ -113,7 +123,9 @@ def judge(state: PipelineState) -> PipelineState:
         current = state.get("current_provider")
         if current and current not in failed and current != "gradient":
             failed.append(current)
-            logger.info(f"  Provider '{current}' blacklisted for this run due to poor quality/gibberish")
+            logger.info(
+                f"  Provider '{current}' blacklisted for this run due to poor quality/gibberish"
+            )
         new_state["failed_providers"] = failed
 
     return new_state
@@ -126,6 +138,7 @@ def use_best(state: PipelineState) -> PipelineState:
         logger.warning("All attempts failed hard gates — using gradient fallback")
         from wisdom.providers.image import GradientFallback
         from wisdom.composers.card import compose_image
+
         raw = GradientFallback().generate("")
         composed = compose_image(raw, state.get("quote"), state.get("brief"))
     else:
@@ -136,6 +149,7 @@ def use_best(state: PipelineState) -> PipelineState:
 # ---------------------------------------------------------------------------
 # Routing
 # ---------------------------------------------------------------------------
+
 
 def _route_judge(state: PipelineState) -> Literal["accept", "retry", "use_best"]:
     if state.get("_accepted"):
@@ -202,6 +216,7 @@ def _judge_image(image_bytes: bytes, quote) -> tuple[int, bool, bool, str]:
 # Build graph
 # ---------------------------------------------------------------------------
 
+
 def build() -> any:
     g = StateGraph(PipelineState)
     g.add_node("generate_image", generate_image)
@@ -213,11 +228,15 @@ def build() -> any:
     g.set_entry_point("generate_image")
     g.add_edge("generate_image", "compose")
     g.add_edge("compose", "judge")
-    g.add_conditional_edges("judge", _route_judge, {
-        "accept": "accept",
-        "retry": "generate_image",
-        "use_best": "use_best",
-    })
+    g.add_conditional_edges(
+        "judge",
+        _route_judge,
+        {
+            "accept": "accept",
+            "retry": "generate_image",
+            "use_best": "use_best",
+        },
+    )
     g.add_edge("accept", END)
     g.add_edge("use_best", END)
     return g.compile()

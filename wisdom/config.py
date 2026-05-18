@@ -2,6 +2,7 @@
 Loads and validates all YAML config files.
 Returns typed dataclass instances — no raw dicts escape this module.
 """
+
 from __future__ import annotations
 
 import os
@@ -11,7 +12,10 @@ from pathlib import Path
 import yaml
 
 from wisdom.schemas import (
-    LLMRoleConfig, ProviderConfig, ThemeConfig, YouTubeConfig,
+    LLMRoleConfig,
+    ProviderConfig,
+    ThemeConfig,
+    YouTubeConfig,
 )
 
 _CONFIG_DIR = Path(__file__).parent.parent / "config"
@@ -26,6 +30,7 @@ def _load(filename: str) -> dict:
 # ---------------------------------------------------------------------------
 # App config
 # ---------------------------------------------------------------------------
+
 
 @lru_cache
 def app() -> dict:
@@ -45,6 +50,7 @@ def reel_cfg() -> dict:
 # ---------------------------------------------------------------------------
 # Theme config
 # ---------------------------------------------------------------------------
+
 
 @lru_cache
 def themes() -> dict[str, ThemeConfig]:
@@ -82,6 +88,7 @@ def enabled_themes() -> dict[str, ThemeConfig]:
 # LLM config
 # ---------------------------------------------------------------------------
 
+
 @lru_cache
 def _llm_raw() -> dict:
     return _load("llm.yml")
@@ -103,12 +110,12 @@ def llm_role(role: str) -> LLMRoleConfig:
     raw = _llm_raw()["roles"].get(role)
     if not raw:
         raise ValueError(f"Unknown LLM role: {role!r}")
-        
+
     providers = raw["providers"]
     env_override = os.environ.get("LLM_PROVIDER_ORDER")
     if env_override:
         providers = [p.strip() for p in env_override.split(",")]
-        
+
     return LLMRoleConfig(
         providers=providers,
         temperature=raw.get("temperature", 0.85),
@@ -120,6 +127,7 @@ def llm_role(role: str) -> LLMRoleConfig:
 # ---------------------------------------------------------------------------
 # Image config
 # ---------------------------------------------------------------------------
+
 
 @lru_cache
 def _image_raw() -> dict:
@@ -149,6 +157,7 @@ def image_fallback_chain() -> list[str]:
 # ---------------------------------------------------------------------------
 # Topics / Styles (passed through as raw dicts — agents consume them directly)
 # ---------------------------------------------------------------------------
+
 
 @lru_cache
 def topics() -> dict:

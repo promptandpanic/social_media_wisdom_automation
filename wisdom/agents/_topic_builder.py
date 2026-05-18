@@ -1,4 +1,5 @@
 """Builds the topic block injected into quote prompts. All direction lives in topics.yml."""
+
 from __future__ import annotations
 
 import random
@@ -24,7 +25,7 @@ def build_topic_block(theme_key: str) -> tuple[str, str]:
             f"Context: {pick['note']}\n"
             f"Choose a lesser-known gem — not their most-circulated line."
         )
-        # We removed the hardcoded dark academia marble statue hint 
+        # We removed the hardcoded dark academia marble statue hint
         # so it uses the dynamic, vibrant image style prompt instead!
         return block, ""
 

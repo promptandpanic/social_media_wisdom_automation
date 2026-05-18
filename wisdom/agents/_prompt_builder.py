@@ -1,7 +1,10 @@
 """Quote generation prompts. Two modes: real_author and internet_found."""
+
 from __future__ import annotations
 
-_AUDIENCE = "global inspirational quotes account with a large Indian following, ages 18–35"
+_AUDIENCE = (
+    "global inspirational quotes account with a large Indian following, ages 18–35"
+)
 
 _BANNED = """\
 Hard bans — reject any quote with:
@@ -14,13 +17,13 @@ Hard bans — reject any quote with:
 """
 
 _CLICHES: dict[str, str] = {
-    "morning":     '"believe in yourself", "rise and shine", "hustle hard", "warrior"',
-    "wisdom":      '"everything happens for a reason", "be the change", "your journey"',
-    "love":        '"soulmates", "love conquers all", "you complete me", "red flags"',
+    "morning": '"believe in yourself", "rise and shine", "hustle hard", "warrior"',
+    "wisdom": '"everything happens for a reason", "be the change", "your journey"',
+    "love": '"soulmates", "love conquers all", "you complete me", "red flags"',
     "mindfulness": '"be present", "let it go", "inner peace", "heal yourself"',
-    "goodnight":   '"count your blessings", "tomorrow is a new day", "sweet dreams"',
-    "latenight":   '"time heals", "let go", "you deserve better", "healing is not linear"',
-    "womenpower":  '"boss babe", "girl boss", "she believed she could", "know your worth"',
+    "goodnight": '"count your blessings", "tomorrow is a new day", "sweet dreams"',
+    "latenight": '"time heals", "let go", "you deserve better", "healing is not linear"',
+    "womenpower": '"boss babe", "girl boss", "she believed she could", "know your worth"',
 }
 
 
@@ -31,8 +34,13 @@ def _avoid_quotes(recent_quotes: list[str]) -> str:
     return f"\nDO NOT use any of these (already posted recently):\n{lines}\n"
 
 
-def build_quote_prompt(theme_key: str, mode: str, topic_block: str,
-                       max_words: int, recent_quotes: list[str]) -> str:
+def build_quote_prompt(
+    theme_key: str,
+    mode: str,
+    topic_block: str,
+    max_words: int,
+    recent_quotes: list[str],
+) -> str:
     cliches = _CLICHES.get(theme_key, "")
     avoid = _avoid_quotes(recent_quotes)
     no_cliches = f"Avoid: {cliches}" if cliches else ""
@@ -56,13 +64,11 @@ Rules:
 - Must be a visceral, raw truth about modern life, ambition, or relationships
 - It should make the reader instantly think "This is exactly how I feel"
 
-Highlight: Select the most impactful 2-4 words from the quote (the punchline) to be drawn in a different color. Do NOT include punctuation. It MUST be an exact substring of the quote.
-
 Uniqueness score (1–10): how fresh and non-clichéd is this exact phrasing?
   10 = almost nobody has seen this line  |  1 = posted on every motivational page
 {avoid}
 Return ONLY a JSON array with 1 item:
-[{{"quote":"exact text","author":"Full Name","highlight":"exact 2-4 words","uniqueness":7}}]
+[{{"quote":"exact text","author":"Full Name","uniqueness":7}}]
 Replace 7 with your actual score."""
 
     else:  # internet_found
@@ -84,11 +90,9 @@ Rules:
 - It should make the reader instantly think "This is exactly how I feel"
 - Author: real name if known, "Unknown" otherwise
 
-Highlight: Select the most impactful 2-4 words from the quote (the punchline) to be drawn in a different color. Do NOT include punctuation. It MUST be an exact substring of the quote.
-
 Uniqueness score (1–10): how fresh and non-clichéd is this exact phrasing?
   10 = almost nobody has seen this line  |  1 = posted on every motivational page
 {avoid}
 Return ONLY a JSON array with 1 item:
-[{{"quote":"exact text","author":"Name or Unknown","highlight":"exact 2-4 words","uniqueness":7}}]
+[{{"quote":"exact text","author":"Name or Unknown","uniqueness":7}}]
 Replace 7 with your actual score."""

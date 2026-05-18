@@ -1,4 +1,5 @@
 """Instagram Graph API platform."""
+
 from __future__ import annotations
 
 import logging
@@ -46,7 +47,9 @@ class InstagramPlatform(BasePlatform):
         tags = " ".join(meta.hashtags)
         return f"{meta.caption}\n\n{tags}" if tags else meta.caption
 
-    def post_video(self, video: bytes, thumbnail: bytes, meta: PostMeta) -> PlatformResult:
+    def post_video(
+        self, video: bytes, thumbnail: bytes, meta: PostMeta
+    ) -> PlatformResult:
         uploader = GitHubUploader()
         try:
             video_url = uploader.upload(video, filename="reel.mp4")
@@ -61,9 +64,14 @@ class InstagramPlatform(BasePlatform):
             # Step 1: create container
             r = requests.post(
                 f"{_GRAPH}/{biz}/media",
-                data={"media_type": "REELS", "video_url": video_url,
-                      "caption": caption, "thumb_offset": 1000,
-                      "cover_url": thumb_url, "access_token": token},
+                data={
+                    "media_type": "REELS",
+                    "video_url": video_url,
+                    "caption": caption,
+                    "thumb_offset": 1000,
+                    "cover_url": thumb_url,
+                    "access_token": token,
+                },
                 timeout=30,
             )
             r.raise_for_status()
@@ -81,8 +89,9 @@ class InstagramPlatform(BasePlatform):
                 if status == "FINISHED":
                     break
                 if status == "ERROR":
-                    return PlatformResult("instagram", "failed",
-                                         error=f"Container error: {s}")
+                    return PlatformResult(
+                        "instagram", "failed", error=f"Container error: {s}"
+                    )
 
             # Step 3: publish
             pub = requests.post(
@@ -117,8 +126,11 @@ class InstagramPlatform(BasePlatform):
 
             r = requests.post(
                 f"{_GRAPH}/{biz}/media",
-                data={"image_url": image_url, "caption": caption,
-                      "access_token": token},
+                data={
+                    "image_url": image_url,
+                    "caption": caption,
+                    "access_token": token,
+                },
                 timeout=30,
             )
             r.raise_for_status()
@@ -136,7 +148,9 @@ class InstagramPlatform(BasePlatform):
                 if status == "FINISHED":
                     break
                 if status == "ERROR":
-                    return PlatformResult("instagram", "failed", error=f"Image error: {s}")
+                    return PlatformResult(
+                        "instagram", "failed", error=f"Image error: {s}"
+                    )
 
             pub = requests.post(
                 f"{_GRAPH}/{biz}/media_publish",

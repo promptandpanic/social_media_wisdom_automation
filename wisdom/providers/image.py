@@ -4,6 +4,7 @@ Image generation provider registry.
 Fallback chain is declared in config/image.yml.
 Adding a new provider = implement BaseImageProvider, add entry to image.yml.
 """
+
 from __future__ import annotations
 
 import importlib
@@ -42,12 +43,12 @@ _NEGATIVE_PROMPT = (
 # Base interface
 # ---------------------------------------------------------------------------
 
+
 class BaseImageProvider(ABC):
     name: str = "base"
 
     @abstractmethod
-    def generate(self, prompt: str) -> bytes:
-        ...
+    def generate(self, prompt: str) -> bytes: ...
 
     def available(self) -> bool:
         return True
@@ -57,10 +58,13 @@ class BaseImageProvider(ABC):
 # Concrete providers
 # ---------------------------------------------------------------------------
 
+
 class HuggingFaceProvider(BaseImageProvider):
     name = "huggingface"
 
-    def __init__(self, model: str = "black-forest-labs/FLUX.1-schnell", timeout: int = 60, **_):
+    def __init__(
+        self, model: str = "black-forest-labs/FLUX.1-schnell", timeout: int = 60, **_
+    ):
         self.model = model
         self.timeout = timeout
 
@@ -72,18 +76,19 @@ class HuggingFaceProvider(BaseImageProvider):
         resp = requests.post(
             url,
             headers={"Authorization": f"Bearer {os.environ['HF_API_KEY']}"},
-            json={"inputs": prompt + _SAFETY_SUFFIX,
-                  "parameters": {"width": _W, "height": _H}},
+            json={
+                "inputs": prompt + _SAFETY_SUFFIX,
+                "parameters": {"width": _W, "height": _H},
+            },
             timeout=self.timeout,
         )
         resp.raise_for_status()
         return _resize(resp.content)
 
 
-
-
 class LeonardoFluxProProvider(BaseImageProvider):
     """Leonardo FLUX.2 Pro via v2 API — generates 810x1440 (9:16), resized to 1080x1920."""
+
     name = "leonardo_flux_pro"
 
     def __init__(self, timeout: int = 120, **_):
@@ -94,6 +99,7 @@ class LeonardoFluxProProvider(BaseImageProvider):
 
     def generate(self, prompt: str) -> bytes:
         import time
+
         key = os.environ["LEONARDO_API_KEY"]
         headers = {"Authorization": f"Bearer {key}", "Content-Type": "application/json"}
 
@@ -121,7 +127,8 @@ class LeonardoFluxProProvider(BaseImageProvider):
             time.sleep(4)
             poll = requests.get(
                 f"https://cloud.leonardo.ai/api/rest/v1/generations/{gen_id}",
-                headers=headers, timeout=15,
+                headers=headers,
+                timeout=15,
             )
             poll.raise_for_status()
             imgs = poll.json().get("generations_by_pk", {}).get("generated_images", [])
@@ -133,6 +140,7 @@ class LeonardoFluxProProvider(BaseImageProvider):
 
 class GeminiImagenProvider(BaseImageProvider):
     """Imagen 3 via Google Gen AI SDK."""
+
     name = "gemini_imagen"
 
     def __init__(self, model: str = "imagen-3.0-generate-002", **_):
@@ -160,6 +168,7 @@ class GeminiImagenProvider(BaseImageProvider):
 
 class GeminiFlashProvider(BaseImageProvider):
     """Gemini native image generation (response modalities)."""
+
     name = "gemini_flash"
 
     def __init__(self, model: str = "gemini-2.5-flash-image", **_):
@@ -228,6 +237,7 @@ class GradientFallback(BaseImageProvider):
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _resize(data: bytes) -> bytes:
     img = Image.open(io.BytesIO(data)).convert("RGB")
     scale = max(_W / img.width, _H / img.height)
@@ -243,6 +253,7 @@ def _resize(data: bytes) -> bytes:
 # ---------------------------------------------------------------------------
 # Registry
 # ---------------------------------------------------------------------------
+
 
 def _import_class(dotted: str) -> type:
     module, cls = dotted.rsplit(".", 1)
@@ -290,7 +301,7 @@ def generate(prompt: str, exclude: list[str] | None = None) -> tuple[bytes, str]
         try:
             logger.info(f"Image: trying {name}")
             result = provider.generate(prompt)
-            logger.info(f"Image: ✓ {name} ({len(result)//1024} KB)")
+            logger.info(f"Image: ✓ {name} ({len(result) // 1024} KB)")
             return result, name
         except Exception as exc:
             logger.warning(f"Image: {name} failed: {exc}")

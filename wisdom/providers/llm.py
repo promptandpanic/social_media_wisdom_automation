@@ -8,6 +8,7 @@ See https://docs.litellm.ai/docs/providers for all supported models.
 Text generation:
   generate(prompt, role)  → runs the role's fallback chain, raises RuntimeError if all fail
 """
+
 from __future__ import annotations
 
 import base64
@@ -88,7 +89,9 @@ def judge_image(image_bytes: bytes, prompt: str, role: str) -> str:
                             {"type": "text", "text": prompt},
                             {
                                 "type": "image_url",
-                                "image_url": {"url": f"data:image/jpeg;base64,{b64_image}"},
+                                "image_url": {
+                                    "url": f"data:image/jpeg;base64,{b64_image}"
+                                },
                             },
                         ],
                     }

@@ -10,6 +10,7 @@ Commands:
   youtube-auth  one-time OAuth2 flow to get refresh token
   themes      list enabled themes
 """
+
 from __future__ import annotations
 
 import logging
@@ -42,6 +43,7 @@ def cli():
 def run(theme: str, dry_run: bool, generate_only: bool, offline: bool):
     """Full pipeline for THEME (generate → design → media → post)."""
     from wisdom.agents.pipeline import run as _run
+
     state = _run(theme, dry_run=dry_run, generate_only=generate_only, offline=offline)
     results = state.get("platform_results", [])
     if not results and not dry_run and not generate_only:
@@ -55,6 +57,7 @@ def run(theme: str, dry_run: bool, generate_only: bool, offline: bool):
 def generate_cmd(theme: str, offline: bool):
     """Generate content for THEME and store as pending (don't post)."""
     from wisdom.agents.pipeline import run as _run
+
     _run(theme, generate_only=True, offline=offline)
     click.echo("✓ Generated and stored. Run 'task post' to publish.")
 
@@ -101,8 +104,9 @@ def post(theme: str, pending_id: str | None):
 def dry_run_cmd(theme: str, offline: bool):
     """Generate for THEME, save locally to output/, never post."""
     # Use the full fallback chain unless overridden by the shell environment
-    
+
     from wisdom.agents.pipeline import run as _run
+
     _run(theme, dry_run=True, offline=offline)
 
 
@@ -110,19 +114,22 @@ def dry_run_cmd(theme: str, offline: bool):
 def validate():
     """Parse all YAML config files and report any errors."""
     import wisdom.config as cfg
+
     errors = []
     checks = [
-        ("app",     lambda: cfg.app()),
-        ("themes",  lambda: cfg.themes()),
-        ("llm",     lambda: cfg.llm_providers()),
-        ("image",   lambda: cfg.image_providers()),
-        ("topics",  lambda: cfg.topics()),
-        ("styles",  lambda: cfg.styles()),
+        ("app", lambda: cfg.app()),
+        ("themes", lambda: cfg.themes()),
+        ("llm", lambda: cfg.llm_providers()),
+        ("image", lambda: cfg.image_providers()),
+        ("topics", lambda: cfg.topics()),
+        ("styles", lambda: cfg.styles()),
     ]
     for name, fn in checks:
         try:
             result = fn()
-            click.echo(f"  ✓ {name}: {len(result) if hasattr(result, '__len__') else 'ok'}")
+            click.echo(
+                f"  ✓ {name}: {len(result) if hasattr(result, '__len__') else 'ok'}"
+            )
         except Exception as exc:
             click.echo(f"  ✗ {name}: {exc}", err=True)
             errors.append(name)
@@ -137,6 +144,7 @@ def validate():
 def youtube_auth():
     """Run one-time OAuth2 flow to obtain a YouTube refresh token."""
     from wisdom.platforms.youtube import run_oauth_flow
+
     token = run_oauth_flow()
     click.echo(f"\nYOUTUBE_REFRESH_TOKEN={token}")
     click.echo("Add this to your .env / GitHub Secrets.")
@@ -146,6 +154,7 @@ def youtube_auth():
 def themes():
     """List all enabled themes and their schedule."""
     import wisdom.config as cfg
+
     for key, t in cfg.enabled_themes().items():
         click.echo(f"  {key:15s}  {t.format:5s}  platforms={t.platforms}")
 
@@ -154,6 +163,7 @@ def themes():
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _read_optional(path: str) -> bytes | None:
     p = Path(path)
     return p.read_bytes() if p.exists() else None
@@ -161,6 +171,7 @@ def _read_optional(path: str) -> bytes | None:
 
 def _meta_from_record(record: dict, theme_cfg) -> object:
     from wisdom.schemas import PostMeta
+
     return PostMeta(
         caption=record.get("caption", ""),
         title="",

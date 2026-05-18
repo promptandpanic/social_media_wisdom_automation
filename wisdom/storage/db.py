@@ -7,6 +7,7 @@ at load() and uploaded back at save(). The file is never committed to git.
 
 Locally: data/wisdom.db is gitignored. Each local run builds its own history.
 """
+
 from __future__ import annotations
 
 import json
@@ -32,6 +33,7 @@ _DB_ASSET_NAME = "wisdom.db"
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -42,7 +44,10 @@ def _is_ci() -> bool:
 
 def _gh_headers() -> dict:
     token = os.environ.get("GITPROVIDER_TOKEN") or os.environ.get("GITHUB_TOKEN", "")
-    return {"Authorization": f"token {token}", "Accept": "application/vnd.github.v3+json"}
+    return {
+        "Authorization": f"token {token}",
+        "Accept": "application/vnd.github.v3+json",
+    }
 
 
 def _repo() -> str:
@@ -55,13 +60,18 @@ def _release_id() -> int | None:
         return None
     r = requests.get(
         f"{_API}/repos/{repo}/releases/tags/{_DB_RELEASE_TAG}",
-        headers=_gh_headers(), timeout=15,
+        headers=_gh_headers(),
+        timeout=15,
     )
     return r.json()["id"] if r.status_code == 200 else None
 
 
 def _download_db(path: Path) -> None:
-    if not _is_ci() or not _repo() or not (os.environ.get("GITPROVIDER_TOKEN") or os.environ.get("GITHUB_TOKEN")):
+    if (
+        not _is_ci()
+        or not _repo()
+        or not (os.environ.get("GITPROVIDER_TOKEN") or os.environ.get("GITHUB_TOKEN"))
+    ):
         return
 
     release_id = _release_id()
@@ -71,7 +81,8 @@ def _download_db(path: Path) -> None:
 
     r = requests.get(
         f"{_API}/repos/{_repo()}/releases/{release_id}/assets",
-        headers=_gh_headers(), timeout=15,
+        headers=_gh_headers(),
+        timeout=15,
     )
     if r.status_code != 200:
         return
@@ -93,7 +104,12 @@ def _download_db(path: Path) -> None:
 
 
 def _upload_db(path: Path) -> None:
-    if not _is_ci() or not _repo() or not os.environ.get("GITHUB_TOKEN") or not path.exists():
+    if (
+        not _is_ci()
+        or not _repo()
+        or not os.environ.get("GITHUB_TOKEN")
+        or not path.exists()
+    ):
         return
 
     release_id = _release_id()
@@ -104,14 +120,16 @@ def _upload_db(path: Path) -> None:
     # Delete existing asset before uploading the new one
     r = requests.get(
         f"{_API}/repos/{_repo()}/releases/{release_id}/assets",
-        headers=_gh_headers(), timeout=15,
+        headers=_gh_headers(),
+        timeout=15,
     )
     if r.status_code == 200:
         for asset in r.json():
             if asset["name"] == _DB_ASSET_NAME:
                 requests.delete(
                     f"{_API}/repos/{_repo()}/releases/assets/{asset['id']}",
-                    headers=_gh_headers(), timeout=15,
+                    headers=_gh_headers(),
+                    timeout=15,
                 )
 
     data = path.read_bytes()
@@ -119,7 +137,8 @@ def _upload_db(path: Path) -> None:
         f"https://uploads.github.com/repos/{_repo()}/releases/{release_id}/assets"
         f"?name={_DB_ASSET_NAME}",
         headers={**_gh_headers(), "Content-Type": "application/octet-stream"},
-        data=data, timeout=60,
+        data=data,
+        timeout=60,
     )
     if r.status_code in (200, 201):
         logger.info(f"Uploaded DB ({len(data):,} bytes)")
@@ -136,12 +155,15 @@ def _row_to_pending(row: sqlite3.Row) -> dict:
 
 def _all_posted(record: dict) -> bool:
     platforms = record.get("platforms", {})
-    return bool(platforms) and all(p.get("status") == "posted" for p in platforms.values())
+    return bool(platforms) and all(
+        p.get("status") == "posted" for p in platforms.values()
+    )
 
 
 # ---------------------------------------------------------------------------
 # ContentDB
 # ---------------------------------------------------------------------------
+
 
 class ContentDB:
     def __init__(self, path: str | None = None):
@@ -190,16 +212,18 @@ class ContentDB:
 
     def recent_quotes(self, days: int | None = None) -> list[str]:
         """Return quote texts posted OR pending in the last N days (for LLM context)."""
-        days = days if days is not None else cfg.app().get("recent_posts_window_days", 30)
+        days = (
+            days if days is not None else cfg.app().get("recent_posts_window_days", 30)
+        )
         cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
-        
+
         # 1. From posted table
         rows_posted = self._conn.execute(
             "SELECT quote_text FROM posted WHERE posted_at > ? ORDER BY posted_at DESC",
             (cutoff,),
         ).fetchall()
         posted = [r["quote_text"] for r in rows_posted]
-        
+
         # 2. From pending table (LLM should avoid what we've already generated but not yet 'promoted')
         rows_pending = self._conn.execute(
             "SELECT quote FROM pending WHERE created_at > ?", (cutoff,)
@@ -212,7 +236,7 @@ class ContentDB:
                     pending.append(q_data["text"])
             except Exception:
                 continue
-                
+
         return list(set(posted + pending))
 
     def recent_styles(self, max_entries: int = 10) -> list[str]:
@@ -233,7 +257,9 @@ class ContentDB:
 
     # ── Pending posts (generate → post decoupling) ────────────────────────────
 
-    def create_pending(self, theme: str, quote: dict, caption: str, asset_dir: str) -> str:
+    def create_pending(
+        self, theme: str, quote: dict, caption: str, asset_dir: str
+    ) -> str:
         record_id = str(uuid.uuid4())
         self._conn.execute(
             "INSERT INTO pending (id, theme, quote, caption, asset_dir, created_at) "
@@ -260,8 +286,14 @@ class ContentDB:
         ).fetchone()
         return _row_to_pending(row) if row else None
 
-    def update_platform_status(self, record_id: str, platform: str,
-                               status: str, post_id: str = "", error: str = "") -> None:
+    def update_platform_status(
+        self,
+        record_id: str,
+        platform: str,
+        status: str,
+        post_id: str = "",
+        error: str = "",
+    ) -> None:
         row = self._conn.execute(
             "SELECT platforms FROM pending WHERE id = ?", (record_id,)
         ).fetchone()
@@ -287,6 +319,8 @@ class ContentDB:
         if not row:
             return
         record = _row_to_pending(row)
-        self.mark_posted(record["quote"], record["theme"], style=record.get("style", ""))
+        self.mark_posted(
+            record["quote"], record["theme"], style=record.get("style", "")
+        )
         self._conn.execute("DELETE FROM pending WHERE id = ?", (record_id,))
         self._conn.commit()

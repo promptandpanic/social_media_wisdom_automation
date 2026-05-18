@@ -11,6 +11,7 @@ Public API:
   create_reel(image_bytes, quote, brief, audio_file, duration_sec, music_volume)
       → (video_bytes, thumbnail_bytes)  — both can be None on ffmpeg failure
 """
+
 from __future__ import annotations
 
 import logging
@@ -23,15 +24,18 @@ from PIL import Image, ImageDraw, ImageFont
 
 import wisdom.config as cfg
 from wisdom.composers.card import (
-    IMAGE_HEIGHT, IMAGE_WIDTH,
-    compose_base, compose_overlay_layer, compose_text_layer,
+    IMAGE_HEIGHT,
+    IMAGE_WIDTH,
+    compose_base,
+    compose_overlay_layer,
+    compose_text_layer,
 )
 from wisdom.schemas import DesignBrief, Quote
 
 logger = logging.getLogger(__name__)
 
-FPS           = cfg.reel_cfg().get("fps", 30)
-FADE_DUR_SEC  = 2.0
+FPS = cfg.reel_cfg().get("fps", 30)
+FADE_DUR_SEC = 2.0
 BASE_HOLD_SEC = 0.3
 
 
@@ -57,37 +61,43 @@ def _zoompan_at(total_frames: int, start_frame: int) -> str:
 # Core reel builder
 # ---------------------------------------------------------------------------
 
-def _build_reel(image_bytes: bytes, quote: Quote, brief: DesignBrief,
-                audio_file: str, duration_sec: float,
-                music_volume: float) -> bytes | None:
-    total = duration_sec
-    W, H  = IMAGE_WIDTH, IMAGE_HEIGHT
 
-    raw_pil      = compose_base(image_bytes, brief)
-    overlay_png  = compose_overlay_layer(brief)
-    text_png     = compose_text_layer(image_bytes, quote, brief)
+def _build_reel(
+    image_bytes: bytes,
+    quote: Quote,
+    brief: DesignBrief,
+    audio_file: str,
+    duration_sec: float,
+    music_volume: float,
+) -> bytes | None:
+    total = duration_sec
+    W, H = IMAGE_WIDTH, IMAGE_HEIGHT
+
+    raw_pil = compose_base(image_bytes, brief)
+    overlay_png = compose_overlay_layer(brief)
+    text_png = compose_text_layer(image_bytes, quote, brief)
     total_frames = int(total * FPS)
 
     text_fade_start = total - FADE_DUR_SEC - BASE_HOLD_SEC
-    skip_kenburns   = brief.skip_kenburns
+    skip_kenburns = brief.skip_kenburns
     sc = _scale_crop()
 
     has_audio = Path(audio_file).exists() if audio_file else False
 
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp = Path(tmpdir)
-        bg_path      = str(tmp / "bg.jpg")
+        bg_path = str(tmp / "bg.jpg")
         overlay_path = str(tmp / "overlay.png")
-        text_path    = str(tmp / "text.png")
+        text_path = str(tmp / "text.png")
         raw_pil.save(bg_path, format="JPEG", quality=95)
         (tmp / "overlay.png").write_bytes(overlay_png)
         (tmp / "text.png").write_bytes(text_png)
 
         out_p = str(tmp / "reel.mp4")
-        cmd   = ["ffmpeg", "-y"]
-        cmd  += ["-loop", "1", "-t", f"{total:.4f}", "-i", bg_path]       # 0: raw bg
-        cmd  += ["-loop", "1", "-t", f"{total:.4f}", "-i", overlay_path]  # 1: overlay
-        cmd  += ["-loop", "1", "-t", f"{total:.4f}", "-i", text_path]     # 2: text
+        cmd = ["ffmpeg", "-y"]
+        cmd += ["-loop", "1", "-t", f"{total:.4f}", "-i", bg_path]  # 0: raw bg
+        cmd += ["-loop", "1", "-t", f"{total:.4f}", "-i", overlay_path]  # 1: overlay
+        cmd += ["-loop", "1", "-t", f"{total:.4f}", "-i", text_path]  # 2: text
 
         audio_idx = None
         if has_audio:
@@ -97,9 +107,13 @@ def _build_reel(image_bytes: bytes, quote: Quote, brief: DesignBrief,
         parts = []
         if not skip_kenburns:
             # Added subtle cinematic grain + sharp color grade
-            parts.append(f"[0:v]{sc},{_zoompan_at(total_frames, 0)},noise=alls=5:allf=t,eq=contrast=1.06:saturation=1.1,unsharp=3:3:0.5:3:3:0.0[bg]")
+            parts.append(
+                f"[0:v]{sc},{_zoompan_at(total_frames, 0)},noise=alls=5:allf=t,eq=contrast=1.06:saturation=1.1,unsharp=3:3:0.5:3:3:0.0[bg]"
+            )
         else:
-            parts.append(f"[0:v]{sc},setsar=1,fps={FPS},noise=alls=5:allf=t,eq=contrast=1.06:saturation=1.1,unsharp=3:3:0.5:3:3:0.0[bg]")
+            parts.append(
+                f"[0:v]{sc},setsar=1,fps={FPS},noise=alls=5:allf=t,eq=contrast=1.06:saturation=1.1,unsharp=3:3:0.5:3:3:0.0[bg]"
+            )
 
         # Overlay and text are both fully static — no zoom
         parts.append(f"[1:v]format=rgba,setsar=1,fps={FPS}[ov_static]")
@@ -123,10 +137,23 @@ def _build_reel(image_bytes: bytes, quote: Quote, brief: DesignBrief,
             cmd += ["-map", "[aout]", "-c:a", "aac", "-b:a", "128k"]
         else:
             cmd += ["-an"]
-        cmd += ["-c:v", "libx264", "-preset", "medium", "-crf", "18",
-                "-pix_fmt", "yuv420p", "-t", str(total), out_p]
+        cmd += [
+            "-c:v",
+            "libx264",
+            "-preset",
+            "medium",
+            "-crf",
+            "18",
+            "-pix_fmt",
+            "yuv420p",
+            "-t",
+            str(total),
+            out_p,
+        ]
 
-        logger.info(f"Reel: {total}s | kenburns={'yes' if not skip_kenburns else 'no'} | music={'yes' if has_audio else 'no'}")
+        logger.info(
+            f"Reel: {total}s | kenburns={'yes' if not skip_kenburns else 'no'} | music={'yes' if has_audio else 'no'}"
+        )
         try:
             result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
             if result.returncode != 0:
@@ -147,9 +174,15 @@ def _build_reel(image_bytes: bytes, quote: Quote, brief: DesignBrief,
 # Public entry point
 # ---------------------------------------------------------------------------
 
-def create_reel(image_bytes: bytes, quote: Quote, brief: DesignBrief,
-                audio_file: str = "", duration_sec: float = 23,
-                music_volume: float = 0.15) -> tuple[bytes | None, bytes | None]:
+
+def create_reel(
+    image_bytes: bytes,
+    quote: Quote,
+    brief: DesignBrief,
+    audio_file: str = "",
+    duration_sec: float = 23,
+    music_volume: float = 0.15,
+) -> tuple[bytes | None, bytes | None]:
     """
     Returns (video_bytes, thumbnail_bytes).
     thumbnail_bytes is always the composed JPEG — used as fallback cover.
@@ -159,7 +192,10 @@ def create_reel(image_bytes: bytes, quote: Quote, brief: DesignBrief,
         return None, None
 
     from wisdom.composers.card import compose_image
+
     thumbnail = compose_image(image_bytes, quote, brief)
 
-    video = _build_reel(image_bytes, quote, brief, audio_file, duration_sec, music_volume)
+    video = _build_reel(
+        image_bytes, quote, brief, audio_file, duration_sec, music_volume
+    )
     return video, thumbnail

@@ -2,6 +2,7 @@
 Central type definitions for the entire pipeline.
 All LangGraph state and config models live here.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -11,6 +12,7 @@ from typing import Any, Literal, TypedDict
 # ---------------------------------------------------------------------------
 # Config models (loaded from YAML)
 # ---------------------------------------------------------------------------
+
 
 @dataclass
 class YouTubeConfig:
@@ -29,7 +31,7 @@ class ThemeConfig:
     platforms: list[str]
     hashtags: list[str]
     enabled: bool = True
-    styles: list[str] | None = None      # None = all applicable styles
+    styles: list[str] | None = None  # None = all applicable styles
     youtube: YouTubeConfig | None = None
 
 
@@ -43,8 +45,8 @@ class LLMRoleConfig:
 
 @dataclass
 class ProviderConfig:
-    model: str | None = None             # LiteLLM model string for LLM providers
-    cls: str | None = None               # dotted import path for custom image providers
+    model: str | None = None  # LiteLLM model string for LLM providers
+    cls: str | None = None  # dotted import path for custom image providers
     key_env: str | None = None
     timeout: int = 60
     extra: dict[str, Any] = field(default_factory=dict)
@@ -53,6 +55,7 @@ class ProviderConfig:
 # ---------------------------------------------------------------------------
 # Pipeline data models
 # ---------------------------------------------------------------------------
+
 
 @dataclass
 class Quote:
@@ -66,7 +69,15 @@ class Quote:
 
 @dataclass
 class Overlay:
-    type: Literal["gradient_bottom", "gradient_top", "gradient_center", "solid", "vignette", "glass", "none"]
+    type: Literal[
+        "gradient_bottom",
+        "gradient_top",
+        "gradient_center",
+        "solid",
+        "vignette",
+        "glass",
+        "none",
+    ]
     opacity: int = 150
     color: str = "#000000"
     blur: int = 20  # For glass effect
@@ -81,11 +92,21 @@ class DesignBrief:
     highlight_color: str
     author_color: str
     overlay: Overlay
-    text_zone: Literal["top", "center", "bottom", "top_left", "top_right", "bottom_left", "bottom_right"]
+    text_zone: Literal[
+        "top",
+        "center",
+        "bottom",
+        "top_left",
+        "top_right",
+        "bottom_left",
+        "bottom_right",
+    ]
     layout: Literal["big_center", "sentence_reveal", "full_card", "asymmetric"]
     decoration: Literal["rule", "quote_mark", "corner_accent", "none"]
     highlight: str
-    highlight_style: Literal["color", "italic", "underline", "caps", "caps_italic", "script"]
+    highlight_style: Literal[
+        "color", "italic", "underline", "caps", "caps_italic", "script"
+    ]
     font_size: int
     animation: Literal["fade", "reveal", "none"]
     skip_kenburns: bool = False
@@ -96,9 +117,9 @@ class DesignBrief:
 @dataclass
 class PostMeta:
     caption: str
-    title: str                            # YouTube title / ignored by Instagram
+    title: str  # YouTube title / ignored by Instagram
     hashtags: list[str]
-    tags: list[str]                       # YouTube tags / ignored by Instagram
+    tags: list[str]  # YouTube tags / ignored by Instagram
     theme: str
 
 
@@ -114,6 +135,7 @@ class PlatformResult:
 # ---------------------------------------------------------------------------
 # LangGraph pipeline state
 # ---------------------------------------------------------------------------
+
 
 class PipelineState(TypedDict, total=False):
     # Input

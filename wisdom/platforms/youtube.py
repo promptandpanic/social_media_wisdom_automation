@@ -1,4 +1,5 @@
 """YouTube Data API v3 platform — uploads Shorts (≤60s vertical video)."""
+
 from __future__ import annotations
 
 import logging
@@ -54,17 +55,27 @@ class YouTubePlatform(BasePlatform):
 
     def _service(self):
         from googleapiclient.discovery import build
-        return build("youtube", "v3", credentials=self._credentials(), cache_discovery=False)
 
-    def _upload(self, video: bytes, meta: PostMeta, theme: ThemeConfig | None,
-                thumbnail: bytes | None = None) -> PlatformResult:
+        return build(
+            "youtube", "v3", credentials=self._credentials(), cache_discovery=False
+        )
+
+    def _upload(
+        self,
+        video: bytes,
+        meta: PostMeta,
+        theme: ThemeConfig | None,
+        thumbnail: bytes | None = None,
+    ) -> PlatformResult:
         from googleapiclient.http import MediaIoBaseUpload
         import io
 
         yt_cfg = theme.youtube if theme else None
         title = _build_title(meta, theme)
         hashtag_line = " ".join(meta.hashtags)
-        description = f"{meta.caption}\n\n{hashtag_line}" if hashtag_line else meta.caption
+        description = (
+            f"{meta.caption}\n\n{hashtag_line}" if hashtag_line else meta.caption
+        )
         tags = (yt_cfg.tags if yt_cfg else []) + meta.tags
         category_id = yt_cfg.category_id if yt_cfg else "22"
         privacy = yt_cfg.privacy if yt_cfg else "public"
@@ -97,10 +108,13 @@ class YouTubePlatform(BasePlatform):
         if thumbnail:
             try:
                 import io as _io
+
                 thumb_media = MediaIoBaseUpload(
                     _io.BytesIO(thumbnail), mimetype="image/jpeg", resumable=False
                 )
-                service.thumbnails().set(videoId=video_id, media_body=thumb_media).execute()
+                service.thumbnails().set(
+                    videoId=video_id, media_body=thumb_media
+                ).execute()
             except Exception as exc:
                 logger.warning(f"YouTube thumbnail failed (non-fatal): {exc}")
 
@@ -108,24 +122,32 @@ class YouTubePlatform(BasePlatform):
         logger.info(f"YouTube: posted {url}")
         return PlatformResult("youtube", "posted", post_id=video_id, url=url)
 
-    def post_video(self, video: bytes, thumbnail: bytes, meta: PostMeta,
-                   theme: ThemeConfig | None = None) -> PlatformResult:
+    def post_video(
+        self,
+        video: bytes,
+        thumbnail: bytes,
+        meta: PostMeta,
+        theme: ThemeConfig | None = None,
+    ) -> PlatformResult:
         try:
             return self._upload(video, meta, theme, thumbnail)
         except Exception as exc:
             logger.error(f"YouTube post_video failed: {exc}")
             return PlatformResult("youtube", "failed", error=str(exc))
 
-    def post_image(self, image: bytes, meta: PostMeta,
-                   theme: ThemeConfig | None = None) -> PlatformResult:
+    def post_image(
+        self, image: bytes, meta: PostMeta, theme: ThemeConfig | None = None
+    ) -> PlatformResult:
         # YouTube doesn't support image posts — skip gracefully
-        return PlatformResult("youtube", "skipped",
-                              error="YouTube does not support image-only posts")
+        return PlatformResult(
+            "youtube", "skipped", error="YouTube does not support image-only posts"
+        )
 
 
 # ---------------------------------------------------------------------------
 # One-time OAuth2 setup helper (called by: task youtube-auth)
 # ---------------------------------------------------------------------------
+
 
 def run_oauth_flow() -> str:
     """Interactive OAuth2 flow — prints the refresh token to store as a secret."""

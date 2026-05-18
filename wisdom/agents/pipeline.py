@@ -4,6 +4,7 @@ Top-level pipeline — orchestrates quote → design → media → store → pos
 generate_only=True  → stops after store (content ready, not posted)
 dry_run=True        → saves locally, never posts
 """
+
 from __future__ import annotations
 
 import datetime
@@ -25,14 +26,19 @@ from wisdom.schemas import PipelineState, PostMeta, ThemeConfig
 logger = logging.getLogger(__name__)
 
 
-def run(theme_key: str, dry_run: bool = False,
-        generate_only: bool = False, offline: bool = False) -> PipelineState:
+def run(
+    theme_key: str,
+    dry_run: bool = False,
+    generate_only: bool = False,
+    offline: bool = False,
+) -> PipelineState:
     theme = cfg.theme(theme_key)
     if not theme.enabled:
         logger.info(f"Theme '{theme_key}' is disabled — skipping")
         return {}
 
     from wisdom.storage.db import ContentDB
+
     db = ContentDB()
     db.load()
 
@@ -109,7 +115,9 @@ def run(theme_key: str, dry_run: bool = False,
 
     results = state.get("platform_results", [])
     for r in results:
-        status_icon = "✅" if r.status == "posted" else "❌" if r.status == "failed" else "⏭"
+        status_icon = (
+            "✅" if r.status == "posted" else "❌" if r.status == "failed" else "⏭"
+        )
         logger.info(f"{status_icon} {r.platform}: {r.status} {r.post_id or r.error}")
 
     _send_email_report(state, theme.name)
@@ -120,6 +128,7 @@ def run(theme_key: str, dry_run: bool = False,
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+
 def _select_audio_file(theme_key: str) -> str:
     audio_dir = Path("assets/audio")
     if not audio_dir.exists():
@@ -128,19 +137,20 @@ def _select_audio_file(theme_key: str) -> str:
     candidates = list(audio_dir.glob(f"{theme_key}_*.mp3"))
     if candidates:
         return str(random.choice(candidates))
-    
+
     # Fallback to ANY available audio for variety, instead of just one file
     all_audio = list(audio_dir.glob("*.mp3"))
     if all_audio:
         return str(random.choice(all_audio))
-        
+
     return ""
 
 
 def _create_video(state: PipelineState, theme: ThemeConfig) -> PipelineState:
     from wisdom.composers.reel import create_reel
-    image_bytes = state.get("image_bytes", b"")   # raw image — no overlay, no text
-    composed = state.get("composed_image", b"")    # full composite — thumbnail only
+
+    image_bytes = state.get("image_bytes", b"")  # raw image — no overlay, no text
+    composed = state.get("composed_image", b"")  # full composite — thumbnail only
     brief = state.get("brief")
     quote = state.get("quote")
     reel_cfg = cfg.reel_cfg()
@@ -154,8 +164,11 @@ def _create_video(state: PipelineState, theme: ThemeConfig) -> PipelineState:
             duration_sec=reel_cfg.get("duration_sec", 23),
             music_volume=reel_cfg.get("music_volume", 0.15),
         )
-        return {**state, "video_bytes": video_bytes,
-                "thumbnail_bytes": thumbnail_bytes or composed}
+        return {
+            **state,
+            "video_bytes": video_bytes,
+            "thumbnail_bytes": thumbnail_bytes or composed,
+        }
     except Exception as exc:
         logger.warning(f"Video creation failed ({exc}) — will post image only")
         return {**state, "thumbnail_bytes": composed}
@@ -185,6 +198,7 @@ Quote context (do NOT include in output): "{quote.text}" — {quote.author}
 """
     try:
         from wisdom import providers
+
         raw = providers.llm.generate(prompt, role="quote_generation")
         m = re.search(r"\{.*\}", raw, re.DOTALL)
         if m:
@@ -208,7 +222,11 @@ def _build_meta(state: PipelineState, theme: ThemeConfig) -> PipelineState:
     # Build caption: quote + attribution + body. No quote = body only.
     parts = []
     if text:
-        attribution = f"— {author}" if author and author.lower() not in ("original", "unknown") else ""
+        attribution = (
+            f"— {author}"
+            if author and author.lower() not in ("original", "unknown")
+            else ""
+        )
         parts.append(text + (f"\n{attribution}" if attribution else ""))
     if llm_caption:
         parts.append(llm_caption)
@@ -244,8 +262,14 @@ def _store(state: PipelineState, theme: ThemeConfig, db) -> PipelineState:
 
     record_id = db.create_pending(
         theme=theme.key,
-        quote={"text": quote.text, "author": quote.author,
-               "highlight": quote.highlight, "source": quote.source} if quote else {},
+        quote={
+            "text": quote.text,
+            "author": quote.author,
+            "highlight": quote.highlight,
+            "source": quote.source,
+        }
+        if quote
+        else {},
         caption=meta.caption if meta else "",
         asset_dir=str(pending_dir),
     )
@@ -288,8 +312,11 @@ def _post(state: PipelineState, theme: ThemeConfig, db) -> PipelineState:
         results.append(result)
         if pending_id:
             db.update_platform_status(
-                pending_id, platform_name, result.status,
-                post_id=result.post_id, error=result.error,
+                pending_id,
+                platform_name,
+                result.status,
+                post_id=result.post_id,
+                error=result.error,
             )
 
     if pending_id and all(r.status == "posted" for r in results):
@@ -297,7 +324,10 @@ def _post(state: PipelineState, theme: ThemeConfig, db) -> PipelineState:
         quote = state.get("quote")
         brief = state.get("brief")
         db.mark_posted(
-            {"text": quote.text if quote else "", "author": getattr(quote, "author", "")},
+            {
+                "text": quote.text if quote else "",
+                "author": getattr(quote, "author", ""),
+            },
             theme.key,
             style=brief.style if brief else "",
         )
@@ -323,7 +353,9 @@ def _save_dry_run(state: PipelineState, theme_key: str) -> None:
 
     logger.info(f'[DRY_RUN] Quote: "{getattr(quote, "text", "")}"')
     if brief:
-        logger.info(f"[DRY_RUN] Style={brief.style} Font={brief.font} Layout={brief.layout}")
+        logger.info(
+            f"[DRY_RUN] Style={brief.style} Font={brief.font} Layout={brief.layout}"
+        )
     if meta:
         print("\n" + "─" * 60)
         print("CAPTION:")
@@ -334,6 +366,7 @@ def _save_dry_run(state: PipelineState, theme_key: str) -> None:
 def _load_font_b64(filename: str) -> str:
     """Return base64-encoded font for @font-face embedding, or empty string if not found."""
     import base64
+
     font_path = Path(__file__).parents[2] / "assets" / "fonts" / filename
     if font_path.exists():
         return base64.b64encode(font_path.read_bytes()).decode()
@@ -350,13 +383,16 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
     playfair_b64 = _load_font_b64("playfair_it.ttf")
     font_face = (
         f"@font-face {{ font-family: 'Playfair Display'; src: url('data:font/truetype;base64,{playfair_b64}') format('truetype'); font-weight: normal; font-style: italic; }}"
-        if playfair_b64 else ""
+        if playfair_b64
+        else ""
     )
 
     has_success = any(r.status == "posted" for r in results)
     has_failure = any(r.status == "failed" for r in results)
     status_text = "LIVE" if not has_failure else "PARTIAL" if has_success else "FAILED"
-    status_color = "#2ecc71" if not has_failure else "#e67e22" if has_success else "#e74c3c"
+    status_color = (
+        "#2ecc71" if not has_failure else "#e67e22" if has_success else "#e74c3c"
+    )
     ist = datetime.datetime.utcnow() + datetime.timedelta(hours=5, minutes=30)
     date_str = f"{ist.strftime('%B %d, %Y').upper()} &nbsp;&bull;&nbsp; {ist.strftime('%A').upper()} &nbsp;&bull;&nbsp; {ist.strftime('%I:%M %p')} IST"
 
@@ -389,7 +425,8 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
     live_dot = (
         '<span class="live-dot" style="display:inline-block; width:7px; height:7px; '
         'background:#e74c3c; border-radius:50%; margin-right:6px; vertical-align:middle;"></span>'
-        if status_text == "LIVE" else ""
+        if status_text == "LIVE"
+        else ""
     )
 
     return f"""<!DOCTYPE html>
@@ -453,7 +490,7 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
         </td></tr>
 
         <!-- Caption block (only if present) -->
-        {'<tr><td style="padding-bottom: 48px;"><div style="font-size:9px; letter-spacing:3px; color:#4a9eba; text-transform:uppercase; margin-bottom:20px;">Caption</div><div style="background:#0f1a24; border: 1px solid #1e3a5f; padding: 24px; font-size:13px; line-height:1.8; color:#8aafbf;">' + caption_html + '</div></td></tr>' if caption_html else ''}
+        {'<tr><td style="padding-bottom: 48px;"><div style="font-size:9px; letter-spacing:3px; color:#4a9eba; text-transform:uppercase; margin-bottom:20px;">Caption</div><div style="background:#0f1a24; border: 1px solid #1e3a5f; padding: 24px; font-size:13px; line-height:1.8; color:#8aafbf;">' + caption_html + "</div></td></tr>" if caption_html else ""}
 
         <!-- Published to -->
         <tr><td style="padding-bottom: 0;">
@@ -506,7 +543,11 @@ def _send_email_report(state: PipelineState, theme_name: str) -> None:
     has_success = any(r.status == "posted" for r in results)
     has_failure = any(r.status == "failed" for r in results)
 
-    author_part = f" · {author}" if author and author.lower() not in ("unknown", "") else " · Internet Wisdom"
+    author_part = (
+        f" · {author}"
+        if author and author.lower() not in ("unknown", "")
+        else " · Internet Wisdom"
+    )
     if has_failure and not has_success:
         subject = f"[FAILED] {theme_name} · {date_str}"
     elif has_failure:

@@ -8,6 +8,7 @@ Graph:
                                 ↓ exhausted
                            curated_fallback → END
 """
+
 from __future__ import annotations
 
 import json
@@ -32,7 +33,7 @@ def _clean(text: str) -> str:
     text = text.strip().strip('""\'\'„"«»‹›').strip()
     # Strip markdown bolding (double asterisks)
     text = text.replace("**", "")
-    text = re.sub(r'\s*[-—–~]\s*[A-Z][^—–\n]{1,60}$', '', text).strip()
+    text = re.sub(r"\s*[-—–~]\s*[A-Z][^—–\n]{1,60}$", "", text).strip()
     return text.strip('"""\'').strip()
 
 
@@ -68,15 +69,23 @@ def _parse_quote_json(raw: str) -> dict | None:
 # Topic + prompt helpers (delegate to config)
 # ---------------------------------------------------------------------------
 
+
 def _get_topic_block(theme_key: str) -> tuple[str, str]:
     """Returns (topic_block, image_hint)."""
     from wisdom.agents._topic_builder import build_topic_block
+
     return build_topic_block(theme_key)
 
 
-def _build_prompt(theme_key: str, mode: str, topic_block: str,
-                  max_words: int, recent_quotes: list[str]) -> str:
+def _build_prompt(
+    theme_key: str,
+    mode: str,
+    topic_block: str,
+    max_words: int,
+    recent_quotes: list[str],
+) -> str:
     from wisdom.agents._prompt_builder import build_quote_prompt
+
     return build_quote_prompt(theme_key, mode, topic_block, max_words, recent_quotes)
 
 
@@ -84,8 +93,13 @@ def _build_prompt(theme_key: str, mode: str, topic_block: str,
 # Graph nodes
 # ---------------------------------------------------------------------------
 
+
 def select_mode(state: PipelineState) -> PipelineState:
-    mode = "offline" if state.get("offline") else random.choice(["real_author", "internet_found"])
+    mode = (
+        "offline"
+        if state.get("offline")
+        else random.choice(["real_author", "internet_found"])
+    )
     logger.info(f"Quote mode: {mode}")
     return {**state, "_quote_mode": mode, "_quote_attempt": 0, "_quote_fallback": None}
 
@@ -108,43 +122,68 @@ def generate(state: PipelineState) -> PipelineState:
         raw = providers.llm.generate(prompt, role="quote_generation")
         data = _parse_quote_json(raw)
         if not data:
-            return {**state, "_quote_attempt": attempt, "_raw_quote_data": None,
-                    "_image_hint": image_hint, "errors": errors}
+            return {
+                **state,
+                "_quote_attempt": attempt,
+                "_raw_quote_data": None,
+                "_image_hint": image_hint,
+                "errors": errors,
+            }
 
         text = _clean(data.get("quote", ""))
         author = (data.get("author") or "").strip()
         uniqueness = int(data.get("uniqueness", 0) or 0)
 
-        if (text and author and len(text.split()) >= 3
-                and len(text.split()) <= max_words + 5
-                and uniqueness >= MIN_UNIQUENESS):
-            
-            # Use LLM-selected highlight if available, else fallback to math rule
-            hl = data.get("highlight", "").strip()
-            if not hl or len(hl.split()) < 2:
-                hl = _extract_highlight(text)
-                
+        if (
+            text
+            and author
+            and len(text.split()) >= 3
+            and len(text.split()) <= max_words + 5
+            and uniqueness >= MIN_UNIQUENESS
+        ):
+            # Highlights are completely disabled
+            hl = ""
+
             quote = Quote(
-                text=text, author=author,
+                text=text,
+                author=author,
                 highlight=hl,
                 image_hint=image_hint,
                 score=uniqueness,
                 source=_source_name(mode),
             )
             logger.info(f'  ✓ "{text[:70]}" — {author}')
-            return {**state, "_quote_attempt": attempt, "_valid_quote": quote,
-                    "_image_hint": image_hint}
+            return {
+                **state,
+                "_quote_attempt": attempt,
+                "_valid_quote": quote,
+                "_image_hint": image_hint,
+            }
 
         # Below bar — keep as fallback
         fallback = state.get("_quote_fallback")
-        if text and author and (not fallback or uniqueness > fallback.get("uniqueness", 0)):
+        if (
+            text
+            and author
+            and (not fallback or uniqueness > fallback.get("uniqueness", 0))
+        ):
             fallback = {**data, "image_hint": image_hint, "uniqueness": uniqueness}
-        return {**state, "_quote_attempt": attempt, "_valid_quote": None,
-                "_quote_fallback": fallback, "_image_hint": image_hint}
+        return {
+            **state,
+            "_quote_attempt": attempt,
+            "_valid_quote": None,
+            "_quote_fallback": fallback,
+            "_image_hint": image_hint,
+        }
 
     except Exception as exc:
         errors.append(f"quote attempt {attempt}: {exc}")
-        return {**state, "_quote_attempt": attempt, "_valid_quote": None, "errors": errors}
+        return {
+            **state,
+            "_quote_attempt": attempt,
+            "_valid_quote": None,
+            "errors": errors,
+        }
 
 
 def curated_fallback(state: PipelineState) -> PipelineState:
@@ -156,13 +195,16 @@ def curated_fallback(state: PipelineState) -> PipelineState:
     if below_bar:
         text = _clean(below_bar.get("quote", ""))
         author = (below_bar.get("author") or "").strip()
-        hl = below_bar.get("highlight", "").strip()
-        if not hl:
-            hl = _extract_highlight(text)
+        hl = ""
         if text and author:
             logger.warning("Using below-bar candidate as fallback")
-            q = Quote(text=text, author=author, highlight=hl,
-                      image_hint=image_hint, source="fallback")
+            q = Quote(
+                text=text,
+                author=author,
+                highlight=hl,
+                image_hint=image_hint,
+                source="fallback",
+            )
             return {**state, "quote": q}
 
     # 2. Curated pool
@@ -170,22 +212,35 @@ def curated_fallback(state: PipelineState) -> PipelineState:
     available = pool
     if available:
         item = random.choice(available)
-        q = Quote(text=item["text"], author=item.get("author", "Unknown"),
-                  highlight=_extract_highlight(item["text"]),
-                  image_hint=image_hint, source="fallback")
-        logger.info(f"Curated fallback: \"{q.text[:60]}\"")
+        q = Quote(
+            text=item["text"],
+            author=item.get("author", "Unknown"),
+            highlight="",
+            image_hint=image_hint,
+            source="fallback",
+        )
+        logger.info(f'Curated fallback: "{q.text[:60]}"')
         return {**state, "quote": q}
 
     # 3. Hardcoded emergency
-    hardcoded = {"text": "The wound is the place where the light enters you.", "author": "Rumi"}
-    q = Quote(text=hardcoded["text"], author=hardcoded["author"],
-              highlight="light enters you", image_hint=image_hint, source="fallback")
+    hardcoded = {
+        "text": "The wound is the place where the light enters you.",
+        "author": "Rumi",
+    }
+    q = Quote(
+        text=hardcoded["text"],
+        author=hardcoded["author"],
+        highlight="",
+        image_hint=image_hint,
+        source="fallback",
+    )
     return {**state, "quote": q}
 
 
 # ---------------------------------------------------------------------------
 # Routing
 # ---------------------------------------------------------------------------
+
 
 def _route_generate(state: PipelineState) -> Literal["done", "retry", "fallback"]:
     if state.get("_valid_quote"):
@@ -214,6 +269,7 @@ def _route_mode(state: PipelineState) -> Literal["generate", "curated_fallback"]
 # Build graph
 # ---------------------------------------------------------------------------
 
+
 def build() -> any:
     g = StateGraph(PipelineState)
 
@@ -223,15 +279,20 @@ def build() -> any:
     g.add_node("curated_fallback", curated_fallback)
 
     g.set_entry_point("select_mode")
-    g.add_conditional_edges("select_mode", _route_mode, {
-        "generate": "generate",
-        "curated_fallback": "curated_fallback"
-    })
-    g.add_conditional_edges("generate", _route_generate, {
-        "done": "set_quote",
-        "retry": "generate",
-        "fallback": "curated_fallback",
-    })
+    g.add_conditional_edges(
+        "select_mode",
+        _route_mode,
+        {"generate": "generate", "curated_fallback": "curated_fallback"},
+    )
+    g.add_conditional_edges(
+        "generate",
+        _route_generate,
+        {
+            "done": "set_quote",
+            "retry": "generate",
+            "fallback": "curated_fallback",
+        },
+    )
     g.add_edge("set_quote", END)
     g.add_edge("curated_fallback", END)
 
