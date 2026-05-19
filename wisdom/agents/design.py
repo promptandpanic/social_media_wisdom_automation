@@ -127,10 +127,11 @@ Reply with ONLY the image prompt — plain text, no JSON, no preamble.
 _THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
     "womenpower": (
         "\n  - MANDATORY: Subject must be a woman in HIGH-FASHION EDITORIAL attire. "
-        "Think Vogue/Harper's Bazaar. Outfits: Dark sunglasses, long coats with high heels, "
-        "minimalist turtlenecks with loose-fit jeans, or chic summer street-style. "
+        "Think Vogue/Harper's Bazaar. Outfits: Elegant oversized blazers with tailored wide-leg trousers, "
+        "sophisticated silk blouses, minimalist slip dresses layered under premium trench coats, chic structured suits, "
+        "or stylish high-fashion street wear (e.g., leather jackets, tailored midi skirts, or structural jumpsuits) with dark sunglasses. "
         "Settings: Busy NYC crosswalks, elegant Paris streets, minimalist Milan office floors, or structural architectural backdrops. "
-        "Match the weather/season to the quote's emotion (e.g., winter coats for somber quotes, breezy summer for light ones)."
+        "Match the weather/season to the quote's emotion (e.g., heavy winter coats/trench coats for somber quotes, breezy linen or summer dresses for light ones)."
     ),
 }
 

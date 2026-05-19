@@ -676,26 +676,31 @@ def _draw_text(
         and author.lower() not in _SKIP_AUTHOR
         and not author.startswith("@")
     ):
-        a_font = _font("poppins", 38)
-        dash_font = _font("poppins", 38)
-        dash = "— "
+        author_spaced = " ".join(list(author.upper().replace(" ", "  ")))
+        a_font = _font("poppins", 26)
+        dash_font = _font("poppins", 26)
+        dash = "—  "
         d_bb = dash_font.getbbox(dash)
-        n_bb = a_font.getbbox(author)
+        n_bb = a_font.getbbox(author_spaced)
         total_w = (d_bb[2] - d_bb[0]) + (n_bb[2] - n_bb[0])
         ax = (TEXT_ZONE_CX * 2 - total_w) // 2
         ay = y + 16
         draw.text((ax, ay), dash, font=dash_font, fill=txt_color)
-        draw.text((ax + (d_bb[2] - d_bb[0]), ay), author, font=a_font, fill=txt_color)
+        draw.text(
+            (ax + (d_bb[2] - d_bb[0]), ay), author_spaced, font=a_font, fill=txt_color
+        )
 
     # 5. Add Brand Handle at the bottom center
     handle_text = cfg.app().get("brand_handle", "")
     if handle_text:
-        handle_font = _font("poppins", 28)
-        h_bb = handle_font.getbbox(handle_text)
+        handle_spaced = " ".join(list(handle_text.upper().replace(" ", "  ")))
+        handle_font = _font("poppins", 20)
+        h_bb = handle_font.getbbox(handle_spaced)
         hx = (IMAGE_WIDTH - (h_bb[2] - h_bb[0])) // 2
         hy = IMAGE_HEIGHT - 60
-        # Semi-transparent for that "aesthetic" look
-        draw.text((hx, hy), handle_text, font=handle_font, fill=(255, 255, 255, 120))
+        # Inherit the safe, contrast-vetted text color with beautiful semi-transparency
+        handle_color = (*txt_color[:3], 120)
+        draw.text((hx, hy), handle_spaced, font=handle_font, fill=handle_color)
 
     return img
 
