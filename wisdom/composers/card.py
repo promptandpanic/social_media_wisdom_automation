@@ -690,18 +690,6 @@ def _draw_text(
             (ax + (d_bb[2] - d_bb[0]), ay), author_spaced, font=a_font, fill=txt_color
         )
 
-    # 5. Add Brand Handle at the bottom center
-    handle_text = cfg.app().get("brand_handle", "")
-    if handle_text:
-        handle_spaced = " ".join(list(handle_text.upper().replace(" ", "  ")))
-        handle_font = _font("poppins", 20)
-        h_bb = handle_font.getbbox(handle_spaced)
-        hx = (IMAGE_WIDTH - (h_bb[2] - h_bb[0])) // 2
-        hy = IMAGE_HEIGHT - 60
-        # Inherit the safe, contrast-vetted text color with beautiful semi-transparency
-        handle_color = (*txt_color[:3], 120)
-        draw.text((hx, hy), handle_spaced, font=handle_font, fill=handle_color)
-
     return img
 
 
