@@ -121,7 +121,20 @@ class LeonardoFluxProProvider(BaseImageProvider):
         )
         r.raise_for_status()
         body = r.json()
-        gen_id = body["generate"]["generationId"]
+        if isinstance(body, list):
+            errors = ", ".join(err.get("message", "Unknown error") for err in body)
+            raise ValueError(f"Leonardo API error: {errors}")
+        if "errors" in body:
+            errors = ", ".join(
+                err.get("message", "Unknown error") for err in body["errors"]
+            )
+            raise ValueError(f"Leonardo API error: {errors}")
+
+        gen = body.get("generate")
+        if not gen or "generationId" not in gen:
+            raise ValueError(f"Leonardo API returned invalid response: {body}")
+
+        gen_id = gen["generationId"]
 
         for _ in range(30):
             time.sleep(4)
@@ -131,7 +144,19 @@ class LeonardoFluxProProvider(BaseImageProvider):
                 timeout=15,
             )
             poll.raise_for_status()
-            imgs = poll.json().get("generations_by_pk", {}).get("generated_images", [])
+            poll_body = poll.json()
+            if isinstance(poll_body, list):
+                errors = ", ".join(
+                    err.get("message", "Unknown error") for err in poll_body
+                )
+                raise ValueError(f"Leonardo polling error: {errors}")
+            if "errors" in poll_body:
+                errors = ", ".join(
+                    err.get("message", "Unknown error") for err in poll_body["errors"]
+                )
+                raise ValueError(f"Leonardo polling error: {errors}")
+
+            imgs = poll_body.get("generations_by_pk", {}).get("generated_images", [])
             if imgs:
                 return _resize(requests.get(imgs[0]["url"], timeout=30).content)
 
