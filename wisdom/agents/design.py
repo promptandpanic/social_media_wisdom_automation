@@ -99,13 +99,14 @@ STYLE: {style_name}
 
 CORE CINEMATIC DIRECTIVES:
 1. SOUL-MATCHING & HIGH-CONCEPT: Match the "energy" of the quote. Favor simple, striking, colorful, and highly imaginative visual concepts/metaphors over complex or crowded scenes.
-2. VIBRANT COLORS: Unless the style explicitly requests monochrome, prioritize simple, rich, and colorful palettes. Use colorful lighting, bright accents, and high-saturation highlights.
-3. CINEMATIC REALISM: The scene MUST feel like a frame from an award-winning film.
+2. CONCEPT CREATIVITY: The conceptual examples listed under each theme are for style and abstraction INSPIRATION ONLY. Absolutely DO NOT reuse or repeat the exact example concepts listed in the constraints. You must invent a completely fresh, unique, and highly creative concept of your own that matches the theme and quote.
+3. VIBRANT COLORS: Unless the style explicitly requests monochrome, prioritize simple, rich, and colorful palettes. Use colorful lighting, bright accents, and high-saturation highlights.
+4. CINEMATIC REALISM: The scene MUST feel like a frame from an award-winning film.
    - Lighting: Use volumetric lighting, dramatic shadows, rim lighting, or natural golden hour.
    - Camera: Specify 35mm or 85mm lens, shallow depth of field (bokeh), shot on Sony A7R IV or Canon EOS R5.
    - Quality: Hyper-realistic textures, visible film grain, 8k resolution, National Geographic quality.
-4. VISUAL METAPHOR: Favor mood, atmosphere, and vast landscapes over literal subjects. Favor silhouettes or back-views of people to maintain mystery and aesthetic.
-5. {image_hint_block}
+5. VISUAL METAPHOR: Favor mood, atmosphere, and vast landscapes over literal subjects. Favor silhouettes or back-views of people to maintain mystery and aesthetic.
+6. {image_hint_block}
 
 Write 4–6 rich sentences describing the scene:
   subject → setting → technique/medium → colour palette (use hex values) → lighting → camera/composition
@@ -113,7 +114,6 @@ Write 4–6 rich sentences describing the scene:
 Constraints:
   - COMPOSITION: The area for text must be naturally clean, high-contrast, and contain VAST NEGATIVE SPACE (sky, empty wall, water).
   - TEXT OVERLAY: {text_zone_instruction}
-  - GLOBAL BANS: Absolutely do NOT include villages, old vintage or historical settings, 1900s rural life (both Indian and Western), bullock carts, lanterns, old cars on Indian streets, wild animals, or cluttered historical settings.
   - No text, words, signs, logos, watermarks, or explicitly recognizable faces.
   - 9:16 portrait format.{subject_constraint}
   - VARIATION SEED: {random_seed}
@@ -133,46 +133,52 @@ _THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
     ),
     "darkacademia": (
         "\n  - MANDATORY CONCEPT: A moody but highly conceptual and colorful scholarly setup. "
-        "Focus on simple, striking visual metaphors rather than cluttered rooms. "
-        "Example Concept: A large cracked mirror standing in an empty stone hall; the reflection in the mirror shows an old man on one side, and a young person on the other side. "
-        "Or: A single glowing book floating above a circular mahogany desk in a dark, circular library, casting vibrant rays of amber and emerald light. "
-        "Or: A colorful ancient brass compass lying on a weathered navigation map, casting long shadows under candle glow. "
-        "CRITICAL BANS: Absolutely no villages, old vintage rural life, bullock carts, lanterns, old cars on Indian streets, or wild animals."
+        "Favor simple, striking visual metaphors over complex or crowded scenes. "
+        "Inspirational Examples (DO NOT copy these, invent your own fresh concept): "
+        "1. A large cracked mirror standing in an empty stone hall, showing an old man on one side and a young person on the other. "
+        "2. A single glowing book floating above a mahogany desk, casting amber and emerald light beams. "
+        "3. A colorful ancient brass compass on a weathered navigation map under candle glow. "
+        "Note: Traditional assets like old libraries, vintage books, villages, vintage settings, lanterns, or wild animals are fully allowed, but they must be styled in a highly clean, colorful, and high-concept cinematic manner."
     ),
     "latenight": (
         "\n  - MANDATORY CONCEPT: A simple, striking late-night visual metaphor with rich color. "
-        "Example Concept: A single mud house or modern log cabin standing in the middle of nowhere during dawn under heavy, dramatic rain, with a warm golden light glowing from its single window. "
-        "Or: A solitary telephone booth in the middle of a dark field, glowing with warm pink and purple neon light. "
-        "Or: A lone person walking under a single streetlamp on a wet asphalt street, with colorful reflections on the wet ground. "
-        "CRITICAL BANS: Absolutely no villages, old vintage rural life, bullock carts, lanterns, old cars on Indian streets, or wild animals."
+        "Inspirational Examples (DO NOT copy these, invent your own fresh concept): "
+        "1. A single mud house or modern log cabin standing in the middle of nowhere during dawn under heavy rain, with a single golden window glow. "
+        "2. A solitary neon-lit phone booth in a dark field glowing pink and purple. "
+        "3. A lone person walking under a single streetlamp on a wet street with reflections. "
+        "Note: Elements like vintage lanterns, historical buildings, old streets, and rural landscapes are fully allowed, but they must be rendered with modern, simple, clean, and hyper-vibrant cinematic lighting."
     ),
     "morning": (
         "\n  - MANDATORY CONCEPT: A powerful, high-energy, and colorful representation of morning strength, fitness, or discipline. "
-        "Example Concept: A sweating, high-performance athlete in modern activewear flipping a massive tractor tire on a concrete outdoor lot at sunrise. "
-        "Or: A runner reaching the crest of a hill at dawn, silhouetted against a brilliant orange and pink sky. "
-        "Or: A clean, vibrant close-up of colorful running shoes on a wet asphalt track with early sun rays. "
-        "CRITICAL BANS: Absolutely no villages, old vintage rural life, bullock carts, lanterns, old cars on Indian streets, or wild animals."
+        "Inspirational Examples (DO NOT copy these, invent your own fresh concept): "
+        "1. A sweating, high-performance athlete in modern activewear flipping a massive tractor tire at sunrise. "
+        "2. A runner reaching the crest of a hill at dawn silhouetted against orange and pink skies. "
+        "3. A close-up of colorful running shoes on a wet asphalt track with early sun rays. "
+        "Note: Historical training environments, vintage gyms, rural workout spaces, or active animals are fully allowed, but must be presented in a clean, simple, and colorful cinematic way."
     ),
     "wisdom": (
         "\n  - MANDATORY CONCEPT: A clean, highly abstract, colorful, and striking visual metaphor for the mind or path of life. "
-        "Example Concept: An abstract brain split in half—one side rendered in a glowing neon color, and the other side full of intricate, illuminated neural networks or digital circuit patterns. "
-        "Or: A single green tree standing defiantly in the exact middle of an empty asphalt road that stretches to the horizon. "
-        "Or: A 'road to heaven' or 'staircase to heaven'—an unimaginable, glowing path or architectural staircase ascending straight into colorful clouds and cosmic stars. "
-        "CRITICAL BANS: Absolutely no villages, old vintage rural life, bullock carts, lanterns, old cars on Indian streets, or wild animals."
+        "Inspirational Examples (DO NOT copy these, invent your own fresh concept): "
+        "1. An abstract brain split in half—one side neon colored, the other side full of glowing digital neural networks. "
+        "2. A single green tree standing in the exact middle of an empty asphalt road stretching to the horizon. "
+        "3. A glowing path or architectural staircase to heaven ascending straight into colorful clouds and cosmic stars. "
+        "Note: Classical subjects like ancient paths, old stone structures, traditional villages, bullock carts, old cars, or symbolic animals are fully allowed, but they must be presented in a highly creative, simple, and colorful visual layout."
     ),
     "mindfulness": (
         "\n  - MANDATORY CONCEPT: A simple, clean, and highly serene visual metaphor of peace. "
-        "Example Concept: A small child chasing a single glowing butterfly across a lush, vibrant green field under a clear blue sky. "
-        "Or: A single colorful flower growing out of a crack in a clean concrete wall, bathed in warm sun. "
-        "Or: A solitary modern wooden deck extending over a perfectly calm, turquoise lake under pastel morning clouds. "
-        "CRITICAL BANS: Absolutely no villages, old vintage rural life, bullock carts, lanterns, old cars on Indian streets, or wild animals."
+        "Inspirational Examples (DO NOT copy these, invent your own fresh concept): "
+        "1. A small child chasing a single glowing butterfly in a lush green field under a clear blue sky. "
+        "2. A single colorful flower growing out of a crack in a clean concrete wall bathed in warm sun. "
+        "3. A solitary wooden deck over a perfectly calm turquoise lake under pastel morning clouds. "
+        "Note: Simple natural subjects, quiet villages, animals in nature, or vintage gardens are fully allowed, but they must be rendered with bright, clean, simple, and serene color palettes."
     ),
     "love": (
         "\n  - MANDATORY CONCEPT: A tasteful, high-concept visual metaphor for connection and warmth with rich colors. "
-        "Example Concept: Two bright red umbrellas floating next to each other on a rainy, reflective city street. "
-        "Or: A warm fireplace glowing with deep crimson and orange, with two cups of tea sitting on a table in front of it. "
-        "Or: A stylized silhouette of two hands reaching towards each other, with a thin line of golden light connecting their fingers. "
-        "CRITICAL BANS: Absolutely no villages, old vintage rural life, bullock carts, lanterns, old cars on Indian streets, or wild animals."
+        "Inspirational Examples (DO NOT copy these, invent your own fresh concept): "
+        "1. Two bright red umbrellas floating next to each other on a rainy, reflective city street. "
+        "2. A warm fireplace glowing with deep crimson and orange, with two cups of tea on a table. "
+        "3. A stylized silhouette of two hands reaching towards each other, connected by a line of golden light. "
+        "Note: Vintage items like old lanterns, historical romantic settings, traditional villages, or old cars are fully allowed, but must focus on simple composition, colorful mood, and cinematic intimacy."
     ),
 }
 
