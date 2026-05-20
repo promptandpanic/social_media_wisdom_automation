@@ -312,18 +312,38 @@ _CURSIVE_FONTS = {
 
 
 def _drop_shadow_text(
-    draw, xy, text, font, fill, shadow_color=(0, 0, 0, 180), offset=(4, 6), blur=0
+    draw,
+    xy,
+    text,
+    font,
+    fill,
+    shadow_color=(0, 0, 0, 180),
+    offset=(4, 6),
+    stroke_width=0,
+    stroke_fill=None,
 ):
     x, y = xy
     # For a sharp 3D shadow (which looks modern), we just draw multiple offset layers
-    for i in range(1, 4):
+    if shadow_color and len(shadow_color) >= 4 and shadow_color[3] > 0:
+        for i in range(1, 4):
+            draw.text(
+                (x + (offset[0] * i / 3), y + (offset[1] * i / 3)),
+                text,
+                font=font,
+                fill=(*shadow_color[:3], int(shadow_color[3] * (4 - i) / 3)),
+            )
+    # Draw main text with optional translucent outline
+    if stroke_width > 0 and stroke_fill:
         draw.text(
-            (x + (offset[0] * i / 3), y + (offset[1] * i / 3)),
+            (x, y),
             text,
             font=font,
-            fill=(*shadow_color[:3], int(shadow_color[3] * (4 - i) / 3)),
+            fill=fill,
+            stroke_width=stroke_width,
+            stroke_fill=stroke_fill,
         )
-    draw.text((x, y), text, font=font, fill=fill)
+    else:
+        draw.text((x, y), text, font=font, fill=fill)
 
 
 def _render_line(
@@ -351,12 +371,24 @@ def _render_line(
     else:
         x = (img_width - line_w) // 2
 
-    # Smart shadow: white shadow for dark text, black shadow for light text
+    # Smart shadow & outline: white outline for dark text, dark outline for light text
     is_dark_text = (fill[0] * 0.299 + fill[1] * 0.587 + fill[2] * 0.114) < 128
     base_alpha = 180 if stroke > 0 else 80
-    shadow_color = (
-        (255, 255, 255, base_alpha) if is_dark_text else (0, 0, 0, base_alpha)
-    )
+
+    stroke_width = min(2, stroke) if stroke > 0 else 0
+    stroke_fill = None
+
+    if stroke_width > 0:
+        if is_dark_text:
+            stroke_fill = (250, 249, 246, 160)  # Soft Alabaster glow
+            shadow_color = (250, 249, 246, 60)
+        else:
+            stroke_fill = (26, 26, 26, 120)  # Soft Charcoal outline
+            shadow_color = (26, 26, 26, 60)
+    else:
+        shadow_color = (
+            (255, 255, 255, base_alpha) if is_dark_text else (0, 0, 0, base_alpha)
+        )
 
     letter_spacing = 0
     if "minimalist" in text_zone or font.path.lower().endswith(
@@ -366,7 +398,14 @@ def _render_line(
 
     if letter_spacing == 0:
         _drop_shadow_text(
-            draw, (x, y), line, font, fill=fill, shadow_color=shadow_color
+            draw,
+            (x, y),
+            line,
+            font,
+            fill=fill,
+            shadow_color=shadow_color,
+            stroke_width=stroke_width,
+            stroke_fill=stroke_fill,
         )
         return
 
@@ -378,7 +417,14 @@ def _render_line(
         curr_x, curr_y = xy
         for char in text:
             _drop_shadow_text(
-                draw, (curr_x, curr_y), char, font, fill=fill, shadow_color=shadow_color
+                draw,
+                (curr_x, curr_y),
+                char,
+                font,
+                fill=fill,
+                shadow_color=shadow_color,
+                stroke_width=stroke_width,
+                stroke_fill=stroke_fill,
             )
             curr_x += draw.textlength(char, font=font) + ls
         return curr_x

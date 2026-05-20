@@ -133,6 +133,39 @@ _THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
         "Settings: Busy NYC crosswalks, elegant Paris streets, minimalist Milan office floors, or structural architectural backdrops. "
         "Match the weather/season to the quote's emotion (e.g., heavy winter coats/trench coats for somber quotes, breezy linen or summer dresses for light ones)."
     ),
+    "darkacademia": (
+        "\n  - MANDATORY: Subject must capture a moody, gothic, or classical scholarly visual. "
+        "Settings: Dark-stained mahogany libraries, towers of ancient leather-bound books, historical European university stone arches, large vintage paned windows with heavy rain outside, or candlelit desks with antique inkwells and parchment. "
+        "If a person is present, they must be in high-end, tailored academic attire (tweed coats, thick turtlenecks, structured wool blazers, wire-rimmed glasses) and shown as a silhouette, side-profile, or from the back to maintain mystery and focus on environment. "
+        "Vibe: Cinematic dark academia film frame, melancholic, intellectual, high-production."
+    ),
+    "latenight": (
+        "\n  - MANDATORY: Subject must capture a raw, atmospheric late-night metropolitan mood. "
+        "Settings: Neon-lit rainy city streets, cozy dimly-lit rooms with city lights glistening outside, empty 3 AM diners with soft warm overhead glows, or solitary silhouettes looking out over a glittering cityscape from a high-rise balcony. "
+        "Use deep blues, neon teals, and warm amber accents. Vibe: High-end cinematic night photography, atmospheric, moody, reflective."
+    ),
+    "morning": (
+        "\n  - MANDATORY: Subject must capture a crisp, high-end quiet luxury morning lifestyle. "
+        "Settings: Warm golden-hour light casting long geometric shadows across a minimalist concrete-and-linen bedroom; a steaming cup of coffee next to an open journal on a raw marble table; a luxurious glass-walled cottage surrounded by misty pine forests; or a solitary silhouette walking along a calm, fog-covered lake at sunrise. "
+        "Vibe: Serene, clean, productive, and aspirational luxury lifestyle."
+    ),
+    "wisdom": (
+        "\n  - MANDATORY: Subject must represent a timeless, epic visual metaphor. "
+        "Settings: Vast, clean, majestic landscapes like misty mountain peaks at sunrise, a solitary path leading through a massive Redwood forest, ancient stone monoliths under a starry night sky, or a vast ocean with rolling fog. "
+        "Avoid literal representations; favor massive negative space, scale, and quiet majesty. If a person is present, they must be a small, distant silhouette to emphasize the scale of nature. "
+        "Vibe: Aspirational, epic, deep, and majestic."
+    ),
+    "mindfulness": (
+        "\n  - MANDATORY: Subject must project absolute tranquility, zen, and inner peace. "
+        "Settings: Minimalist zen rock gardens with clean sand ripples; soft sunlight filtering through a dense green bamboo forest; a steaming clay cup of green tea on a clean wooden deck; or calm, reflective water ripples in a shallow stone basin. "
+        "Use soft, natural earthy tones and high negative space. Vibe: Peaceful, clean, meditative, and high-end natural wellness."
+    ),
+    "love": (
+        "\n  - MANDATORY: Subject must capture a cinematic, tasteful, and deeply emotional romantic aesthetic. "
+        "Settings: A couple walking hand-in-hand along a windy, fog-covered beach at dusk; two silhouettes sharing an umbrella under streetlights on a rainy night; or hands holding warm cups of tea by a crackling fireplace. "
+        "Avoid bright, generic stock-photo couples; focus on mood, silhouettes, lighting, and soft film-like intimacy. "
+        "Vibe: Warm, moody, romantic, and cinematic."
+    ),
 }
 
 

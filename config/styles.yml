@@ -2,7 +2,7 @@ styles:
 
   timeless_minimalist_sans:
     summary: "Clean, modern, and high-end sans-serif aesthetic with focus on negative space."
-    categories: [wisdom, morning, mindfulness]
+    categories: [wisdom, morning, mindfulness, latenight]
     weight: high
     description: >
       A high-end, cinematic lifestyle photograph shot on a 35mm lens. 
@@ -19,10 +19,10 @@ styles:
       layout: minimalist
       decoration: none
       voice_gender: female
-
+ 
   timeless_minimalist_serif:
     summary: "Classic, elegant serif typography on dark, moody, or artistic backgrounds."
-    categories: [wisdom, mindfulness, love]
+    categories: [wisdom, mindfulness, love, darkacademia, latenight]
     weight: high
     description: >
       A moody, artistic, and cinematic photograph with deep shadows and rich textures. Shot on an 85mm lens with shallow depth of field.

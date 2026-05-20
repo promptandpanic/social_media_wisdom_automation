@@ -17,6 +17,7 @@ themes:
   morning:
     name: Morning Motivation
     format: reel
+    styles: [timeless_minimalist_sans, quiet_luxury_minimalist, minimalist_doodle_wisdom]
     max_words: 18
     platforms: [instagram, youtube]
     hashtags: ["#MorningVibes", "#WorkoutMotivation", "#FreshStart", "#DailyDiscipline", "#SuccessMindset", "#FitnessAesthetic"]
@@ -30,6 +31,7 @@ themes:
   wisdom:
     name: Life Wisdom
     format: reel
+    styles: [timeless_minimalist_sans, timeless_minimalist_serif, quiet_luxury_minimalist, surreal_cosmic_minimalism, metaphorical_abstract_installation]
     max_words: 18
     platforms: [instagram, youtube]
     hashtags: ["#Stoicism", "#DeepThoughts", "#WisdomQuotes", "#PhilosophyOfLife", "#CarlJung"]
@@ -43,6 +45,7 @@ themes:
   love:
     name: Love & Relationships
     format: reel
+    styles: [timeless_minimalist_serif, elegant_illustrated_portrait, indian_ethnic_aesthetic]
     max_words: 18
     platforms: [instagram, youtube]
     hashtags: ["#LoveQuotes", "#RelationshipAdvice", "#Heartbreak", "#TwinFlame", "#DeepLoveQuotes"]
@@ -56,6 +59,7 @@ themes:
   mindfulness:
     name: Mindfulness & Inner Peace
     format: reel
+    styles: [timeless_minimalist_sans, timeless_minimalist_serif, quiet_luxury_minimalist, surreal_cosmic_minimalism]
     max_words: 16
     platforms: [instagram, youtube]
     hashtags: ["#MindfulnessPractice", "#SpiritualAwakening", "#InnerPeace", "#MentalClarity", "#ZenLife"]
@@ -82,9 +86,9 @@ themes:
   darkacademia:
     name: Dark Academia
     format: reel
+    styles: [timeless_minimalist_serif, artistic_cinematic_minimal, metaphorical_abstract_installation]
     max_words: 22
     platforms: [instagram, youtube]
-    # styles: [dark_academia_classical] # Removed lock for fresh vibes
     hashtags: ["#AestheticVibes", "#DeepThinking", "#DarkAcademia", "#PhilosophyQuotes", "#Intellectual"]
     youtube:
       title_template: "Dark Academia"
@@ -96,6 +100,7 @@ themes:
   latenight:
     name: Late Night Feels
     format: reel
+    styles: [timeless_minimalist_sans, timeless_minimalist_serif, artistic_cinematic_minimal, dream_logic_architectural]
     max_words: 20
     platforms: [instagram, youtube]
     hashtags: ["#LateNightThoughts", "#Overthinking", "#MidnightThoughts", "#Melancholy", "#DeepQuotes"]
