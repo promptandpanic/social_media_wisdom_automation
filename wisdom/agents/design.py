@@ -19,7 +19,7 @@ from wisdom.schemas import DesignBrief, Overlay, PipelineState
 
 logger = logging.getLogger(__name__)
 
-_ACCOUNT = "global inspirational quotes account (ages 18–35, large Indian following)"
+_ACCOUNT = "global inspirational quotes account (ages 18–35)"
 
 _VALID_FONTS = frozenset(
     {

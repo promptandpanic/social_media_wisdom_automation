@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 _AUDIENCE = (
-    "global inspirational quotes account with a large Indian following, ages 18–35"
+    "global inspirational quotes account, ages 18–35"
 )
 
 _BANNED = """\

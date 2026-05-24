@@ -45,7 +45,7 @@ themes:
   love:
     name: Love & Relationships
     format: reel
-    styles: [timeless_minimalist_serif, elegant_illustrated_portrait, indian_ethnic_aesthetic]
+    styles: [timeless_minimalist_serif, elegant_illustrated_portrait, cultural_heritage_aesthetic]
     max_words: 18
     platforms: [instagram, youtube]
     hashtags: ["#LoveQuotes", "#RelationshipAdvice", "#Heartbreak", "#TwinFlame", "#DeepLoveQuotes"]

@@ -74,13 +74,13 @@ styles:
       decoration: none
       voice_gender: female
 
-  indian_ethnic_aesthetic:
-    summary: "Diverse Indian women in authentic, high-fashion settings. Now ultra-minimalist."
+  cultural_heritage_aesthetic:
+    summary: "Mythic, ancient architectural motifs pushed into an avant-garde minimalism."
     categories: [wisdom, love, womenpower]
     weight: high
     description: >
-      A high-end, highly conceptual representation rooted in South Asian cultural motifs, pushed into an avant-garde aesthetic.
-      Scenes: Do not use literal women or typical settings. Use abstract architectural elements (arches, stepwells), rich traditional textures (silk, terracotta, gold leaf), and impossibly vast landscapes.
+      A high-end, highly conceptual representation rooted in ancient cultural and architectural motifs, pushed into an avant-garde aesthetic.
+      Scenes: Do not use literal people or typical settings. Use abstract monumental elements (ancient arches, stone ruins), rich traditional textures (raw silk, terracotta, weathered gold), and impossibly vast landscapes.
       Composition: Warm golden or rich jewel tones, with striking, massive geometric shadows.
       Vibe: Mythic, authentic, immensely powerful, and serene.
     rendering:
