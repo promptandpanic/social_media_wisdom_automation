@@ -90,95 +90,71 @@ Return ONLY valid JSON: {{"style": "chosen_style_name"}}"""
 
 
 _IMAGE_PROMPT_TEMPLATE = """\
-Write a vivid, high-end image generation prompt that captures the deep emotional essence of this quote.
+You are an unhinged, visionary Creative Director building high-stakes, scroll-stopping social media art from scratch. 
+Write a vivid, avant-garde image generation prompt that captures the absolute emotional essence of this quote, but in a completely unpredictable, surreal, or dramatic way.
 
 QUOTE: "{text}"
 STYLE: {style_name}
 
 {style_description}
 
-CORE CINEMATIC DIRECTIVES:
-1. SOUL-MATCHING & HIGH-CONCEPT: Match the "energy" of the quote. Favor simple, striking, colorful, and highly imaginative visual concepts/metaphors over complex or crowded scenes.
-2. CONCEPT CREATIVITY: The conceptual examples listed under each theme are for style and abstraction INSPIRATION ONLY. Absolutely DO NOT reuse or repeat the exact example concepts listed in the constraints. You must invent a completely fresh, unique, and highly creative concept of your own that matches the theme and quote.
-3. VIBRANT COLORS: Unless the style explicitly requests monochrome, prioritize simple, rich, and colorful palettes. Use colorful lighting, bright accents, and high-saturation highlights.
-4. CINEMATIC REALISM: The scene MUST feel like a frame from an award-winning film.
-   - Lighting: Use volumetric lighting, dramatic shadows, rim lighting, or natural golden hour.
-   - Camera: Specify 35mm or 85mm lens, shallow depth of field (bokeh), shot on Sony A7R IV or Canon EOS R5.
-   - Quality: Hyper-realistic textures, visible film grain, 8k resolution, National Geographic quality.
-5. VISUAL METAPHOR: Favor mood, atmosphere, and vast landscapes over literal subjects. Favor silhouettes or back-views of people to maintain mystery and aesthetic.
-6. {image_hint_block}
+CORE CREATIVE DIRECTIVES:
+1. SCROLL-STOPPING ORIGINALITY: Break the rules. No clichés. No "person walking on a path" or "tree in a field". Invent a wildly unpredictable, high-stakes visual metaphor. Use extreme scale contrast, impossible architecture, gravity-defying objects, or surreal minimalism.
+2. MEDIUM FLUIDITY: Do not just use photography. Depending on the quote's energy, mandate striking mediums: Brutalist 3D renders, neo-noir illustrations, hyper-macro textures, glitch-art aesthetics, liminal space photography, dark renaissance paintings, or retro-futurism.
+3. SHOCK VALUE & MOOD: The image must evoke an immediate gasp or deep emotional resonance. Use aggressive or ethereal lighting (e.g., neon-lit darkness, blinding bioluminescence, void-like shadows, harsh brutalist sunlight).
+4. THEMATIC RADICALISM: Do NOT repeat the exact example concepts listed in the constraints. You must invent a completely fresh, unique, and HIGHLY creative concept of your own.
+5. {image_hint_block}
 
-Write 4–6 rich sentences describing the scene:
-  subject → setting → technique/medium → colour palette (use hex values) → lighting → camera/composition
+Write 4–6 intensely descriptive sentences describing the scene:
+  medium/style → subject & action → extreme setting/environment → bold color palette (with hex values) → dramatic lighting & composition.
 
 Constraints:
-  - COMPOSITION: The area for text must be naturally clean, high-contrast, and contain VAST NEGATIVE SPACE (sky, empty wall, water).
+  - COMPOSITION: The area for text must be naturally clean, high-contrast, and contain VAST NEGATIVE SPACE (voids, massive skies, flat brutalist walls, empty dark waters). This is non-negotiable.
   - TEXT OVERLAY: {text_zone_instruction}
   - No text, words, signs, logos, watermarks, or explicitly recognizable faces.
   - 9:16 portrait format.{subject_constraint}
-  - VARIATION SEED: {random_seed}
-  - ATMOSPHERIC TWIST: {atmospheric_twist}
+  - CREATIVE CHAOS SEED: {random_seed}
+  - DRAMATIC TWIST: {atmospheric_twist}
 
 Reply with ONLY the image prompt — plain text, no JSON, no preamble.
 """
 
 _THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
     "womenpower": (
-        "\n  - MANDATORY: Subject must be a woman in HIGH-FASHION EDITORIAL attire. "
-        "Think Vogue/Harper's Bazaar. Outfits: Elegant oversized blazers with tailored wide-leg trousers, "
-        "sophisticated silk blouses, minimalist slip dresses layered under premium trench coats, chic structured suits, "
-        "or stylish high-fashion street wear (e.g., leather jackets, tailored midi skirts, or structural jumpsuits) with dark sunglasses. "
-        "Settings: Busy NYC crosswalks, elegant Paris streets, minimalist Milan office floors, or structural architectural backdrops. "
-        "Match the weather/season to the quote's emotion (e.g., heavy winter coats/trench coats for somber quotes, breezy linen or summer dresses for light ones)."
+        "\n  - THEMATIC MANDATE: A fierce, highly conceptual representation of feminine dominance, resilience, or divine energy. "
+        "Think avant-garde fashion mixed with surrealism. "
+        "Examples: A colossal marble statue of a woman fracturing to reveal glowing gold beneath, a figure floating in a gravity-defying storm of crimson silk, or a sleek futuristic silhouette standing untouched amid total destruction. "
+        "Do NOT use basic 'woman in a suit' tropes. Go mythic, brutalist, or hyper-modern."
     ),
     "darkacademia": (
-        "\n  - MANDATORY CONCEPT: A moody but highly conceptual and colorful scholarly setup. "
-        "Favor simple, striking visual metaphors over complex or crowded scenes. "
-        "Inspirational Examples (DO NOT copy these, invent your own fresh concept): "
-        "1. A large cracked mirror standing in an empty stone hall, showing an old man on one side and a young person on the other. "
-        "2. A single glowing book floating above a mahogany desk, casting amber and emerald light beams. "
-        "3. A colorful ancient brass compass on a weathered navigation map under candle glow. "
-        "Note: Traditional assets like old libraries, vintage books, villages, vintage settings, lanterns, or wild animals are fully allowed, but they must be styled in a highly clean, colorful, and high-concept cinematic manner."
+        "\n  - THEMATIC MANDATE: A dark, labyrinthine visual of forbidden knowledge, obsessive intellect, or gothic surrealism. "
+        "Examples: A sprawling library where the books are entirely made of glowing crystal, an endless spiral staircase sinking into an ink-black void, or macro-photography of a crumbling marble bust weeping molten bronze. "
+        "Make it atmospheric, obsessive, and visually overwhelming."
     ),
     "latenight": (
-        "\n  - MANDATORY CONCEPT: A simple, striking late-night visual metaphor with rich color. "
-        "Inspirational Examples (DO NOT copy these, invent your own fresh concept): "
-        "1. A single mud house or modern log cabin standing in the middle of nowhere during dawn under heavy rain, with a single golden window glow. "
-        "2. A solitary neon-lit phone booth in a dark field glowing pink and purple. "
-        "3. A lone person walking under a single streetlamp on a wet street with reflections. "
-        "Note: Elements like vintage lanterns, historical buildings, old streets, and rural landscapes are fully allowed, but they must be rendered with modern, simple, clean, and hyper-vibrant cinematic lighting."
+        "\n  - THEMATIC MANDATE: The psychological weight of 3 AM. A visually striking, liminal, or neo-noir metaphor for isolation and realization. "
+        "Examples: A single glowing red doorway suspended in an endless ocean at midnight, a brutalist concrete room lit only by the glare of a monolithic neon monolith, or a distorted reflection in shattered black glass. "
+        "Keep it mysterious, lonely, and deeply cinematic."
     ),
     "morning": (
-        "\n  - MANDATORY CONCEPT: A powerful, high-energy, and colorful representation of morning strength, fitness, or discipline. "
-        "Inspirational Examples (DO NOT copy these, invent your own fresh concept): "
-        "1. A sweating, high-performance athlete in modern activewear flipping a massive tractor tire at sunrise. "
-        "2. A runner reaching the crest of a hill at dawn silhouetted against orange and pink skies. "
-        "3. A close-up of colorful running shoes on a wet asphalt track with early sun rays. "
-        "Note: Historical training environments, vintage gyms, rural workout spaces, or active animals are fully allowed, but must be presented in a clean, simple, and colorful cinematic way."
+        "\n  - THEMATIC MANDATE: An aggressive, high-energy burst of awakening, discipline, or raw potential. "
+        "Examples: A sun literally exploding from the chest of an abstract geometric figure, extreme macro of a single bead of sweat shattering concrete upon impact, or a blindingly bright hyper-minimalist ascent into pure light. "
+        "Avoid basic 'gym/runner at dawn' concepts. Make it feel like an unstoppable force of nature."
     ),
     "wisdom": (
-        "\n  - MANDATORY CONCEPT: A clean, highly abstract, colorful, and striking visual metaphor for the mind or path of life. "
-        "Inspirational Examples (DO NOT copy these, invent your own fresh concept): "
-        "1. An abstract brain split in half—one side neon colored, the other side full of glowing digital neural networks. "
-        "2. A single green tree standing in the exact middle of an empty asphalt road stretching to the horizon. "
-        "3. A glowing path or architectural staircase to heaven ascending straight into colorful clouds and cosmic stars. "
-        "Note: Classical subjects like ancient paths, old stone structures, traditional villages, bullock carts, old cars, or symbolic animals are fully allowed, but they must be presented in a highly creative, simple, and colorful visual layout."
+        "\n  - THEMATIC MANDATE: A clean, highly abstract, mind-bending visual metaphor for consciousness, time, or truth. "
+        "Examples: A surreal tesseract of glass floating over a perfectly mirrored black desert, a giant iris embedded in a cliff face watching a storm, or a minimalist zen garden where the stones are floating monoliths. "
+        "Break reality. Use extreme minimalism or mind-bending scale."
     ),
     "mindfulness": (
-        "\n  - MANDATORY CONCEPT: A simple, clean, and highly serene visual metaphor of peace. "
-        "Inspirational Examples (DO NOT copy these, invent your own fresh concept): "
-        "1. A small child chasing a single glowing butterfly in a lush green field under a clear blue sky. "
-        "2. A single colorful flower growing out of a crack in a clean concrete wall bathed in warm sun. "
-        "3. A solitary wooden deck over a perfectly calm turquoise lake under pastel morning clouds. "
-        "Note: Simple natural subjects, quiet villages, animals in nature, or vintage gardens are fully allowed, but they must be rendered with bright, clean, simple, and serene color palettes."
+        "\n  - THEMATIC MANDATE: An impossible serenity. A visually stunning, hyper-calm environment that defies physics. "
+        "Examples: A perfectly smooth sphere of water hovering silently in a sterile white brutalist gallery, a vast field of bioluminescent grass waving in slow-motion without wind, or an endless pastel sky reflected on a liquid metal floor. "
+        "Evoke a feeling of profound, almost unsettling peace and stillness."
     ),
     "love": (
-        "\n  - MANDATORY CONCEPT: A tasteful, high-concept visual metaphor for connection and warmth with rich colors. "
-        "Inspirational Examples (DO NOT copy these, invent your own fresh concept): "
-        "1. Two bright red umbrellas floating next to each other on a rainy, reflective city street. "
-        "2. A warm fireplace glowing with deep crimson and orange, with two cups of tea on a table. "
-        "3. A stylized silhouette of two hands reaching towards each other, connected by a line of golden light. "
-        "Note: Vintage items like old lanterns, historical romantic settings, traditional villages, or old cars are fully allowed, but must focus on simple composition, colorful mood, and cinematic intimacy."
+        "\n  - THEMATIC MANDATE: A visceral, high-stakes metaphor for soul-deep connection, sacrifice, or warmth. "
+        "Examples: Two supernovas colliding to form a single quiet glowing core, a macro shot of two hands turning into intertwined smoke, or a stark dark room where two light beams violently bend towards each other. "
+        "Avoid basic romantic clichés. Make the emotion feel powerful, cosmic, or deeply structural."
     ),
 }
 
@@ -254,26 +230,26 @@ def generate_brief(state: PipelineState) -> PipelineState:
         import random
 
         variation_seeds = [
-            "Prism",
-            "Vortex",
-            "Horizon",
-            "Pulse",
-            "Void",
-            "Echo",
-            "Loom",
-            "Fractal",
-            "Aether",
-            "Obsidian",
+            "Glitch-core Surrealism",
+            "Baroque Futurism",
+            "Liminal Horror / Void",
+            "Ethereal Renaissance",
+            "Neon-Brutalism",
+            "Hyper-Macro Abstract",
+            "Cyber-Mysticism",
+            "Atmospheric Monolithic",
+            "Retro-Futuristic Noir",
+            "Dreamcore / Weirdcore",
         ]
         atmospheric_twists = [
-            "Heavy volumetric fog with light rays.",
-            "Subtle chromatic aberration at the edges.",
-            "Dramatic long shadows and extreme high-contrast lighting.",
-            "Soft, dream-like bokeh with floating dust motes.",
-            "Minimalist composition with a single bold accent color.",
-            "Ethereal glow from an unseen source below the horizon.",
-            "Crisp, clear atmosphere with hyper-realistic sharpness.",
-            "Moody, rain-slicked textures and reflective surfaces.",
+            "Time frozen at the exact moment of a shattering impact.",
+            "Submerged entirely under ethereal, bioluminescent water.",
+            "Harsh, blinding strobe lighting freezing dynamic motion.",
+            "Melted reality with extreme chromatic aberration and distortion.",
+            "A chilling, oppressive liminal emptiness with zero shadows.",
+            "Volcanic ash falling softly like snow in a hyper-colored light.",
+            "An overwhelming sense of monumental scale and insignificance.",
+            "Hyper-saturated infrared colors making nature look alien.",
         ]
 
         prompt = _IMAGE_PROMPT_TEMPLATE.format(

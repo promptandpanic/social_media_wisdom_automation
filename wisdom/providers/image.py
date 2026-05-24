@@ -168,7 +168,7 @@ class GeminiImagenProvider(BaseImageProvider):
 
     name = "gemini_imagen"
 
-    def __init__(self, model: str = "imagen-3.0-generate-002", **_):
+    def __init__(self, model: str = "imagen-4.0-generate-001", **_):
         self.model = model
 
     def available(self) -> bool:
@@ -196,7 +196,7 @@ class GeminiFlashProvider(BaseImageProvider):
 
     name = "gemini_flash"
 
-    def __init__(self, model: str = "gemini-2.5-flash-image", **_):
+    def __init__(self, model: str = "gemini-3.5-flash-image", **_):
         self.model = model
 
     def available(self) -> bool:

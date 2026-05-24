@@ -156,7 +156,7 @@ Six-provider fallback chain — tried in order until one succeeds:
 
 ```
 leonardo_flux_pro  →  gemini_flash  →  gemini_imagen  →  leonardo  →  pollinations  →  gradient
-(FLUX.2 Pro,          (2.5-flash-      (imagen-4.0-      (API)        (free API)       (PIL local
+(FLUX.2 Pro,          (3.5-flash-      (imagen-4.0-      (API)        (free API)       (PIL local
  810×1440 → resize)    image)           fast-001)                                        fallback)
 ```
 

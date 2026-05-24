@@ -2,7 +2,7 @@
 # Keys come from .env / GitHub Secrets — not here
 #
 # Model strings use LiteLLM format — changing provider = change model name only:
-#   gemini/gemini-2.5-flash  →  anthropic/claude-opus-4-7
+#   gemini/gemini-3.5-flash  →  anthropic/claude-opus-4-7
 #   see: https://docs.litellm.ai/docs/providers
 
 providers:
@@ -10,7 +10,7 @@ providers:
     model: moonshot/moonshot-v1-32k
     key_env: MOONSHOT_API_KEY
   gemini:
-    model: gemini/gemini-2.5-flash
+    model: gemini/gemini-3.5-flash
     key_env: GEMINI_API_KEY
   huggingface:
     model: huggingface/Qwen/Qwen2.5-7B-Instruct
