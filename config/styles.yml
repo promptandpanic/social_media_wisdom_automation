@@ -5,11 +5,9 @@ styles:
     categories: [wisdom, morning, mindfulness, latenight]
     weight: high
     description: >
-      A high-end, cinematic lifestyle photograph shot on a 35mm lens. 
-      The scene must be ultra-clean, minimalist, and hyper-realistic.
-      Examples: A single cup of coffee on a textured stone table in soft morning light with volumetric dust motes; 
-      a lone silhouette walking on a vast, misty beach at dawn; minimalist modern architectural detail with harsh geometric shadows.
-      Vibe: Quiet luxury, intentional, and calm.
+      Hyper-clean, ultra-modern minimalism. Use harsh geometric lighting, pristine textures, and an overwhelming sense of quiet luxury.
+      Subjects should be entirely abstract or conceptual, focusing on shadows, raw materials (stone, glass, metal), and light play.
+      Avoid any literal human subjects or daily objects. Make it feel expansive, intentional, and fiercely calm.
     rendering:
       font: poppins
       text_color: "#FAF9F6"
@@ -25,10 +23,9 @@ styles:
     categories: [wisdom, mindfulness, love, darkacademia, latenight]
     weight: high
     description: >
-      A moody, artistic, and cinematic photograph with deep shadows and rich textures. Shot on an 85mm lens with shallow depth of field.
-      Examples: A vintage library with soft rim light hitting old leather books; a dark, jagged mountain range under a vast starry sky;
-      a high-end restaurant interior with single flickering candlelight and heavy shadows.
-      Vibe: Intellectual, timeless, and sophisticated.
+      Deep, moody, and highly intellectual. Focus on overwhelming textures, profound shadows, and isolated cinematic light.
+      Do not use basic objects like books or candles. Instead, invent sprawling, abstract environments of dark matter, ancient monolithic structures, or shadowy voids.
+      Vibe: Timeless, sophisticated, and dramatically mysterious.
     rendering:
       font: spectral
       text_color: "#FAF9F6"
@@ -44,11 +41,10 @@ styles:
     categories: [wisdom, womenpower, morning]
     weight: high
     description: >
-      A clean, 2D minimalist digital illustration with premium textures. 
-      Style: Flat art, soft pastel or earthy desert-tone palette, clean vector lines with subtle grain.
-      Subject: A solitary figure engaging in a simple, mindful activity (pouring tea, looking at the moon, meditative pose).
-      Background: Simple, solid-color or very clean background area with VAST negative space at the top for text.
-      Vibe: Relatable, modern, and lighthearted but high-end.
+      A clean, 2D minimalist digital illustration with premium tactile textures (like subtle paper grain or risograph effects).
+      Style: Bold, flat geometric vector art with an earthy, desert-tone palette.
+      Subject: Completely abstract representations of thought, time, or emotion. Avoid standard humans doing things. Use striking shapes and metaphorical alignments.
+      Vibe: Relatable, modern, deeply conceptual, and high-end.
     rendering:
       font: fredoka
       text_color: "#1A1A1A"
@@ -64,11 +60,10 @@ styles:
     categories: [love, womenpower, wisdom]
     weight: high
     description: >
-      A soft, beautiful digital painting or stylized illustration with cinematic lighting.
-      Style: Modern flat 2D minimalist art with rich, harmonious colors and soft-box lighting feel.
-      Subject: A woman in a stylish outfit or a silhouette of connection.
-      Background: Artistic but with a large, clean, solid-color area at the top for text.
-      Vibe: Emotive, artistic, and premium.
+      A soft, ethereal digital painting or hyper-stylized illustration bathed in dreamlike cinematic lighting.
+      Style: Fluid, emotionally resonant brushstrokes or impossibly smooth gradients.
+      Subject: Metaphorical representations of grace, power, or connection—avoiding literal human faces or basic fashion. Think flowing forms, glowing auras, or intertwined elements.
+      Vibe: Deeply emotive, purely artistic, and premium.
     rendering:
       font: outfit
       text_color: "#1A1A1A"
@@ -84,11 +79,10 @@ styles:
     categories: [wisdom, love, womenpower]
     weight: high
     description: >
-      A high-end, cinematic illustration or photograph of a woman in India. Shot on 35mm film with warm golden tones.
-      Scenes: Modern sunlit offices with massive windows, quiet Himalayan balconies overlooking mist, or lush tea gardens.
-      Subject: An expressive, modern Indian woman in elegant, structural attire.
-      Composition: Ensure a large, clean, high-contrast area at the top for dark text overlay.
-      Vibe: Authentic, powerful, and serene.
+      A high-end, highly conceptual representation rooted in South Asian cultural motifs, pushed into an avant-garde aesthetic.
+      Scenes: Do not use literal women or typical settings. Use abstract architectural elements (arches, stepwells), rich traditional textures (silk, terracotta, gold leaf), and impossibly vast landscapes.
+      Composition: Warm golden or rich jewel tones, with striking, massive geometric shadows.
+      Vibe: Mythic, authentic, immensely powerful, and serene.
     rendering:
       font: inter
       text_color: "#1A1A1A"
@@ -104,11 +98,10 @@ styles:
     categories: [wisdom, morning, womenpower, love]
     weight: high
     description: >
-      A cutting-edge, high-fashion illustration or clean photograph. Brutalist aesthetic.
-      Setting: Minimalist architectural spaces, brutalist concrete, or stark white runways with dramatic shadows.
-      Subject: A person in a structural outfit with an expressive, editorial pose.
-      Composition: Ensure a large, clean, shadowed area at the top for white text overlay.
-      Vibe: Bold, structural, and ultra-modern.
+      A cutting-edge, brutalist visual experience. Focus on stark, monolithic structures and high-contrast environments.
+      Subject: Avoid literal people. Imagine fashion-as-architecture or impossible physical forms that command authority and space.
+      Composition: Extreme minimalism, harsh angles, concrete textures, and striking, dramatic shadows.
+      Vibe: Aggressive, structural, and undeniably avant-garde.
     rendering:
       font: inter
       text_color: "#FAF9F6"
@@ -124,11 +117,10 @@ styles:
     categories: [wisdom, morning, mindfulness]
     weight: high
     description: >
-      An understated, high-end 'Quiet Luxury' illustration or photograph. Soft, diffused lighting.
-      Scenes: Sun-drenched minimalist interiors with large windows and soft linen textures; a single high-end watch or book on a marble slab.
-      Subject: A single object or a person (back-view) in a calm, reflective moment.
-      Composition: Focus on VAST negative space and clean backgrounds for dark text.
-      Vibe: Wealthy, calm, and perfectly curated.
+      An impossibly understated, high-end 'Quiet Luxury' visual. Use soft, intensely diffused lighting and immaculate textures.
+      Scenes: Abstract close-ups of premium materials (marble veins, flowing linen, brushed titanium) or vast, empty, perfectly curated spaces.
+      Subject: No literal objects like watches or people. Focus on the feeling of unbothered perfection and absolute stillness.
+      Vibe: Exponentially wealthy, profoundly calm, and perfectly curated.
     rendering:
       font: spectral
       text_color: "#1A1A1A"
@@ -148,8 +140,9 @@ styles:
     categories: [morning, wisdom, love, womenpower, mindfulness, darkacademia, latenight]
     weight: high
     description: >
-      A high-contrast, professional studio portrait or a bold architectural shot with a flat, light background.
-      Clean, sharp, and modern. Designed to make the black text pop. Vibe is aggressive and powerful.
+      A visceral, high-contrast visual strike. Avoid literal portraits. Focus on aggressive, monolithic forms, explosive kinetic energy frozen in time, or blindingly stark environments.
+      Clean, sharp, and brutally modern. Designed to command total attention instantly.
+      Vibe is aggressive, unapologetic, and powerful.
     rendering:
       font: raleway
       text_color: "#1A1A1A"
@@ -165,8 +158,9 @@ styles:
     categories: [morning, wisdom, love, womenpower, mindfulness, darkacademia, latenight]
     weight: high
     description: >
-      A breathtaking, moody cinematic landscape (misty forests, rainy streets, vast oceans). Shot on 35mm film.
-      High-end cinematography feel with deep shadows and rim lighting. The text should feel like a small, deep thought in a big world.
+      A breathtaking, moody, and conceptually overwhelming landscape. Do not use standard forests or streets.
+      Think vast, alien terrain, an endless void of reflective water, or towering, impossible fog.
+      High-end cinematography with deep, crushing shadows and isolated rim lighting. The visual must make the viewer feel incredibly small.
     rendering:
       font: cormorant
       text_color: "#FAF9F6"
@@ -182,8 +176,9 @@ styles:
     categories: [morning, wisdom, love, womenpower, mindfulness, darkacademia, latenight]
     weight: high
     description: >
-      A warm, illustrative scene (watercolor or digital painting) of a figure in a sunlit garden or a cozy room.
-      The aesthetic should be 'earthy' and 'soulful' with volumetric lighting and soft textures.
+      A warm, deeply soulful abstract painting or organic visual. 
+      Avoid literal figures, gardens, or rooms. Instead, use flowing energetic forms, blooming abstract fractals, or intense, warm volumetric light piercing through heavy atmospheres.
+      The aesthetic is 'earthy' yet transcendent, grounding the viewer in raw emotion.
     rendering:
       font: outfit
       text_color: "#1A1A1A"
@@ -203,10 +198,10 @@ styles:
     categories: [wisdom, mindfulness, latenight]
     weight: high
     description: >
-      A surreal, high-end editorial photograph of a massive, glowing geometric orb (gold or glass) floating silently over a black sand desert at twilight.
-      Atmosphere: Volumetric fog, soft amber rim lighting, vast starry sky with a faint nebula.
-      Composition: Central subject with VAST negative space. Hyper-realistic textures.
-      Vibe: Transcendent, mysterious, and awe-inspiring.
+      Mind-bending, high-end cosmic surrealism. Do not rely solely on orbs or deserts.
+      Invent impossible stellar phenomena: gravity bending light across a dark plain, a shattered celestial body, or liquid starlight frozen in zero gravity.
+      Atmosphere: Ethereal glow, crushing scale, and flawless hyper-realistic textures.
+      Vibe: Transcendent, deeply mysterious, and terrifyingly awe-inspiring.
     rendering:
       font: montserrat
       text_color: "#FAF9F6"
@@ -222,10 +217,10 @@ styles:
     categories: [wisdom, mindfulness, darkacademia]
     weight: high
     description: >
-      A cinematic photograph of a surreal art installation in a misty forest. 
-      Examples: A series of glowing glass doorways leading into a void; a massive floating stone block tethered by golden threads.
-      Lighting: Soft-box lighting feel, volumetric rays of light through trees, deep shadows.
-      Vibe: Intellectual, metaphorical, and high-production value.
+      A hyper-realistic depiction of an impossible, large-scale abstract art installation.
+      Do not place it in a typical forest. Put it in an endless void, an impossibly large brutalist hall, or suspended over an abyss.
+      Focus on the sheer scale, impossible physics, and profound psychological metaphors.
+      Vibe: Highly intellectual, unsettling, and cinematic.
     rendering:
       font: cormorant
       text_color: "#FAF9F6"
@@ -241,10 +236,10 @@ styles:
     categories: [morning, wisdom, latenight]
     weight: high
     description: >
-      A stark, brutalist concrete structure rising out of a vast, calm ocean under a blood-red moon or a bright neon sun.
-      Style: Architectural editorial, harsh geometric shadows, clean lines, minimalist color palette (concrete gray and one bold accent color).
-      Composition: High-contrast, minimalist, focus on structural purity.
-      Vibe: Bold, structural, and dream-like.
+      Pure, liminal dream-logic. Architecture that makes no physical sense but feels deeply familiar.
+      Style: Endless staircases, monolithic walls, sterile pools of water, or environments with zero shadow and impossible geometry.
+      Composition: Harsh lines or terrifyingly endless curves. Minimalist color palette focused on pure structure.
+      Vibe: Surreal, liminal, structural, and hypnotic.
     rendering:
       font: oswald
       text_color: "#FAF9F6"
@@ -260,12 +255,10 @@ styles:
     categories: [womenpower]
     weight: high
     description: >
-      A high-end editorial black and white photograph of a woman in high-fashion attire (long coats, dark sunglasses, or minimalist chic).
-      Setting: An elegant urban environment (NYC, Paris, or Milan).
-      Lighting: Hard, high-contrast 'Chiaroscuro' lighting, dramatic shadows, sharp rim light.
-      Medium: 35mm monochrome film with visible, artistic grain.
-      Vibe: Empowering, sophisticated, and high-fashion.
-      Composition: Focus on the subject's posture and movement (e.g., walking across a busy road or standing against a brutalist wall).
+      Fierce, avant-garde black and white conceptual photography. 
+      Do not use literal human portraits or street settings. Use extreme close-ups of abstract movement, high-contrast shattered glass, or aggressive, kinetic silhouettes.
+      Lighting: Hard, unforgiving 'Chiaroscuro' lighting. Maximum contrast between blinding white and pitch black.
+      Vibe: Dominant, fiercely empowering, sophisticated, and raw.
     rendering:
       font: raleway
       text_color: "#FAF9F6"
@@ -281,12 +274,10 @@ styles:
     categories: [womenpower]
     weight: high
     description: >
-      A cinematic, strictly black and white street photography shot of a fashionable woman (Parisian chic or NYC street style).
-      Outfit: A high-fashion outfit like an oversized blazer with tailored trousers, an elegant trench coat over a slip dress, a stylish knit top with a midi skirt, or premium chic street-style.
-      Setting: A busy city street with natural movement and bokeh.
-      Lighting: High-contrast monochrome, deep shadows, soft volumetric glow.
-      Vibe: Relatable yet aspirational, emotional, and visually rich.
-      Composition: Wide angle 35mm shot showing the environment and the subject's full outfit.
+      Cinematic, strictly black and white hyper-motion photography.
+      Abandon the idea of standard "street style" fashion. Capture the essence of urban velocity: streaks of light, blurred monolithic structures, or the stark geometry of shadows bending around impossible corners.
+      Lighting: Deep cinematic shadows and intense volumetric bursts of light.
+      Vibe: Urgent, deeply emotional, aspirational, and visually relentless.
     rendering:
       font: caveat
       text_color: "#FAF9F6"
