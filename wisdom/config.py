@@ -118,7 +118,7 @@ def llm_role(role: str) -> LLMRoleConfig:
 
     return LLMRoleConfig(
         providers=providers,
-        temperature=raw.get("temperature", 0.85),
+        temperature=raw.get("temperature", 1.0),
         max_tokens=raw.get("max_tokens", 1024),
         disable_thinking=raw.get("disable_thinking", False),
     )

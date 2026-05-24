@@ -38,7 +38,7 @@ class ThemeConfig:
 @dataclass
 class LLMRoleConfig:
     providers: list[str]
-    temperature: float = 0.85
+    temperature: float = 1.0
     max_tokens: int = 1024
     disable_thinking: bool = False
 
