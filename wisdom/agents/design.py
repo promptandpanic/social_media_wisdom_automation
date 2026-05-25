@@ -176,7 +176,11 @@ def pick_style(state: PipelineState) -> PipelineState:
 
     try:
         prompt = _picker_prompt(quote.text if quote else "", theme_key, styles, recent)
-        raw = providers.llm.generate(prompt, role="style_picker")
+        raw, provider_info = providers.llm.generate(prompt, role="style_picker")
+        if "model_usage" not in state:
+            state["model_usage"] = {}
+        state["model_usage"]["Style Picker"] = provider_info
+
         m = re.search(r"\{.*?\}", raw, re.DOTALL)
         if m:
             import json
@@ -264,7 +268,12 @@ def generate_brief(state: PipelineState) -> PipelineState:
             random_seed=random.choice(variation_seeds),
             atmospheric_twist=random.choice(atmospheric_twists),
         )
-        image_prompt = providers.llm.generate(prompt, role="creative_brief").strip()
+        image_prompt, provider_info = providers.llm.generate(prompt, role="creative_brief")
+        if "model_usage" not in state:
+            state["model_usage"] = {}
+        state["model_usage"]["Creative Brief"] = provider_info
+
+        image_prompt = image_prompt.strip()
         if len(image_prompt.split()) >= 20:
             brief = _build_brief(image_prompt, style_name, style_data, text, quote)
             logger.info(

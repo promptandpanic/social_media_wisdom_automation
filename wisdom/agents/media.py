@@ -65,6 +65,9 @@ def generate_image(state: PipelineState) -> PipelineState:
 
         exclude = state.get("failed_providers", [])
         image_bytes, provider_name = providers.image.generate(prompt, exclude=exclude)
+        if "model_usage" not in state:
+            state["model_usage"] = {}
+        state["model_usage"]["Image Generation"] = provider_name
 
     return {
         **state,
@@ -88,7 +91,7 @@ def compose(state: PipelineState) -> PipelineState:
 def judge(state: PipelineState) -> PipelineState:
     composed = state.get("composed_image", b"")
     quote = state.get("quote")
-    score, accepted, hard_gate, issues = _judge_image(composed, quote)
+    score, accepted, hard_gate, issues = _judge_image(composed, quote, state)
 
     candidate = {
         "image": state.get("image_bytes"),
@@ -192,14 +195,18 @@ Return ONLY valid JSON:
 """
 
 
-def _judge_image(image_bytes: bytes, quote) -> tuple[int, bool, bool, str]:
+def _judge_image(image_bytes: bytes, quote, state: PipelineState) -> tuple[int, bool, bool, str]:
     if not image_bytes:
         return 0, False, True, "No image bytes"
     threshold = cfg.app().get("judge_threshold", 7)
     try:
         prompt = _JUDGE_PROMPT.format(text=getattr(quote, "text", "") if quote else "")
-        raw = providers.llm.judge_image(image_bytes, prompt, role="image_judge")
-        m = re.search(r"\{.*\}", raw, re.DOTALL)
+        content, provider_info = providers.llm.judge_image(image_bytes, prompt, role="image_judge")
+        if "model_usage" not in state:
+            state["model_usage"] = {}
+        state["model_usage"]["Vision Judge"] = provider_info
+
+        m = re.search(r"\{.*\}", content, re.DOTALL)
         if m:
             data = json.loads(m.group())
             score = int(data.get("score", 5))

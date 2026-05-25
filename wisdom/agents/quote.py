@@ -119,7 +119,11 @@ def generate(state: PipelineState) -> PipelineState:
     errors = list(state.get("errors", []))
 
     try:
-        raw = providers.llm.generate(prompt, role="quote_generation")
+        raw, provider_info = providers.llm.generate(prompt, role="quote_generation")
+        if "model_usage" not in state:
+            state["model_usage"] = {}
+        state["model_usage"]["Quote Generation"] = provider_info
+
         quote_list = _parse_quote_json(raw)
         if not quote_list:
             return {

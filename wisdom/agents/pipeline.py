@@ -174,7 +174,7 @@ def _create_video(state: PipelineState, theme: ThemeConfig) -> PipelineState:
         return {**state, "thumbnail_bytes": composed}
 
 
-def _generate_caption_and_tags(quote, theme: ThemeConfig) -> tuple[str, list[str], str]:
+def _generate_caption_and_tags(quote, theme: ThemeConfig, state: PipelineState) -> tuple[str, list[str], str]:
     if not quote:
         return "", theme.hashtags
     prompt = f"""
@@ -200,7 +200,11 @@ Quote context (do NOT include in output): "{quote.text}" — {quote.author}
     try:
         from wisdom import providers
 
-        raw = providers.llm.generate(prompt, role="quote_generation")
+        raw, provider_info = providers.llm.generate(prompt, role="quote_generation")
+        if "model_usage" not in state:
+            state["model_usage"] = {}
+        state["model_usage"]["Caption Writer"] = provider_info
+
         m = re.search(r"\{.*\}", raw, re.DOTALL)
         if m:
             data = json.loads(m.group())
@@ -218,7 +222,7 @@ def _build_meta(state: PipelineState, theme: ThemeConfig) -> PipelineState:
     if state.get("offline"):
         llm_caption, hashtags, llm_title = "", theme.hashtags, ""
     else:
-        llm_caption, hashtags, llm_title = _generate_caption_and_tags(quote, theme)
+        llm_caption, hashtags, llm_title = _generate_caption_and_tags(quote, theme, state)
 
     # Build caption: quote + attribution + body. No quote = body only.
     parts = []
@@ -437,6 +441,40 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
         else ""
     )
 
+    model_usage = state.get("model_usage", {})
+    if model_usage:
+        telemetry_html = '<tr><td style="padding-bottom: 48px;"><div style="font-size:9px; letter-spacing:3px; color:#4a9eba; text-transform:uppercase; margin-bottom:20px;">AI Telemetry</div><div style="background:#0f1a24; border: 1px solid #1e3a5f; padding: 24px; border-radius: 8px;">'
+        
+        items = list(model_usage.items())
+        for i, (step, model_info) in enumerate(items):
+            is_last = (i == len(items) - 1)
+            
+            m = re.match(r"(.*?)\s*\((.*?)\)", model_info)
+            if m:
+                provider_display = f'{m.group(1)} <span style="color:#4a9eba; font-weight:normal; font-size:12px;">({m.group(2)})</span>'
+            else:
+                provider_display = model_info
+
+            telemetry_html += f'''
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:15px;">
+              <tr>
+                <td width="24" valign="middle">
+                  <div style="background:#4a9eba; color:#fff; border-radius:50%; width:24px; height:24px; text-align:center; font-size:12px; line-height:24px; font-weight:bold;">{i+1}</div>
+                </td>
+                <td valign="middle" style="padding-left:15px;">
+                  <div style="color:#8aafbf; font-size:10px; text-transform:uppercase; letter-spacing:2px;">{step}</div>
+                  <div style="color:#fff; font-size:14px; font-weight:600;">{provider_display}</div>
+                </td>
+              </tr>
+            </table>
+            '''
+            if not is_last:
+                telemetry_html += '<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:15px;"><tr><td width="24" align="center"><div style="border-left: 2px solid #1e3a5f; height: 20px; width: 0;"></div></td><td></td></tr></table>'
+                
+        telemetry_html += '</div></td></tr>'
+    else:
+        telemetry_html = ''
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -499,6 +537,9 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
 
         <!-- Caption block (only if present) -->
         {'<tr><td style="padding-bottom: 48px;"><div style="font-size:9px; letter-spacing:3px; color:#4a9eba; text-transform:uppercase; margin-bottom:20px;">Caption</div><div style="background:#0f1a24; border: 1px solid #1e3a5f; padding: 24px; font-size:13px; line-height:1.8; color:#8aafbf;">' + caption_html + "</div></td></tr>" if caption_html else ""}
+
+        <!-- Telemetry block -->
+        {telemetry_html}
 
         <!-- Published to -->
         <tr><td style="padding-bottom: 0;">

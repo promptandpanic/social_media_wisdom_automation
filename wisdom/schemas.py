@@ -184,3 +184,6 @@ class PipelineState(TypedDict, total=False):
     # Results
     platform_results: list[PlatformResult]
     errors: list[str]
+
+    # Telemetry
+    model_usage: dict[str, str]

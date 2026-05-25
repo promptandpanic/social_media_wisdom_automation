@@ -23,8 +23,8 @@ litellm.suppress_debug_info = True
 logger = logging.getLogger(__name__)
 
 
-def generate(prompt: str, role: str) -> str:
-    """Run prompt through the role's fallback chain. Raises RuntimeError if all fail."""
+def generate(prompt: str, role: str) -> tuple[str, str]:
+    """Run prompt through the role's fallback chain. Raises RuntimeError if all fail. Returns (content, provider_info)"""
     role_cfg = cfg.llm_role(role)
     providers_cfg = cfg.llm_providers()
     last_err: Exception | None = None
@@ -55,7 +55,7 @@ def generate(prompt: str, role: str) -> str:
             if not content:
                 raise ValueError("Empty response content")
             logger.info(f"[{role}] ✓ {p_name} ({p.model})")
-            return content
+            return content, f"{p_name} ({p.model})"
         except Exception as exc:
             logger.warning(f"[{role}] {p_name} failed: {exc}")
             last_err = exc
@@ -66,8 +66,8 @@ def generate(prompt: str, role: str) -> str:
     )
 
 
-def judge_image(image_bytes: bytes, prompt: str, role: str) -> str:
-    """Evaluate an image using a vision-capable LLM (Gemini Flash)."""
+def judge_image(image_bytes: bytes, prompt: str, role: str) -> tuple[str, str]:
+    """Evaluate an image using a vision-capable LLM (Gemini Flash). Returns (content, provider_info)"""
     role_cfg = cfg.llm_role(role)
     providers_cfg = cfg.llm_providers()
     b64_image = base64.b64encode(image_bytes).decode("utf-8")
@@ -104,7 +104,7 @@ def judge_image(image_bytes: bytes, prompt: str, role: str) -> str:
             if not content:
                 raise ValueError("Empty response content")
             logger.info(f"[{role}] ✓ {p_name} ({p.model})")
-            return content
+            return content, f"{p_name} ({p.model})"
         except Exception as exc:
             logger.warning(f"[{role}] {p_name} failed: {exc}")
             last_err = exc
