@@ -24,7 +24,27 @@ class FacebookPlatform(BasePlatform):
         )
 
     def _token(self) -> str:
-        return os.environ["FACEBOOK_ACCESS_TOKEN"]
+        if hasattr(self, "_effective_token"):
+            return self._effective_token
+            
+        token = os.environ["FACEBOOK_ACCESS_TOKEN"]
+        page_id = self._page_id()
+        
+        try:
+            r = requests.get(
+                f"{_GRAPH}/{page_id}",
+                params={"fields": "access_token", "access_token": token},
+                timeout=10,
+            )
+            if r.status_code == 200:
+                data = r.json()
+                if "access_token" in data:
+                    token = data["access_token"]
+        except Exception as e:
+            logger.warning(f"Could not check for page access token: {e}")
+            
+        self._effective_token = token
+        return token
 
     def _page_id(self) -> str:
         return os.environ["FACEBOOK_PAGE_ID"]
