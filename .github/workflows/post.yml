@@ -1,6 +1,13 @@
 name: Post Quotes
 
 on:
+  schedule:
+    # 5 Posts/Day optimized for US (EST) + Global Reach
+    - cron: '0 11 * * *'   # 7:00 AM EST / 4:30 PM IST (Wake up US, Commute India)
+    - cron: '0 14 * * *'   # 10:00 AM EST / 7:30 PM IST (Morning US, Prime India)
+    - cron: '0 17 * * *'   # 1:00 PM EST / 10:30 PM IST (Lunch US, Late India)
+    - cron: '0 20 * * *'   # 4:00 PM EST (Afternoon slump US)
+    - cron: '30 23 * * *'  # 7:30 PM EST (Prime time US)
   workflow_dispatch:
     inputs:
       theme:
@@ -54,10 +61,10 @@ jobs:
         id: theme
         run: |
           INPUT="${{ github.event.inputs.theme }}"
-          if [ "$INPUT" = "rotating" ]; then
-            THEMES=(wisdom love mindfulness darkacademia)
-            IDX=$(( $(date +%j) % 4 ))
-            echo "name=${THEMES[$IDX]}" >> $GITHUB_OUTPUT
+          if [ -z "$INPUT" ] || [ "$INPUT" = "rotating" ]; then
+            THEMES=(morning wisdom love mindfulness womenpower latenight)
+            RANDOM_IDX=$(( RANDOM % ${#THEMES[@]} ))
+            echo "name=${THEMES[$RANDOM_IDX]}" >> $GITHUB_OUTPUT
           else
             echo "name=$INPUT" >> $GITHUB_OUTPUT
           fi
