@@ -429,11 +429,11 @@ def _render_line(
             curr_x += draw.textlength(char, font=font) + ls
         return curr_x
 
-    hl_words = [hw.strip('.,!?"\\'').lower() for hw in highlight_text.split()] if highlight_text else []
+    hl_words = [hw.strip(".,!?\\\"'").lower() for hw in highlight_text.split()] if highlight_text else []
 
     for w in words:
         if w:
-            word_clean = w.strip('.,!?"\\'').lower()
+            word_clean = w.strip(".,!?\\\"'").lower()
             is_hl = word_clean in hl_words and word_clean
             word_fill = hi_color if is_hl else fill
 
