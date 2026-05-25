@@ -743,6 +743,18 @@ def _draw_text(
             (ax + (d_bb[2] - d_bb[0]), ay), author_spaced, font=a_font, fill=a_color
         )
 
+    # High-Fashion Editorial Header
+    import random
+    try:
+        tag_font = _font("inter", 18)
+        tag_text = f"V I S U A L   A R C H I V E   —   V O L .  {random.randint(1, 9)}"
+        tag_bb = tag_font.getbbox(tag_text)
+        tag_w = tag_bb[2] - tag_bb[0]
+        # Draw at top center with low opacity
+        draw.text(((IMAGE_WIDTH - tag_w) // 2, 70), tag_text, font=tag_font, fill=(255, 255, 255, 90))
+    except Exception:
+        pass
+
     return img
 
 
