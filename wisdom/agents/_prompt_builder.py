@@ -47,7 +47,7 @@ def build_quote_prompt(
 
     if mode == "real_author":
         return f"""\
-Find ONE real quote from a real named person for a {_AUDIENCE}.
+Generate 5 DISTINCT real quotes from real named persons for a {_AUDIENCE}.
 
 {topic_block}
 
@@ -57,23 +57,27 @@ Find ONE real quote from a real named person for a {_AUDIENCE}.
 Rules:
 - REAL quote — do not invent, paraphrase, or composite
 - BREVITY: Favor shorter quotes (10-15 words) that hit hard immediately.
-- Maximum {max_words} words
+- Maximum {max_words} words per quote
 - Named author — not "Unknown"
 - Choose lesser-known gems over widely-circulated lines
 - Specific and concrete — not vague philosophy
 - Must be a visceral, raw truth about modern life, ambition, or relationships
 - It should make the reader instantly think "This is exactly how I feel"
 
-Uniqueness score (1–10): how fresh and non-clichéd is this exact phrasing?
-  10 = almost nobody has seen this line  |  1 = posted on every motivational page
+Uniqueness / Viral Potential score (1–10): how fresh, relatable, and shareable is this exact phrasing?
+  10 = mind-blowing truth almost nobody has seen  |  1 = posted on every motivational page
 {avoid}
-Return ONLY a JSON array with 1 item:
-[{{"quote":"exact text","author":"Full Name","uniqueness":7}}]
-Replace 7 with your actual score."""
+Return ONLY a JSON array with exactly 5 items:
+[
+  {{"quote":"exact text","author":"Full Name","uniqueness":9}},
+  {{"quote":"exact text","author":"Full Name","uniqueness":7}},
+  ...
+]
+Replace uniqueness with your actual score."""
 
     else:  # internet_found
         return f"""\
-Find ONE quote from the internet — Reddit, Pinterest, Tumblr, Instagram captions, Twitter/X,
+Find 5 DISTINCT quotes from the internet — Reddit, Pinterest, Tumblr, Instagram captions, Twitter/X,
 or a traditional proverb / folk saying. Author may be known or unknown.
 
 {topic_block}
@@ -82,17 +86,21 @@ or a traditional proverb / folk saying. Author may be known or unknown.
 {no_cliches}
 
 Rules:
-- DO NOT write or invent — find something that genuinely exists
+- DO NOT write or invent — find things that genuinely exist
 - BREVITY: Favor shorter quotes (8-15 words) that hit hard immediately.
-- Maximum {max_words} words
+- Maximum {max_words} words per quote
 - Must feel instantly shareable — the kind people screenshot and send
 - Must be a visceral, raw truth about modern life, ambition, or relationships
 - It should make the reader instantly think "This is exactly how I feel"
 - Author: real name if known, "Unknown" otherwise
 
-Uniqueness score (1–10): how fresh and non-clichéd is this exact phrasing?
-  10 = almost nobody has seen this line  |  1 = posted on every motivational page
+Uniqueness / Viral Potential score (1–10): how fresh, relatable, and shareable is this exact phrasing?
+  10 = mind-blowing truth almost nobody has seen  |  1 = posted on every motivational page
 {avoid}
-Return ONLY a JSON array with 1 item:
-[{{"quote":"exact text","author":"Name or Unknown","uniqueness":7}}]
-Replace 7 with your actual score."""
+Return ONLY a JSON array with exactly 5 items:
+[
+  {{"quote":"exact text","author":"Name or Unknown","uniqueness":9}},
+  {{"quote":"exact text","author":"Name or Unknown","uniqueness":7}},
+  ...
+]
+Replace uniqueness with your actual score."""

@@ -75,27 +75,54 @@ class FacebookPlatform(BasePlatform):
             page = self._page_id()
             token = self._token()
 
-            # For Facebook Pages, the /videos endpoint handles URL uploads seamlessly.
-            # Vertical videos under 90s are distributed as Reels.
-            r = requests.post(
-                f"{_GRAPH}/{page}/videos",
+            # Step 1: Initialize Upload Session
+            r1 = requests.post(
+                f"{_GRAPH}/{page}/video_reels",
                 data={
+                    "upload_phase": "start",
+                    "access_token": token,
+                },
+                timeout=30,
+            )
+            if r1.status_code != 200:
+                logger.error(f"Facebook video init failed: {r1.text}")
+                return PlatformResult("facebook", "failed", error=f"FB Init Error: {r1.text}")
+            
+            video_id = r1.json().get("video_id")
+            if not video_id:
+                return PlatformResult("facebook", "failed", error="No video_id returned from init")
+
+            # Step 2: Upload Video via rupload
+            r2 = requests.post(
+                f"https://rupload.facebook.com/video-upload/{video_id}",
+                headers={
+                    "Authorization": f"OAuth {token}",
                     "file_url": video_url,
+                },
+                timeout=120,
+            )
+            if r2.status_code != 200:
+                logger.error(f"Facebook rupload failed: {r2.text}")
+                return PlatformResult("facebook", "failed", error=f"FB Upload Error: {r2.text}")
+
+            # Step 3: Publish Reel
+            r3 = requests.post(
+                f"{_GRAPH}/{page}/video_reels",
+                data={
+                    "video_id": video_id,
+                    "upload_phase": "finish",
+                    "video_state": "PUBLISHED",
                     "description": caption,
                     "access_token": token,
                 },
-                timeout=60,
+                timeout=30,
             )
-            if r.status_code != 200:
-                logger.error(f"Facebook video publish failed: {r.text}")
-                return PlatformResult("facebook", "failed", error=f"FB Error: {r.text}")
+            if r3.status_code != 200:
+                logger.error(f"Facebook video finish failed: {r3.text}")
+                return PlatformResult("facebook", "failed", error=f"FB Finish Error: {r3.text}")
 
-            post_id = r.json()["id"]
-            # Video processing might mean the permalink isn't immediately resolvable,
-            # but we can return the ID. Let's try to get the permalink.
-            url = f"https://www.facebook.com/{page}/videos/{post_id}"
-            
-            return PlatformResult("facebook", "posted", post_id=post_id, url=url)
+            url = f"https://www.facebook.com/{page}/videos/{video_id}"
+            return PlatformResult("facebook", "posted", post_id=video_id, url=url)
 
         except Exception as exc:
             logger.error(f"Facebook post_video failed: {exc}")

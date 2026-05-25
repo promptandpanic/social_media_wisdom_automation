@@ -46,7 +46,7 @@ def _extract_highlight(text: str) -> str:
     return " ".join(words[-5:]) if len(words) > 5 else text
 
 
-def _parse_quote_json(raw: str) -> dict | None:
+def _parse_quote_json(raw: str) -> list[dict] | None:
     # Strip markdown code fences Gemini often wraps around JSON
     raw = re.sub(r"```(?:json)?\s*", "", raw).strip()
     m = re.search(r"\[.*\]", raw, re.DOTALL)
@@ -55,12 +55,12 @@ def _parse_quote_json(raw: str) -> dict | None:
         if not m:
             return None
         try:
-            return json.loads(m.group())
+            return [json.loads(m.group())]
         except Exception:
             return None
     try:
         arr = json.loads(m.group())
-        return arr[0] if isinstance(arr, list) and arr else None
+        return arr if isinstance(arr, list) and arr else None
     except Exception:
         return None
 
@@ -120,8 +120,8 @@ def generate(state: PipelineState) -> PipelineState:
 
     try:
         raw = providers.llm.generate(prompt, role="quote_generation")
-        data = _parse_quote_json(raw)
-        if not data:
+        quote_list = _parse_quote_json(raw)
+        if not quote_list:
             return {
                 **state,
                 "_quote_attempt": attempt,
@@ -129,6 +129,10 @@ def generate(state: PipelineState) -> PipelineState:
                 "_image_hint": image_hint,
                 "errors": errors,
             }
+
+        # Pick the one with the highest uniqueness/viral potential score
+        quote_list.sort(key=lambda q: int(q.get("uniqueness", 0) or 0), reverse=True)
+        data = quote_list[0]
 
         text = _clean(data.get("quote", ""))
         author = (data.get("author") or "").strip()
@@ -152,7 +156,7 @@ def generate(state: PipelineState) -> PipelineState:
                 score=uniqueness,
                 source=_source_name(mode),
             )
-            logger.info(f'  ✓ "{text[:70]}" — {author}')
+            logger.info(f'  ✓ "{text[:70]}" — {author} (Score: {uniqueness})')
             return {
                 **state,
                 "_quote_attempt": attempt,

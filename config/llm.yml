@@ -6,6 +6,9 @@
 #   see: https://docs.litellm.ai/docs/providers
 
 providers:
+  deepseek:
+    model: deepseek/deepseek-v4-pro
+    key_env: DEEPSEEK_API_KEY
   kimi:
     model: moonshot/moonshot-v1-32k
     key_env: MOONSHOT_API_KEY
@@ -17,23 +20,23 @@ providers:
     key_env: HF_API_KEY
 
 # Per-role temperature/token settings.
-# kimi runs first for text roles (burns $1 Moonshot credit), falls back to gemini.
-# image_judge stays gemini-only — kimi has no vision support.
+# deepseek runs first for text roles, falls back to kimi, then gemini.
+# image_judge stays gemini-only — deepseek chat has no vision support.
 roles:
   quote_generation:
-    providers: [kimi, gemini]
+    providers: [deepseek, kimi, gemini]
     temperature: 1.0
     max_tokens: 8192
     disable_thinking: true
 
   style_picker:
-    providers: [kimi, gemini]
+    providers: [deepseek, kimi, gemini]
     temperature: 1.0
     max_tokens: 2048
     disable_thinking: true
 
   creative_brief:
-    providers: [kimi, gemini]
+    providers: [deepseek, kimi, gemini]
     temperature: 1.0
     max_tokens: 8192
 

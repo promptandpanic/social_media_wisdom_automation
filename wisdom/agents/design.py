@@ -221,7 +221,7 @@ def generate_brief(state: PipelineState) -> PipelineState:
         }.get(r.get("text_zone", "center"), "center")
 
         text_zone_instruction = (
-            f"The {zone_desc} of the frame will have {text_color} text overlaid on it. "
+            f"The {zone_desc} of the frame will have text overlaid on it. "
             f"That area MUST be naturally clean, shadowed, or low-contrast in the scene itself — "
             f"not bright or busy — so the text is legible."
         )

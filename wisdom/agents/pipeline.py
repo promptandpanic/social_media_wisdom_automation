@@ -186,7 +186,7 @@ The post already opens with this quote and attribution — do NOT repeat or echo
 Write the body of the Instagram caption that goes BELOW the quote:
 1. One highly polarizing, provocative, or deeply relatable hook sentence (e.g. "The hardest truth you'll read today.", "Most people will scroll past this because it hurts."). No emojis in the hook.
 2. A deeply philosophical 4-sentence story or breakdown that expands on the quote. This MUST be long enough to keep the user reading for at least 15 seconds. 
-3. One CTA line (e.g. "Tag someone who needs to hear this.", "Drop a 💯 if you agree.").
+3. One call-to-action line (e.g. "Tag someone who needs to hear this.", "Drop a 💯 if you agree."). Do NOT include the literal word "CTA" or "CTA:" in your response.
 4. Provide a short, punchy, and highly clickable YouTube Shorts title (under 60 characters) based on the quote. Do NOT include the theme name unless it's natural.
 
 Format the caption to force a "Read More" algorithmic trap:
