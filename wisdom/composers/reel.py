@@ -117,12 +117,9 @@ def _build_reel(
 
         # Overlay and text are both fully static — no zoom
         parts.append(f"[1:v]format=rgba,setsar=1,fps={FPS}[ov_static]")
-        parts.append(
-            f"[2:v]format=rgba,setsar=1,fps={FPS},"
-            f"fade=t=out:st={text_fade_start:.3f}:d={FADE_DUR_SEC:.3f}:alpha=1[text_fade]"
-        )
+        parts.append(f"[2:v]format=rgba,setsar=1,fps={FPS}[text_static]")
         parts.append("[bg][ov_static]overlay=0:0[bg_ov]")
-        parts.append("[bg_ov][text_fade]overlay=0:0[vout]")
+        parts.append("[bg_ov][text_static]overlay=0:0[vout]")
 
         if audio_idx is not None:
             fade_st = max(0.0, total - 1.5)
