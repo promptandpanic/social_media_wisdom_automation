@@ -1,275 +1,140 @@
 # Quote topic configuration
-# Strategy: broad emotional territory only — let the LLM pick its own angle.
-# No prescriptive sub-lists or angle hints. Less is more.
+# Strategy: Pure algorithmic engagement. 
+# We are abandoning generic advice and focusing entirely on high-virality psychological hooks:
+# Villain arc, brutal truths, dark feminine, modern heartbreak, and silent boundaries.
 
 categories:
 
   morning:
-    name: "Morning Motivation"
-    max_words: 18
+    name: "The Villain Arc / Obsession"
+    max_words: 16
     brief: >
-      The relentless pursuit of the hard path because it is the right one. Specific, visceral, and felt — absolutely no generic hustle slogans.
-      Includes: The silence of early hours, grueling physical discipline, forging mental foundations before the world wakes up, and the raw grit of outworking your own doubts.
+      Extreme, uncompromising obsession. Going ghost to build an empire. The cold, calculated decision to outwork everyone who doubted you. 
+      This isn't "good morning" motivation; this is "Villain Arc" discipline. Emotional detachment, hyper-focus, and the realization that nobody is coming to save you.
+      Absolutely no generic hustle quotes. Must feel dangerous, quiet, and ruthlessly ambitious.
 
     featured_authors:
-      - name: "Naval Ravikant"
-        note: "Modern philosopher/investor — wealth, happiness, clear thinking"
       - name: "David Goggins"
-        note: "Former Navy SEAL — mental toughness, overcoming limits, raw discipline"
-      - name: "Alex Hormozi"
-        note: "Modern entrepreneur — extreme effort, anti-excuse, business philosophy"
-      - name: "James Clear"
-        note: "Author of Atomic Habits — systems, small daily improvements"
-      - name: "Ryan Holiday"
-        note: "Modern Stoic — ego as the enemy, discipline is destiny"
+        note: "Taking souls, absolute suffering, callous your mind"
+      - name: "Naval Ravikant"
+        note: "Cold, calculating truth about wealth and status"
+      - name: "Marcus Aurelius"
+        note: "Stoic indifference to the opinions of the weak"
+      - name: "Robert Greene"
+        note: "Author of 48 Laws of Power — human nature, strategy, power dynamics"
       - name: "Kobe Bryant"
-        note: "Basketball legend — Mamba mentality, obsession with the craft"
-      - name: "MS Dhoni"
-        note: "Legendary Indian cricketer — calmness under pressure, process over results"
-      - name: "Ratan Tata"
-        note: "Indian industrialist — humility with ambition, ethics in success, building with purpose"
-      - name: "Mel Robbins"
-        note: "Author/speaker — action despite fear, the 5-second rule, self-confidence"
-      - name: "Elon Musk"
-        note: "Entrepreneur — obsession with the mission, working when others don't"
-      - name: "Narendra Modi"
-        note: "Indian PM — self-reliance, nation-building, rising from humble beginnings"
+        note: "Psychopathic obsession with winning and the craft"
 
   wisdom:
-    name: "Life Wisdom"
-    max_words: 24
+    name: "Brutal Psychological Truths"
+    max_words: 22
     brief: >
-      Truths that arrive slowly through experience, patterns people repeat without
-      seeing, clarity after disappointment, the cost of avoidance, what time
-      teaches that advice cannot. Also: the paradoxes — how loss clarifies, how
-      slowing down is not falling behind, how the things we resist most are often
-      the things we need. Should feel like naming something already known
-      but never said quite this way.
+      Uncomfortable, harsh realities about human psychology, betrayal, and outgrowing your circle. 
+      The pain of realizing people don't love you, they love what they can extract from you. The cost of being too loyal. 
+      Must make the reader stop scrolling because it exposes a truth they were trying to ignore. Dark, profound, and deeply cynical but ultimately liberating.
 
     featured_authors:
-      - name: "Rumi"
-        note: "13th-century Sufi poet — soul, longing, love, spiritual depth"
-      - name: "Swami Vivekananda"
-        note: "Indian monk — strength, fearlessness, duty, self-belief"
-      - name: "Kabir Das"
-        note: "15th-century Indian saint-poet — raw honest wisdom, non-attachment"
-      - name: "APJ Abdul Kalam"
-        note: "India's beloved president/scientist — dreams, youth, resilience"
-      - name: "Khalil Gibran"
-        note: "Lebanese poet (The Prophet) — love, pain, grief, beauty of life"
-      - name: "Paulo Coelho"
-        note: "Brazilian novelist — destiny, courage, following your heart"
-      - name: "Chanakya"
-        note: "Ancient Indian strategist — sharp life wisdom, power, self-discipline"
-      - name: "Rabindranath Tagore"
-        note: "Nobel laureate Indian poet — beauty, humanity, spiritual depth"
-      - name: "Osho"
-        note: "Indian mystic — awareness, ego, freedom, presence"
-      - name: "Marcus Aurelius"
-        note: "Roman emperor, Stoic — duty, impermanence, self-mastery"
-      - name: "Seneca"
-        note: "Roman Stoic — time, mortality, living deliberately"
-      - name: "Epictetus"
-        note: "Stoic philosopher (former slave) — what is and isn't in your control"
-      - name: "Carl Jung"
-        note: "Swiss psychologist — shadow, archetypes, the unconscious"
-      - name: "Alan Watts"
-        note: "British philosopher — Zen, acceptance, the nature of reality"
-      - name: "Lao Tzu"
-        note: "Ancient Chinese philosopher — effortless action, the Tao, simplicity"
-      - name: "Charlie Munger"
-        note: "Investor/polymath — mental models, elementary worldly wisdom"
       - name: "Friedrich Nietzsche"
-        note: "German philosopher — the will to power, self-overcoming, honesty"
+        note: "The abyss, the will to power, dismantling morality"
+      - name: "Carl Jung"
+        note: "The shadow self, the dark side of human nature"
+      - name: "Niccolò Machiavelli"
+        note: "The reality of human selfishness and power"
+      - name: "Seneca"
+        note: "The brevity of life, the foolishness of people"
+      - name: "Arthur Schopenhauer"
+        note: "Pessimism, the suffering of existence, the illusion of happiness"
 
   love:
-    name: "Love & Relationships"
+    name: "Modern Heartbreak & Detachment"
     max_words: 24
     brief: >
-      Being chosen in ordinary moments, the difference between attention and care,
-      who you become in safe versus anxious love, the slow drift apart, things
-      people feel but never say, the specific ache of almost-love. Also: modern
-      dynamics — situationships, the person who was right but at the wrong time,
-      loving someone whose attachment style collides with yours, the grief of
-      outgrowing people you once needed. Precise and recognised — not romantic clichés.
+      The excruciating pain of silent detachment. Realizing you fought for someone who was okay with losing you.
+      The exhaustion of situationships, unspoken goodbyes, and the grief of outgrowing someone you once loved.
+      Must focus on *walking away*, *unrequited loyalty*, and *healing in silence*. No sweet romance. This is for the broken-hearted who need closure.
 
     featured_authors:
       - name: "Esther Perel"
-        note: "Relationship therapist — erotic intelligence, safe vs adventure in long-term love"
-      - name: "Alain de Botton"
-        note: "Philosopher — the reality of marriage, safe love, love as a skill"
-      - name: "bell hooks"
-        note: "Author — love as action, the courage to be vulnerable, love as choice"
-      - name: "Khalil Gibran"
-        note: "Poet — the beauty and pain of shared life, loving without possession"
-      - name: "C.S. Lewis"
-        note: "Author — the four loves, grief as the price of deep love"
-      - name: "Atticus"
-        note: "Modern poet (Instagram) — short, precise, the unsaid between two people"
+        note: "The reality of modern betrayal and emotional distance"
+      - name: "Warsan Shire"
+        note: "Visceral, raw pain of not being enough, cutting ties"
       - name: "Lang Leav"
-        note: "Modern poet — longing, heartbreak, love that didn't survive"
-      - name: "Nikita Gill"
-        note: "Modern poet — fierce love, healing, loving yourself first"
-      - name: "Nayyirah Waheed"
-        note: "Modern poet — softness as strength, loving without losing yourself"
-      - name: "John Gottman"
-        note: "Relationship researcher — what makes love last, contempt as the killer"
+        note: "The quiet ache of someone who doesn't care anymore"
+      - name: "Charles Bukowski"
+        note: "Cynical, whiskey-soaked heartbreak and loneliness"
+      - name: "R.M. Drake"
+        note: "The messy, painful process of letting go"
 
   mindfulness:
-    name: "Mindfulness & Inner Peace"
-    max_words: 20
-    brief: >
-      Rest without guilt, the cost of constant noise, returning to yourself,
-      attention as a finite resource, slowing down before life forces you to.
-      Also: anxiety that won't switch off, the mind replaying what the day is done with,
-      the particular exhaustion of overthinking, finding stillness not as an escape
-      but as the only honest place to start from.
-      Should feel like relief — recognition, not instruction.
-
-    featured_authors:
-      - name: "Eckhart Tolle"
-        note: "Spiritual teacher — The Power of Now, presence, the ego as the source of suffering"
-      - name: "Thich Nhat Hanh"
-        note: "Zen monk — peace is every step, deep listening, breathing as practice"
-      - name: "Pema Chödrön"
-        note: "Buddhist nun — failing well, sitting with discomfort, compassion in difficulty"
-      - name: "Brianna Wiest"
-        note: "Modern author — emotional maturity, self-sabotage, the mountain is you"
-      - name: "Jon Kabat-Zinn"
-        note: "Mindfulness researcher — attention, acceptance, arriving in the present moment"
-      - name: "Rumi"
-        note: "Sufi poet — silence as the language of God, the soul's longing for peace"
-      - name: "Lao Tzu"
-        note: "Ancient philosopher — stillness as power, the way of non-resistance"
-      - name: "Adyashanti"
-        note: "Spiritual teacher — awakening, the end of seeking, resting as you are"
-      - name: "Deepak Chopra"
-        note: "Author/physician — mind-body connection, consciousness, inner stillness"
-
-  goodnight:
-    name: "Goodnight & Gratitude"
-    max_words: 22
-    brief: >
-      Letting the day end gently, releasing what you couldn't control, forgiving
-      yourself without ceremony, gratitude for ordinary comfort, tomorrow as a
-      blank page. Also: the quietness of night as its own kind of gift — the
-      permission to stop, small blessings that went unnoticed in the rush,
-      the grace in imperfect days. Gentle — never saccharine. Something read
-      in bed that feels less alone.
-
-    featured_authors:
-      - name: "Marcus Aurelius"
-        note: "Stoic — evening reflections on virtue, what was enough today"
-      - name: "Mary Oliver"
-        note: "Poet — nature, attention as prayer, simple gratitude for being alive"
-      - name: "Hafez"
-        note: "Persian Sufi poet — the soul's joy, beauty of the night, divine love"
-      - name: "Thich Nhat Hanh"
-        note: "Zen monk — ending the day in peace, non-attachment, rest as practice"
-      - name: "Rumi"
-        note: "Sufi poet — the night as a time of longing, surrender, and grace"
-      - name: "David Whyte"
-        note: "Poet — consolations, the conversational nature of reality, rest as belonging"
-      - name: "Rupi Kaur"
-        note: "Modern poet — healing as quiet work done in the small hours"
-      - name: "Lang Leav"
-        note: "Modern poet — the tender ache of a day that passed too fast"
-
-  latenight:
-    name: "Late Night Feels"
-    max_words: 26
-    topic_groups:
-      - name: "relationships_loss"
-        weight: 21
-        brief: >
-          Missing someone, grief without closure, the silence after something
-          ended, loving who a person was rather than who they became, being left
-          with memories but no answers.
-
-      - name: "ambition_pressure"
-        weight: 25
-        brief: >
-          The gap between who you are and who you promised to become. Feeling
-          behind while everyone else looks settled. Working without visible
-          results yet. Comparing your beginning to someone's highlight reel.
-
-      - name: "identity_belonging"
-        weight: 17
-        brief: >
-          Feeling like a stranger in your own life. Being surrounded but not
-          understood. Belonging nowhere completely. Not knowing which version
-          of yourself is real.
-
-      - name: "nostalgia_change"
-        weight: 13
-        brief: >
-          Missing simpler times. Friendships that faded without a goodbye.
-          Growing apart from people you meant to keep. Something ending quietly
-          before you noticed.
-
-      - name: "existential_overthinking"
-        weight: 14
-        brief: >
-          Small worries that become enormous after midnight. Questioning whether
-          you're building the right life. The thoughts that only arrive when the
-          world goes quiet.
-
-      - name: "emotional_unsaid"
-        weight: 10
-        brief: >
-          The things that go unsaid. Silence as self-protection. Feeling
-          something before you can name it. Being understood only after going quiet.
-
-    featured_authors:
-      - name: "Franz Kafka"
-        note: "Author — existential dread, the isolation of the unsaid"
-      - name: "Charles Bukowski"
-        note: "Poet — raw reality, the beauty in the dirt, lonely nights"
-      - name: "Haruki Murakami"
-        note: "Novelist — magical realism, urban loneliness, nostalgic silence"
-      - name: "Sylvia Plath"
-        note: "Poet — intense emotional precision, the heavy weight of being"
-      - name: "Albert Camus"
-        note: "French philosopher — absurdity, the question of meaning, living anyway"
-      - name: "Virginia Woolf"
-        note: "Author — the interior life, loneliness that language barely reaches"
-      - name: "Atticus"
-        note: "Modern poet (Instagram) — late-night thoughts, the unsaid, quiet heartbreak"
-      - name: "R.M. Drake"
-        note: "Modern poet — 3am thoughts, beautiful chaos, the rawness of being human"
-      - name: "Tyler Knott Gregson"
-        note: "Modern poet — typewriter poems, longing, the specific feeling of midnight"
-
-  womenpower:
-    name: "She Feels"
+    name: "Protecting Your Peace / Ruthless Boundaries"
     max_words: 18
     brief: >
-      The uncompromising power of a woman who refuses to dim her light for anyone.
-      Includes: Supreme self-worth, unapologetic dark feminine energy, radical independence, and the quiet danger of profound confidence.
-      Must be hyper-specific, visceral, and deeply felt. Absolutely no generic girl-boss or empowerment clichés.
+      The power of becoming unreachable. Cutting off toxic family or friends without an explanation.
+      Finding peace by refusing to entertain disrespect. The "Healing Era" aesthetic: protecting your energy with absolute ruthlessness.
+      Not about meditation or breathing—about boundaries made of steel.
 
     featured_authors:
-      - name: "Maya Angelou"
-        note: "Poet/Activist — phenomenal woman, resilience, self-worth, still I rise"
+      - name: "Brianna Wiest"
+        note: "Self-sabotage, outgrowing your old self, setting absolute boundaries"
+      - name: "Eckhart Tolle"
+        note: "The ego, detaching from toxic drama"
+      - name: "Osho"
+        note: "Radical independence, not caring what others think"
+      - name: "Pema Chödrön"
+        note: "Leaning into the pain of disappointing others to save yourself"
+
+  goodnight:
+    name: "Late Night Existentialism"
+    max_words: 22
+    brief: >
+      The crushing weight of 3 AM overthinking. The realization that time is slipping away.
+      The silent battles you fight entirely alone in your bedroom. 
+      Must feel deeply melancholic, nostalgic, and solitary.
+
+    featured_authors:
+      - name: "Haruki Murakami"
+        note: "Urban loneliness, 3AM thoughts, the surreal emptiness of night"
+      - name: "Franz Kafka"
+        note: "Existential dread, isolation, the weight of being alive"
+      - name: "Virginia Woolf"
+        note: "The heavy, internal silence of the mind"
+      - name: "Sylvia Plath"
+        note: "The raw, overwhelming exhaustion of existence"
+
+  latenight:
+    name: "The Silent Battles"
+    max_words: 24
+    brief: >
+      Grief, burnout, and the exhaustion of having to be strong all the time. 
+      The mask you wear during the day finally slipping off at night. 
+      The quiet desperation of wanting to disappear and start over completely.
+
+    featured_authors:
+      - name: "Albert Camus"
+        note: "The absurdity of the daily grind, the desire to escape"
+      - name: "Fernando Pessoa"
+        note: "The Book of Disquiet, absolute alienation from society"
+      - name: "Atticus"
+        note: "The unsaid words, the secret pain"
+      - name: "Charles Bukowski"
+        note: "The absolute drudgery of modern life"
+
+  womenpower:
+    name: "Dark Feminine Energy"
+    max_words: 18
+    brief: >
+      Untouchable, unapologetic Dark Feminine energy. 
+      The power of walking away. Intimidation as a superpower. Refusing to shrink, apologize, or beg.
+      The realization that your absence is your ultimate weapon. Must be ruthless, glamorous, and dangerous. Absolutely no "girl boss" clichés.
+
+    featured_authors:
       - name: "Frida Kahlo"
-        note: "Mexican painter — raw emotion, surviving pain, fierce independence"
-      - name: "Rupi Kaur"
-        note: "Modern poet — heartbreak, healing, divine feminine, self-love"
-      - name: "Chimamanda Ngozi Adichie"
-        note: "Nigerian author/feminist — gender, identity, the cost of silence"
-      - name: "Brené Brown"
-        note: "Researcher — vulnerability, shame, the courage to be seen"
-      - name: "Michelle Obama"
-        note: "Author/former First Lady — ambition, rising, being a first and the weight of it"
-      - name: "Viola Davis"
-        note: "Actress — on being a Black woman, refusing erasure, art as survival"
-      - name: "Malala Yousafzai"
-        note: "Activist — education as defiance, refusing to be silenced by fear"
-      - name: "Coco Chanel"
-        note: "Designer — independence, style as power, choosing oneself"
-      - name: "Sudha Murty"
-        note: "Indian author/philanthropist — quiet strength, simplicity, profound values"
-      - name: "Bianca Sparacino"
-        note: "Modern author — healing, self-love, the strength in softness"
-      - name: "Serena Williams"
-        note: "Tennis champion — power without apology, excellence as a woman and mother"
+        note: "Surviving pain, ruthless self-expression, fire"
+      - name: "Cleopatra"
+        note: "Absolute dominance, strategy, feminine power"
+      - name: "Bell Hooks"
+        note: "Radical self-love, refusing to conform to male gaze"
+      - name: "Anaïs Nin"
+        note: "Unapologetic desire, complexity, dark emotional depths"
+      - name: "Megan Fox"
+        note: "Modern dark feminine icons, boundary setting, self-awareness"
