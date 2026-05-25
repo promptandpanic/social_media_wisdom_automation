@@ -19,7 +19,7 @@ themes:
     format: reel
     styles: [timeless_minimalist_sans, quiet_luxury_minimalist, minimalist_doodle_wisdom]
     max_words: 18
-    platforms: [instagram, youtube]
+    platforms: [instagram, youtube, facebook]
     hashtags: ["#MorningVibes", "#WorkoutMotivation", "#FreshStart", "#DailyDiscipline", "#SuccessMindset", "#FitnessAesthetic"]
     youtube:
       title_template: "Morning Motivation"
@@ -33,7 +33,7 @@ themes:
     format: reel
     styles: [timeless_minimalist_sans, timeless_minimalist_serif, quiet_luxury_minimalist, surreal_cosmic_minimalism, metaphorical_abstract_installation]
     max_words: 18
-    platforms: [instagram, youtube]
+    platforms: [instagram, youtube, facebook]
     hashtags: ["#Stoicism", "#DeepThoughts", "#WisdomQuotes", "#PhilosophyOfLife", "#CarlJung"]
     youtube:
       title_template: "Life Wisdom"
@@ -47,7 +47,7 @@ themes:
     format: reel
     styles: [timeless_minimalist_serif, elegant_illustrated_portrait, cultural_heritage_aesthetic]
     max_words: 18
-    platforms: [instagram, youtube]
+    platforms: [instagram, youtube, facebook]
     hashtags: ["#LoveQuotes", "#RelationshipAdvice", "#Heartbreak", "#TwinFlame", "#DeepLoveQuotes"]
     youtube:
       title_template: "Love & Relationships"
@@ -61,7 +61,7 @@ themes:
     format: reel
     styles: [timeless_minimalist_sans, timeless_minimalist_serif, quiet_luxury_minimalist, surreal_cosmic_minimalism]
     max_words: 16
-    platforms: [instagram, youtube]
+    platforms: [instagram, youtube, facebook]
     hashtags: ["#MindfulnessPractice", "#SpiritualAwakening", "#InnerPeace", "#MentalClarity", "#ZenLife"]
     youtube:
       title_template: "Mindfulness & Inner Peace"
@@ -74,7 +74,7 @@ themes:
     name: Goodnight & Gratitude
     format: reel
     max_words: 22
-    platforms: [instagram, youtube]
+    platforms: [instagram, youtube, facebook]
     hashtags: ["#GoodNight", "#NightThoughts", "#GratitudePractice", "#PeacefulMind", "#SleepWell"]
     youtube:
       title_template: "Goodnight & Gratitude"
@@ -88,7 +88,7 @@ themes:
     format: reel
     styles: [timeless_minimalist_serif, artistic_cinematic_minimal, metaphorical_abstract_installation]
     max_words: 22
-    platforms: [instagram, youtube]
+    platforms: [instagram, youtube, facebook]
     hashtags: ["#AestheticVibes", "#DeepThinking", "#DarkAcademia", "#PhilosophyQuotes", "#Intellectual"]
     youtube:
       title_template: "Dark Academia"
@@ -102,7 +102,7 @@ themes:
     format: reel
     styles: [timeless_minimalist_sans, timeless_minimalist_serif, artistic_cinematic_minimal, dream_logic_architectural]
     max_words: 20
-    platforms: [instagram, youtube]
+    platforms: [instagram, youtube, facebook]
     hashtags: ["#LateNightThoughts", "#Overthinking", "#MidnightThoughts", "#Melancholy", "#DeepQuotes"]
     youtube:
       title_template: "Late Night Feels"
@@ -116,7 +116,7 @@ themes:
     format: reel
     styles: [editorial_black_white_portrait, street_style_editorial_bw]
     max_words: 18
-    platforms: [instagram, youtube]
+    platforms: [instagram, youtube, facebook]
     # styles: [cinematic_female_protagonist] # Removed lock for fresh vibes
     hashtags: ["#SheFeels", "#WomenEmpowerment", "#DarkFeminine", "#GlowUp", "#IndependentWoman", "#Aesthetic"]
     youtube:

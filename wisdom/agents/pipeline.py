@@ -279,6 +279,7 @@ def _store(state: PipelineState, theme: ThemeConfig, db) -> PipelineState:
 def _post(state: PipelineState, theme: ThemeConfig, db) -> PipelineState:
     from wisdom.platforms.instagram import InstagramPlatform
     from wisdom.platforms.youtube import YouTubePlatform
+    from wisdom.platforms.facebook import FacebookPlatform
 
     composed = state.get("composed_image", b"")
     video = state.get("video_bytes")
@@ -290,6 +291,7 @@ def _post(state: PipelineState, theme: ThemeConfig, db) -> PipelineState:
     platform_map = {
         "instagram": InstagramPlatform(),
         "youtube": YouTubePlatform(),
+        "facebook": FacebookPlatform(),
     }
 
     for platform_name in theme.platforms:
@@ -399,7 +401,12 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
     platforms_html = ""
     for r in results:
         if r.status == "posted":
-            label = "Instagram" if r.platform == "instagram" else "YouTube"
+            if r.platform == "youtube":
+                label = "YouTube"
+            elif r.platform == "instagram":
+                label = "Instagram"
+            else:
+                label = "Facebook"
             platforms_html += f"""
             <tr>
               <td style="padding: 14px 0; border-bottom: 1px solid #1e3a5f;">
