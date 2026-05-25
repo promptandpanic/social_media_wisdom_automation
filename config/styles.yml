@@ -11,7 +11,7 @@ styles:
     rendering:
       font: poppins
       text_color: "#FAF9F6"
-      author_color: "#EBEBEB"
+      author_color: "#D4AF37"
       overlay: {type: glass, opacity: 140, color: "#000000", blur: 20}
       text_zone: center_minimalist
       layout: minimalist
@@ -29,7 +29,7 @@ styles:
     rendering:
       font: spectral
       text_color: "#FAF9F6"
-      author_color: "#E0E0E0"
+      author_color: "#D4AF37"
       overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
       text_zone: center
       layout: big_center
@@ -48,7 +48,7 @@ styles:
     rendering:
       font: fredoka
       text_color: "#1A1A1A"
-      author_color: "#4A4A4A"
+      author_color: "#D4AF37"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: minimalist
@@ -67,7 +67,7 @@ styles:
     rendering:
       font: outfit
       text_color: "#1A1A1A"
-      author_color: "#333333"
+      author_color: "#D4AF37"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: asymmetric
@@ -86,7 +86,7 @@ styles:
     rendering:
       font: inter
       text_color: "#1A1A1A"
-      author_color: "#333333"
+      author_color: "#D4AF37"
       overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
       text_zone: top_minimalist
       layout: big_center
@@ -105,7 +105,7 @@ styles:
     rendering:
       font: inter
       text_color: "#FAF9F6"
-      author_color: "#EBEBEB"
+      author_color: "#D4AF37"
       overlay: {type: gradient_top, opacity: 140, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: big_center
@@ -124,7 +124,7 @@ styles:
     rendering:
       font: spectral
       text_color: "#1A1A1A"
-      author_color: "#4A4A4A"
+      author_color: "#D4AF37"
       overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
       text_zone: top_minimalist
       layout: minimalist
@@ -146,7 +146,7 @@ styles:
     rendering:
       font: raleway
       text_color: "#1A1A1A"
-      author_color: "#333333"
+      author_color: "#D4AF37"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
@@ -164,7 +164,7 @@ styles:
     rendering:
       font: cormorant
       text_color: "#FAF9F6"
-      author_color: "#CCCCCC"
+      author_color: "#D4AF37"
       overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
@@ -182,7 +182,7 @@ styles:
     rendering:
       font: outfit
       text_color: "#1A1A1A"
-      author_color: "#4A4A4A"
+      author_color: "#D4AF37"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
@@ -205,7 +205,7 @@ styles:
     rendering:
       font: montserrat
       text_color: "#FAF9F6"
-      author_color: "#CCCCCC"
+      author_color: "#D4AF37"
       overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
@@ -224,7 +224,7 @@ styles:
     rendering:
       font: cormorant
       text_color: "#FAF9F6"
-      author_color: "#F0F0F0"
+      author_color: "#D4AF37"
       overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
       text_zone: bottom_left
       layout: asymmetric
@@ -243,7 +243,7 @@ styles:
     rendering:
       font: oswald
       text_color: "#FAF9F6"
-      author_color: "#F0F0F0"
+      author_color: "#D4AF37"
       overlay: {type: gradient_top, opacity: 140, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: minimalist
@@ -262,7 +262,7 @@ styles:
     rendering:
       font: raleway
       text_color: "#FAF9F6"
-      author_color: "#CCCCCC"
+      author_color: "#D4AF37"
       overlay: {type: vignette, opacity: 160, color: "#000000", blur: 0}
       text_zone: bottom_minimalist
       layout: minimalist
@@ -281,7 +281,7 @@ styles:
     rendering:
       font: caveat
       text_color: "#FAF9F6"
-      author_color: "#E0E0E0"
+      author_color: "#D4AF37"
       overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: minimalist
