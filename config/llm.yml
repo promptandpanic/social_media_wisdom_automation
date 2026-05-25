@@ -21,19 +21,19 @@ providers:
 # image_judge stays gemini-only — kimi has no vision support.
 roles:
   quote_generation:
-    providers: [gemini, kimi]
+    providers: [kimi, gemini]
     temperature: 1.0
     max_tokens: 8192
     disable_thinking: true
 
   style_picker:
-    providers: [gemini, kimi]
+    providers: [kimi, gemini]
     temperature: 1.0
     max_tokens: 2048
     disable_thinking: true
 
   creative_brief:
-    providers: [gemini, kimi]
+    providers: [kimi, gemini]
     temperature: 1.0
     max_tokens: 8192
 

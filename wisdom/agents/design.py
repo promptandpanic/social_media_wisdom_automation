@@ -315,8 +315,8 @@ def _build_brief(
         style=style_name,
         font=font,
         text_color=r.get("text_color", "#FFFFFF"),
-        highlight_color=r.get("highlight_color", "#FFD700"),
-        author_color=r.get("author_color", "#FFD700"),
+        highlight_color=r.get("highlight_color", "#D4AF37"),
+        author_color=r.get("author_color", "#D4AF37"),
         overlay=Overlay(
             type=overlay_type,
             opacity=int(ov.get("opacity", 150)),

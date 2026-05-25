@@ -627,7 +627,7 @@ def _draw_text(
     # Glass effect - draw a blurred box behind the text area
     if brief.overlay.type == "glass":
         # Draw glass box slightly larger than text block
-        box_padding = 60
+        box_padding = 100
         box_w = TEXT_MAX_W + (box_padding * 2)
         box_h = block_h + (box_padding * 2)
 
@@ -737,9 +737,10 @@ def _draw_text(
         total_w = (d_bb[2] - d_bb[0]) + (n_bb[2] - n_bb[0])
         ax = (TEXT_ZONE_CX * 2 - total_w) // 2
         ay = y + 16
-        draw.text((ax, ay), dash, font=dash_font, fill=txt_color)
+        a_color = _hex_to_rgb(brief.author_color)
+        draw.text((ax, ay), dash, font=dash_font, fill=a_color)
         draw.text(
-            (ax + (d_bb[2] - d_bb[0]), ay), author_spaced, font=a_font, fill=txt_color
+            (ax + (d_bb[2] - d_bb[0]), ay), author_spaced, font=a_font, fill=a_color
         )
 
     return img
