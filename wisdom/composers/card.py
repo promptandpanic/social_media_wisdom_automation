@@ -744,10 +744,18 @@ def _draw_text(
         )
 
     # High-Fashion Editorial Header
-    import random
+    import hashlib
     try:
-        tag_font = _font("inter", 18)
-        tag_text = f"V I S U A L   A R C H I V E   —   V O L .  {random.randint(1, 9)}"
+        # Generate a unique 4-character hex ID based on the quote text
+        unique_id = hashlib.md5(quote.text.encode('utf-8')).hexdigest()[:4].upper()
+        
+        # Fallback to poppins if inter isn't available
+        try:
+            tag_font = _font("inter", 18)
+        except Exception:
+            tag_font = _font("poppins", 18)
+            
+        tag_text = f"A R C H I V E   //   N O .  {unique_id}"
         tag_bb = tag_font.getbbox(tag_text)
         tag_w = tag_bb[2] - tag_bb[0]
         # Draw at top center with low opacity
