@@ -141,8 +141,8 @@ def generate(state: PipelineState) -> PipelineState:
             and len(text.split()) <= max_words + 5
             and uniqueness >= MIN_UNIQUENESS
         ):
-            # Highlights are completely disabled
-            hl = ""
+            # The "Golden Highlight" Visual Hook: Auto-extract the punchline to render in a high-contrast color.
+            hl = _extract_highlight(text)
 
             quote = Quote(
                 text=text,

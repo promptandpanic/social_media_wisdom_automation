@@ -429,10 +429,16 @@ def _render_line(
             curr_x += draw.textlength(char, font=font) + ls
         return curr_x
 
+    hl_words = [hw.strip('.,!?"\\'').lower() for hw in highlight_text.split()] if highlight_text else []
+
     for w in words:
         if w:
+            word_clean = w.strip('.,!?"\\'').lower()
+            is_hl = word_clean in hl_words and word_clean
+            word_fill = hi_color if is_hl else fill
+
             current_x = _draw_text_custom(
-                draw, (current_x, y), w, font, fill=fill, ls=letter_spacing
+                draw, (current_x, y), w, font, fill=word_fill, ls=letter_spacing
             )
 
         # Add space with letter spacing
