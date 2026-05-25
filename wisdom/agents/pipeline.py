@@ -184,15 +184,15 @@ Theme: {theme.name}
 The post already opens with this quote and attribution — do NOT repeat or echo it.
 
 Write the body of the Instagram caption that goes BELOW the quote:
-1. One strong hook sentence that captures the feeling of the quote (e.g. "Save this for when you feel stuck.", "This one hits different at 2am."). No emojis in the hook.
-2. 2 short sentences expanding the idea. Emojis are fine here.
-3. One CTA line (e.g. "Tag someone who needs this.", "Drop a comment if this is you.").
+1. One highly polarizing, provocative, or deeply relatable hook sentence (e.g. "The hardest truth you'll read today.", "Most people will scroll past this because it hurts."). No emojis in the hook.
+2. A deeply philosophical 4-sentence story or breakdown that expands on the quote. This MUST be long enough to keep the user reading for at least 15 seconds. 
+3. One CTA line (e.g. "Tag someone who needs to hear this.", "Drop a 💯 if you agree.").
 
-Keep it tight — 4 lines total, each separated by a blank line.
-Provide exactly 5 niche hashtags relevant to this quote and theme.
+Format the caption to force a "Read More" algorithmic trap:
+Put EXACTLY 4 blank lines (using \\n) between the hook and the breakdown so the rest of the text is hidden under the "Read more..." button on Instagram/YouTube.
 
 Return ONLY valid JSON (use \\n for newlines):
-{{"caption": "Hook\\n\\nBody 1.\\n\\nBody 2.\\n\\nCTA", "hashtags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"]}}
+{{"caption": "Hook\\n\\n\\n\\nBreakdown...\\n\\nCTA", "hashtags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"]}}
 
 Quote context (do NOT include in output): "{quote.text}" — {quote.author}
 """
