@@ -174,7 +174,7 @@ def _create_video(state: PipelineState, theme: ThemeConfig) -> PipelineState:
         return {**state, "thumbnail_bytes": composed}
 
 
-def _generate_caption_and_tags(quote, theme: ThemeConfig) -> tuple[str, list[str]]:
+def _generate_caption_and_tags(quote, theme: ThemeConfig) -> tuple[str, list[str], str]:
     if not quote:
         return "", theme.hashtags
     prompt = f"""
@@ -187,12 +187,13 @@ Write the body of the Instagram caption that goes BELOW the quote:
 1. One highly polarizing, provocative, or deeply relatable hook sentence (e.g. "The hardest truth you'll read today.", "Most people will scroll past this because it hurts."). No emojis in the hook.
 2. A deeply philosophical 4-sentence story or breakdown that expands on the quote. This MUST be long enough to keep the user reading for at least 15 seconds. 
 3. One CTA line (e.g. "Tag someone who needs to hear this.", "Drop a 💯 if you agree.").
+4. Provide a short, punchy, and highly clickable YouTube Shorts title (under 60 characters) based on the quote. Do NOT include the theme name unless it's natural.
 
 Format the caption to force a "Read More" algorithmic trap:
-Put EXACTLY 4 blank lines (using \\n) between the hook and the breakdown so the rest of the text is hidden under the "Read more..." button on Instagram/YouTube.
+Put EXACTLY 4 blank lines (using \n) between the hook and the breakdown so the rest of the text is hidden under the "Read more..." button on Instagram/YouTube.
 
-Return ONLY valid JSON (use \\n for newlines):
-{{"caption": "Hook\\n\\n\\n\\nBreakdown...\\n\\nCTA", "hashtags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"]}}
+Return ONLY valid JSON (use \n for newlines):
+{{"caption": "Hook\\n\\n\\n\\nBreakdown...\\n\\nCTA", "hashtags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "youtube_title": "Punchy Title Here"}}
 
 Quote context (do NOT include in output): "{quote.text}" — {quote.author}
 """
@@ -203,10 +204,10 @@ Quote context (do NOT include in output): "{quote.text}" — {quote.author}
         m = re.search(r"\{.*\}", raw, re.DOTALL)
         if m:
             data = json.loads(m.group())
-            return data.get("caption", ""), data.get("hashtags", theme.hashtags)
+            return data.get("caption", ""), data.get("hashtags", theme.hashtags), data.get("youtube_title", "")
     except Exception as exc:
         logger.warning(f"Caption generation failed: {exc}")
-    return "", theme.hashtags
+    return "", theme.hashtags, ""
 
 
 def _build_meta(state: PipelineState, theme: ThemeConfig) -> PipelineState:
@@ -215,9 +216,9 @@ def _build_meta(state: PipelineState, theme: ThemeConfig) -> PipelineState:
     author = quote.author if quote else ""
 
     if state.get("offline"):
-        llm_caption, hashtags = "", theme.hashtags
+        llm_caption, hashtags, llm_title = "", theme.hashtags, ""
     else:
-        llm_caption, hashtags = _generate_caption_and_tags(quote, theme)
+        llm_caption, hashtags, llm_title = _generate_caption_and_tags(quote, theme)
 
     # Build caption: quote + attribution + body. No quote = body only.
     parts = []
@@ -233,7 +234,7 @@ def _build_meta(state: PipelineState, theme: ThemeConfig) -> PipelineState:
 
     caption = "\n\n".join(parts)
     snippet = text.split(".")[0][:80] if text else theme.name
-    title = f"{snippet} | {theme.name}"
+    title = llm_title or f"{snippet} | {theme.name}"
 
     meta = PostMeta(
         caption=caption,

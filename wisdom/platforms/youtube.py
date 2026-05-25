@@ -16,15 +16,7 @@ _SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
 
 
 def _build_title(meta: PostMeta, theme: ThemeConfig | None) -> str:
-    """Build YouTube title from theme template or fallback to first line of caption."""
-    if theme and theme.youtube and theme.youtube.title_template:
-        tmpl = theme.youtube.title_template
-        if "{quote_snippet}" not in tmpl:
-            return tmpl
-        max_len = 97 - len(tmpl.replace("{quote_snippet}", ""))
-        raw = meta.caption.split("\n")[0]
-        snippet = raw if len(raw) <= max_len else raw[:max_len].rsplit(" ", 1)[0] + "…"
-        return tmpl.format(quote_snippet=snippet)
+    """Build YouTube title from meta."""
     return meta.title or meta.caption[:100]
 
 
