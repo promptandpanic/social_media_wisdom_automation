@@ -596,17 +596,6 @@ def _draw_text(
 
     bg_lum = _bg_luminance(lum_img if lum_img is not None else img, text_zone)
     txt_color = _ensure_readable(txt_color, bg_lum)
-    
-    # Ensure the highlight color is also readable, but keep its hue if possible.
-    # If the contrast fails, we darken or lighten it safely without turning it pure white/black.
-    hi_lum = 0.299 * hi_color[0] + 0.587 * hi_color[1] + 0.114 * hi_color[2]
-    if _contrast_ratio(hi_lum, bg_lum) < 3.0:
-        if bg_lum > 128:
-            # Background is bright, darken the highlight
-            hi_color = (int(hi_color[0]*0.5), int(hi_color[1]*0.5), int(hi_color[2]*0.5))
-        else:
-            # Background is dark, brighten the highlight
-            hi_color = (min(255, hi_color[0] + 100), min(255, hi_color[1] + 100), min(255, hi_color[2] + 100))
 
     # Force text contrast for glass overlays
     if brief.overlay.type == "glass":

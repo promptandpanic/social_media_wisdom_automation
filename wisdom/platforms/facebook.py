@@ -68,7 +68,7 @@ class FacebookPlatform(BasePlatform):
             )
             if r.status_code != 200:
                 logger.error(f"Facebook video publish failed: {r.text}")
-                r.raise_for_status()
+                return PlatformResult("facebook", "failed", error=f"FB Error: {r.text}")
 
             post_id = r.json()["id"]
             # Video processing might mean the permalink isn't immediately resolvable,
@@ -105,7 +105,7 @@ class FacebookPlatform(BasePlatform):
             )
             if r.status_code != 200:
                 logger.error(f"Facebook image publish failed: {r.text}")
-                r.raise_for_status()
+                return PlatformResult("facebook", "failed", error=f"FB Error: {r.text}")
 
             post_id = r.json()["id"]
             url = self._permalink(post_id, token)
