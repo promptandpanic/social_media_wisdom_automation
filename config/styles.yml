@@ -15,7 +15,7 @@ styles:
       overlay: {type: glass, opacity: 140, color: "#000000", blur: 20}
       text_zone: center_minimalist
       layout: minimalist
-      decoration: none
+      decoration: quote_mark
       voice_gender: female
  
   timeless_minimalist_serif:
@@ -33,7 +33,7 @@ styles:
       overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
       text_zone: center
       layout: big_center
-      decoration: none
+      decoration: quote_mark
       voice_gender: male
 
   minimalist_doodle_wisdom:
@@ -209,7 +209,7 @@ styles:
       overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
-      decoration: none
+      decoration: quote_mark
       voice_gender: male
 
   metaphorical_abstract_installation:

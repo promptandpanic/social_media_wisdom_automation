@@ -693,8 +693,8 @@ def _draw_text(
             width=3,
         )
     elif decoration == "quote_mark":
-        dq_font = _font("playfair", 260)
-        draw.text((MARGIN_X - 44, y - 40), "“", font=dq_font, fill=(*hi_color, 30))
+        dq_font = _font("playfair", 450)
+        draw.text((MARGIN_X - 60, y - 100), "“", font=dq_font, fill=(*hi_color, 80))
 
     text_stroke = 0 if font_key in _CURSIVE_FONTS else 3
 
