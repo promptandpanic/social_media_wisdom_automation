@@ -218,24 +218,6 @@ styles:
       decoration: none
       voice_gender: female
 
-  neon_cyberpunk_noir:
-    summary: "A moody, highly saturated cyberpunk aesthetic featuring glowing neon reflections in the rain."
-    categories: [latenight, darkacademia]
-    weight: medium
-    description: >
-      A moody, highly saturated cyberpunk aesthetic. 
-      Pitch-black, rain-slicked city streets illuminated by intense, glowing neon signs in electric pink, cyan, and deep purple. 
-      The composition should feel solitary, reflective, and atmospheric, representing introspection in chaos. 
-      Lighting: High contrast, volumetric fog, striking neon reflections in puddles, cinematic framing.
-    rendering:
-      font: inter
-      text_color: "#FFFFFF"
-      author_color: "#00FFFF"
-      overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
-      text_zone: bottom_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: male
 
   national_geographic_macro:
     summary: "Award-winning, hyper-realistic National Geographic wildlife macro photography."

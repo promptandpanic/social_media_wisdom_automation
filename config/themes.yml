@@ -87,7 +87,7 @@ themes:
   darkacademia:
     name: Dark Academia
     format: reel
-    styles: [vhs_glitch_renaissance, anatomical_glass_sculpture, neon_cyberpunk_noir]
+    styles: [vhs_glitch_renaissance, anatomical_glass_sculpture]
     max_words: 22
     platforms: [instagram, youtube, facebook]
     hashtags: ["#AestheticVibes", "#DeepThinking", "#DarkAcademia", "#PhilosophyQuotes", "#Intellectual"]
@@ -101,7 +101,7 @@ themes:
   latenight:
     name: Late Night Feels
     format: reel
-    styles: [thermal_isolation_void, vacuum_sealed_floral_decay, burning_silk_and_ice, neon_cyberpunk_noir]
+    styles: [thermal_isolation_void, vacuum_sealed_floral_decay, burning_silk_and_ice]
     max_words: 20
     platforms: [instagram, youtube, facebook]
     hashtags: ["#LateNightThoughts", "#Overthinking", "#MidnightThoughts", "#Melancholy", "#DeepQuotes"]
