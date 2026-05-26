@@ -57,6 +57,10 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
         "poppins.ttf",
         "https://raw.githubusercontent.com/google/fonts/main/ofl/poppins/Poppins-Regular.ttf",
     ),
+    "inter": (
+        "inter.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/static/Inter-Regular.ttf",
+    ),
     "poppins_bold": (
         "poppins_bold.ttf",
         "https://raw.githubusercontent.com/google/fonts/main/ofl/poppins/Poppins-Bold.ttf",
