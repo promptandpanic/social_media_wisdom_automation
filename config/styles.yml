@@ -1,289 +1,180 @@
 styles:
 
-  timeless_minimalist_sans:
-    summary: "Clean, modern, and high-end sans-serif aesthetic with focus on negative space."
-    categories: [wisdom, morning, mindfulness, latenight]
+  hyper_kinetic_chrome:
+    summary: "A frozen, high-speed macro photograph of liquid chrome and shattered black obsidian violently colliding."
+    categories: [morning, womenpower]
     weight: high
     description: >
-      Hyper-clean, ultra-modern minimalism. Use harsh geometric lighting, pristine textures, and an overwhelming sense of quiet luxury.
-      Subjects should be entirely abstract or conceptual, focusing on shadows, raw materials (stone, glass, metal), and light play.
-      Avoid any literal human subjects or daily objects. Make it feel expansive, intentional, and fiercely calm.
+      A frozen, high-speed macro photograph of liquid chrome and shattered black obsidian violently colliding in a sterile, blindingly white room. 
+      Represents the aggressive, violent birth of discipline and unstoppable momentum. 
+      Lighting: Harsh studio strobes, ultra-high contrast, hyper-realistic 8k render. 
+      Do not show typical human figures, focus purely on the explosive physics and impossible textures.
     rendering:
-      font: poppins
-      text_color: "#FAF9F6"
+      font: oswald
+      text_color: "#1A1A1A"
       author_color: "#D4AF37"
-      overlay: {type: glass, opacity: 140, color: "#000000", blur: 20}
+      overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
       decoration: none
-      voice_gender: female
- 
-  timeless_minimalist_serif:
-    summary: "Classic, elegant serif typography on dark, moody, or artistic backgrounds."
-    categories: [wisdom, mindfulness, love, darkacademia, latenight]
+      voice_gender: male
+
+  monolithic_brutalism_scale:
+    summary: "An impossibly massive brutalist concrete structure piercing through a dense, blood-red fog."
+    categories: [morning, wisdom]
     weight: high
     description: >
-      Deep, moody, and highly intellectual. Focus on overwhelming textures, profound shadows, and isolated cinematic light.
-      Do not use basic objects like books or candles. Instead, invent sprawling, abstract environments of dark matter, ancient monolithic structures, or shadowy voids.
-      Vibe: Timeless, sophisticated, and dramatically mysterious.
+      An impossibly massive, terrifyingly large brutalist concrete structure piercing through a dense, blood-red fog. 
+      The sheer scale makes the viewer feel insignificantly small. 
+      Atmosphere: Unforgiving, silent, and structurally absolute. Cinematic wide-angle lens, deep crushing shadows.
+    rendering:
+      font: inter
+      text_color: "#FAF9F6"
+      author_color: "#D4AF37"
+      overlay: {type: gradient_top, opacity: 140, color: "#000000", blur: 0}
+      text_zone: top_minimalist
+      layout: big_center
+      decoration: none
+      voice_gender: male
+
+  anatomical_glass_sculpture:
+    summary: "Hyper-realistic medical macro photography of human anatomy made of cracked glass or porcelain."
+    categories: [wisdom, latenight, darkacademia]
+    weight: high
+    description: >
+      Hyper-realistic, high-fashion medical macro photography. 
+      The human anatomy (such as a glowing brain or a delicate ribcage) constructed entirely from cracked, fragile glass or delicate porcelain. 
+      Lighting: Harsh studio strobes isolating the fragile structure against a pitch-black background.
     rendering:
       font: spectral
       text_color: "#FAF9F6"
       author_color: "#D4AF37"
       overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
       text_zone: center
-      layout: big_center
-      decoration: none
-      voice_gender: male
-
-  minimalist_doodle_wisdom:
-    summary: "2D minimalist digital illustration with clean typography in the negative space at the top."
-    categories: [wisdom, womenpower, morning]
-    weight: high
-    description: >
-      A clean, 2D minimalist digital illustration with premium tactile textures (like subtle paper grain or risograph effects).
-      Style: Bold, flat geometric vector art with an earthy, desert-tone palette.
-      Subject: Completely abstract representations of thought, time, or emotion. Avoid standard humans doing things. Use striking shapes and metaphorical alignments.
-      Vibe: Relatable, modern, deeply conceptual, and high-end.
-    rendering:
-      font: fredoka
-      text_color: "#1A1A1A"
-      author_color: "#D4AF37"
-      overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
-      text_zone: top_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: female
-
-  elegant_illustrated_portrait:
-    summary: "Soft digital painting with elegant plain typography (formerly script)."
-    categories: [love, womenpower, wisdom]
-    weight: high
-    description: >
-      A soft, ethereal digital painting or hyper-stylized illustration bathed in dreamlike cinematic lighting.
-      Style: Fluid, emotionally resonant brushstrokes or impossibly smooth gradients.
-      Subject: Metaphorical representations of grace, power, or connection—avoiding literal human faces or basic fashion. Think flowing forms, glowing auras, or intertwined elements.
-      Vibe: Deeply emotive, purely artistic, and premium.
-    rendering:
-      font: outfit
-      text_color: "#1A1A1A"
-      author_color: "#D4AF37"
-      overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
-      text_zone: top_minimalist
       layout: asymmetric
       decoration: none
       voice_gender: female
 
-  cultural_heritage_aesthetic:
-    summary: "Mythic, ancient architectural motifs pushed into an avant-garde minimalism."
-    categories: [wisdom, love, womenpower]
+  burning_silk_and_ice:
+    summary: "High-end macro photography of delicate white silk catching fire but instantly freezing into jagged black ice."
+    categories: [love, latenight]
     weight: high
     description: >
-      A high-end, highly conceptual representation rooted in ancient cultural and architectural motifs, pushed into an avant-garde aesthetic.
-      Scenes: Do not use literal people or typical settings. Use abstract monumental elements (ancient arches, stone ruins), rich traditional textures (raw silk, terracotta, weathered gold), and impossibly vast landscapes.
-      Composition: Warm golden or rich jewel tones, with striking, massive geometric shadows.
-      Vibe: Mythic, authentic, immensely powerful, and serene.
-    rendering:
-      font: inter
-      text_color: "#1A1A1A"
-      author_color: "#D4AF37"
-      overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
-      text_zone: top_minimalist
-      layout: big_center
-      decoration: none
-      voice_gender: female
-
-  avant_garde_lifestyle:
-    summary: "High-fashion 'Ramp' style; structural clothing and minimalist settings. Now ultra-clean."
-    categories: [wisdom, morning, womenpower, love]
-    weight: high
-    description: >
-      A cutting-edge, brutalist visual experience. Focus on stark, monolithic structures and high-contrast environments.
-      Subject: Avoid literal people. Imagine fashion-as-architecture or impossible physical forms that command authority and space.
-      Composition: Extreme minimalism, harsh angles, concrete textures, and striking, dramatic shadows.
-      Vibe: Aggressive, structural, and undeniably avant-garde.
-    rendering:
-      font: inter
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: gradient_top, opacity: 140, color: "#000000", blur: 0}
-      text_zone: top_minimalist
-      layout: big_center
-      decoration: none
-      voice_gender: female
-
-  quiet_luxury_minimalist:
-    summary: "High-end 'Old Money' aesthetic; minimalist luxury interiors. Ultra-clean negative space."
-    categories: [wisdom, morning, mindfulness]
-    weight: high
-    description: >
-      An impossibly understated, high-end 'Quiet Luxury' visual. Use soft, intensely diffused lighting and immaculate textures.
-      Scenes: Abstract close-ups of premium materials (marble veins, flowing linen, brushed titanium) or vast, empty, perfectly curated spaces.
-      Subject: No literal objects like watches or people. Focus on the feeling of unbothered perfection and absolute stillness.
-      Vibe: Exponentially wealthy, profoundly calm, and perfectly curated.
-    rendering:
-      font: spectral
-      text_color: "#1A1A1A"
-      author_color: "#D4AF37"
-      overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
-      text_zone: top_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: female
-
-  # ---------------------------------------------------------------------------
-  # Artistic & Illustrative (Inspiration from user screenshots)
-  # ---------------------------------------------------------------------------
-
-  artistic_bold_impact:
-    summary: "Massive, high-contrast all-caps sans-serif. Scroll-stopping."
-    categories: [morning, wisdom, love, womenpower, mindfulness, darkacademia, latenight]
-    weight: high
-    description: >
-      A visceral, high-contrast visual strike. Avoid literal portraits. Focus on aggressive, monolithic forms, explosive kinetic energy frozen in time, or blindingly stark environments.
-      Clean, sharp, and brutally modern. Designed to command total attention instantly.
-      Vibe is aggressive, unapologetic, and powerful.
-    rendering:
-      font: raleway
-      text_color: "#1A1A1A"
-      author_color: "#D4AF37"
-      overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
-      text_zone: center_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: male
-
-  artistic_cinematic_minimal:
-    summary: "Tiny, elegant serif in the center of a vast landscape."
-    categories: [morning, wisdom, love, womenpower, mindfulness, darkacademia, latenight]
-    weight: high
-    description: >
-      A breathtaking, moody, and conceptually overwhelming landscape. Do not use standard forests or streets.
-      Think vast, alien terrain, an endless void of reflective water, or towering, impossible fog.
-      High-end cinematography with deep, crushing shadows and isolated rim lighting. The visual must make the viewer feel incredibly small.
+      High-end macro photography of delicate white silk catching fire, but the flames instantly freeze the fabric into jagged black ice. 
+      A visual metaphor for the sudden, cold death of emotion. 
+      Atmosphere: Elegant, deeply tragic, hyper-detailed textures of frost and burnt silk.
     rendering:
       font: cormorant
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
-      text_zone: center_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: male
-
-  artistic_spiritual_mixed:
-    summary: "Elegant plain typography with decorative elements (formerly mixed script)."
-    categories: [morning, wisdom, love, womenpower, mindfulness, darkacademia, latenight]
-    weight: high
-    description: >
-      A warm, deeply soulful abstract painting or organic visual. 
-      Avoid literal figures, gardens, or rooms. Instead, use flowing energetic forms, blooming abstract fractals, or intense, warm volumetric light piercing through heavy atmospheres.
-      The aesthetic is 'earthy' yet transcendent, grounding the viewer in raw emotion.
-    rendering:
-      font: outfit
-      text_color: "#1A1A1A"
-      author_color: "#D4AF37"
-      overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
-      text_zone: center_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: female
-
-  # ---------------------------------------------------------------------------
-  # Surreal Minimalist (Next-Level Engagement)
-  # ---------------------------------------------------------------------------
-
-  surreal_cosmic_minimalism:
-    summary: "Floating geometric orbs and impossible cosmic phenomena in vast, empty landscapes."
-    categories: [wisdom, mindfulness, latenight]
-    weight: high
-    description: >
-      Mind-bending, high-end cosmic surrealism. Do not rely solely on orbs or deserts.
-      Invent impossible stellar phenomena: gravity bending light across a dark plain, a shattered celestial body, or liquid starlight frozen in zero gravity.
-      Atmosphere: Ethereal glow, crushing scale, and flawless hyper-realistic textures.
-      Vibe: Transcendent, deeply mysterious, and terrifyingly awe-inspiring.
-    rendering:
-      font: montserrat
       text_color: "#FAF9F6"
       author_color: "#D4AF37"
       overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
-      text_zone: center_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: male
-
-  metaphorical_abstract_installation:
-    summary: "Impossible art installations in natural settings. Visual metaphors for the mind."
-    categories: [wisdom, mindfulness, darkacademia]
-    weight: high
-    description: >
-      A hyper-realistic depiction of an impossible, large-scale abstract art installation.
-      Do not place it in a typical forest. Put it in an endless void, an impossibly large brutalist hall, or suspended over an abyss.
-      Focus on the sheer scale, impossible physics, and profound psychological metaphors.
-      Vibe: Highly intellectual, unsettling, and cinematic.
-    rendering:
-      font: cormorant
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
-      text_zone: bottom_left
-      layout: asymmetric
-      decoration: rule
-      voice_gender: male
-
-  dream_logic_architectural:
-    summary: "Brutalist architecture in impossible, dream-like environments."
-    categories: [morning, wisdom, latenight]
-    weight: high
-    description: >
-      Pure, liminal dream-logic. Architecture that makes no physical sense but feels deeply familiar.
-      Style: Endless staircases, monolithic walls, sterile pools of water, or environments with zero shadow and impossible geometry.
-      Composition: Harsh lines or terrifyingly endless curves. Minimalist color palette focused on pure structure.
-      Vibe: Surreal, liminal, structural, and hypnotic.
-    rendering:
-      font: oswald
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: gradient_top, opacity: 140, color: "#000000", blur: 0}
-      text_zone: top_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: female
-
-  editorial_black_white_portrait:
-    summary: "High-end Vogue-style black and white editorial photography of women."
-    categories: [womenpower]
-    weight: high
-    description: >
-      Fierce, avant-garde black and white conceptual photography. 
-      Do not use literal human portraits or street settings. Use extreme close-ups of abstract movement, high-contrast shattered glass, or aggressive, kinetic silhouettes.
-      Lighting: Hard, unforgiving 'Chiaroscuro' lighting. Maximum contrast between blinding white and pitch black.
-      Vibe: Dominant, fiercely empowering, sophisticated, and raw.
-    rendering:
-      font: raleway
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: vignette, opacity: 160, color: "#000000", blur: 0}
       text_zone: bottom_minimalist
       layout: minimalist
       decoration: rule
       voice_gender: female
 
-  street_style_editorial_bw:
-    summary: "Cinematic black and white street-style fashion editorial."
-    categories: [womenpower]
+  kintsugi_human_void:
+    summary: "A cracking marble statue suspended in darkness, with blinding gold light violently bursting from the seams."
+    categories: [love, wisdom, latenight, darkacademia]
     weight: high
     description: >
-      Cinematic, strictly black and white hyper-motion photography.
-      Abandon the idea of standard "street style" fashion. Capture the essence of urban velocity: streaks of light, blurred monolithic structures, or the stark geometry of shadows bending around impossible corners.
-      Lighting: Deep cinematic shadows and intense volumetric bursts of light.
-      Vibe: Urgent, deeply emotional, aspirational, and visually relentless.
+      A hyper-realistic classical marble statue of a weeping or falling figure, suspended in absolute pitch-black darkness. 
+      The marble is cracking apart, with blinding, molten gold light violently bursting from the seams. 
+      A deeply emotional representation of Kintsugi and profound psychological healing.
+    rendering:
+      font: playfair
+      text_color: "#FAF9F6"
+      author_color: "#D4AF37"
+      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
+      text_zone: center_minimalist
+      layout: big_center
+      decoration: none
+      voice_gender: male
+
+  vacuum_sealed_floral_decay:
+    summary: "Exotic, beautiful blooming flowers suffocating inside thick, wrinkled vacuum-sealed plastic."
+    categories: [mindfulness, latenight]
+    weight: high
+    description: >
+      A deeply unsettling, hyper-detailed macro shot of exotic, beautiful blooming flowers suffocating inside thick, industrial, wrinkled vacuum-sealed plastic. 
+      A metaphor for protecting your peace or being suffocated by toxic environments. 
+      Lighting: Clinical, bright, highlighting the reflections on the plastic wrap.
+    rendering:
+      font: poppins
+      text_color: "#1A1A1A"
+      author_color: "#D4AF37"
+      overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
+      text_zone: top_minimalist
+      layout: minimalist
+      decoration: none
+      voice_gender: female
+
+  ferrofluid_organic_armor:
+    summary: "Flawless white porcelain faces being slowly consumed or protected by moving, spiky black magnetic ferrofluid."
+    categories: [mindfulness, womenpower, morning]
+    weight: high
+    description: >
+      Pure, flawless white porcelain faces being slowly consumed or protected by moving, spiky, aggressive black magnetic ferrofluid. 
+      Visually represents setting boundaries made of impenetrable armor. 
+      The contrast between the pristine white porcelain and the hostile, liquid black metal must be extreme.
+    rendering:
+      font: raleway
+      text_color: "#FAF9F6"
+      author_color: "#D4AF37"
+      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
+      text_zone: bottom_minimalist
+      layout: minimalist
+      decoration: rule
+      voice_gender: female
+
+  vhs_glitch_renaissance:
+    summary: "A pristine Caravaggio-style oil painting being violently torn apart by modern VHS tracking glitches."
+    categories: [darkacademia, latenight, goodnight]
+    weight: high
+    description: >
+      A pristine, highly emotional Caravaggio-style oil painting (deep shadows, intense light) being violently torn apart by modern, aggressive VHS tracking glitches, chromatic aberration, and pixel sorting. 
+      A jarring collision of classical art and digital corruption.
+    rendering:
+      font: cormorant
+      text_color: "#FAF9F6"
+      author_color: "#D4AF37"
+      overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
+      text_zone: center
+      layout: asymmetric
+      decoration: none
+      voice_gender: male
+
+  thermal_isolation_void:
+    summary: "Highly saturated thermal camera (FLIR) aesthetic. A solitary human figure glowing with intense red/yellow heat in a freezing blue room."
+    categories: [goodnight, latenight, love]
+    weight: high
+    description: >
+      A highly saturated, hyper-stylized thermal camera (FLIR) aesthetic. 
+      A solitary human figure glowing with intense red and yellow heat, standing in a massive, freezing, deep blue empty room. 
+      Visually represents pure isolation, raw emotion, and being unable to hide your feelings.
     rendering:
       font: caveat
       text_color: "#FAF9F6"
       author_color: "#D4AF37"
-      overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
+      overlay: {type: gradient_top, opacity: 140, color: "#000000", blur: 0}
       text_zone: top_minimalist
+      layout: minimalist
+      decoration: none
+      voice_gender: female
+
+  bioluminescent_haute_couture:
+    summary: "Vogue-grade runway editorial photography where clothing is made entirely of glowing, living bioluminescent flora."
+    categories: [womenpower]
+    weight: high
+    description: >
+      Vogue-grade runway editorial photography where the clothing is made entirely of glowing, living, alien bioluminescent flora and deep-sea light patterns. 
+      Shot in absolute darkness, the only light source is the glowing, pulsing garments worn by a fiercely confident model.
+    rendering:
+      font: outfit
+      text_color: "#FAF9F6"
+      author_color: "#D4AF37"
+      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
+      text_zone: bottom_minimalist
       layout: minimalist
       decoration: none
       voice_gender: female
@@ -304,6 +195,82 @@ styles:
       author_color: "#D4AF37"
       overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
       text_zone: bottom_minimalist
+      layout: minimalist
+      decoration: rule
+      voice_gender: female
+
+  studio_ghibli_nostalgia:
+    summary: "A breathtaking, hand-drawn anime aesthetic inspired by Studio Ghibli, featuring lush, vibrant nature and soft, nostalgic lighting."
+    categories: [morning, mindfulness, love]
+    weight: medium
+    description: >
+      A breathtaking, hand-drawn 2D anime aesthetic heavily inspired by the visual style of Studio Ghibli. 
+      Features lush, vibrant, overgrown nature, soft dappled sunlight filtering through leaves, and a deep sense of peaceful nostalgia and quiet magic. 
+      The composition should feel incredibly comforting, cinematic, and beautifully painted with watercolor-like skies and highly detailed, breezy landscapes.
+      Lighting: Soft golden hour or gentle morning light, warm, nostalgic, and inviting.
+    rendering:
+      font: poppins
+      text_color: "#FAF9F6"
+      author_color: "#FFFFFF"
+      overlay: {type: vignette, opacity: 80, color: "#000000", blur: 0}
+      text_zone: center
+      layout: minimalist
+      decoration: none
+      voice_gender: female
+
+  neon_cyberpunk_noir:
+    summary: "A moody, highly saturated cyberpunk aesthetic featuring glowing neon reflections in the rain."
+    categories: [latenight, darkacademia]
+    weight: medium
+    description: >
+      A moody, highly saturated cyberpunk aesthetic. 
+      Pitch-black, rain-slicked city streets illuminated by intense, glowing neon signs in electric pink, cyan, and deep purple. 
+      The composition should feel solitary, reflective, and atmospheric, representing introspection in chaos. 
+      Lighting: High contrast, volumetric fog, striking neon reflections in puddles, cinematic framing.
+    rendering:
+      font: inter
+      text_color: "#FFFFFF"
+      author_color: "#00FFFF"
+      overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
+      text_zone: bottom_minimalist
+      layout: minimalist
+      decoration: none
+      voice_gender: male
+
+  national_geographic_macro:
+    summary: "Award-winning, hyper-realistic National Geographic wildlife macro photography."
+    categories: [wisdom, morning]
+    weight: medium
+    description: >
+      Award-winning, hyper-realistic National Geographic wildlife macro photography. 
+      Insanely detailed extreme close-ups of nature (e.g., the iridescent scales of a morpho butterfly, a dewdrop perfectly reflecting a dense forest, or the striking golden eye of an eagle). 
+      The level of detail should be microscopic, capturing the breathtaking, unbelievable perfection of the real natural world.
+      Lighting: Perfect natural sunlight, ultra-sharp focus, beautiful creamy bokeh background (shallow depth of field).
+    rendering:
+      font: inter
+      text_color: "#FAF9F6"
+      author_color: "#D4AF37"
+      overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
+      text_zone: bottom_minimalist
+      layout: minimalist
+      decoration: none
+      voice_gender: male
+
+  cinematic_drone_landscape:
+    summary: "Breathtaking 8k drone photography shot straight down over surreal natural landscapes."
+    categories: [mindfulness, morning, womenpower]
+    weight: medium
+    description: >
+      Breathtaking, highly cinematic 8k drone photography shot perfectly straight down (top-down view) over a dramatically contrasting, real-world landscape. 
+      Features impossible natural beauty, such as a neon pink salt lake crashing against a deep teal ocean, or a jagged obsidian rock formation cutting through pristine white sand. 
+      Must look exactly like a million-dollar, high-end travel or automotive commercial photograph.
+      Lighting: Golden hour long shadows, hyper-realistic textures, vibrant natural colors.
+    rendering:
+      font: raleway
+      text_color: "#FFFFFF"
+      author_color: "#FFFFFF"
+      overlay: {type: vignette, opacity: 80, color: "#000000", blur: 0}
+      text_zone: center
       layout: minimalist
       decoration: rule
       voice_gender: female
