@@ -114,7 +114,7 @@ themes:
   womenpower:
     name: She Feels
     format: reel
-    styles: [editorial_black_white_portrait, street_style_editorial_bw]
+    styles: [editorial_black_white_portrait, street_style_editorial_bw, avant_garde_surreal_fashion, elegant_illustrated_portrait]
     max_words: 18
     platforms: [instagram, youtube, facebook]
     # styles: [cinematic_female_protagonist] # Removed lock for fresh vibes

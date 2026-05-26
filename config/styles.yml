@@ -287,3 +287,23 @@ styles:
       layout: minimalist
       decoration: none
       voice_gender: female
+
+  avant_garde_surreal_fashion:
+    summary: "Avant-garde editorial fashion featuring runway-grade clothing constructed from unimaginable, elegant objects."
+    categories: [womenpower]
+    weight: high
+    description: >
+      High-end, runway-grade editorial fashion photography featuring a fiercely confident woman wearing unimaginably strange, surreal clothing. 
+      The garments must be constructed from impossible or highly unusual materials—such as shattered obsidian, cascading liquid chrome, hundreds of vintage watch dials, crystallized smoke, woven bioluminescence, or folded architectural concrete. 
+      The composition must be strictly high-fashion, deeply elegant, and impeccably decent (absolutely no nudity or excessive skin). 
+      Lighting: Dramatic runway spotlighting or harsh studio strobes against a stark, minimalist background to highlight the surreal, impossible textures of the clothing.
+      Vibe: Untouchable, fiercely powerful, and breathtakingly avant-garde.
+    rendering:
+      font: cormorant
+      text_color: "#FAF9F6"
+      author_color: "#D4AF37"
+      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
+      text_zone: bottom_minimalist
+      layout: minimalist
+      decoration: rule
+      voice_gender: female
