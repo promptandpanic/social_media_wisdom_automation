@@ -1,233 +1,81 @@
 styles:
 
-  hyper_kinetic_chrome:
-    summary: "A frozen, high-speed macro photograph of liquid chrome and shattered black obsidian violently colliding."
-    categories: [morning, womenpower]
+  golden_hour_epic:
+    summary: "Breathtaking 8K cinematic golden hour. Burning sky, epic natural scale, warm anamorphic light."
+    categories: [morning, womenpower, love, wisdom]
     weight: high
     description: >
-      A frozen, high-speed macro photograph of liquid chrome and shattered black obsidian violently colliding in a sterile, blindingly white room. 
-      Represents the aggressive, violent birth of discipline and unstoppable momentum. 
-      Lighting: Harsh studio strobes, ultra-high contrast, hyper-realistic 8k render. 
-      Do not show typical human figures, focus purely on the explosive physics and impossible textures.
-    rendering:
-      font: oswald
-      text_color: "#1A1A1A"
-      author_color: "#D4AF37"
-      overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
-      text_zone: center_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: male
-
-  monolithic_brutalism_scale:
-    summary: "An impossibly massive brutalist concrete structure piercing through a dense, blood-red fog."
-    categories: [morning, wisdom]
-    weight: high
-    description: >
-      An impossibly massive, terrifyingly large brutalist concrete structure piercing through a dense, blood-red fog. 
-      The sheer scale makes the viewer feel insignificantly small. 
-      Atmosphere: Unforgiving, silent, and structurally absolute. Cinematic wide-angle lens, deep crushing shadows.
-    rendering:
-      font: inter
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: gradient_top, opacity: 140, color: "#000000", blur: 0}
-      text_zone: top_minimalist
-      layout: big_center
-      decoration: none
-      voice_gender: male
-
-  anatomical_glass_sculpture:
-    summary: "Hyper-realistic medical macro photography of human anatomy made of cracked glass or porcelain."
-    categories: [wisdom, latenight, darkacademia]
-    weight: high
-    description: >
-      Hyper-realistic, high-fashion medical macro photography. 
-      The human anatomy (such as a glowing brain or a delicate ribcage) constructed entirely from cracked, fragile glass or delicate porcelain. 
-      Lighting: Harsh studio strobes isolating the fragile structure against a pitch-black background.
-    rendering:
-      font: spectral
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
-      text_zone: center
-      layout: asymmetric
-      decoration: none
-      voice_gender: female
-
-  burning_silk_and_ice:
-    summary: "High-end macro photography of delicate white silk catching fire but instantly freezing into jagged black ice."
-    categories: [love, latenight]
-    weight: high
-    description: >
-      High-end macro photography of delicate white silk catching fire, but the flames instantly freeze the fabric into jagged black ice. 
-      A visual metaphor for the sudden, cold death of emotion. 
-      Atmosphere: Elegant, deeply tragic, hyper-detailed textures of frost and burnt silk.
-    rendering:
-      font: cormorant
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
-      text_zone: bottom_minimalist
-      layout: minimalist
-      decoration: rule
-      voice_gender: female
-
-  kintsugi_human_void:
-    summary: "A cracking marble statue suspended in darkness, with blinding gold light violently bursting from the seams."
-    categories: [love, wisdom, latenight, darkacademia]
-    weight: high
-    description: >
-      A hyper-realistic classical marble statue of a weeping or falling figure, suspended in absolute pitch-black darkness. 
-      The marble is cracking apart, with blinding, molten gold light violently bursting from the seams. 
-      A deeply emotional representation of Kintsugi and profound psychological healing.
+      Hyper-cinematic 8K photography. Lighting: the burning last 90 seconds of golden hour —
+      long shadows, warm tones, the sky visibly on fire. Technique: wide anamorphic lens, beautiful
+      horizontal lens flares, epic natural scale. Color direction: deep navy bleeding into burnt amber
+      into blinding gold. Mood: quiet unstoppable power, raw freedom, earned peace.
+      The specific scene — subject, location, action — is driven entirely by the quote's emotion and
+      the location seed. This style only defines how it is lit and shot.
     rendering:
       font: playfair
-      text_color: "#FAF9F6"
+      text_color: "#FFFFFF"
       author_color: "#D4AF37"
-      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
-      text_zone: center_minimalist
+      overlay: {type: gradient_bottom, opacity: 130, color: "#000000", blur: 0}
+      text_zone: bottom_minimalist
+      layout: minimalist
+      decoration: none
+      voice_gender: female
+
+  dramatic_sky_weather:
+    summary: "Awe-inspiring 8K dramatic sky. Storm light breaking through clouds, raw elemental power."
+    categories: [morning, womenpower, latenight, love]
+    weight: high
+    description: >
+      Hyper-cinematic 8K photography dominated by a dramatic sky. Lighting: storm clouds breaking
+      into shafts of light, or sun rays punching through dark cumulonimbus, or lightning reflected
+      on dark water. Technique: ultra-wide angle, sky filling 70% of the frame. Color direction:
+      dark dramatic greys and deep blues against explosive bursts of gold and white light.
+      Mood: awe, raw elemental power, the humbling scale of things larger than us.
+      The specific scene is driven entirely by the quote's emotion and the location seed.
+    rendering:
+      font: montserrat
+      text_color: "#FFFFFF"
+      author_color: "#D4AF37"
+      overlay: {type: gradient_bottom, opacity: 150, color: "#000000", blur: 0}
+      text_zone: bottom_minimalist
       layout: big_center
       decoration: none
       voice_gender: male
 
-  vacuum_sealed_floral_decay:
-    summary: "Exotic, beautiful blooming flowers suffocating inside thick, wrinkled vacuum-sealed plastic."
-    categories: [mindfulness, latenight]
+  intimate_warm_light:
+    summary: "8K cinematic intimacy. Single warm light source carving a scene from darkness. Deeply relatable."
+    categories: [love, latenight, darkacademia, mindfulness]
     weight: high
     description: >
-      A deeply unsettling, hyper-detailed macro shot of exotic, beautiful blooming flowers suffocating inside thick, industrial, wrinkled vacuum-sealed plastic. 
-      A metaphor for protecting your peace or being suffocated by toxic environments. 
-      Lighting: Clinical, bright, highlighting the reflections on the plastic wrap.
-    rendering:
-      font: poppins
-      text_color: "#1A1A1A"
-      author_color: "#D4AF37"
-      overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
-      text_zone: top_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: female
-
-  ferrofluid_organic_armor:
-    summary: "Flawless white porcelain faces being slowly consumed or protected by moving, spiky black magnetic ferrofluid."
-    categories: [mindfulness, womenpower, morning]
-    weight: high
-    description: >
-      Pure, flawless white porcelain faces being slowly consumed or protected by moving, spiky, aggressive black magnetic ferrofluid. 
-      Visually represents setting boundaries made of impenetrable armor. 
-      The contrast between the pristine white porcelain and the hostile, liquid black metal must be extreme.
-    rendering:
-      font: raleway
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
-      text_zone: bottom_minimalist
-      layout: minimalist
-      decoration: rule
-      voice_gender: female
-
-  vhs_glitch_renaissance:
-    summary: "A pristine Caravaggio-style oil painting being violently torn apart by modern VHS tracking glitches."
-    categories: [darkacademia, latenight, goodnight]
-    weight: high
-    description: >
-      A pristine, highly emotional Caravaggio-style oil painting (deep shadows, intense light) being violently torn apart by modern, aggressive VHS tracking glitches, chromatic aberration, and pixel sorting. 
-      A jarring collision of classical art and digital corruption.
-    rendering:
-      font: cormorant
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
-      text_zone: center
-      layout: asymmetric
-      decoration: none
-      voice_gender: male
-
-  thermal_isolation_void:
-    summary: "Highly saturated thermal camera (FLIR) aesthetic. A solitary human figure glowing with intense red/yellow heat in a freezing blue room."
-    categories: [goodnight, latenight, love]
-    weight: high
-    description: >
-      A highly saturated, hyper-stylized thermal camera (FLIR) aesthetic. 
-      A solitary human figure glowing with intense red and yellow heat, standing in a massive, freezing, deep blue empty room. 
-      Visually represents pure isolation, raw emotion, and being unable to hide your feelings.
-    rendering:
-      font: caveat
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: gradient_top, opacity: 140, color: "#000000", blur: 0}
-      text_zone: top_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: female
-
-  bioluminescent_haute_couture:
-    summary: "Vogue-grade runway editorial photography where clothing is made entirely of glowing, living bioluminescent flora."
-    categories: [womenpower]
-    weight: high
-    description: >
-      Vogue-grade runway editorial photography where the clothing is made entirely of glowing, living, alien bioluminescent flora and deep-sea light patterns. 
-      Shot in absolute darkness, the only light source is the glowing, pulsing garments worn by a fiercely confident model.
-    rendering:
-      font: outfit
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
-      text_zone: bottom_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: female
-
-  avant_garde_surreal_fashion:
-    summary: "Avant-garde editorial fashion featuring runway-grade clothing constructed from unimaginable, elegant objects."
-    categories: [womenpower]
-    weight: high
-    description: >
-      High-end, runway-grade editorial fashion photography featuring a fiercely confident woman wearing unimaginably strange, surreal clothing. 
-      The garments must be constructed from impossible or highly unusual materials—such as shattered obsidian, cascading liquid chrome, hundreds of vintage watch dials, crystallized smoke, woven bioluminescence, or folded architectural concrete. 
-      The composition must be strictly high-fashion, deeply elegant, and impeccably decent (absolutely no nudity or excessive skin). 
-      Lighting: Dramatic runway spotlighting or harsh studio strobes against a stark, minimalist background to highlight the surreal, impossible textures of the clothing.
-      Vibe: Untouchable, fiercely powerful, and breathtakingly avant-garde.
+      Hyper-cinematic 8K photography lit by a single warm domestic light source — candle flame,
+      table lamp, fireplace glow, or soft morning window light. Technique: shallow depth of field,
+      intimate telephoto framing, rich texture detail in near objects. Color direction: deep burnt
+      amber and warm ochre pools against surrounding soft shadow. Mood: the private, honest feeling
+      of being alone with your thoughts in a warm space — the intimacy of 2am, or early morning
+      before the world wakes. The specific scene is driven entirely by the quote's emotion.
     rendering:
       font: cormorant
       text_color: "#FAF9F6"
       author_color: "#D4AF37"
       overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
-      text_zone: bottom_minimalist
+      text_zone: center_minimalist
       layout: minimalist
       decoration: rule
       voice_gender: female
 
-  studio_ghibli_nostalgia:
-    summary: "A breathtaking, hand-drawn anime aesthetic inspired by Studio Ghibli, featuring lush, vibrant nature and soft, nostalgic lighting."
-    categories: [morning, mindfulness, love]
-    weight: medium
+  nature_wonder_macro:
+    summary: "Award-winning 8K NatGeo-grade macro. Microscopic natural world, impossible breathtaking detail."
+    categories: [wisdom, morning, mindfulness]
+    weight: high
     description: >
-      A breathtaking, hand-drawn 2D anime aesthetic heavily inspired by the visual style of Studio Ghibli. 
-      Features lush, vibrant, overgrown nature, soft dappled sunlight filtering through leaves, and a deep sense of peaceful nostalgia and quiet magic. 
-      The composition should feel incredibly comforting, cinematic, and beautifully painted with watercolor-like skies and highly detailed, breezy landscapes.
-      Lighting: Soft golden hour or gentle morning light, warm, nostalgic, and inviting.
-    rendering:
-      font: poppins
-      text_color: "#FAF9F6"
-      author_color: "#FFFFFF"
-      overlay: {type: vignette, opacity: 80, color: "#000000", blur: 0}
-      text_zone: center
-      layout: minimalist
-      decoration: none
-      voice_gender: female
-
-
-  national_geographic_macro:
-    summary: "Award-winning, hyper-realistic National Geographic wildlife macro photography."
-    categories: [wisdom, morning]
-    weight: medium
-    description: >
-      Award-winning, hyper-realistic National Geographic wildlife macro photography. 
-      Insanely detailed extreme close-ups of nature (e.g., the iridescent scales of a morpho butterfly, a dewdrop perfectly reflecting a dense forest, or the striking golden eye of an eagle). 
-      The level of detail should be microscopic, capturing the breathtaking, unbelievable perfection of the real natural world.
-      Lighting: Perfect natural sunlight, ultra-sharp focus, beautiful creamy bokeh background (shallow depth of field).
+      Award-winning 8K extreme macro photography of the natural world at its most breathtaking.
+      Technique: microscopic scale reveals impossible detail invisible to the naked eye — the perfect
+      geometry of a dewdrop, the iridescent scales of a morpho butterfly wing, the fractal architecture
+      of a frost crystal, or the striking eye of a wild animal in extreme close-up. Lighting: perfect
+      natural daylight, ultra-sharp focus, creamy bokeh background. Color direction: nature's own
+      colors — nothing enhanced, nothing artificial. Mood: patient, humbling awe.
+      The world is more perfect and more strange than we remember.
+      The specific subject is driven entirely by the quote's emotion.
     rendering:
       font: inter
       text_color: "#FAF9F6"
@@ -238,21 +86,24 @@ styles:
       decoration: none
       voice_gender: male
 
-  cinematic_drone_landscape:
-    summary: "Breathtaking 8k drone photography shot straight down over surreal natural landscapes."
-    categories: [mindfulness, morning, womenpower]
+  aerial_landscape_beauty:
+    summary: "Breathtaking 8K drone aerial. Abstract earth patterns, impossible natural color contrasts."
+    categories: [mindfulness, wisdom, womenpower, morning]
     weight: medium
     description: >
-      Breathtaking, highly cinematic 8k drone photography shot perfectly straight down (top-down view) over a dramatically contrasting, real-world landscape. 
-      Features impossible natural beauty, such as a neon pink salt lake crashing against a deep teal ocean, or a jagged obsidian rock formation cutting through pristine white sand. 
-      Must look exactly like a million-dollar, high-end travel or automotive commercial photograph.
-      Lighting: Golden hour long shadows, hyper-realistic textures, vibrant natural colors.
+      Breathtaking 8K drone photography capturing the abstract, painterly beauty of earth from above.
+      Technique: straight down or low aerial angle over dramatically beautiful natural landscapes.
+      Lighting: golden hour long shadows revealing texture, or perfect midday exposing vivid color.
+      Color direction: defined entirely by the landscape — neon pink salt flats, deep teal rivers,
+      rust-red rock formations, jade rice terraces, white glacier tongues against black rock.
+      Mood: perspective, smallness, the earth's indifferent ancient beauty.
+      Must look like a National Geographic cover. The specific location is driven by the quote's emotion.
     rendering:
-      font: raleway
+      font: outfit
       text_color: "#FFFFFF"
       author_color: "#FFFFFF"
-      overlay: {type: vignette, opacity: 80, color: "#000000", blur: 0}
-      text_zone: center
+      overlay: {type: vignette, opacity: 100, color: "#000000", blur: 0}
+      text_zone: center_minimalist
       layout: minimalist
-      decoration: rule
+      decoration: none
       voice_gender: female

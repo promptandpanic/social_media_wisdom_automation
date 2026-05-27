@@ -90,71 +90,76 @@ Return ONLY valid JSON: {{"style": "chosen_style_name"}}"""
 
 
 _IMAGE_PROMPT_TEMPLATE = """\
-You are an unhinged, visionary Creative Director building high-stakes, scroll-stopping social media art from scratch. 
-Write a vivid, avant-garde image generation prompt that captures the absolute emotional essence of this quote, but in a completely unpredictable, surreal, or dramatic way.
+You are a world-class photographer and Creative Director creating a single scroll-stopping 8K image for a global social media audience aged 18–35.
+
+Your task: translate the emotional truth of this quote into one breathtaking photographic scene.
 
 QUOTE: "{text}"
-STYLE: {style_name}
 
+VISUAL GRAMMAR — how to shoot (technique, light, palette — not the scene):
+STYLE: {style_name}
 {style_description}
 
-CORE CREATIVE DIRECTIVES:
-1. SCROLL-STOPPING ORIGINALITY: Break the rules. No clichés. No "person walking on a path" or "tree in a field". Invent a wildly unpredictable, high-stakes visual metaphor. Use extreme scale contrast, impossible architecture, gravity-defying objects, or surreal minimalism.
-2. MEDIUM FLUIDITY: Do not just use photography. Depending on the quote's energy, mandate striking mediums: Brutalist 3D renders, neo-noir illustrations, hyper-macro textures, glitch-art aesthetics, liminal space photography, dark renaissance paintings, or retro-futurism.
-3. SHOCK VALUE & MOOD: The image must evoke an immediate gasp or deep emotional resonance. Use aggressive or ethereal lighting (e.g., neon-lit darkness, blinding bioluminescence, void-like shadows, harsh brutalist sunlight).
-4. THEMATIC RADICALISM: Do NOT repeat the exact example concepts listed in the constraints. You must invent a completely fresh, unique, and HIGHLY creative concept of your own.
-5. {image_hint_block}
+SCENE PARAMETERS — what world to build:
+  - LOCATION: {random_seed}
+  - CONDITIONS: {atmospheric_twist}
+  - EMOTIONAL ANCHOR: The quote's specific emotion shapes every detail — subject, action, scale, mood.
+    Same style + different quote = completely different scene. Let the words lead.
+{image_hint_block}
+RULES:
+1. GENERAL AUDIENCE: Beautiful, relatable, emotionally resonant. Must stop someone scrolling at 7am.
+   Real-world cinematography — not conceptual art, not niche aesthetics, not fashion editorial.
+2. 8K PHOTOREALISTIC: Hyper-real photography quality. Breathtaking natural detail. Cinematic color grade.
+3. QUOTE-DRIVEN SCENE: The scene is entirely shaped by the quote's emotion. The style only defines how it is shot.
+4. VAST NEGATIVE SPACE: The text overlay zone must be naturally clean and dark. Non-negotiable.{subject_constraint}
 
-Write 4–6 intensely descriptive sentences describing the scene:
-  medium/style → subject & action → extreme setting/environment → bold color palette (with hex values) → dramatic lighting & composition.
+Write 4–6 sentences:
+  location & setting → subject & emotional action → atmospheric detail → exact color palette (hex values) → lighting & composition.
 
 Constraints:
-  - COMPOSITION: The area for text must be naturally clean, high-contrast, and contain VAST NEGATIVE SPACE (voids, massive skies, flat brutalist walls, empty dark waters). This is non-negotiable.
-  - TEXT OVERLAY: {text_zone_instruction}
+  - TEXT ZONE: {text_zone_instruction}
   - No text, words, signs, logos, watermarks, or explicitly recognizable faces.
-  - 9:16 portrait format.{subject_constraint}
-  - CREATIVE CHAOS SEED: {random_seed}
-  - DRAMATIC TWIST: {atmospheric_twist}
+  - 9:16 portrait format, 8K resolution.
 
 Reply with ONLY the image prompt — plain text, no JSON, no preamble.
 """
 
 _THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
     "womenpower": (
-        "\n  - THEMATIC MANDATE: A fierce, highly conceptual representation of feminine dominance, resilience, or divine energy. "
-        "Think avant-garde fashion mixed with surrealism. "
-        "Examples: A colossal marble statue of a woman fracturing to reveal glowing gold beneath, a figure floating in a gravity-defying storm of crimson silk, or a sleek futuristic silhouette standing untouched amid total destruction. "
-        "Do NOT use basic 'woman in a suit' tropes. Go mythic, brutalist, or hyper-modern."
+        "\n  - THEMATIC MANDATE: A scene that radiates quiet, earned power and freedom — aspirational but real. "
+        "A woman (seen from behind, in silhouette, or as an anonymous presence) in a setting that embodies the quote's specific emotion. "
+        "Beautiful, cinematic, and universally relatable. Not runway, not editorial, not conceptual art."
     ),
     "darkacademia": (
-        "\n  - THEMATIC MANDATE: A dark, labyrinthine visual of forbidden knowledge, obsessive intellect, or gothic surrealism. "
-        "Examples: A sprawling library where the books are entirely made of glowing crystal, an endless spiral staircase sinking into an ink-black void, or macro-photography of a crumbling marble bust weeping molten bronze. "
-        "Make it atmospheric, obsessive, and visually overwhelming."
+        "\n  - THEMATIC MANDATE: The quiet beauty of deep focus and solitary thought. "
+        "Warm, intimate, lived-in environments where intellectual life happens — "
+        "the kind of scene the viewer wants to step into. "
+        "Driven entirely by the emotional truth of the quote."
     ),
     "latenight": (
-        "\n  - THEMATIC MANDATE: The psychological weight of 3 AM. A visually striking, liminal, or neo-noir metaphor for isolation and realization. "
-        "Examples: A single glowing red doorway suspended in an endless ocean at midnight, a brutalist concrete room lit only by the glare of a monolithic neon monolith, or a distorted reflection in shattered black glass. "
-        "Keep it mysterious, lonely, and deeply cinematic."
+        "\n  - THEMATIC MANDATE: The specific emotional weight of late-night solitude — honest, beautiful, deeply relatable. "
+        "A scene the viewer has experienced themselves: that 2am moment of clarity, longing, or quiet truth. "
+        "Cinematic, intimate, emotionally precise."
     ),
     "morning": (
-        "\n  - THEMATIC MANDATE: An aggressive, high-energy burst of awakening, discipline, or raw potential. "
-        "Examples: A sun literally exploding from the chest of an abstract geometric figure, extreme macro of a single bead of sweat shattering concrete upon impact, or a blindingly bright hyper-minimalist ascent into pure light. "
-        "Avoid basic 'gym/runner at dawn' concepts. Make it feel like an unstoppable force of nature."
+        "\n  - THEMATIC MANDATE: The raw energy and possibility of a new day — specific and visceral, not generic. "
+        "Light arriving, the world waking, potential made visible. "
+        "The scene must feel alive with beginning. Driven entirely by the quote's emotional truth."
     ),
     "wisdom": (
-        "\n  - THEMATIC MANDATE: A clean, highly abstract, mind-bending visual metaphor for consciousness, time, or truth. "
-        "Examples: A surreal tesseract of glass floating over a perfectly mirrored black desert, a giant iris embedded in a cliff face watching a storm, or a minimalist zen garden where the stones are floating monoliths. "
-        "Break reality. Use extreme minimalism or mind-bending scale."
+        "\n  - THEMATIC MANDATE: A visual that makes the viewer stop and feel the weight of something true. "
+        "Timeless, humbling in scale or detail. Must look like it belongs in National Geographic or a museum. "
+        "Driven entirely by the emotional truth of the quote."
     ),
     "mindfulness": (
-        "\n  - THEMATIC MANDATE: An impossible serenity. A visually stunning, hyper-calm environment that defies physics. "
-        "Examples: A perfectly smooth sphere of water hovering silently in a sterile white brutalist gallery, a vast field of bioluminescent grass waving in slow-motion without wind, or an endless pastel sky reflected on a liquid metal floor. "
-        "Evoke a feeling of profound, almost unsettling peace and stillness."
+        "\n  - THEMATIC MANDATE: Genuine, breathtaking calm — a real moment of natural beauty so perfect it quiets the mind. "
+        "The image must make the viewer exhale. Not spiritual cliché — actual beauty. "
+        "Driven entirely by the emotional truth of the quote."
     ),
     "love": (
-        "\n  - THEMATIC MANDATE: A visceral, high-stakes metaphor for soul-deep connection, sacrifice, or warmth. "
-        "Examples: Two supernovas colliding to form a single quiet glowing core, a macro shot of two hands turning into intertwined smoke, or a stark dark room where two light beams violently bend towards each other. "
-        "Avoid basic romantic clichés. Make the emotion feel powerful, cosmic, or deeply structural."
+        "\n  - THEMATIC MANDATE: The real, human truth of connection — warmth, longing, tenderness, or heartbreak rendered beautifully. "
+        "The image must feel deeply personal, like a memory the viewer has lived. "
+        "Cinematic and emotionally precise. Driven entirely by the quote's specific feeling."
     ),
 }
 
@@ -172,7 +177,7 @@ def pick_style(state: PipelineState) -> PipelineState:
 
     styles = _styles_for_theme(theme_key, theme.styles, recent)
     if not styles:
-        return {**state, "_chosen_style": "dark_academia_classical"}
+        return {**state, "_chosen_style": "golden_hour_epic"}
 
     try:
         prompt = _picker_prompt(quote.text if quote else "", theme_key, styles, recent)
@@ -234,26 +239,33 @@ def generate_brief(state: PipelineState) -> PipelineState:
         import random
 
         variation_seeds = [
-            "Glitch-core Surrealism",
-            "Baroque Futurism",
-            "Liminal Horror / Void",
-            "Ethereal Renaissance",
-            "Neon-Brutalism",
-            "Hyper-Macro Abstract",
-            "Cyber-Mysticism",
-            "Atmospheric Monolithic",
-            "Retro-Futuristic Noir",
-            "Dreamcore / Weirdcore",
+            "Himalayan ridge at first light",
+            "Pacific coastal cliffside",
+            "Saharan sand dune sea",
+            "Nordic fjord valley",
+            "ancient Japanese cedar forest",
+            "Patagonian open steppe",
+            "Icelandic volcanic moss plains",
+            "Vietnamese terraced rice fields",
+            "Scottish highland moor",
+            "Atacama desert salt flat",
+            "Norwegian mountain plateau",
+            "Tuscan rolling hillside at harvest",
+            "Alaskan wilderness tundra",
+            "New Zealand south island coastline",
+            "Moroccan desert at dusk",
         ]
         atmospheric_twists = [
-            "Time frozen at the exact moment of a shattering impact.",
-            "Submerged entirely under ethereal, bioluminescent water.",
-            "Harsh, blinding strobe lighting freezing dynamic motion.",
-            "Melted reality with extreme chromatic aberration and distortion.",
-            "A chilling, oppressive liminal emptiness with zero shadows.",
-            "Volcanic ash falling softly like snow in a hyper-colored light.",
-            "An overwhelming sense of monumental scale and insignificance.",
-            "Hyper-saturated infrared colors making nature look alien.",
+            "Crystal clear air after heavy rain — everything hyper-sharp, colors deeply saturated.",
+            "Morning mist slowly burning off — soft diffused layers, depth created by receding fog.",
+            "Approaching storm on the horizon — dramatic contrast between dark sky and a single shaft of brilliant light.",
+            "Low fog layer blanketing the ground — landscape or figure rising above a sea of cloud.",
+            "Epic wide establishing shot — any human presence is made tiny against the vast landscape.",
+            "Intimate ground-level framing looking up — the sky fills most of the frame.",
+            "Golden backlight — subject silhouetted with a glowing rim-light halo, sky ablaze behind.",
+            "Storm light breaking — one shaft of sunlight cutting through dark clouds onto a single point in the landscape.",
+            "Pre-dawn blue hour — the world holds its breath in deep blue before the first light arrives.",
+            "Last light of the day — everything dipped in deep orange and long purple shadows.",
         ]
 
         prompt = _IMAGE_PROMPT_TEMPLATE.format(
