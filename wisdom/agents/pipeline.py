@@ -31,6 +31,7 @@ def run(
     dry_run: bool = False,
     generate_only: bool = False,
     offline: bool = False,
+    native_text: bool = False,
 ) -> PipelineState:
     theme = cfg.theme(theme_key)
     if not theme.enabled:
@@ -48,6 +49,7 @@ def run(
         "dry_run": dry_run,
         "generate_only": generate_only,
         "offline": offline,
+        "use_native_text": native_text,
         "quote": None,
         "brief": None,
         "image_bytes": None,
@@ -57,6 +59,9 @@ def run(
         "design_attempt": 0,
         "best_score": 0,
         "best_state": None,
+        "_accepted": False,
+        "_hard_gate": False,
+        "_fallback_to_overlay": False,
         "meta": None,
         "pending_id": None,
         "platform_results": [],
@@ -163,6 +168,7 @@ def _create_video(state: PipelineState, theme: ThemeConfig) -> PipelineState:
             audio_file=_select_audio_file(theme.key),
             duration_sec=reel_cfg.get("duration_sec", 23),
             music_volume=reel_cfg.get("music_volume", 0.15),
+            native_text=state.get("use_native_text", False) and not state.get("_fallback_to_overlay", False),
         )
         return {
             **state,

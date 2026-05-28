@@ -48,7 +48,7 @@ class BaseImageProvider(ABC):
     name: str = "base"
 
     @abstractmethod
-    def generate(self, prompt: str) -> bytes: ...
+    def generate(self, prompt: str, native_text: bool = False) -> bytes: ...
 
     def available(self) -> bool:
         return True
@@ -71,13 +71,13 @@ class HuggingFaceProvider(BaseImageProvider):
     def available(self) -> bool:
         return bool(os.environ.get("HF_API_KEY"))
 
-    def generate(self, prompt: str) -> bytes:
+    def generate(self, prompt: str, native_text: bool = False) -> bytes:
         url = f"https://api-inference.huggingface.co/models/{self.model}"
         resp = requests.post(
             url,
             headers={"Authorization": f"Bearer {os.environ['HF_API_KEY']}"},
             json={
-                "inputs": prompt + _SAFETY_SUFFIX,
+                "inputs": prompt if native_text else prompt + _SAFETY_SUFFIX,
                 "parameters": {"width": _W, "height": _H},
             },
             timeout=self.timeout,
@@ -97,7 +97,7 @@ class LeonardoFluxProProvider(BaseImageProvider):
     def available(self) -> bool:
         return bool(os.environ.get("LEONARDO_API_KEY"))
 
-    def generate(self, prompt: str) -> bytes:
+    def generate(self, prompt: str, native_text: bool = False) -> bytes:
         import time
 
         key = os.environ["LEONARDO_API_KEY"]
@@ -110,8 +110,8 @@ class LeonardoFluxProProvider(BaseImageProvider):
                 "model": "flux-pro-2.0",
                 "public": False,
                 "parameters": {
-                    "prompt": prompt + _SAFETY_SUFFIX,
-                    "negativePrompt": _NEGATIVE_PROMPT,
+                    "prompt": prompt if native_text else prompt + _SAFETY_SUFFIX,
+                    "negativePrompt": "" if native_text else _NEGATIVE_PROMPT,
                     "width": 810,
                     "height": 1440,
                     "quantity": 1,
@@ -174,14 +174,14 @@ class GeminiImagenProvider(BaseImageProvider):
     def available(self) -> bool:
         return bool(os.environ.get("GEMINI_API_KEY"))
 
-    def generate(self, prompt: str) -> bytes:
+    def generate(self, prompt: str, native_text: bool = False) -> bytes:
         from google import genai
         from google.genai import types
 
         client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
         resp = client.models.generate_images(
             model=self.model,
-            prompt=prompt + _SAFETY_SUFFIX,
+            prompt=prompt if native_text else prompt + _SAFETY_SUFFIX,
             config=types.GenerateImagesConfig(
                 number_of_images=1,
                 aspect_ratio="9:16",
@@ -202,14 +202,14 @@ class GeminiFlashProvider(BaseImageProvider):
     def available(self) -> bool:
         return bool(os.environ.get("GEMINI_API_KEY"))
 
-    def generate(self, prompt: str) -> bytes:
+    def generate(self, prompt: str, native_text: bool = False) -> bytes:
         from google import genai
         from google.genai import types
 
         client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
         resp = client.models.generate_content(
             model=self.model,
-            contents=prompt + _SAFETY_SUFFIX,
+            contents=prompt if native_text else prompt + _SAFETY_SUFFIX,
             config=types.GenerateContentConfig(
                 response_modalities=["IMAGE"],
             ),
@@ -226,7 +226,7 @@ class PollinationsProvider(BaseImageProvider):
     def __init__(self, **_):
         pass
 
-    def generate(self, prompt: str) -> bytes:
+    def generate(self, prompt: str, native_text: bool = False) -> bytes:
         # Remove newlines and excess spaces for URL safety
         clean_prompt = " ".join(prompt.split())
         encoded = url_encode(clean_prompt[:500])
@@ -242,7 +242,7 @@ class GradientFallback(BaseImageProvider):
     def __init__(self, **_):
         pass
 
-    def generate(self, prompt: str) -> bytes:
+    def generate(self, prompt: str, native_text: bool = False) -> bytes:
         img = Image.new("RGB", (_W, _H))
         d = ImageDraw.Draw(img)
         top = (15, 15, 20)  # Charcoal
@@ -306,7 +306,7 @@ def _get(name: str) -> BaseImageProvider | None:
     return p
 
 
-def generate(prompt: str, exclude: list[str] | None = None) -> tuple[bytes, str]:
+def generate(prompt: str, exclude: list[str] | None = None, native_text: bool = False) -> tuple[bytes, str]:
     """Run prompt through the image fallback chain. Returns (bytes, provider_name)."""
     chain = cfg.image_fallback_chain()
     exclude = exclude or []
@@ -325,7 +325,7 @@ def generate(prompt: str, exclude: list[str] | None = None) -> tuple[bytes, str]
             continue
         try:
             logger.info(f"Image: trying {name}")
-            result = provider.generate(prompt)
+            result = provider.generate(prompt, native_text=native_text)
             logger.info(f"Image: ✓ {name} ({len(result) // 1024} KB)")
             return result, name
         except Exception as exc:
@@ -333,4 +333,4 @@ def generate(prompt: str, exclude: list[str] | None = None) -> tuple[bytes, str]
             last_error = exc
 
     logger.error("Image: all providers failed — returning gradient fallback")
-    return GradientFallback().generate(prompt), "gradient"
+    return GradientFallback().generate(prompt, native_text=native_text), "gradient"

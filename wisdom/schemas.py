@@ -144,6 +144,7 @@ class PipelineState(TypedDict, total=False):
     dry_run: bool
     generate_only: bool
     offline: bool
+    use_native_text: bool
 
     # Quote generation
     quote: Quote | None
@@ -171,6 +172,7 @@ class PipelineState(TypedDict, total=False):
     best_state: dict[str, Any] | None
     _accepted: bool
     _hard_gate: bool
+    _fallback_to_overlay: bool
     current_provider: str
     failed_providers: list[str]
 

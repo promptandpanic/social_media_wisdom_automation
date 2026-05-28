@@ -40,11 +40,12 @@ def cli():
 @click.option("--dry-run", is_flag=True, help="Save locally, never post")
 @click.option("--generate-only", is_flag=True, help="Stop after storing, don't post")
 @click.option("--offline", is_flag=True, help="Bypass LLM, use local curated quotes")
-def run(theme: str, dry_run: bool, generate_only: bool, offline: bool):
+@click.option("--native-text", is_flag=True, help="Use native text generation for images")
+def run(theme: str, dry_run: bool, generate_only: bool, offline: bool, native_text: bool):
     """Full pipeline for THEME (generate → design → media → post)."""
     from wisdom.agents.pipeline import run as _run
 
-    state = _run(theme, dry_run=dry_run, generate_only=generate_only, offline=offline)
+    state = _run(theme, dry_run=dry_run, generate_only=generate_only, offline=offline, native_text=native_text)
     results = state.get("platform_results", [])
     if not results and not dry_run and not generate_only:
         click.echo("No platforms posted — check logs", err=True)
@@ -54,11 +55,12 @@ def run(theme: str, dry_run: bool, generate_only: bool, offline: bool):
 @cli.command("generate")
 @click.argument("theme")
 @click.option("--offline", is_flag=True, help="Bypass LLM, use local curated quotes")
-def generate_cmd(theme: str, offline: bool):
+@click.option("--native-text", is_flag=True, help="Use native text generation for images")
+def generate_cmd(theme: str, offline: bool, native_text: bool):
     """Generate content for THEME and store as pending (don't post)."""
     from wisdom.agents.pipeline import run as _run
 
-    _run(theme, generate_only=True, offline=offline)
+    _run(theme, generate_only=True, offline=offline, native_text=native_text)
     click.echo("✓ Generated and stored. Run 'task post' to publish.")
 
 
@@ -101,13 +103,14 @@ def post(theme: str, pending_id: str | None):
 @cli.command("dry-run")
 @click.argument("theme")
 @click.option("--offline", is_flag=True, help="Bypass LLM, use local curated quotes")
-def dry_run_cmd(theme: str, offline: bool):
+@click.option("--native-text", is_flag=True, help="Use native text generation for images")
+def dry_run_cmd(theme: str, offline: bool, native_text: bool):
     """Generate for THEME, save locally to output/, never post."""
     # Use the full fallback chain unless overridden by the shell environment
 
     from wisdom.agents.pipeline import run as _run
 
-    _run(theme, dry_run=True, offline=offline)
+    _run(theme, dry_run=True, offline=offline, native_text=native_text)
 
 
 @cli.command()

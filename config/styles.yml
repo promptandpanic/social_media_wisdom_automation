@@ -1,109 +1,106 @@
 styles:
 
-  golden_hour_epic:
-    summary: "Breathtaking 8K cinematic golden hour. Burning sky, epic natural scale, warm anamorphic light."
-    categories: [morning, womenpower, love, wisdom]
+  frame_within_a_frame:
+    summary: "Frame Within a Frame. Unusual camera spot, mid-action, imperfect framing, feels peer-to-peer."
+    categories: [womenpower, morning, latenight, wisdom]
     weight: high
     description: >
-      Hyper-cinematic 8K photography. Lighting: the burning last 90 seconds of golden hour —
-      long shadows, warm tones, the sky visibly on fire. Technique: wide anamorphic lens, beautiful
-      horizontal lens flares, epic natural scale. Color direction: deep navy bleeding into burnt amber
-      into blinding gold. Mood: quiet unstoppable power, raw freedom, earned peace.
-      The specific scene — subject, location, action — is driven entirely by the quote's emotion and
-      the location seed. This style only defines how it is lit and shot.
+      Imperfect by design, feeling like a raw peer-to-peer capture rather than a polished ad. 
+      Lighting: realistic, unpolished, ambient room or street lighting. Technique: frame within a frame. 
+      The camera/perspective is placed in an unusual spot (e.g., behind an object, looking through a gap). 
+      Movement tells the brain something is happening — turn the camera on mid-action. 
+      Messy, imperfect framing. Color direction: raw, un-color-graded, real-life tones.
+      Mood: relatable, authentic, capturing a fleeting moment of truth.
+    rendering:
+      font: inter
+      text_color: "#FFFFFF"
+      author_color: "#D4AF37"
+      overlay: {type: gradient_bottom, opacity: 120, color: "#000000", blur: 0}
+      text_zone: center_minimalist
+      layout: big_center
+      decoration: none
+      voice_gender: female
+
+  dark_mode_neon:
+    summary: "Dark Mode Infographic. True black background #000000, high contrast, neon accents."
+    categories: [mindfulness, wisdom, latenight]
+    weight: high
+    description: >
+      Dark mode native aesthetic. 70% of users have dark mode on, so this is designed to be seamless.
+      Lighting/Technique: The background is predominantly true deep black (#000000) or extremely dark. 
+      Lighting is highly constrained, maybe just a stark neon highlight or high-contrast silhouette. 
+      Color direction: Minimal color palette—mostly true black and white, but broken by a single, 
+      startling neon accent (neon green, vivid hot pink, or electric blue). 
+      Mood: tech-forward, modern, stark, honest. "Healing isn't linear" energy.
+    rendering:
+      font: montserrat
+      text_color: "#FFFFFF"
+      author_color: "#39FF14"
+      overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
+      text_zone: center
+      layout: minimalist
+      decoration: rule
+      voice_gender: male
+
+  y2k_nostalgia:
+    summary: "Y2K/90s Nostalgia. Early internet, 90s palette, unusual tactile materials."
+    categories: [womenpower, love, morning]
+    weight: high
+    description: >
+      A raw 90s/Y2K nostalgia hook that triggers an emotional response before processing content.
+      Technique: Flash photography aesthetic, slight disposable camera grain or early digital grit.
+      Color direction: 90s color palette, washed-out tones, metallic silvers, or hyper-saturated Y2K pop colors.
+      Subject constraints: Unusual materials, e.g., a high-fashion outfit made of VHS tape, bubble wrap, or furby material.
+      Mood: Nostalgic, tactile, slightly chaotic, "She's not a throwback. She's a reminder."
+      The scene must stop the scroll by feeling like a buried memory or featuring an unexpected texture.
+    rendering:
+      font: anton
+      text_color: "#FAF9F6"
+      author_color: "#FF00FF"
+      overlay: {type: vignette, opacity: 130, color: "#000000", blur: 0}
+      text_zone: top_minimalist
+      layout: asymmetric
+      decoration: none
+      voice_gender: female
+
+  visual_poetry_macro:
+    summary: "Visual Poetry Extreme Close-Up. Macro human detail, raw textures, unresolved tension."
+    categories: [womenpower, love, mindfulness, latenight]
+    weight: high
+    description: >
+      Visual poetry through extreme, uncomfortable close-up. Not macro nature — macro human. 
+      Technique: Cinematic attention to detail in a format that usually rewards speed. 
+      Focus on tactile human texture: sweat on a collarbone, cracked lipstick, a tight grip on tearing silk.
+      Lighting: intimate, dramatic, emphasizing the physical weight and texture of what is genuinely made.
+      Color direction: rich, cinematic, focused on skin tones and physical material.
+      Mood: interiority, unresolved tension. "Soft does not mean weak."
     rendering:
       font: playfair
       text_color: "#FFFFFF"
       author_color: "#D4AF37"
-      overlay: {type: gradient_bottom, opacity: 130, color: "#000000", blur: 0}
-      text_zone: bottom_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: female
-
-  dramatic_sky_weather:
-    summary: "Awe-inspiring 8K dramatic sky. Storm light breaking through clouds, raw elemental power."
-    categories: [morning, womenpower, latenight, love]
-    weight: high
-    description: >
-      Hyper-cinematic 8K photography dominated by a dramatic sky. Lighting: storm clouds breaking
-      into shafts of light, or sun rays punching through dark cumulonimbus, or lightning reflected
-      on dark water. Technique: ultra-wide angle, sky filling 70% of the frame. Color direction:
-      dark dramatic greys and deep blues against explosive bursts of gold and white light.
-      Mood: awe, raw elemental power, the humbling scale of things larger than us.
-      The specific scene is driven entirely by the quote's emotion and the location seed.
-    rendering:
-      font: montserrat
-      text_color: "#FFFFFF"
-      author_color: "#D4AF37"
       overlay: {type: gradient_bottom, opacity: 150, color: "#000000", blur: 0}
       text_zone: bottom_minimalist
-      layout: big_center
-      decoration: none
-      voice_gender: male
-
-  intimate_warm_light:
-    summary: "8K cinematic intimacy. Single warm light source carving a scene from darkness. Deeply relatable."
-    categories: [love, latenight, darkacademia, mindfulness]
-    weight: high
-    description: >
-      Hyper-cinematic 8K photography lit by a single warm domestic light source — candle flame,
-      table lamp, fireplace glow, or soft morning window light. Technique: shallow depth of field,
-      intimate telephoto framing, rich texture detail in near objects. Color direction: deep burnt
-      amber and warm ochre pools against surrounding soft shadow. Mood: the private, honest feeling
-      of being alone with your thoughts in a warm space — the intimacy of 2am, or early morning
-      before the world wakes. The specific scene is driven entirely by the quote's emotion.
-    rendering:
-      font: cormorant
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: vignette, opacity: 140, color: "#000000", blur: 0}
-      text_zone: center_minimalist
       layout: minimalist
-      decoration: rule
+      decoration: none
       voice_gender: female
 
-  nature_wonder_macro:
-    summary: "Award-winning 8K NatGeo-grade macro. Microscopic natural world, impossible breathtaking detail."
-    categories: [wisdom, morning, mindfulness]
-    weight: high
-    description: >
-      Award-winning 8K extreme macro photography of the natural world at its most breathtaking.
-      Technique: microscopic scale reveals impossible detail invisible to the naked eye — the perfect
-      geometry of a dewdrop, the iridescent scales of a morpho butterfly wing, the fractal architecture
-      of a frost crystal, or the striking eye of a wild animal in extreme close-up. Lighting: perfect
-      natural daylight, ultra-sharp focus, creamy bokeh background. Color direction: nature's own
-      colors — nothing enhanced, nothing artificial. Mood: patient, humbling awe.
-      The world is more perfect and more strange than we remember.
-      The specific subject is driven entirely by the quote's emotion.
-    rendering:
-      font: inter
-      text_color: "#FAF9F6"
-      author_color: "#D4AF37"
-      overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
-      text_zone: bottom_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: male
-
-  aerial_landscape_beauty:
-    summary: "Breathtaking 8K drone aerial. Abstract earth patterns, impossible natural color contrasts."
-    categories: [mindfulness, wisdom, womenpower, morning]
+  pattern_interrupt:
+    summary: "Bold Statement Text & Pattern Interrupt. Startling contrast, imperfect."
+    categories: [wisdom, morning, womenpower]
     weight: medium
     description: >
-      Breathtaking 8K drone photography capturing the abstract, painterly beauty of earth from above.
-      Technique: straight down or low aerial angle over dramatically beautiful natural landscapes.
-      Lighting: golden hour long shadows revealing texture, or perfect midday exposing vivid color.
-      Color direction: defined entirely by the landscape — neon pink salt flats, deep teal rivers,
-      rust-red rock formations, jade rice terraces, white glacier tongues against black rock.
-      Mood: perspective, smallness, the earth's indifferent ancient beauty.
-      Must look like a National Geographic cover. The specific location is driven by the quote's emotion.
+      A stark pattern interrupt designed to break the scroll instantly.
+      Technique: Imperfect by design. It shouldn't look like an ad; it should look like a raw, 
+      urgent message. High contrast, perhaps a slightly blurred background of a chaotic real-world scene,
+      leaving maximum room for a bold statement text. 
+      Lighting: harsh, direct, or aggressively mundane (fluorescent lighting). 
+      Mood: Absolute confidence. "This will change how you see yourself."
     rendering:
-      font: outfit
+      font: bebas
       text_color: "#FFFFFF"
-      author_color: "#FFFFFF"
-      overlay: {type: vignette, opacity: 100, color: "#000000", blur: 0}
-      text_zone: center_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: female
+      author_color: "#FF3131"
+      overlay: {type: gradient_top, opacity: 150, color: "#000000", blur: 0}
+      text_zone: center
+      layout: big_center
+      decoration: rule
+      voice_gender: male

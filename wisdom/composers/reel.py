@@ -69,17 +69,20 @@ def _build_reel(
     audio_file: str,
     duration_sec: float,
     music_volume: float,
+    native_text: bool = False,
 ) -> bytes | None:
     total = duration_sec
     W, H = IMAGE_WIDTH, IMAGE_HEIGHT
 
     raw_pil = compose_base(image_bytes, brief)
-    overlay_png = compose_overlay_layer(brief)
-    text_png = compose_text_layer(image_bytes, quote, brief)
+    if not native_text:
+        overlay_png = compose_overlay_layer(brief)
+        text_png = compose_text_layer(image_bytes, quote, brief)
+    
     total_frames = int(total * FPS)
 
     text_fade_start = total - FADE_DUR_SEC - BASE_HOLD_SEC
-    skip_kenburns = brief.skip_kenburns
+    skip_kenburns = brief.skip_kenburns or native_text
     sc = _scale_crop()
 
     has_audio = Path(audio_file).exists() if audio_file else False
@@ -87,39 +90,43 @@ def _build_reel(
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp = Path(tmpdir)
         bg_path = str(tmp / "bg.jpg")
-        overlay_path = str(tmp / "overlay.png")
-        text_path = str(tmp / "text.png")
         raw_pil.save(bg_path, format="JPEG", quality=95)
-        (tmp / "overlay.png").write_bytes(overlay_png)
-        (tmp / "text.png").write_bytes(text_png)
 
         out_p = str(tmp / "reel.mp4")
         cmd = ["ffmpeg", "-y"]
         cmd += ["-loop", "1", "-t", f"{total:.4f}", "-i", bg_path]  # 0: raw bg
-        cmd += ["-loop", "1", "-t", f"{total:.4f}", "-i", overlay_path]  # 1: overlay
-        cmd += ["-loop", "1", "-t", f"{total:.4f}", "-i", text_path]  # 2: text
+        
+        if not native_text:
+            overlay_path = str(tmp / "overlay.png")
+            text_path = str(tmp / "text.png")
+            (tmp / "overlay.png").write_bytes(overlay_png)
+            (tmp / "text.png").write_bytes(text_png)
+            cmd += ["-loop", "1", "-t", f"{total:.4f}", "-i", overlay_path]  # 1: overlay
+            cmd += ["-loop", "1", "-t", f"{total:.4f}", "-i", text_path]  # 2: text
 
         audio_idx = None
         if has_audio:
-            audio_idx = 3
+            audio_idx = 3 if not native_text else 1
             cmd += ["-stream_loop", "-1", "-i", str(Path(audio_file).resolve())]
 
         parts = []
+        v_out_target = "bg" if not native_text else "vout"
         if not skip_kenburns:
             # Added subtle cinematic grain + sharp color grade
             parts.append(
-                f"[0:v]{sc},{_zoompan_at(total_frames, 0)},noise=alls=5:allf=t,eq=contrast=1.06:saturation=1.1,unsharp=3:3:0.5:3:3:0.0[bg]"
+                f"[0:v]{sc},{_zoompan_at(total_frames, 0)},noise=alls=5:allf=t,eq=contrast=1.06:saturation=1.1,unsharp=3:3:0.5:3:3:0.0[{v_out_target}]"
             )
         else:
             parts.append(
-                f"[0:v]{sc},setsar=1,fps={FPS},noise=alls=5:allf=t,eq=contrast=1.06:saturation=1.1,unsharp=3:3:0.5:3:3:0.0[bg]"
+                f"[0:v]{sc},setsar=1,fps={FPS},noise=alls=5:allf=t,eq=contrast=1.06:saturation=1.1,unsharp=3:3:0.5:3:3:0.0[{v_out_target}]"
             )
 
-        # Overlay and text are both fully static — no zoom
-        parts.append(f"[1:v]format=rgba,setsar=1,fps={FPS}[ov_static]")
-        parts.append(f"[2:v]format=rgba,setsar=1,fps={FPS}[text_static]")
-        parts.append("[bg][ov_static]overlay=0:0[bg_ov]")
-        parts.append("[bg_ov][text_static]overlay=0:0[vout]")
+        if not native_text:
+            # Overlay and text are both fully static — no zoom
+            parts.append(f"[1:v]format=rgba,setsar=1,fps={FPS}[ov_static]")
+            parts.append(f"[2:v]format=rgba,setsar=1,fps={FPS}[text_static]")
+            parts.append("[bg][ov_static]overlay=0:0[bg_ov]")
+            parts.append("[bg_ov][text_static]overlay=0:0[vout]")
 
         if audio_idx is not None:
             fade_st = max(0.0, total - 1.5)
@@ -179,6 +186,7 @@ def create_reel(
     audio_file: str = "",
     duration_sec: float = 23,
     music_volume: float = 0.15,
+    native_text: bool = False,
 ) -> tuple[bytes | None, bytes | None]:
     """
     Returns (video_bytes, thumbnail_bytes).
@@ -190,9 +198,12 @@ def create_reel(
 
     from wisdom.composers.card import compose_image
 
-    thumbnail = compose_image(image_bytes, quote, brief)
+    if native_text:
+        thumbnail = image_bytes
+    else:
+        thumbnail = compose_image(image_bytes, quote, brief)
 
     video = _build_reel(
-        image_bytes, quote, brief, audio_file, duration_sec, music_volume
+        image_bytes, quote, brief, audio_file, duration_sec, music_volume, native_text
     )
     return video, thumbnail

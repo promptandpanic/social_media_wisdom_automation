@@ -126,40 +126,39 @@ Reply with ONLY the image prompt — plain text, no JSON, no preamble.
 
 _THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
     "womenpower": (
-        "\n  - THEMATIC MANDATE: A scene that radiates quiet, earned power and freedom — aspirational but real. "
-        "A woman (seen from behind, in silhouette, or as an anonymous presence) in a setting that embodies the quote's specific emotion. "
-        "Beautiful, cinematic, and universally relatable. Not runway, not editorial, not conceptual art."
+        "\n  - THEMATIC MANDATE: A scene that radiates quiet, earned power — aspirational but raw and real. "
+        "Use your boundless creativity to imagine a raw, relatable, and deeply symbolic visual metaphor that perfectly captures the quote's soul. "
+        "Do not rely on clichés; think completely out of the box."
     ),
     "darkacademia": (
         "\n  - THEMATIC MANDATE: The quiet beauty of deep focus and solitary thought. "
-        "Warm, intimate, lived-in environments where intellectual life happens — "
-        "the kind of scene the viewer wants to step into. "
-        "Driven entirely by the emotional truth of the quote."
+        "Use your boundless creativity to imagine a warm, intimate, lived-in environment. "
+        "Do not rely on clichés; think completely out of the box and let the quote's emotional truth drive the scene."
     ),
     "latenight": (
-        "\n  - THEMATIC MANDATE: The specific emotional weight of late-night solitude — honest, beautiful, deeply relatable. "
-        "A scene the viewer has experienced themselves: that 2am moment of clarity, longing, or quiet truth. "
-        "Cinematic, intimate, emotionally precise."
+        "\n  - THEMATIC MANDATE: The specific emotional weight of late-night solitude. "
+        "Use your boundless creativity to imagine a cinematic, intimate, and emotionally precise scene. "
+        "Do not rely on clichés; think completely out of the box."
     ),
     "morning": (
-        "\n  - THEMATIC MANDATE: The raw energy and possibility of a new day — specific and visceral, not generic. "
-        "Light arriving, the world waking, potential made visible. "
-        "The scene must feel alive with beginning. Driven entirely by the quote's emotional truth."
+        "\n  - THEMATIC MANDATE: The raw energy and possibility of a new day. "
+        "Use your boundless creativity to imagine a specific, visceral scene where light arrives and potential is made visible. "
+        "Do not rely on clichés; think completely out of the box."
     ),
     "wisdom": (
         "\n  - THEMATIC MANDATE: A visual that makes the viewer stop and feel the weight of something true. "
-        "Timeless, humbling in scale or detail. Must look like it belongs in National Geographic or a museum. "
-        "Driven entirely by the emotional truth of the quote."
+        "Use your boundless creativity to imagine a timeless, humbling scene. "
+        "Do not rely on clichés; think completely out of the box."
     ),
     "mindfulness": (
-        "\n  - THEMATIC MANDATE: Genuine, breathtaking calm — a real moment of natural beauty so perfect it quiets the mind. "
-        "The image must make the viewer exhale. Not spiritual cliché — actual beauty. "
-        "Driven entirely by the emotional truth of the quote."
+        "\n  - THEMATIC MANDATE: Genuine, breathtaking calm — a real moment of natural beauty. "
+        "Use your boundless creativity to imagine a scene so perfect it quiets the mind. "
+        "Do not rely on clichés or spiritual stereotypes; think completely out of the box."
     ),
     "love": (
-        "\n  - THEMATIC MANDATE: The real, human truth of connection — warmth, longing, tenderness, or heartbreak rendered beautifully. "
-        "The image must feel deeply personal, like a memory the viewer has lived. "
-        "Cinematic and emotionally precise. Driven entirely by the quote's specific feeling."
+        "\n  - THEMATIC MANDATE: The real, human truth of connection — warmth, longing, tenderness, or heartbreak. "
+        "Use your boundless creativity to imagine a deeply personal, cinematic scene. "
+        "Do not rely on clichés; think completely out of the box."
     ),
 }
 
@@ -239,33 +238,33 @@ def generate_brief(state: PipelineState) -> PipelineState:
         import random
 
         variation_seeds = [
-            "Himalayan ridge at first light",
-            "Pacific coastal cliffside",
-            "Saharan sand dune sea",
-            "Nordic fjord valley",
-            "ancient Japanese cedar forest",
-            "Patagonian open steppe",
-            "Icelandic volcanic moss plains",
-            "Vietnamese terraced rice fields",
-            "Scottish highland moor",
-            "Atacama desert salt flat",
-            "Norwegian mountain plateau",
-            "Tuscan rolling hillside at harvest",
-            "Alaskan wilderness tundra",
-            "New Zealand south island coastline",
-            "Moroccan desert at dusk",
+            "cramped subway car",
+            "back of an Uber",
+            "messy desk with coffee cups",
+            "fluorescent-lit laundromat",
+            "cluttered vanity mirror",
+            "unmade bed in a dim room",
+            "kitchen counter late at night",
+            "passenger seat of a car in the rain",
+            "corner booth of an empty diner",
+            "stairwell with harsh overhead lighting",
+            "bathroom sink edge",
+            "library table stacked with books",
+            "sidewalk edge at dusk",
+            "dark empty parking lot",
+            "floor surrounded by torn paper or fabric",
         ]
         atmospheric_twists = [
-            "Crystal clear air after heavy rain — everything hyper-sharp, colors deeply saturated.",
-            "Morning mist slowly burning off — soft diffused layers, depth created by receding fog.",
-            "Approaching storm on the horizon — dramatic contrast between dark sky and a single shaft of brilliant light.",
-            "Low fog layer blanketing the ground — landscape or figure rising above a sea of cloud.",
-            "Epic wide establishing shot — any human presence is made tiny against the vast landscape.",
-            "Intimate ground-level framing looking up — the sky fills most of the frame.",
-            "Golden backlight — subject silhouetted with a glowing rim-light halo, sky ablaze behind.",
-            "Storm light breaking — one shaft of sunlight cutting through dark clouds onto a single point in the landscape.",
-            "Pre-dawn blue hour — the world holds its breath in deep blue before the first light arrives.",
-            "Last light of the day — everything dipped in deep orange and long purple shadows.",
+            "Imperfect by design — raw, honest lighting, feels peer-to-peer and unpolished.",
+            "Turn the camera on mid-action — messy framing, slight movement blur, kinetic energy.",
+            "Cinematic attention to detail — tactile texture, weight of materials, extreme physical proximity.",
+            "Dark mode native — stark contrast, deep true blacks, striking single-color accents.",
+            "Contrasting environment — high fashion or heavy emotion placed in an aggressively mundane location.",
+            "Flash photography aesthetic — harsh direct flash, slightly overexposed foreground, dark background.",
+            "Neon reflection — a single source of bright neon light reflecting off a surface or skin.",
+            "Obscured subject — face hidden, focus entirely on hands, fabric, or a specific prop.",
+            "Grain and grit — visible film grain or digital noise, avoiding anything that looks like an 8K ad.",
+            "Extreme macro depth — background completely blown out to focus on one tiny tactile detail.",
         ]
 
         prompt = _IMAGE_PROMPT_TEMPLATE.format(

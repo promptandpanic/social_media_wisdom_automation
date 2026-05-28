@@ -63,8 +63,12 @@ def generate_image(state: PipelineState) -> PipelineState:
         suffix = _RETRY_SUFFIXES[min(attempt - 1, len(_RETRY_SUFFIXES) - 1)]
         prompt = f"{base_prompt} {suffix}".strip() if suffix else base_prompt
 
+        native_text = state.get("use_native_text", False) and not state.get("_fallback_to_overlay", False)
+        if native_text:
+            prompt = f"{prompt}\n\nCRITICAL MANDATE: Render the following exact text beautifully and flawlessly integrated into the image scene: '{state.get('quote').text if state.get('quote') else ''}'"
+
         exclude = state.get("failed_providers", [])
-        image_bytes, provider_name = providers.image.generate(prompt, exclude=exclude)
+        image_bytes, provider_name = providers.image.generate(prompt, exclude=exclude, native_text=native_text)
         if "model_usage" not in state:
             state["model_usage"] = {}
         state["model_usage"]["Image Generation"] = provider_name
@@ -81,6 +85,12 @@ def compose(state: PipelineState) -> PipelineState:
     from wisdom.composers.card import compose_image
 
     image_bytes = state.get("image_bytes", b"")
+    native_text = state.get("use_native_text", False) and not state.get("_fallback_to_overlay", False)
+    
+    if native_text:
+        logger.info(f"  Skipping compose (native text used) ({len(image_bytes) // 1024} KB)")
+        return {**state, "composed_image": image_bytes}
+
     quote = state.get("quote")
     brief = state.get("brief")
     composed = compose_image(image_bytes, quote, brief)
@@ -91,7 +101,8 @@ def compose(state: PipelineState) -> PipelineState:
 def judge(state: PipelineState) -> PipelineState:
     composed = state.get("composed_image", b"")
     quote = state.get("quote")
-    score, accepted, hard_gate, issues = _judge_image(composed, quote, state)
+    native_text = state.get("use_native_text", False) and not state.get("_fallback_to_overlay", False)
+    score, accepted, hard_gate, issues = _judge_image(composed, quote, state, native_text)
 
     candidate = {
         "image": state.get("image_bytes"),
@@ -122,14 +133,18 @@ def judge(state: PipelineState) -> PipelineState:
     }
 
     if not accepted:
-        failed = list(state.get("failed_providers", []))
-        current = state.get("current_provider")
-        if current and current not in failed and current != "gradient":
-            failed.append(current)
-            logger.info(
-                f"  Provider '{current}' blacklisted for this run due to poor quality/gibberish"
-            )
-        new_state["failed_providers"] = failed
+        if native_text and (hard_gate or score == 0):
+            logger.info("  Native text generation failed judge — falling back to overlay for next attempt")
+            new_state["_fallback_to_overlay"] = True
+        else:
+            failed = list(state.get("failed_providers", []))
+            current = state.get("current_provider")
+            if current and current not in failed and current != "gradient":
+                failed.append(current)
+                logger.info(
+                    f"  Provider '{current}' blacklisted for this run due to poor quality/gibberish"
+                )
+            new_state["failed_providers"] = failed
 
     return new_state
 
@@ -195,12 +210,14 @@ Return ONLY valid JSON:
 """
 
 
-def _judge_image(image_bytes: bytes, quote, state: PipelineState) -> tuple[int, bool, bool, str]:
+def _judge_image(image_bytes: bytes, quote, state: PipelineState, native_text: bool) -> tuple[int, bool, bool, str]:
     if not image_bytes:
         return 0, False, True, "No image bytes"
     threshold = cfg.app().get("judge_threshold", 7)
     try:
         prompt = _JUDGE_PROMPT.format(text=getattr(quote, "text", "") if quote else "")
+        if native_text:
+            prompt += "\n\nNATIVE TEXT MODE ACTIVE: You MUST verify the exact text is spelled 100% perfectly and is easily readable. If there are ANY spelling errors, missing words, extra gibberish words, or unreadable words, you MUST set score=0 and hard_gate_failure=true."
         content, provider_info = providers.llm.judge_image(image_bytes, prompt, role="image_judge")
         if "model_usage" not in state:
             state["model_usage"] = {}
