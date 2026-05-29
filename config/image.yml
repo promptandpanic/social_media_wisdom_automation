@@ -36,4 +36,4 @@ providers:
     # Zero-dependency PIL fallback — always works
 
 # Tried left-to-right; first success wins.
-fallback_chain: [gemini_imagen, leonardo_flux_pro, gemini_flash, huggingface, pollinations, gradient]
+fallback_chain: [leonardo_flux_pro, gemini_imagen, gemini_flash, huggingface, pollinations, gradient]
