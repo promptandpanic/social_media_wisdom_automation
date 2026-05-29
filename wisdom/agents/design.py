@@ -322,20 +322,21 @@ def _build_brief(
     word_count = len(text.split())
     layout = r.get("layout", "big_center")
     if layout == "minimalist":
-        font_size = 30
+        font_size = 35
     elif layout == "asymmetric":
-        font_size = 38
+        font_size = 44
     else:
         font_size = (
-            46
+            53
             if layout == "big_center" and word_count <= 7
-            else 40
+            else 46
             if layout == "big_center"
-            else max(34, 44 - max(0, word_count - 12))
+            else max(39, 51 - max(0, word_count - 12))
         )
 
     variants = r.get("font_variants") or [r.get("font", "playfair")]
     font = random.choice(variants)
+    logger.info(f"Font: {font} (pool: {variants})")
 
     text_zone = r.get("text_zone", "center")
     overlay_type = ov.get("type", "gradient_bottom")
