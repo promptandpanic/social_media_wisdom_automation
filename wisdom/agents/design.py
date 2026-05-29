@@ -326,7 +326,8 @@ def _build_brief(
             else max(34, 44 - max(0, word_count - 12))
         )
 
-    font = r.get("font", "playfair")
+    variants = r.get("font_variants") or [r.get("font", "playfair")]
+    font = random.choice(variants)
 
     text_zone = r.get("text_zone", "center")
     overlay_type = ov.get("type", "gradient_bottom")

@@ -13,6 +13,7 @@ styles:
       Mood: relatable, authentic, capturing a fleeting moment of truth.
     rendering:
       font: inter
+      font_variants: [inter, poppins, outfit, fredoka]
       text_color: "#FFFFFF"
       author_color: "#D4AF37"
       overlay: {type: gradient_bottom, opacity: 130, color: "#000000", blur: 0}
@@ -33,6 +34,7 @@ styles:
       No neon. No clutter. The mood is editorial restraint — "less is the loudest thing in the room."
     rendering:
       font: jost
+      font_variants: [jost, cinzel, bebas]
       text_color: "#FFFFFF"
       author_color: "#C0C0C0"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
@@ -54,6 +56,7 @@ styles:
       Mood: interiority, unresolved tension. "Soft does not mean weak."
     rendering:
       font: playfair
+      font_variants: [playfair, caveat, shadows_into_light, indie_flower, patrick_hand]
       text_color: "#FFFFFF"
       author_color: "#D4AF37"
       overlay: {type: gradient_bottom, opacity: 150, color: "#000000", blur: 0}
@@ -75,6 +78,7 @@ styles:
       Mood: a memory you didn't know you had. The feeling of a song that makes you pull over.
     rendering:
       font: spectral
+      font_variants: [spectral, satisfy, great_vibes, dancing]
       text_color: "#FAF9F6"
       author_color: "#C9A96E"
       overlay: {type: gradient_bottom, opacity: 140, color: "#1a0f00", blur: 0}
@@ -96,6 +100,7 @@ styles:
       The scene should feel expensive without trying. Mood: stillness, intention, the luxury of slowness.
     rendering:
       font: cormorant
+      font_variants: [cormorant, raleway, comfortaa]
       text_color: "#2C2C2C"
       author_color: "#8B7355"
       overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
@@ -116,6 +121,7 @@ styles:
       Mood: absolute confidence. "This will change how you see yourself."
     rendering:
       font: montserrat
+      font_variants: [montserrat, oswald, anton]
       text_color: "#FFFFFF"
       author_color: "#FF3131"
       overlay: {type: gradient_top, opacity: 150, color: "#000000", blur: 0}

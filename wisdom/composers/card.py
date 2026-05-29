@@ -259,6 +259,17 @@ _FONT_SIZE_SCALE: dict[str, float] = {
     "caveat": 1.12,
     "bebas": 1.00,
     "poppins": 1.00,
+    "fredoka": 1.05,
+    "cinzel": 1.05,
+    "oswald": 1.00,
+    "anton": 1.00,
+    "raleway": 1.02,
+    "comfortaa": 1.05,
+    "montserrat": 1.00,
+    "great_vibes": 1.18,
+    "shadows_into_light": 1.15,
+    "indie_flower": 1.10,
+    "patrick_hand": 1.08,
 }
 
 
@@ -312,6 +323,9 @@ _CURSIVE_FONTS = {
     "kalam",
     "indieflower",
     "great_vibes",
+    "shadows_into_light",
+    "indie_flower",
+    "patrick_hand",
 }
 
 
