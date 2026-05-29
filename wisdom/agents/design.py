@@ -9,6 +9,7 @@ Rendering parameters (font, colors, overlay) come from the style's config — no
 from __future__ import annotations
 
 import logging
+import random
 import re
 
 from langgraph.graph import END, StateGraph
@@ -224,8 +225,6 @@ def generate_brief(state: PipelineState) -> PipelineState:
             f"not bright or busy — so the text is legible."
         )
         subject_constraint = _THEME_SUBJECT_CONSTRAINTS.get(theme_key, "")
-
-        import random
 
         variation_seeds = [
             # Wildlife & nature
