@@ -178,7 +178,7 @@ def pick_style(state: PipelineState) -> PipelineState:
 
     styles = _styles_for_theme(theme_key, theme.styles, recent)
     if not styles:
-        return {**state, "_chosen_style": "golden_hour_epic"}
+        return {**state, "_chosen_style": "cinematic_35mm"}
 
     try:
         prompt = _picker_prompt(quote.text if quote else "", theme_key, styles, recent)

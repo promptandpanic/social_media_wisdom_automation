@@ -32,7 +32,7 @@ styles:
       clean silhouettes. Technique: wide aperture, sharp subject against an out-of-focus, minimal background.
       No neon. No clutter. The mood is editorial restraint — "less is the loudest thing in the room."
     rendering:
-      font: montserrat
+      font: jost
       text_color: "#FFFFFF"
       author_color: "#C0C0C0"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
