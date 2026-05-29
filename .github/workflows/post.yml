@@ -13,11 +13,6 @@ on:
         required: false
         type: boolean
         default: false
-      native_text:
-        description: 'Native text generation inside image'
-        required: false
-        type: boolean
-        default: false
 
 permissions:
   contents: write
@@ -69,6 +64,7 @@ jobs:
 
       - name: Run pipeline — ${{ steps.theme.outputs.name }}
         env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           LEONARDO_API_KEY: ${{ secrets.LEONARDO_API_KEY }}
@@ -90,8 +86,4 @@ jobs:
           if [ "${{ github.event.inputs.offline }}" = "true" ]; then
             OFFLINE_FLAG="--offline"
           fi
-          NATIVE_TEXT_FLAG=""
-          if [ "${{ github.event.inputs.native_text }}" = "true" ]; then
-            NATIVE_TEXT_FLAG="--native-text"
-          fi
-          python -m wisdom.cli run ${{ steps.theme.outputs.name }} $OFFLINE_FLAG $NATIVE_TEXT_FLAG
+          python -m wisdom.cli run ${{ steps.theme.outputs.name }} $OFFLINE_FLAG

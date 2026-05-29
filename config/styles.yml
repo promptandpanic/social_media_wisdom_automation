@@ -1,75 +1,53 @@
 styles:
 
   frame_within_a_frame:
-    summary: "Frame Within a Frame. Unusual camera spot, mid-action, imperfect framing, feels peer-to-peer."
+    summary: "Frame Within a Frame. Unusual camera angle, mid-action, feels peer-to-peer."
     categories: [womenpower, morning, latenight, wisdom]
     weight: high
     description: >
-      Imperfect by design, feeling like a raw peer-to-peer capture rather than a polished ad. 
-      Lighting: realistic, unpolished, ambient room or street lighting. Technique: frame within a frame. 
-      The camera/perspective is placed in an unusual spot (e.g., behind an object, looking through a gap). 
-      Movement tells the brain something is happening — turn the camera on mid-action. 
+      Imperfect by design, feeling like a raw peer-to-peer capture rather than a polished ad.
+      Lighting: realistic, unpolished, ambient natural or street lighting. Technique: frame within a frame.
+      The camera is placed in an unusual spot — behind an object, looking through a gap, through a doorway.
+      Movement tells the brain something is happening — turn the camera on mid-action.
       Messy, imperfect framing. Color direction: raw, un-color-graded, real-life tones.
       Mood: relatable, authentic, capturing a fleeting moment of truth.
     rendering:
       font: inter
       text_color: "#FFFFFF"
       author_color: "#D4AF37"
-      overlay: {type: gradient_bottom, opacity: 120, color: "#000000", blur: 0}
+      overlay: {type: gradient_bottom, opacity: 130, color: "#000000", blur: 0}
       text_zone: center_minimalist
       layout: big_center
       decoration: none
       voice_gender: female
 
-  dark_mode_neon:
-    summary: "Dark Mode Infographic. True black background #000000, high contrast, neon accents."
-    categories: [mindfulness, wisdom, latenight]
+  editorial_dark:
+    summary: "Editorial Dark. High-contrast monochrome, fashion-week minimal, one intentional accent."
+    categories: [mindfulness, wisdom, latenight, womenpower]
     weight: high
     description: >
-      Dark mode native aesthetic. 70% of users have dark mode on, so this is designed to be seamless.
-      Lighting/Technique: The background is predominantly true deep black (#000000) or extremely dark. 
-      Lighting is highly constrained, maybe just a stark neon highlight or high-contrast silhouette. 
-      Color direction: Minimal color palette—mostly true black and white, but broken by a single, 
-      startling neon accent (neon green, vivid hot pink, or electric blue). 
-      Mood: tech-forward, modern, stark, honest. "Healing isn't linear" energy.
+      Fashion Week meets long-exposure night photography. The palette is near-monochrome — deep charcoal,
+      near-black, and true white — broken by exactly one intentional accent color (deep burgundy, slate blue,
+      or burnt amber). Lighting: dramatic single-source, side-lit or back-lit, creating strong shadows and
+      clean silhouettes. Technique: wide aperture, sharp subject against an out-of-focus, minimal background.
+      No neon. No clutter. The mood is editorial restraint — "less is the loudest thing in the room."
     rendering:
       font: montserrat
       text_color: "#FFFFFF"
-      author_color: "#39FF14"
+      author_color: "#C0C0C0"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
       text_zone: center
       layout: minimalist
       decoration: rule
       voice_gender: male
 
-  y2k_nostalgia:
-    summary: "Y2K/90s Nostalgia. Early internet, 90s palette, unusual tactile materials."
-    categories: [womenpower, love, morning]
-    weight: high
-    description: >
-      A raw 90s/Y2K nostalgia hook that triggers an emotional response before processing content.
-      Technique: Flash photography aesthetic, slight disposable camera grain or early digital grit.
-      Color direction: 90s color palette, washed-out tones, metallic silvers, or hyper-saturated Y2K pop colors.
-      Subject constraints: Unusual materials, e.g., a high-fashion outfit made of VHS tape, bubble wrap, or furby material.
-      Mood: Nostalgic, tactile, slightly chaotic, "She's not a throwback. She's a reminder."
-      The scene must stop the scroll by feeling like a buried memory or featuring an unexpected texture.
-    rendering:
-      font: anton
-      text_color: "#FAF9F6"
-      author_color: "#FF00FF"
-      overlay: {type: vignette, opacity: 130, color: "#000000", blur: 0}
-      text_zone: top_minimalist
-      layout: asymmetric
-      decoration: none
-      voice_gender: female
-
   visual_poetry_macro:
     summary: "Visual Poetry Extreme Close-Up. Macro human detail, raw textures, unresolved tension."
     categories: [womenpower, love, mindfulness, latenight]
     weight: high
     description: >
-      Visual poetry through extreme, uncomfortable close-up. Not macro nature — macro human. 
-      Technique: Cinematic attention to detail in a format that usually rewards speed. 
+      Visual poetry through extreme, uncomfortable close-up. Not macro nature — macro human.
+      Technique: cinematic attention to detail in a format that usually rewards speed.
       Focus on tactile human texture: sweat on a collarbone, cracked lipstick, a tight grip on tearing silk.
       Lighting: intimate, dramatic, emphasizing the physical weight and texture of what is genuinely made.
       Color direction: rich, cinematic, focused on skin tones and physical material.
@@ -84,19 +62,60 @@ styles:
       decoration: none
       voice_gender: female
 
+  cinematic_35mm:
+    summary: "Cinematic 35mm Film. Kodak Portra warmth, grain, wide-open prime lens, anamorphic flare."
+    categories: [love, morning, wisdom, womenpower, mindfulness]
+    weight: high
+    description: >
+      Shot on a prime lens wide open at f/1.4 — the background dissolves into a creamy, painterly bokeh.
+      Film simulation: Kodak Portra 400 color science — warm shadows lifting to amber, gentle skin-tone
+      rendering, natural halation around light sources. Visible fine grain that adds texture without grit.
+      Anamorphic horizontal lens flare when a light source hits the edge of the frame.
+      Color direction: warm golds, faded teals, lifted blacks — never crushed or digital-looking.
+      Mood: a memory you didn't know you had. The feeling of a song that makes you pull over.
+    rendering:
+      font: spectral
+      text_color: "#FAF9F6"
+      author_color: "#C9A96E"
+      overlay: {type: gradient_bottom, opacity: 140, color: "#1a0f00", blur: 0}
+      text_zone: bottom_minimalist
+      layout: minimalist
+      decoration: none
+      voice_gender: female
+
+  quiet_luxury:
+    summary: "Quiet Luxury. Soft morning light, organic textures, architectural negative space, muted warmth."
+    categories: [mindfulness, wisdom, morning, love, womenpower]
+    weight: high
+    description: >
+      The anti-maximalist aesthetic — restraint as the loudest possible statement.
+      Environment: architecturally interesting negative space — arched windows, limewashed walls, aged marble,
+      raw linen, ceramic, warm wood. Light source: soft, directional morning light pooling through a single
+      window, casting long gentle shadows. No clutter. Every object earns its place.
+      Color direction: warm neutrals — ivory, sand, terracotta, sage — with deep shadow anchors.
+      The scene should feel expensive without trying. Mood: stillness, intention, the luxury of slowness.
+    rendering:
+      font: cormorant
+      text_color: "#2C2C2C"
+      author_color: "#8B7355"
+      overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
+      text_zone: center_minimalist
+      layout: minimalist
+      decoration: none
+      voice_gender: female
+
   pattern_interrupt:
-    summary: "Bold Statement Text & Pattern Interrupt. Startling contrast, imperfect."
+    summary: "Bold Statement Text & Pattern Interrupt. Startling contrast, imperfect, urgent."
     categories: [wisdom, morning, womenpower]
     weight: medium
     description: >
       A stark pattern interrupt designed to break the scroll instantly.
-      Technique: Imperfect by design. It shouldn't look like an ad; it should look like a raw, 
-      urgent message. High contrast, perhaps a slightly blurred background of a chaotic real-world scene,
-      leaving maximum room for a bold statement text. 
-      Lighting: harsh, direct, or aggressively mundane (fluorescent lighting). 
-      Mood: Absolute confidence. "This will change how you see yourself."
+      Technique: imperfect by design — should not look like an ad, but like a raw, urgent message.
+      High contrast, slightly blurred background of a real-world scene leaving maximum room for bold text.
+      Lighting: harsh, direct, or aggressively mundane (fluorescent, bare bulb).
+      Mood: absolute confidence. "This will change how you see yourself."
     rendering:
-      font: bebas
+      font: montserrat
       text_color: "#FFFFFF"
       author_color: "#FF3131"
       overlay: {type: gradient_top, opacity: 150, color: "#000000", blur: 0}

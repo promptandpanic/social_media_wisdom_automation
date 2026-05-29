@@ -266,14 +266,14 @@ def _fit_text(
     disp_text: str, font_key: str, font_size: int, layout: str, zone: str
 ) -> tuple[list[str], ImageFont.FreeTypeFont, int]:
     scale = _FONT_SIZE_SCALE.get(font_key, 1.0)
-    font_size = max(64, int(font_size * scale))
+    font_size = max(36, int(font_size * scale))
     max_h = _ZONE_MAX_H.get(zone, int(IMAGE_HEIGHT * 0.70))
-    for size in range(font_size, 62, -2):
+    for size in range(font_size, 34, -2):
         f = _font(font_key, size)
         lines = _layout_lines(disp_text, f, layout)
         if len(lines) * int(size * 1.28) <= max_h:
             return lines, f, size
-    size = 64
+    size = 36
     f = _font(font_key, size)
     return _layout_lines(disp_text, f, layout), f, size
 
@@ -600,6 +600,7 @@ def _draw_text(
 
     bg_lum = _bg_luminance(lum_img if lum_img is not None else img, text_zone)
     txt_color = _ensure_readable(txt_color, bg_lum)
+    hi_color = _ensure_readable(hi_color, bg_lum)
 
     # Force text contrast for glass overlays
     if brief.overlay.type == "glass":
@@ -610,7 +611,7 @@ def _draw_text(
             # Dark BG -> Light glass box -> Dark text
             txt_color = (30, 30, 30)
 
-    font_size = max(64, brief.font_size)
+    font_size = max(36, brief.font_size)
     all_lines, f, font_size = _fit_text(
         disp_text, font_key, font_size, layout, text_zone
     )
@@ -779,7 +780,7 @@ def get_reveal_counts(quote: Quote, brief: DesignBrief) -> list[int]:
     font_key = brief.font
     if font_key == "playfair_it":
         font_key = "playfair"
-    font_size = max(64, brief.font_size)
+    font_size = max(36, brief.font_size)
     text = _sanitize(quote.text)
     upper = font_key == "bebas"
     disp_text = text.upper() if upper else text

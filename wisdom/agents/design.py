@@ -126,9 +126,11 @@ Reply with ONLY the image prompt — plain text, no JSON, no preamble.
 
 _THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
     "womenpower": (
-        "\n  - THEMATIC MANDATE: A scene that radiates quiet, earned power — aspirational but raw and real. "
-        "Use your boundless creativity to imagine a raw, relatable, and deeply symbolic visual metaphor that perfectly captures the quote's soul. "
-        "Do not rely on clichés; think completely out of the box."
+        "\n  - THEMATIC MANDATE: A stunning, stylish woman — impeccably dressed, confident, aspirational. "
+        "She can be in motion or still, but her presence commands the frame. Fashion-forward without being costume: "
+        "think tailored coat on a windswept cliff, silk dress in a sunlit doorway, or structured outfit in a minimal architectural space. "
+        "The image should make someone stop scrolling and think 'I want to feel like that.' "
+        "Do not show faces. Convey power, elegance, and intention through posture, clothing, light, and environment."
     ),
     "darkacademia": (
         "\n  - THEMATIC MANDATE: The quiet beauty of deep focus and solitary thought. "
@@ -205,7 +207,7 @@ def pick_style(state: PipelineState) -> PipelineState:
 def generate_brief(state: PipelineState) -> PipelineState:
     theme_key = state["theme_key"]
     quote = state.get("quote")
-    style_name = state.get("_chosen_style", "dark_academia_classical")
+    style_name = state.get("_chosen_style", "cinematic_35mm")
     style_data = cfg.styles().get(style_name, {})
     style_desc = style_data.get("description", "").strip()
     image_hint = quote.image_hint if quote else ""
@@ -238,33 +240,33 @@ def generate_brief(state: PipelineState) -> PipelineState:
         import random
 
         variation_seeds = [
-            "cramped subway car",
-            "back of an Uber",
-            "messy desk with coffee cups",
-            "fluorescent-lit laundromat",
-            "cluttered vanity mirror",
-            "unmade bed in a dim room",
-            "kitchen counter late at night",
-            "passenger seat of a car in the rain",
-            "corner booth of an empty diner",
-            "stairwell with harsh overhead lighting",
-            "bathroom sink edge",
-            "library table stacked with books",
-            "sidewalk edge at dusk",
-            "dark empty parking lot",
-            "floor surrounded by torn paper or fabric",
+            "cliff edge overlooking a vast ocean at golden hour",
+            "misty forest at dawn with shafts of light breaking through the canopy",
+            "minimalist white room with a single arched window, morning light pooling on the floor",
+            "rooftop at magic hour, city glowing softly in the warm haze below",
+            "empty café terrace drenched in late afternoon golden light",
+            "rain-soaked cobblestone alley with warm amber glow from a single doorway",
+            "desert landscape at dusk, the sky a gradient of deep violet and burnt orange",
+            "snow-covered mountain lookout, vast stillness, breath visible in cold air",
+            "sunlit wheat field, camera low and wide, golden stalks filling the frame",
+            "ocean shore at dawn, mist rising off the water, tide retreating",
+            "abandoned stone courtyard overtaken by wildflowers, dappled afternoon light",
+            "linen-curtained window seat, soft diffused morning light, a cup of tea steaming",
+            "old-growth forest floor, single shaft of light cutting through ancient trees",
+            "empty winding mountain road at blue hour, headlights fading into the distance",
+            "still lake perfectly mirroring a dramatic sky at sunrise",
         ]
         atmospheric_twists = [
-            "Imperfect by design — raw, honest lighting, feels peer-to-peer and unpolished.",
-            "Turn the camera on mid-action — messy framing, slight movement blur, kinetic energy.",
-            "Cinematic attention to detail — tactile texture, weight of materials, extreme physical proximity.",
-            "Dark mode native — stark contrast, deep true blacks, striking single-color accents.",
-            "Contrasting environment — high fashion or heavy emotion placed in an aggressively mundane location.",
-            "Flash photography aesthetic — harsh direct flash, slightly overexposed foreground, dark background.",
-            "Neon reflection — a single source of bright neon light reflecting off a surface or skin.",
-            "Obscured subject — face hidden, focus entirely on hands, fabric, or a specific prop.",
-            "Grain and grit — visible film grain or digital noise, avoiding anything that looks like an 8K ad.",
-            "Extreme macro depth — background completely blown out to focus on one tiny tactile detail.",
+            "Cinematic 35mm film grain — Kodak Portra warmth, lifted blacks, natural halation around light sources.",
+            "Anamorphic prime lens — wide open at f/1.4, background dissolves to creamy painterly bokeh, horizontal lens flare.",
+            "Golden hour backlight — subject silhouetted or rim-lit against warm amber sun, atmospheric haze.",
+            "Tilt-shift selective focus — razor-thin depth of field, one element pin-sharp, everything else soft as breath.",
+            "Long exposure stillness — motion of water or clouds rendered silky smooth, environment perfectly still.",
+            "Obscured and intimate — face hidden, focus entirely on hands, fabric, posture, or a single telling detail.",
+            "Extreme macro depth — background completely dissolved, one tiny tactile detail rendered in breathtaking clarity.",
+            "Film halation — warm orange-red glow bleeding around bright highlights, as if light is alive.",
+            "Overcast diffused light — no harsh shadows, colours deeply saturated, everything glows from within.",
+            "Magic hour silhouette — strong clean silhouette against a sky that looks painted, minimal detail in subject.",
         ]
 
         prompt = _IMAGE_PROMPT_TEMPLATE.format(
@@ -312,17 +314,16 @@ def _build_brief(
     word_count = len(text.split())
     layout = r.get("layout", "big_center")
     if layout == "minimalist":
-        font_size = 38
+        font_size = 30
     elif layout == "asymmetric":
-        font_size = 48
+        font_size = 38
     else:
-        # Ultra-elegant aesthetic: smaller text, maximum negative space
         font_size = (
-            60
+            46
             if layout == "big_center" and word_count <= 7
-            else 52
+            else 40
             if layout == "big_center"
-            else max(42, 56 - max(0, word_count - 12))
+            else max(34, 44 - max(0, word_count - 12))
         )
 
     font = r.get("font", "playfair")
