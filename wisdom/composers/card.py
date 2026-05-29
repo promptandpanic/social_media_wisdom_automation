@@ -59,7 +59,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "inter": (
         "inter.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/static/Inter-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf",
     ),
     "poppins_bold": (
         "poppins_bold.ttf",
@@ -67,7 +67,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "outfit": (
         "outfit.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/outfit/static/Outfit-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/outfit/Outfit%5Bwght%5D.ttf",
     ),
     "spectral": (
         "spectral.ttf",
@@ -75,27 +75,27 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "jost": (
         "jost.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/jost/static/Jost-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/jost/Jost%5Bwght%5D.ttf",
     ),
     "satisfy": (
         "satisfy.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/satisfy/Satisfy-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/apache/satisfy/Satisfy-Regular.ttf",
     ),
     "playfair": (
         "playfair.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/static/PlayfairDisplay-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/playfair/Playfair%5Bopsz%2Cwdth%2Cwght%5D.ttf",
     ),
     "cormorant": (
         "cormorant.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/cormorantgaramond/static/CormorantGaramond-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/cormorant/Cormorant%5Bwght%5D.ttf",
     ),
     "dancing": (
         "dancing.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/dancingscript/static/DancingScript-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/dancingscript/DancingScript%5Bwght%5D.ttf",
     ),
     "caveat": (
         "caveat.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/caveat/static/Caveat-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/caveat/Caveat%5Bwght%5D.ttf",
     ),
     "bebas": (
         "bebas.ttf",
@@ -107,7 +107,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "cinzel": (
         "cinzel.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/static/Cinzel-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/Cinzel%5Bwght%5D.ttf",
     ),
     "great_vibes": (
         "great_vibes.ttf",
@@ -115,19 +115,19 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "shadows_into_light": (
         "shadows_into_light.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/shadowsintolight/ShadowsIntoLight-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/shadowsintolight/ShadowsIntoLight.ttf",
     ),
     "montserrat": (
         "montserrat_bold.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/static/Montserrat-Bold.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/Montserrat%5Bwght%5D.ttf",
     ),
     "oswald": (
         "oswald_bold.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/oswald/static/Oswald-Bold.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/oswald/Oswald%5Bwght%5D.ttf",
     ),
     "raleway": (
         "raleway_bold.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/raleway/static/Raleway-Bold.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/raleway/Raleway%5Bwght%5D.ttf",
     ),
     "patrick_hand": (
         "patrick_hand.ttf",
@@ -135,7 +135,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "comfortaa": (
         "comfortaa.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/comfortaa/static/Comfortaa-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/comfortaa/Comfortaa%5Bwght%5D.ttf",
     ),
     "indie_flower": (
         "indie_flower.ttf",
@@ -143,7 +143,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "fredoka": (
         "fredoka.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/fredoka/static/Fredoka-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/fredoka/Fredoka%5Bwdth%2Cwght%5D.ttf",
     ),
 }
 
