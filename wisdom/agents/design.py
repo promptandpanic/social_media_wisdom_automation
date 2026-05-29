@@ -90,38 +90,26 @@ Return ONLY valid JSON: {{"style": "chosen_style_name"}}"""
 
 
 _IMAGE_PROMPT_TEMPLATE = """\
-You are a world-class photographer and Creative Director creating a single scroll-stopping 8K image for a global social media audience aged 18–35.
-
-Your task: translate the emotional truth of this quote into one breathtaking photographic scene.
+You are a Creative Director writing a prompt for an AI image generator (Flux Pro / Imagen 4). Your output feeds directly into the model — write for the model, not for a human reader.
 
 QUOTE: "{text}"
 
-VISUAL GRAMMAR — how to shoot (technique, light, palette — not the scene):
-STYLE: {style_name}
+VISUAL GRAMMAR: {style_name}
 {style_description}
 
-SCENE PARAMETERS — what world to build:
-  - LOCATION: {random_seed}
-  - CONDITIONS: {atmospheric_twist}
-  - EMOTIONAL ANCHOR: The quote's specific emotion shapes every detail — subject, action, scale, mood.
-    Same style + different quote = completely different scene. Let the words lead.
-{image_hint_block}
-RULES:
-1. GENERAL AUDIENCE: Beautiful, relatable, emotionally resonant. Must stop someone scrolling at 7am.
-   Real-world cinematography — not conceptual art, not niche aesthetics, not fashion editorial.
-2. 8K PHOTOREALISTIC: Hyper-real photography quality. Breathtaking natural detail. Cinematic color grade.
-3. QUOTE-DRIVEN SCENE: The scene is entirely shaped by the quote's emotion. The style only defines how it is shot.
-4. VAST NEGATIVE SPACE: The text overlay zone must be naturally clean and dark. Non-negotiable.{subject_constraint}
+COLOR SCIENCE: {color_grade}
 
-Write 4–6 sentences:
-  location & setting → subject & emotional action → atmospheric detail → exact color palette (hex values) → lighting & composition.
+SCENE SEED: {random_seed}
+LENS TECHNIQUE: {atmospheric_twist}
+{image_hint_block}RULES:
+1. SUBJECT FREEDOM: The subject can be human, animal, vehicle, weather phenomenon, landscape, or object — whichever carries the quote's emotion most powerfully. A resilience quote → lone wolf on a frozen plain, or a soldier in mud. A peace quote → still lake at dawn, or a deer drinking. A discipline quote → military humvee on a brutal road. Let the quote's FEELING choose the subject — never default to a person standing somewhere.
+2. HERO DETAIL: Include one unexpected, visually arresting detail the viewer notices only on second look — something that couldn't be predicted from the quote alone. Make it specific and physical.
+3. TEXT ZONE: {text_zone_instruction}
+4. No text, words, signs, logos, watermarks, or explicitly recognizable faces.
+5. 9:16 portrait format, 8K photorealistic quality.{subject_constraint}
 
-Constraints:
-  - TEXT ZONE: {text_zone_instruction}
-  - No text, words, signs, logos, watermarks, or explicitly recognizable faces.
-  - 9:16 portrait format, 8K resolution.
-
-Reply with ONLY the image prompt — plain text, no JSON, no preamble.
+OUTPUT — write a single dense image-generation prompt using comma-separated descriptors only. NO prose sentences. NO explanation. NO preamble:
+[subject + emotional action], [specific environment], [lighting: type + direction + color temperature], [color grade: {color_grade_short}], [lens + aperture + depth of field], [film texture or grain], [mood + atmosphere], [hero detail], photorealistic, 8K, 9:16 portrait
 """
 
 _THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
@@ -240,39 +228,60 @@ def generate_brief(state: PipelineState) -> PipelineState:
         import random
 
         variation_seeds = [
-            "cliff edge overlooking a vast ocean at golden hour",
-            "misty forest at dawn with shafts of light breaking through the canopy",
-            "minimalist white room with a single arched window, morning light pooling on the floor",
-            "rooftop at magic hour, city glowing softly in the warm haze below",
-            "empty café terrace drenched in late afternoon golden light",
-            "rain-soaked cobblestone alley with warm amber glow from a single doorway",
-            "desert landscape at dusk, the sky a gradient of deep violet and burnt orange",
+            # Wildlife & nature
+            "lone wolf standing at the edge of a frozen tundra at pre-dawn blue hour",
+            "herd of elephants crossing an African savanna in harsh midday heat, dust rising",
+            "bald eagle in mid-dive through storm clouds above a mountain range",
+            "deer drinking from a still forest lake at sunrise, mist rising off the water",
+            "pride of lions resting on a sun-scorched rocky kopje at golden hour",
+            "great white shark breaching through dark ocean water under a storm sky",
+            "wild horse galloping through a desert dust storm at dusk",
+            # Vehicles & conflict
+            "military humvee pushing through a flooded jungle road in monsoon rain",
+            "commercial aircraft cutting through towering cumulonimbus clouds at altitude",
+            "armoured convoy on a rutted dirt road through a conflict-scarred landscape at dawn",
+            "old cargo ship moving through a thick Arctic fog, ice floes on either side",
+            # Weather & sky phenomena
+            "double rainbow arching over a rain-soaked valley after a violent storm",
+            "lightning bolt splitting a bruised purple sky over open ocean at night",
+            "aurora borealis in full bloom reflecting perfectly in a glassy arctic lake",
+            "wall of red dust storm rolling across a cracked desert plain at dusk",
+            "tornado forming on the horizon of a flat Midwestern prairie at golden hour",
+            # Dramatic landscapes
+            "ancient jungle temple being slowly consumed by massive tree roots and vines",
+            "sunlit wheat field, camera low, golden stalks filling the frame, sky vast above",
             "snow-covered mountain lookout, vast stillness, breath visible in cold air",
-            "sunlit wheat field, camera low and wide, golden stalks filling the frame",
-            "ocean shore at dawn, mist rising off the water, tide retreating",
-            "abandoned stone courtyard overtaken by wildflowers, dappled afternoon light",
+            "African savanna waterhole at dusk, multiple species gathered under a burning sky",
+            "cliff edge overlooking a vast ocean at golden hour, waves crashing far below",
+            # Intimate & architectural
+            "minimalist white room with a single arched window, morning light pooling on the floor",
             "linen-curtained window seat, soft diffused morning light, a cup of tea steaming",
-            "old-growth forest floor, single shaft of light cutting through ancient trees",
-            "empty winding mountain road at blue hour, headlights fading into the distance",
-            "still lake perfectly mirroring a dramatic sky at sunrise",
+            "rain-soaked cobblestone alley with warm amber glow from a single doorway",
+            "still lake perfectly mirroring a dramatic painted sky at sunrise",
         ]
         atmospheric_twists = [
-            "Cinematic 35mm film grain — Kodak Portra warmth, lifted blacks, natural halation around light sources.",
-            "Anamorphic prime lens — wide open at f/1.4, background dissolves to creamy painterly bokeh, horizontal lens flare.",
-            "Golden hour backlight — subject silhouetted or rim-lit against warm amber sun, atmospheric haze.",
-            "Tilt-shift selective focus — razor-thin depth of field, one element pin-sharp, everything else soft as breath.",
-            "Long exposure stillness — motion of water or clouds rendered silky smooth, environment perfectly still.",
-            "Obscured and intimate — face hidden, focus entirely on hands, fabric, posture, or a single telling detail.",
-            "Extreme macro depth — background completely dissolved, one tiny tactile detail rendered in breathtaking clarity.",
-            "Film halation — warm orange-red glow bleeding around bright highlights, as if light is alive.",
-            "Overcast diffused light — no harsh shadows, colours deeply saturated, everything glows from within.",
-            "Magic hour silhouette — strong clean silhouette against a sky that looks painted, minimal detail in subject.",
+            "Anamorphic prime lens — wide open at f/1.4, background dissolves to creamy bokeh, horizontal lens flare cuts across frame.",
+            "Golden hour backlight — subject rim-lit or silhouetted against warm amber sun, atmospheric haze fills the air.",
+            "Cinematic 35mm film grain — Kodak Portra warmth, lifted blacks, natural halation bleeding around every light source.",
+            "Tilt-shift razor focus — one element pin-sharp, everything else dissolves to soft breath, disorienting and beautiful.",
+            "Long exposure motion — water or clouds rendered silky smooth, subject perfectly still, time made visible.",
+            "Magic hour silhouette — strong clean silhouette against a sky that looks painted by hand, form over detail.",
+            "Extreme macro — background completely dissolved, one tiny physical detail rendered in breathtaking clarity.",
+            "Film halation — warm orange-red glow bleeding around bright highlights, as if light is alive and restless.",
+            "Overcast diffused — no harsh shadows, colours deeply saturated from within, the world glowing without a sun.",
+            "Stormy dramatic backlight — dark turbulent sky, single beam of light breaking through, subject caught in the beam.",
         ]
+
+        r = style_data.get("rendering", {})
+        color_grade = r.get("color_grade", "natural cinematic color grade")
+        color_grade_short = color_grade.split(",")[0]  # first clause only for inline hint
 
         prompt = _IMAGE_PROMPT_TEMPLATE.format(
             text=text,
             style_name=style_name,
             style_description=style_desc,
+            color_grade=color_grade,
+            color_grade_short=color_grade_short,
             image_hint_block=f"ADDITIONAL DIRECTION: {image_hint}\n"
             if image_hint
             else "",

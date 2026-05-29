@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 
 import requests
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageFilter
 
 import wisdom.config as cfg
 from wisdom.schemas import DesignBrief, Quote
@@ -517,6 +517,36 @@ def _vignette(img: Image.Image, intensity: int = 160) -> Image.Image:
     return Image.alpha_composite(rgba, vig).convert("RGB")
 
 
+_STYLE_GRADE: dict[str, dict] = {
+    "cinematic_35mm":      {"contrast": 1.08, "color": 0.88, "brightness": 1.02, "warmth": (12,  5, -8), "vignette": 130},
+    "editorial_dark":      {"contrast": 1.35, "color": 0.50, "brightness": 0.95, "warmth": (-6, -3,  4), "vignette": 175},
+    "visual_poetry_macro": {"contrast": 1.12, "color": 1.08, "brightness": 1.00, "warmth": (10,  3, -6), "vignette": 115},
+    "quiet_luxury":        {"contrast": 0.95, "color": 0.80, "brightness": 1.04, "warmth": ( 8,  4, -3), "vignette":  75},
+    "frame_within_a_frame":{"contrast": 1.04, "color": 0.90, "brightness": 1.00, "warmth": ( 3,  1, -2), "vignette":  85},
+    "pattern_interrupt":   {"contrast": 1.40, "color": 0.65, "brightness": 0.96, "warmth": ( 0,  0,  0), "vignette": 155},
+}
+
+
+def _grade_image(img: Image.Image, style: str) -> Image.Image:
+    grade = _STYLE_GRADE.get(style)
+    if not grade:
+        return img
+    img = ImageEnhance.Contrast(img).enhance(grade["contrast"])
+    img = ImageEnhance.Color(img).enhance(grade["color"])
+    img = ImageEnhance.Brightness(img).enhance(grade["brightness"])
+    wr, wg, wb = grade["warmth"]
+    if wr or wg or wb:
+        r, g, b = img.split()
+        img = Image.merge("RGB", (
+            r.point([max(0, min(255, i + wr)) for i in range(256)]),
+            g.point([max(0, min(255, i + wg)) for i in range(256)]),
+            b.point([max(0, min(255, i + wb)) for i in range(256)]),
+        ))
+    if grade.get("vignette"):
+        img = _vignette(img, intensity=grade["vignette"])
+    return img
+
+
 def _apply_overlay(img: Image.Image, brief: DesignBrief) -> Image.Image:
     ov = brief.overlay
     otype = ov.type
@@ -822,6 +852,7 @@ def get_reveal_counts(quote: Quote, brief: DesignBrief) -> list[int]:
 
 def compose_image(image_bytes: bytes, quote: Quote, brief: DesignBrief) -> bytes:
     img = _load(image_bytes)
+    img = _grade_image(img, brief.style)
     img = _apply_overlay(img, brief)
     img = _draw_text(img, quote, brief)
     return _to_jpeg(img)
@@ -831,6 +862,7 @@ def compose_partial(
     image_bytes: bytes, quote: Quote, brief: DesignBrief, n_lines: int
 ) -> bytes:
     img = _load(image_bytes)
+    img = _grade_image(img, brief.style)
     img = _apply_overlay(img, brief)
     img = _draw_text(img, quote, brief, n_lines=n_lines)
     return _to_jpeg(img)
