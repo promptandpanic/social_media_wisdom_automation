@@ -322,16 +322,16 @@ def _build_brief(
     word_count = len(text.split())
     layout = r.get("layout", "big_center")
     if layout == "minimalist":
-        font_size = 35
+        font_size = 33
     elif layout == "asymmetric":
-        font_size = 44
+        font_size = 41
     else:
         font_size = (
-            53
+            50
             if layout == "big_center" and word_count <= 7
-            else 46
+            else 43
             if layout == "big_center"
-            else max(39, 51 - max(0, word_count - 12))
+            else max(37, 48 - max(0, word_count - 12))
         )
 
     variants = r.get("font_variants") or [r.get("font", "playfair")]
