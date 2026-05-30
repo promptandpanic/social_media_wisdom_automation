@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 
 import requests
-from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 import wisdom.config as cfg
 from wisdom.schemas import DesignBrief, Quote
@@ -59,7 +59,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "inter": (
         "inter.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/static/Inter-Regular.ttf",
     ),
     "poppins_bold": (
         "poppins_bold.ttf",
@@ -67,7 +67,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "outfit": (
         "outfit.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/outfit/Outfit%5Bwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/outfit/static/Outfit-Regular.ttf",
     ),
     "spectral": (
         "spectral.ttf",
@@ -75,27 +75,27 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "jost": (
         "jost.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/jost/Jost%5Bwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/jost/static/Jost-Regular.ttf",
     ),
     "satisfy": (
         "satisfy.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/apache/satisfy/Satisfy-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/satisfy/Satisfy-Regular.ttf",
     ),
     "playfair": (
         "playfair.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/playfair/Playfair%5Bopsz%2Cwdth%2Cwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/static/PlayfairDisplay-Regular.ttf",
     ),
     "cormorant": (
         "cormorant.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/cormorant/Cormorant%5Bwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/cormorantgaramond/static/CormorantGaramond-Regular.ttf",
     ),
     "dancing": (
         "dancing.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/dancingscript/DancingScript%5Bwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/dancingscript/static/DancingScript-Regular.ttf",
     ),
     "caveat": (
         "caveat.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/caveat/Caveat%5Bwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/caveat/static/Caveat-Regular.ttf",
     ),
     "bebas": (
         "bebas.ttf",
@@ -107,7 +107,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "cinzel": (
         "cinzel.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/Cinzel%5Bwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/static/Cinzel-Regular.ttf",
     ),
     "great_vibes": (
         "great_vibes.ttf",
@@ -115,19 +115,19 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "shadows_into_light": (
         "shadows_into_light.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/shadowsintolight/ShadowsIntoLight.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/shadowsintolight/ShadowsIntoLight-Regular.ttf",
     ),
     "montserrat": (
         "montserrat_bold.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/Montserrat%5Bwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/static/Montserrat-Bold.ttf",
     ),
     "oswald": (
         "oswald_bold.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/oswald/Oswald%5Bwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/oswald/static/Oswald-Bold.ttf",
     ),
     "raleway": (
         "raleway_bold.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/raleway/Raleway%5Bwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/raleway/static/Raleway-Bold.ttf",
     ),
     "patrick_hand": (
         "patrick_hand.ttf",
@@ -135,7 +135,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "comfortaa": (
         "comfortaa.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/comfortaa/Comfortaa%5Bwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/comfortaa/static/Comfortaa-Regular.ttf",
     ),
     "indie_flower": (
         "indie_flower.ttf",
@@ -143,7 +143,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "fredoka": (
         "fredoka.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/fredoka/Fredoka%5Bwdth%2Cwght%5D.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/fredoka/static/Fredoka-Regular.ttf",
     ),
 }
 
@@ -259,17 +259,6 @@ _FONT_SIZE_SCALE: dict[str, float] = {
     "caveat": 1.12,
     "bebas": 1.00,
     "poppins": 1.00,
-    "fredoka": 1.05,
-    "cinzel": 1.05,
-    "oswald": 1.00,
-    "anton": 1.00,
-    "raleway": 1.02,
-    "comfortaa": 1.05,
-    "montserrat": 1.00,
-    "great_vibes": 1.18,
-    "shadows_into_light": 1.15,
-    "indie_flower": 1.10,
-    "patrick_hand": 1.08,
 }
 
 
@@ -323,9 +312,6 @@ _CURSIVE_FONTS = {
     "kalam",
     "indieflower",
     "great_vibes",
-    "shadows_into_light",
-    "indie_flower",
-    "patrick_hand",
 }
 
 
@@ -515,36 +501,6 @@ def _vignette(img: Image.Image, intensity: int = 160) -> Image.Image:
             width=4,
         )
     return Image.alpha_composite(rgba, vig).convert("RGB")
-
-
-_STYLE_GRADE: dict[str, dict] = {
-    "cinematic_35mm":      {"contrast": 1.08, "color": 0.88, "brightness": 1.02, "warmth": (12,  5, -8), "vignette": 130},
-    "editorial_dark":      {"contrast": 1.35, "color": 0.50, "brightness": 0.95, "warmth": (-6, -3,  4), "vignette": 175},
-    "visual_poetry_macro": {"contrast": 1.12, "color": 1.08, "brightness": 1.00, "warmth": (10,  3, -6), "vignette": 115},
-    "quiet_luxury":        {"contrast": 0.95, "color": 0.80, "brightness": 1.04, "warmth": ( 8,  4, -3), "vignette":  75},
-    "frame_within_a_frame":{"contrast": 1.04, "color": 0.90, "brightness": 1.00, "warmth": ( 3,  1, -2), "vignette":  85},
-    "pattern_interrupt":   {"contrast": 1.40, "color": 0.65, "brightness": 0.96, "warmth": ( 0,  0,  0), "vignette": 155},
-}
-
-
-def _grade_image(img: Image.Image, style: str) -> Image.Image:
-    grade = _STYLE_GRADE.get(style)
-    if not grade:
-        return img
-    img = ImageEnhance.Contrast(img).enhance(grade["contrast"])
-    img = ImageEnhance.Color(img).enhance(grade["color"])
-    img = ImageEnhance.Brightness(img).enhance(grade["brightness"])
-    wr, wg, wb = grade["warmth"]
-    if wr or wg or wb:
-        r, g, b = img.split()
-        img = Image.merge("RGB", (
-            r.point([max(0, min(255, i + wr)) for i in range(256)]),
-            g.point([max(0, min(255, i + wg)) for i in range(256)]),
-            b.point([max(0, min(255, i + wb)) for i in range(256)]),
-        ))
-    if grade.get("vignette"):
-        img = _vignette(img, intensity=grade["vignette"])
-    return img
 
 
 def _apply_overlay(img: Image.Image, brief: DesignBrief) -> Image.Image:
@@ -852,7 +808,6 @@ def get_reveal_counts(quote: Quote, brief: DesignBrief) -> list[int]:
 
 def compose_image(image_bytes: bytes, quote: Quote, brief: DesignBrief) -> bytes:
     img = _load(image_bytes)
-    img = _grade_image(img, brief.style)
     img = _apply_overlay(img, brief)
     img = _draw_text(img, quote, brief)
     return _to_jpeg(img)
@@ -862,7 +817,6 @@ def compose_partial(
     image_bytes: bytes, quote: Quote, brief: DesignBrief, n_lines: int
 ) -> bytes:
     img = _load(image_bytes)
-    img = _grade_image(img, brief.style)
     img = _apply_overlay(img, brief)
     img = _draw_text(img, quote, brief, n_lines=n_lines)
     return _to_jpeg(img)

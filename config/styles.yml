@@ -13,7 +13,7 @@ styles:
       Mood: relatable, authentic, capturing a fleeting moment of truth.
     rendering:
       font: inter
-      font_variants: [inter, poppins, outfit]
+      font_variants: [inter, poppins, jost, outfit]
       text_color: "#FFFFFF"
       author_color: "#D4AF37"
       overlay: {type: gradient_bottom, opacity: 130, color: "#000000", blur: 0}
@@ -21,7 +21,6 @@ styles:
       layout: big_center
       decoration: none
       voice_gender: female
-      color_grade: "natural lifted shadows (#1a1814 warm grey-black), honest un-graded midtones, soft ivory highlights (#f5f0e8), slight desaturation, feels unprocessed and real — no color casts"
 
   editorial_dark:
     summary: "Editorial Dark. High-contrast monochrome, fashion-week minimal, one intentional accent."
@@ -34,8 +33,8 @@ styles:
       clean silhouettes. Technique: wide aperture, sharp subject against an out-of-focus, minimal background.
       No neon. No clutter. The mood is editorial restraint — "less is the loudest thing in the room."
     rendering:
-      font: jost
-      font_variants: [jost, cinzel, bebas]
+      font: montserrat
+      font_variants: [montserrat, jost, cinzel]
       text_color: "#FFFFFF"
       author_color: "#C0C0C0"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
@@ -43,7 +42,6 @@ styles:
       layout: minimalist
       decoration: rule
       voice_gender: male
-      color_grade: "crushed black shadows (#000000), deep charcoal midtones (#1a1a1a), stark white highlights (#ffffff), near-monochrome, single accent color: deep burgundy (#4a0010) or slate blue (#1a2a4a) — maximum tonal contrast"
 
   visual_poetry_macro:
     summary: "Visual Poetry Extreme Close-Up. Macro human detail, raw textures, unresolved tension."
@@ -66,7 +64,6 @@ styles:
       layout: minimalist
       decoration: none
       voice_gender: female
-      color_grade: "deep warm brown shadows (#1a0800), rich saturated skin-tone midtones, warm ivory highlights (#f5e6d3), high texture saturation, intimate cinematic warmth — no cool tones"
 
   cinematic_35mm:
     summary: "Cinematic 35mm Film. Kodak Portra warmth, grain, wide-open prime lens, anamorphic flare."
@@ -89,7 +86,6 @@ styles:
       layout: minimalist
       decoration: none
       voice_gender: female
-      color_grade: "lifted amber shadows (#2d1a00), Kodak Portra 400 warm midtones, blown-out creamy highlights (#fffaf0), halation orange-red glow around all light sources, visible fine grain — never digital-looking"
 
   quiet_luxury:
     summary: "Quiet Luxury. Soft morning light, organic textures, architectural negative space, muted warmth."
@@ -104,7 +100,7 @@ styles:
       The scene should feel expensive without trying. Mood: stillness, intention, the luxury of slowness.
     rendering:
       font: cormorant
-      font_variants: [cormorant, playfair, raleway]
+      font_variants: [cormorant, playfair, spectral]
       text_color: "#2C2C2C"
       author_color: "#8B7355"
       overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
@@ -112,7 +108,6 @@ styles:
       layout: minimalist
       decoration: none
       voice_gender: female
-      color_grade: "soft warm shadows (#2c2416), sand and ivory midtones, near-white highlights (#faf8f4), muted saturation, warm neutral palette throughout — no cool tones, no crushed blacks"
 
   pattern_interrupt:
     summary: "Bold Statement Text & Pattern Interrupt. Startling contrast, imperfect, urgent."
@@ -134,4 +129,3 @@ styles:
       layout: big_center
       decoration: rule
       voice_gender: male
-      color_grade: "crushed black shadows (#000000), maximum contrast midtones, blown-out white highlights (#ffffff), zero color cast, stark and uncompromising — pure tonal contrast with no warmth or coolness"
