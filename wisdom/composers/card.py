@@ -266,14 +266,14 @@ def _fit_text(
     disp_text: str, font_key: str, font_size: int, layout: str, zone: str
 ) -> tuple[list[str], ImageFont.FreeTypeFont, int]:
     scale = _FONT_SIZE_SCALE.get(font_key, 1.0)
-    font_size = max(39, int(font_size * scale))
+    font_size = max(28, int(font_size * scale))
     max_h = _ZONE_MAX_H.get(zone, int(IMAGE_HEIGHT * 0.70))
-    for size in range(font_size, 37, -2):
+    for size in range(font_size, 26, -2):
         f = _font(font_key, size)
         lines = _layout_lines(disp_text, f, layout)
         if len(lines) * int(size * 1.28) <= max_h:
             return lines, f, size
-    size = 39
+    size = 28
     f = _font(font_key, size)
     return _layout_lines(disp_text, f, layout), f, size
 
@@ -377,28 +377,29 @@ def _render_line(
 
     # Smart shadow & outline: white outline for dark text, dark outline for light text
     is_dark_text = (fill[0] * 0.299 + fill[1] * 0.587 + fill[2] * 0.114) < 128
-    base_alpha = 180 if stroke > 0 else 80
+    base_alpha = 100 if stroke > 0 else 50
 
     stroke_width = min(2, stroke) if stroke > 0 else 0
     stroke_fill = None
 
     if stroke_width > 0:
         if is_dark_text:
-            stroke_fill = (250, 249, 246, 160)  # Soft Alabaster glow
-            shadow_color = (250, 249, 246, 60)
+            stroke_fill = (250, 249, 246, 120)
+            shadow_color = (250, 249, 246, 40)
         else:
-            stroke_fill = (26, 26, 26, 120)  # Soft Charcoal outline
-            shadow_color = (26, 26, 26, 60)
+            stroke_fill = (26, 26, 26, 80)
+            shadow_color = (26, 26, 26, 40)
     else:
         shadow_color = (
             (255, 255, 255, base_alpha) if is_dark_text else (0, 0, 0, base_alpha)
         )
 
     letter_spacing = 0
-    if "minimalist" in text_zone or font.path.lower().endswith(
-        ("poppins", "montserrat")
-    ):
-        letter_spacing = 4 if "minimalist" in text_zone else 1
+    font_name = font.path.lower()
+    if font_name.endswith(("montserrat.ttf", "montserrat_bold.ttf", "inter.ttf", "jost.ttf", "outfit.ttf", "cinzel.ttf")):
+        letter_spacing = 6 if "minimalist" in text_zone else 2
+    elif "minimalist" in text_zone:
+        letter_spacing = 3
 
     if letter_spacing == 0:
         _drop_shadow_text(
@@ -595,7 +596,9 @@ def _draw_text(
     decoration = brief.decoration
     layout = brief.layout
 
-    upper = font_key == "bebas"
+    is_minimalist = layout == "minimalist" or "minimalist" in text_zone
+    word_count = len(text.split())
+    upper = font_key in ("bebas", "cinzel") or (is_minimalist and word_count < 15 and font_key in ("montserrat", "inter", "outfit", "jost", "oswald"))
     disp_text = text.upper() if upper else text
 
     bg_lum = _bg_luminance(lum_img if lum_img is not None else img, text_zone)
@@ -611,7 +614,7 @@ def _draw_text(
             # Dark BG -> Light glass box -> Dark text
             txt_color = (30, 30, 30)
 
-    font_size = max(39, brief.font_size)
+    font_size = max(28, brief.font_size)
     all_lines, f, font_size = _fit_text(
         disp_text, font_key, font_size, layout, text_zone
     )
@@ -699,13 +702,10 @@ def _draw_text(
 
     if decoration == "rule":
         draw.line(
-            [(MARGIN_X, y - 20), (IMAGE_WIDTH - MARGIN_X_R, y - 20)],
-            fill=(*hi_color, 220),
-            width=3,
+            [(MARGIN_X + 80, y - 20), (IMAGE_WIDTH - MARGIN_X_R - 80, y - 20)],
+            fill=(*hi_color, 180),
+            width=1,
         )
-    elif decoration == "quote_mark":
-        dq_font = _font("playfair", 450)
-        draw.text((MARGIN_X - 60, y - 100), "“", font=dq_font, fill=(*hi_color, 80))
 
     text_stroke = 0 if font_key in _CURSIVE_FONTS else 3
 
@@ -748,26 +748,6 @@ def _draw_text(
             (ax + (d_bb[2] - d_bb[0]), ay), author_spaced, font=a_font, fill=a_color
         )
 
-    # High-Fashion Editorial Header
-    import hashlib
-    try:
-        # Generate a unique 4-character hex ID based on the quote text
-        unique_id = hashlib.md5(quote.text.encode('utf-8')).hexdigest()[:4].upper()
-        
-        # Fallback to poppins if inter isn't available
-        try:
-            tag_font = _font("inter", 18)
-        except Exception:
-            tag_font = _font("poppins", 18)
-            
-        tag_text = f"A R C H I V E   //   N O .  {unique_id}"
-        tag_bb = tag_font.getbbox(tag_text)
-        tag_w = tag_bb[2] - tag_bb[0]
-        # Draw at top center with low opacity
-        draw.text(((IMAGE_WIDTH - tag_w) // 2, 70), tag_text, font=tag_font, fill=(255, 255, 255, 90))
-    except Exception:
-        pass
-
     return img
 
 
@@ -780,9 +760,12 @@ def get_reveal_counts(quote: Quote, brief: DesignBrief) -> list[int]:
     font_key = brief.font
     if font_key == "playfair_it":
         font_key = "playfair"
-    font_size = max(39, brief.font_size)
+    font_size = max(28, brief.font_size)
     text = _sanitize(quote.text)
-    upper = font_key == "bebas"
+    
+    is_minimalist = brief.layout == "minimalist" or "minimalist" in brief.text_zone
+    word_count = len(text.split())
+    upper = font_key in ("bebas", "cinzel") or (is_minimalist and word_count < 15 and font_key in ("montserrat", "inter", "outfit", "jost", "oswald"))
     disp_text = text.upper() if upper else text
     zone = brief.text_zone
 

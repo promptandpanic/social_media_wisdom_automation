@@ -406,8 +406,8 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
     status_color = (
         "#2ecc71" if not has_failure else "#e67e22" if has_success else "#e74c3c"
     )
-    ist = datetime.datetime.utcnow() + datetime.timedelta(hours=5, minutes=30)
-    date_str = f"{ist.strftime('%B %d, %Y').upper()} &nbsp;&bull;&nbsp; {ist.strftime('%A').upper()} &nbsp;&bull;&nbsp; {ist.strftime('%I:%M %p')} IST"
+    est = datetime.datetime.utcnow() - datetime.timedelta(hours=5)
+    date_str = f"{est.strftime('%B %d, %Y').upper()} &nbsp;&bull;&nbsp; {est.strftime('%A').upper()} &nbsp;&bull;&nbsp; {est.strftime('%I:%M %p')} EST"
 
     platforms_html = ""
     for r in results:
@@ -590,8 +590,8 @@ def _send_email_report(state: PipelineState, theme_name: str) -> None:
     from email.utils import formataddr
 
     html = _build_email_html(state, theme_name)
-    ist = datetime.datetime.utcnow() + datetime.timedelta(hours=5, minutes=30)
-    date_str = ist.strftime("%d-%b-%y")
+    est = datetime.datetime.utcnow() - datetime.timedelta(hours=5)
+    date_str = est.strftime("%d-%b-%y")
     quote = state.get("quote")
     author = quote.author if quote else ""
     results = state.get("platform_results", [])

@@ -102,17 +102,16 @@ STYLE: {style_name}
 {style_description}
 
 SCENE PARAMETERS — what world to build:
-  - LOCATION: {random_seed}
-  - CONDITIONS: {atmospheric_twist}
-  - EMOTIONAL ANCHOR: The quote's specific emotion shapes every detail — subject, action, scale, mood.
-    Same style + different quote = completely different scene. Let the words lead.
+  - SCENE & SUBJECT: Imagine a highly creative, random, and unique scene that captures the SENTIMENT and EMOTION of the quote. 
+    DO NOT translate the quote literally. Instead, find a visual metaphor. 
+    Vary your subjects wildly: use nature, animals, human figures (no recognizable faces), architecture, or everyday objects. Every single prompt must feel completely different from the last.
+  - EMOTIONAL ANCHOR: The quote's specific emotion shapes every detail. Let the words lead.
 {image_hint_block}
 RULES:
-1. GENERAL AUDIENCE: Beautiful, relatable, emotionally resonant. Must stop someone scrolling at 7am.
-   Real-world cinematography — not conceptual art, not niche aesthetics, not fashion editorial.
+1. GENERAL AUDIENCE: Beautiful, relatable, emotionally resonant. Must stop someone scrolling.
 2. 8K PHOTOREALISTIC: Hyper-real photography quality. Breathtaking natural detail. Cinematic color grade.
-3. QUOTE-DRIVEN SCENE: The scene is entirely shaped by the quote's emotion. The style only defines how it is shot.
-4. VAST NEGATIVE SPACE: The text overlay zone must be naturally clean and dark. Non-negotiable.{subject_constraint}
+3. CREATIVE FREEDOM: The scene is entirely up to your imagination. The style only defines how it is shot (lighting, grading, technique).
+4. VAST NEGATIVE SPACE: The text overlay zone must be naturally clean and uncluttered. Non-negotiable.{subject_constraint}
 
 Write 4–6 sentences:
   location & setting → subject & emotional action → atmospheric detail → exact color palette (hex values) → lighting & composition.
@@ -127,41 +126,9 @@ Reply with ONLY the image prompt — plain text, no JSON, no preamble.
 
 _THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
     "womenpower": (
-        "\n  - THEMATIC MANDATE: A stunning, stylish woman — impeccably dressed, confident, aspirational. "
-        "She can be in motion or still, but her presence commands the frame. Fashion-forward without being costume: "
-        "think tailored coat on a windswept cliff, silk dress in a sunlit doorway, or structured outfit in a minimal architectural space. "
-        "The image should make someone stop scrolling and think 'I want to feel like that.' "
-        "Do not show faces. Convey power, elegance, and intention through posture, clothing, light, and environment."
-    ),
-    "darkacademia": (
-        "\n  - THEMATIC MANDATE: The quiet beauty of deep focus and solitary thought. "
-        "Use your boundless creativity to imagine a warm, intimate, lived-in environment. "
-        "Do not rely on clichés; think completely out of the box and let the quote's emotional truth drive the scene."
-    ),
-    "latenight": (
-        "\n  - THEMATIC MANDATE: The specific emotional weight of late-night solitude. "
-        "Use your boundless creativity to imagine a cinematic, intimate, and emotionally precise scene. "
-        "Do not rely on clichés; think completely out of the box."
-    ),
-    "morning": (
-        "\n  - THEMATIC MANDATE: The raw energy and possibility of a new day. "
-        "Use your boundless creativity to imagine a specific, visceral scene where light arrives and potential is made visible. "
-        "Do not rely on clichés; think completely out of the box."
-    ),
-    "wisdom": (
-        "\n  - THEMATIC MANDATE: A visual that makes the viewer stop and feel the weight of something true. "
-        "Use your boundless creativity to imagine a timeless, humbling scene. "
-        "Do not rely on clichés; think completely out of the box."
-    ),
-    "mindfulness": (
-        "\n  - THEMATIC MANDATE: Genuine, breathtaking calm — a real moment of natural beauty. "
-        "Use your boundless creativity to imagine a scene so perfect it quiets the mind. "
-        "Do not rely on clichés or spiritual stereotypes; think completely out of the box."
-    ),
-    "love": (
-        "\n  - THEMATIC MANDATE: The real, human truth of connection — warmth, longing, tenderness, or heartbreak. "
-        "Use your boundless creativity to imagine a deeply personal, cinematic scene. "
-        "Do not rely on clichés; think completely out of the box."
+        "\n  - THEMATIC MANDATE: Keep it like an editorial style: elegant, fashionable, well-dressed woman. "
+        "Aspirational, confident, and put-together. Do not show recognizable faces, but focus on the "
+        "attitude, clothing, posture, and sophisticated environment."
     ),
 }
 
@@ -238,38 +205,6 @@ def generate_brief(state: PipelineState) -> PipelineState:
         )
         subject_constraint = _THEME_SUBJECT_CONSTRAINTS.get(theme_key, "")
 
-        import random
-
-        variation_seeds = [
-            "cliff edge overlooking a vast ocean at golden hour",
-            "misty forest at dawn with shafts of light breaking through the canopy",
-            "minimalist white room with a single arched window, morning light pooling on the floor",
-            "rooftop at magic hour, city glowing softly in the warm haze below",
-            "empty café terrace drenched in late afternoon golden light",
-            "rain-soaked cobblestone alley with warm amber glow from a single doorway",
-            "desert landscape at dusk, the sky a gradient of deep violet and burnt orange",
-            "snow-covered mountain lookout, vast stillness, breath visible in cold air",
-            "sunlit wheat field, camera low and wide, golden stalks filling the frame",
-            "ocean shore at dawn, mist rising off the water, tide retreating",
-            "abandoned stone courtyard overtaken by wildflowers, dappled afternoon light",
-            "linen-curtained window seat, soft diffused morning light, a cup of tea steaming",
-            "old-growth forest floor, single shaft of light cutting through ancient trees",
-            "empty winding mountain road at blue hour, headlights fading into the distance",
-            "still lake perfectly mirroring a dramatic sky at sunrise",
-        ]
-        atmospheric_twists = [
-            "Cinematic 35mm film grain — Kodak Portra warmth, lifted blacks, natural halation around light sources.",
-            "Anamorphic prime lens — wide open at f/1.4, background dissolves to creamy painterly bokeh, horizontal lens flare.",
-            "Golden hour backlight — subject silhouetted or rim-lit against warm amber sun, atmospheric haze.",
-            "Tilt-shift selective focus — razor-thin depth of field, one element pin-sharp, everything else soft as breath.",
-            "Long exposure stillness — motion of water or clouds rendered silky smooth, environment perfectly still.",
-            "Obscured and intimate — face hidden, focus entirely on hands, fabric, posture, or a single telling detail.",
-            "Extreme macro depth — background completely dissolved, one tiny tactile detail rendered in breathtaking clarity.",
-            "Film halation — warm orange-red glow bleeding around bright highlights, as if light is alive.",
-            "Overcast diffused light — no harsh shadows, colours deeply saturated, everything glows from within.",
-            "Magic hour silhouette — strong clean silhouette against a sky that looks painted, minimal detail in subject.",
-        ]
-
         prompt = _IMAGE_PROMPT_TEMPLATE.format(
             text=text,
             style_name=style_name,
@@ -279,8 +214,6 @@ def generate_brief(state: PipelineState) -> PipelineState:
             else "",
             text_zone_instruction=text_zone_instruction,
             subject_constraint=subject_constraint,
-            random_seed=random.choice(variation_seeds),
-            atmospheric_twist=random.choice(atmospheric_twists),
         )
         image_prompt, provider_info = providers.llm.generate(prompt, role="creative_brief")
         if "model_usage" not in state:
@@ -315,16 +248,16 @@ def _build_brief(
     word_count = len(text.split())
     layout = r.get("layout", "big_center")
     if layout == "minimalist":
-        font_size = 33
+        font_size = 30
     elif layout == "asymmetric":
-        font_size = 41
+        font_size = 36
     else:
         font_size = (
-            50
+            42
             if layout == "big_center" and word_count <= 7
-            else 43
+            else 36
             if layout == "big_center"
-            else max(37, 48 - max(0, word_count - 12))
+            else max(32, 40 - max(0, word_count - 12))
         )
 
     variants = r.get("font_variants") or [r.get("font", "playfair")]
