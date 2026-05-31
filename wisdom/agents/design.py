@@ -9,6 +9,7 @@ Rendering parameters (font, colors, overlay) come from the style's config — no
 from __future__ import annotations
 
 import logging
+import random
 import re
 
 from langgraph.graph import END, StateGraph
