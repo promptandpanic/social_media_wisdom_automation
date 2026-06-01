@@ -248,16 +248,16 @@ def _build_brief(
     word_count = len(text.split())
     layout = r.get("layout", "big_center")
     if layout == "minimalist":
-        font_size = 30
+        font_size = 40
     elif layout == "asymmetric":
-        font_size = 36
+        font_size = 46
     else:
         font_size = (
-            42
+            52
             if layout == "big_center" and word_count <= 7
-            else 36
+            else 46
             if layout == "big_center"
-            else max(32, 40 - max(0, word_count - 12))
+            else max(38, 50 - max(0, word_count - 12))
         )
 
     variants = r.get("font_variants") or [r.get("font", "playfair")]
@@ -287,7 +287,7 @@ def _build_brief(
         highlight_style=r.get("highlight_style", "color"),
         font_size=font_size,
         animation="fade",
-        skip_kenburns=bool(r.get("skip_kenburns", False)),
+        skip_kenburns=True,
         mood_note="",
         voice_gender=r.get("voice_gender", "male"),
     )

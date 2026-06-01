@@ -588,8 +588,6 @@ def _draw_text(
     text = _sanitize(quote.text).strip(_QC).strip()
     author = quote.author
     font_key = brief.font
-    if font_key == "playfair_it":
-        font_key = "playfair"
     txt_color = _hex_to_rgb(brief.text_color)
     hi_color = _hex_to_rgb(brief.highlight_color)
     text_zone = brief.text_zone
@@ -758,8 +756,6 @@ def _draw_text(
 
 def get_reveal_counts(quote: Quote, brief: DesignBrief) -> list[int]:
     font_key = brief.font
-    if font_key == "playfair_it":
-        font_key = "playfair"
     font_size = max(28, brief.font_size)
     text = _sanitize(quote.text)
     
