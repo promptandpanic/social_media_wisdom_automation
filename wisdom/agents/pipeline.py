@@ -393,12 +393,8 @@ def _build_email_html(state: PipelineState, theme_name: str) -> str:
     author = quote.author if quote else "Unknown"
     llm_caption = state.get("llm_caption", "")
     results = state.get("platform_results", [])
-    playfair_b64 = _load_font_b64("playfair.ttf")
-    font_face = (
-        f"@font-face {{ font-family: 'Playfair Display'; src: url('data:font/truetype;base64,{playfair_b64}') format('truetype'); font-weight: normal; font-style: normal; }}"
-        if playfair_b64
-        else ""
-    )
+    # Load font from Google Fonts instead of embedding base64 to avoid Gmail clipping (>102KB)
+    font_face = "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');"
 
     has_success = any(r.status == "posted" for r in results)
     has_failure = any(r.status == "failed" for r in results)
