@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 
 import requests
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
 
 import wisdom.config as cfg
 from wisdom.schemas import DesignBrief, Quote
@@ -59,7 +59,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "inter": (
         "inter.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/static/Inter-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf",
     ),
     "poppins_bold": (
         "poppins_bold.ttf",
@@ -67,7 +67,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "outfit": (
         "outfit.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/outfit/static/Outfit-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/outfit/Outfit%5Bwght%5D.ttf",
     ),
     "spectral": (
         "spectral.ttf",
@@ -75,27 +75,27 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "jost": (
         "jost.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/jost/static/Jost-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/jost/Jost%5Bwght%5D.ttf",
     ),
     "satisfy": (
         "satisfy.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/satisfy/Satisfy-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/apache/satisfy/Satisfy-Regular.ttf",
     ),
     "playfair": (
         "playfair.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/static/PlayfairDisplay-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf",
     ),
     "cormorant": (
         "cormorant.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/cormorantgaramond/static/CormorantGaramond-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/cormorantgaramond/CormorantGaramond%5Bwght%5D.ttf",
     ),
     "dancing": (
         "dancing.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/dancingscript/static/DancingScript-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/dancingscript/DancingScript%5Bwght%5D.ttf",
     ),
     "caveat": (
         "caveat.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/caveat/static/Caveat-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/caveat/Caveat%5Bwght%5D.ttf",
     ),
     "bebas": (
         "bebas.ttf",
@@ -107,7 +107,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "cinzel": (
         "cinzel.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/static/Cinzel-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/Cinzel%5Bwght%5D.ttf",
     ),
     "great_vibes": (
         "great_vibes.ttf",
@@ -115,19 +115,19 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "shadows_into_light": (
         "shadows_into_light.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/shadowsintolight/ShadowsIntoLight-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/shadowsintolight/ShadowsIntoLight.ttf",
     ),
     "montserrat": (
-        "montserrat_bold.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/static/Montserrat-Bold.ttf",
+        "montserrat.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/Montserrat%5Bwght%5D.ttf",
     ),
     "oswald": (
-        "oswald_bold.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/oswald/static/Oswald-Bold.ttf",
+        "oswald.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/oswald/Oswald%5Bwght%5D.ttf",
     ),
     "raleway": (
-        "raleway_bold.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/raleway/static/Raleway-Bold.ttf",
+        "raleway.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/raleway/Raleway%5Bwght%5D.ttf",
     ),
     "patrick_hand": (
         "patrick_hand.ttf",
@@ -135,7 +135,7 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "comfortaa": (
         "comfortaa.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/comfortaa/static/Comfortaa-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/comfortaa/Comfortaa%5Bwght%5D.ttf",
     ),
     "indie_flower": (
         "indie_flower.ttf",
@@ -143,7 +143,19 @@ _FONT_URLS: dict[str, tuple[str, str]] = {
     ),
     "fredoka": (
         "fredoka.ttf",
-        "https://raw.githubusercontent.com/google/fonts/main/ofl/fredoka/static/Fredoka-Regular.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/fredoka/Fredoka%5Bwdth%2Cwght%5D.ttf",
+    ),
+    "lora": (
+        "lora.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/lora/Lora%5Bwght%5D.ttf",
+    ),
+    "merriweather": (
+        "merriweather.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/merriweather/Merriweather%5Bopsz%2Cwdth%2Cwght%5D.ttf",
+    ),
+    "nunito": (
+        "nunito.ttf",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/nunito/Nunito%5Bwght%5D.ttf",
     ),
 }
 
@@ -259,6 +271,9 @@ _FONT_SIZE_SCALE: dict[str, float] = {
     "caveat": 1.12,
     "bebas": 1.00,
     "poppins": 1.00,
+    "lora": 1.05,
+    "merriweather": 1.00,
+    "nunito": 1.00,
 }
 
 
@@ -396,7 +411,7 @@ def _render_line(
 
     letter_spacing = 0
     font_name = font.path.lower()
-    if font_name.endswith(("montserrat.ttf", "montserrat_bold.ttf", "inter.ttf", "jost.ttf", "outfit.ttf", "cinzel.ttf")):
+    if font_name.endswith(("montserrat.ttf", "montserrat_bold.ttf", "inter.ttf", "jost.ttf", "outfit.ttf", "cinzel.ttf", "nunito.ttf")):
         letter_spacing = 6 if "minimalist" in text_zone else 2
     elif "minimalist" in text_zone:
         letter_spacing = 3
@@ -871,10 +886,30 @@ def compose_text_layer(image_bytes: bytes, quote: Quote, brief: DesignBrief) -> 
 # ---------------------------------------------------------------------------
 
 
+def _color_grade(img: Image.Image) -> Image.Image:
+    """Apply cinematic color grading: contrast, saturation, and a subtle moody tint."""
+    # 1. Boost contrast for a punchier look
+    enhancer_contrast = ImageEnhance.Contrast(img)
+    img = enhancer_contrast.enhance(1.15)
+    
+    # 2. Boost saturation slightly
+    enhancer_color = ImageEnhance.Color(img)
+    img = enhancer_color.enhance(1.10)
+    
+    # 3. Add a very subtle cooling/moody filter (mix with deep teal)
+    overlay = Image.new("RGB", img.size, (15, 25, 40))
+    img = Image.blend(img, overlay, alpha=0.08)
+    
+    return img
+
+
 def _load(image_bytes: bytes) -> Image.Image:
     img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
     if img.size != (IMAGE_WIDTH, IMAGE_HEIGHT):
         img = img.resize((IMAGE_WIDTH, IMAGE_HEIGHT), Image.LANCZOS)
+
+    # Apply cinematic color grading
+    img = _color_grade(img)
 
     # Apply subtle film grain for a more premium, cinematic feel
     return _apply_film_grain(img)

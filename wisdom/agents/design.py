@@ -37,6 +37,9 @@ _VALID_FONTS = frozenset(
         "cinzel",
         "great_vibes",
         "montserrat",
+        "lora",
+        "merriweather",
+        "nunito",
     }
 )
 
@@ -104,8 +107,8 @@ STYLE: {style_name}
 SCENE PARAMETERS — what world to build:
   - SCENE & SUBJECT: Imagine a highly creative, random, and unique scene that captures the SENTIMENT and EMOTION of the quote. 
     DO NOT translate the quote literally. Instead, find a visual metaphor. 
-    Vary your subjects wildly: use nature, animals, human figures (no recognizable faces), architecture, or everyday objects. Every single prompt must feel completely different from the last.
-  - EMOTIONAL ANCHOR: The quote's specific emotion shapes every detail. Let the words lead.
+    Vary your subjects wildly: use nature, animals, human figures, architecture, or everyday objects. Every single prompt must feel completely different from the last.
+  - EMOTIONAL ANCHOR: The overall mood, lighting, and expression of the subject MUST be dictated strictly by the emotion of the quote. If the quote is fierce, the mood should be fierce; if serene, serene. Let the words lead the vibe.
 {image_hint_block}
 RULES:
 1. GENERAL AUDIENCE: Beautiful, relatable, emotionally resonant. Must stop someone scrolling.
@@ -118,7 +121,7 @@ Write 4–6 sentences:
 
 Constraints:
   - TEXT ZONE: {text_zone_instruction}
-  - No text, words, signs, logos, watermarks, or explicitly recognizable faces.
+  - No text, words, signs, logos, or watermarks.
   - 9:16 portrait format, 8K resolution.
 
 Reply with ONLY the image prompt — plain text, no JSON, no preamble.
@@ -126,9 +129,10 @@ Reply with ONLY the image prompt — plain text, no JSON, no preamble.
 
 _THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
     "womenpower": (
-        "\n  - THEMATIC MANDATE: Keep it like an editorial style: elegant, fashionable, well-dressed woman. "
-        "Aspirational, confident, and put-together. Do not show recognizable faces, but focus on the "
-        "attitude, clothing, posture, and sophisticated environment."
+        "\n  - THEMATIC MANDATE: STRICTLY BLACK AND WHITE editorial style. Large image of a stylish woman. "
+        "Rotate between different modern outfits (e.g., high-fashion ramp wear, sharp professional corporate attire). "
+        "The focus MUST be entirely on the woman, her attitude, clothing, and posture. "
+        "Keep the background/scene minimal and mostly out of focus."
     ),
 }
 
