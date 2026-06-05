@@ -112,7 +112,7 @@ SCENE PARAMETERS — what world to build:
 {image_hint_block}
 RULES:
 1. GENERAL AUDIENCE: Beautiful, relatable, emotionally resonant. Must stop someone scrolling.
-2. 8K PHOTOREALISTIC: Hyper-real photography quality. Breathtaking natural detail. Cinematic color grade.
+2. 8K IMMERSIVE 3D/4D: Create a hyper-immersive, hyper-realistic 3D or 4D render effect (e.g., Unreal Engine 5, Octane Render style). Breathtaking volumetric lighting, extreme depth of field, and a cinematic, larger-than-life dreamlike quality that feels like you can step into it.
 3. CREATIVE FREEDOM: The scene is entirely up to your imagination. The style only defines how it is shot (lighting, grading, technique).
 4. VAST NEGATIVE SPACE: The text overlay zone must be naturally clean and uncluttered. Non-negotiable.{subject_constraint}
 
