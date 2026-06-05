@@ -214,6 +214,8 @@ class GeminiFlashProvider(BaseImageProvider):
                 response_modalities=["IMAGE"],
             ),
         )
+        if not resp.candidates or not resp.candidates[0].content or not resp.candidates[0].content.parts:
+            raise ValueError(f"Invalid or blocked response from Gemini Flash: {resp}")
         for part in resp.candidates[0].content.parts:
             if part.inline_data:
                 return _resize(part.inline_data.data)
@@ -230,7 +232,7 @@ class PollinationsProvider(BaseImageProvider):
         # Remove newlines and excess spaces for URL safety
         clean_prompt = " ".join(prompt.split())
         encoded = url_encode(clean_prompt[:500])
-        url = f"https://image.pollinations.ai/prompt/{encoded}?width={_W}&height={_H}&nologo=true"
+        url = f"https://image.pollinations.ai/prompt/{encoded}?width={_W}&height={_H}"
         resp = requests.get(url, timeout=30)
         resp.raise_for_status()
         return _resize(resp.content)
