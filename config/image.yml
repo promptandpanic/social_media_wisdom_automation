@@ -26,14 +26,10 @@ providers:
     key_env: HF_API_KEY
     timeout: 60
 
-  pollinations:
-    class: wisdom.providers.image.PollinationsProvider
-    # No key needed
-    timeout: 30
 
   gradient:
     class: wisdom.providers.image.GradientFallback
     # Zero-dependency PIL fallback — always works
 
 # Tried left-to-right; first success wins.
-fallback_chain: [leonardo_flux_pro, gemini_imagen, gemini_flash, huggingface, pollinations, gradient]
+fallback_chain: [leonardo_flux_pro, gemini_imagen, gemini_flash, huggingface, gradient]

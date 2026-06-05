@@ -1,13 +1,21 @@
 import sys
-from wisdom.providers.image import PollinationsProvider
+import os
+from dotenv import load_dotenv
+import requests
 
-prompt = "A majestic lion standing on a cliff at sunset, cinematic lighting, 8k"
-print("Generating image using Pollinations...")
-provider = PollinationsProvider()
-try:
-    image_bytes = provider.generate(prompt)
-    with open("output/test_pollinations.jpg", "wb") as f:
-        f.write(image_bytes)
-    print("Success! Image saved to output/test_pollinations.jpg")
-except Exception as e:
-    print(f"Error: {e}")
+load_dotenv()
+api_key = os.environ.get("POLLINATIONS_API_KEY")
+if not api_key:
+    print("No key found")
+    sys.exit(1)
+
+print(f"Key loaded: {api_key[:5]}...")
+
+url = f"https://image.pollinations.ai/prompt/A%20lion?width=1080&height=1920&key={api_key}"
+resp = requests.get(url)
+print(f"Query Param Test: {resp.status_code}")
+
+url2 = f"https://image.pollinations.ai/prompt/A%20lion?width=1080&height=1920"
+headers = {"Authorization": f"Bearer {api_key}"}
+resp2 = requests.get(url2, headers=headers)
+print(f"Header Test: {resp2.status_code}")
