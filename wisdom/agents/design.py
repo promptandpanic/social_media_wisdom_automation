@@ -112,7 +112,7 @@ RULES:
 1. GENERAL AUDIENCE: Beautiful, relatable, emotionally resonant. Must stop someone scrolling.
 2. 8K IMMERSIVE 3D/4D: Create a high-end, sleek, hyper-polished 3D render (e.g., Unreal Engine 5, Octane Render). Focus on bright, luminous atmospheric lighting, gorgeous materials (glass, glowing elements, soft polished textures), and a breathtaking cinematic quality. It must look incredibly premium and pristine, not dirty or gritty.
 3. CREATIVE FREEDOM: The scene is entirely up to your imagination. The style only defines how it is shot (lighting, grading, technique).
-4. VAST NEGATIVE SPACE: The center of the image MUST have a vast, perfectly clean, low-contrast area so text can be read easily. Do not place busy, floating, or high-contrast objects in the dead center. Non-negotiable.{subject_constraint}
+4. VAST NEGATIVE SPACE: The designated text zone MUST have a vast, perfectly clean, low-contrast area so text can be read easily. Do not place busy, floating, or high-contrast objects in this zone. Non-negotiable.{subject_constraint}
 
 Write 4–6 sentences:
   location & setting → subject & emotional action → atmospheric detail → exact color palette (hex values) → lighting & composition.
