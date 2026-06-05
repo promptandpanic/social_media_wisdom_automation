@@ -105,14 +105,14 @@ STYLE: {style_name}
 {style_description}
 
 SCENE PARAMETERS — what world to build:
-  - SCENE & SUBJECT: Tell a vivid story through the visual. Do NOT just put a person standing in a landscape (that is boring and redundant). Instead, imagine a highly creative, intricately designed scene where every background element and object adds to the narrative of the quote. Use surrealism, unique metaphors, detailed architecture, or magical realism. Every single prompt must feel completely different and wildly imaginative.
+  - SCENE & SUBJECT: Tell a vivid story through the visual. Do NOT just put a person standing in a landscape. IMPORTANT: The scene MUST be highly polished, sleek, and exceptionally beautiful. Use unique metaphors and magical realism, but absolutely NO dark, gritty, horrific, or depressing surrealism. Keep the composition elegant, luminous, and visually harmonious. Every single prompt must feel wildly imaginative but pristine.
   - EMOTIONAL ANCHOR: The overall mood, lighting, and expression of the subject MUST be dictated strictly by the emotion of the quote. If the quote is fierce, the mood should be fierce; if serene, serene. Let the words lead the vibe.
 {image_hint_block}
 RULES:
 1. GENERAL AUDIENCE: Beautiful, relatable, emotionally resonant. Must stop someone scrolling.
-2. 8K IMMERSIVE 3D/4D: Create a hyper-immersive, hyper-realistic 3D or 4D render effect (e.g., Unreal Engine 5, Octane Render style). Breathtaking volumetric lighting, extreme depth of field, and a cinematic, larger-than-life dreamlike quality that feels like you can step into it.
+2. 8K IMMERSIVE 3D/4D: Create a high-end, sleek, hyper-polished 3D render (e.g., Unreal Engine 5, Octane Render). Focus on bright, luminous atmospheric lighting, gorgeous materials (glass, glowing elements, soft polished textures), and a breathtaking cinematic quality. It must look incredibly premium and pristine, not dirty or gritty.
 3. CREATIVE FREEDOM: The scene is entirely up to your imagination. The style only defines how it is shot (lighting, grading, technique).
-4. VAST NEGATIVE SPACE: The text overlay zone must be naturally clean and uncluttered. Non-negotiable.{subject_constraint}
+4. VAST NEGATIVE SPACE: The center of the image MUST have a vast, perfectly clean, low-contrast area so text can be read easily. Do not place busy, floating, or high-contrast objects in the dead center. Non-negotiable.{subject_constraint}
 
 Write 4–6 sentences:
   location & setting → subject & emotional action → atmospheric detail → exact color palette (hex values) → lighting & composition.
