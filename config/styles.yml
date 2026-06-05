@@ -11,7 +11,7 @@ styles:
       Lighting is highly professional, like a Vogue or Harper's Bazaar editorial spread.
     rendering:
       font: montserrat
-      font_variants: [montserrat, raleway, oswald, inter, lora]
+      font_variants: [montserrat, inter, jost, outfit, poppins]
       text_color: "#FFFFFF"
       author_color: "#D4AF37"
       overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
@@ -30,8 +30,8 @@ styles:
       thought by a window, or a beautifully rendered object on a desk. The colors are rich and cinematic. 
       Lighting is atmospheric and natural. Highly relatable for a modern youth demographic.
     rendering:
-      font: inter
-      font_variants: [cormorant, playfair, spectral, inter, merriweather]
+      font: outfit
+      font_variants: [outfit, inter, jost, montserrat, nunito]
       text_color: "#F8F8F8"
       author_color: "#B0B0B0"
       overlay: {type: gradient_top, opacity: 160, color: "#000000", blur: 0}
@@ -50,8 +50,8 @@ styles:
       It feels incredibly expensive but entirely understated. Color palette is strictly neutral (beige, cream,
       slate, soft olive). Very calming, grounded, and modern.
     rendering:
-      font: playfair
-      font_variants: [playfair, cormorant, outfit, spectral, lora]
+      font: jost
+      font_variants: [jost, outfit, inter, montserrat, poppins]
       text_color: "#2C2C2C"
       author_color: "#8B7355"
       overlay: {type: glass, opacity: 180, color: "#FFFFFF", blur: 30}
@@ -69,8 +69,8 @@ styles:
       animals, or humans in a candid, authentic moment. The focus is on the warmth of the light and a feeling
       of hope or peacefulness. Colors are warm, glowing oranges, soft yellows, and deep shadow contrast.
     rendering:
-      font: playfair
-      font_variants: [montserrat, poppins, jost, inter, nunito]
+      font: inter
+      font_variants: [inter, montserrat, poppins, jost, nunito]
       text_color: "#FFFFFF"
       author_color: "#FFD700"
       overlay: {type: gradient_bottom, opacity: 130, color: "#1A0F00", blur: 0}
