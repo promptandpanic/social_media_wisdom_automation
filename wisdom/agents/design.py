@@ -105,9 +105,7 @@ STYLE: {style_name}
 {style_description}
 
 SCENE PARAMETERS — what world to build:
-  - SCENE & SUBJECT: Imagine a highly creative, random, and unique scene that captures the SENTIMENT and EMOTION of the quote. 
-    DO NOT translate the quote literally. Instead, find a visual metaphor. 
-    Vary your subjects wildly: use nature, animals, human figures, architecture, or everyday objects. Every single prompt must feel completely different from the last.
+  - SCENE & SUBJECT: Tell a vivid story through the visual. Do NOT just put a person standing in a landscape (that is boring and redundant). Instead, imagine a highly creative, intricately designed scene where every background element and object adds to the narrative of the quote. Use surrealism, unique metaphors, detailed architecture, or magical realism. Every single prompt must feel completely different and wildly imaginative.
   - EMOTIONAL ANCHOR: The overall mood, lighting, and expression of the subject MUST be dictated strictly by the emotion of the quote. If the quote is fierce, the mood should be fierce; if serene, serene. Let the words lead the vibe.
 {image_hint_block}
 RULES:
