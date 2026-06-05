@@ -228,12 +228,21 @@ class PollinationsProvider(BaseImageProvider):
     def __init__(self, **_):
         pass
 
+    def available(self) -> bool:
+        # Since the free tier is largely paywalled, we now require an API key to even attempt it.
+        return bool(os.environ.get("POLLINATIONS_API_KEY"))
+
     def generate(self, prompt: str, native_text: bool = False) -> bytes:
         # Remove newlines and excess spaces for URL safety
         clean_prompt = " ".join(prompt.split())
         encoded = url_encode(clean_prompt[:500])
         url = f"https://image.pollinations.ai/prompt/{encoded}?width={_W}&height={_H}"
-        resp = requests.get(url, timeout=30)
+        
+        headers = {}
+        if api_key := os.environ.get("POLLINATIONS_API_KEY"):
+            headers["Authorization"] = f"Bearer {api_key}"
+            
+        resp = requests.get(url, headers=headers, timeout=30)
         resp.raise_for_status()
         return _resize(resp.content)
 
