@@ -26,19 +26,11 @@ _VALID_FONTS = frozenset(
     {
         "inter",
         "outfit",
-        "spectral",
         "jost",
-        "satisfy",
-        "playfair",
-        "cormorant",
-        "bebas",
         "poppins",
         "anton",
         "cinzel",
-        "great_vibes",
         "montserrat",
-        "lora",
-        "merriweather",
         "nunito",
     }
 )
@@ -148,7 +140,7 @@ def pick_style(state: PipelineState) -> PipelineState:
 
     styles = _styles_for_theme(theme_key, theme.styles, recent)
     if not styles:
-        return {**state, "_chosen_style": "golden_hour_epic"}
+        return {**state, "_chosen_style": "quiet_luxury"}
 
     try:
         prompt = _picker_prompt(quote.text if quote else "", theme_key, styles, recent)
@@ -262,7 +254,7 @@ def _build_brief(
             else max(38, 50 - max(0, word_count - 12))
         )
 
-    variants = r.get("font_variants") or [r.get("font", "playfair")]
+    variants = r.get("font_variants") or [r.get("font", "inter")]
     font = random.choice(variants)
     logger.info(f"Font: {font} (pool: {variants})")
 
