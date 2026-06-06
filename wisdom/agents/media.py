@@ -93,6 +93,12 @@ def compose(state: PipelineState) -> PipelineState:
 
     quote = state.get("quote")
     brief = state.get("brief")
+    
+    if state.get("current_provider") == "gradient":
+        brief.text_zone = "center"
+        brief.text_color = "#FFFFFF"
+        brief.highlight_color = "#FFFFFF"
+
     composed = compose_image(image_bytes, quote, brief)
     logger.info(f"  Composed ({len(composed) // 1024} KB)")
     return {**state, "composed_image": composed}

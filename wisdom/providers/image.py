@@ -231,16 +231,14 @@ class GradientFallback(BaseImageProvider):
         pass
 
     def generate(self, prompt: str, native_text: bool = False) -> bytes:
-        img = Image.new("RGB", (_W, _H))
-        d = ImageDraw.Draw(img)
-        top = (15, 15, 20)  # Charcoal
-        bot = (40, 40, 45)  # Dark Gray
-        for y in range(_H):
-            t = y / _H
-            r = int(top[0] + (bot[0] - top[0]) * t)
-            g = int(top[1] + (bot[1] - top[1]) * t)
-            b = int(top[2] + (bot[2] - top[2]) * t)
-            d.line([(0, y), (_W, y)], fill=(r, g, b))
+        import os
+        fallback_path = "assets/fallback_bg.jpg"
+        if os.path.exists(fallback_path):
+            with open(fallback_path, "rb") as f:
+                return f.read()
+                
+        # Pure black fallback if file is missing
+        img = Image.new("RGB", (_W, _H), (0, 0, 0))
         buf = io.BytesIO()
         img.save(buf, "JPEG", quality=85)
         return buf.getvalue()
