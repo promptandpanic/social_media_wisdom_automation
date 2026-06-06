@@ -25,10 +25,10 @@ styles:
     categories: [latenight, wisdom, love, mindfulness]
     weight: high
     description: >
-      Cinematic, moody real-world photography. This is not heavily artistic or abstract; it's grounded in reality
-      but shot beautifully. Think a quiet coffee shop in the rain, a dimly lit street corner, a person in deep
-      thought by a window, or a beautifully rendered object on a desk. The colors are rich and cinematic. 
-      Lighting is atmospheric and natural. Highly relatable for a modern youth demographic.
+      Cinematic, moody atmospheric rendering. Think neo-noir or moody atmospheric environments, heavy mist, 
+      glowing neon reflections on wet surfaces, or a dimly lit, highly detailed room with volumetric fog and 
+      anamorphic lens flares. The colors are rich and cinematic. Lighting is highly stylized and moody. 
+      Highly immersive and breathtaking for a modern youth demographic.
     rendering:
       font: outfit
       font_variants: [outfit, inter, jost, montserrat, nunito]
@@ -45,10 +45,10 @@ styles:
     categories: [mindfulness, wisdom, morning, love]
     weight: high
     description: >
-      The epitome of 'quiet luxury' and high-end aesthetics. This style relies on beautiful negative space,
-      clean architectural lines, soft natural lighting, and high-quality textures (linen, marble, warm wood).
-      It feels incredibly expensive but entirely understated. Color palette is strictly neutral (beige, cream,
-      slate, soft olive). Very calming, grounded, and modern.
+      The epitome of 'quiet luxury' and high-end aesthetics. Focus on hyper-minimalist liminal spaces, 
+      vast empty modern architecture, softly glowing frosted glass, pristine white marble, and impossibly 
+      perfect lighting. It feels incredibly expensive, pristine, and understated. Color palette is strictly 
+      neutral (beige, cream, slate, soft olive). Very calming, grounded, and intensely modern.
     rendering:
       font: jost
       font_variants: [jost, outfit, inter, montserrat, poppins]
@@ -84,9 +84,9 @@ styles:
     categories: [wisdom, womenpower, latenight]
     weight: medium
     description: >
-      Striking black and white photography with high contrast. Deep, pure blacks and bright, clean whites.
-      Focus on strong shapes, silhouettes, and dramatic lighting. Very modern, unapologetic, and powerful.
-      Perfect for strong, direct quotes where the visual needs to match the intensity of the words.
+      Striking black and white 3D art with extreme high contrast. Deep, pure blacks and bright, glowing whites.
+      Focus on harsh, dramatic chiaroscuro lighting, massive brutalist architecture or floating obsidian geometry, 
+      deep shadows, and luminous white elements in pure monochrome. Unapologetic, modern, and powerful.
     rendering:
       font: cinzel
       font_variants: [cinzel, bebas, oswald, montserrat]
