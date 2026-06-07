@@ -37,11 +37,24 @@ _THEME_PROMPT_PREFIXES: dict[str, str] = {
 
 
 def generate_image(state: PipelineState) -> PipelineState:
-    brief = state.get("brief")
-    theme_key = state["theme_key"]
     attempt = state.get("design_attempt", 0) + 1
     max_attempts = cfg.app().get("design_attempts", 3)
     logger.info(f"Image attempt {attempt}/{max_attempts}…")
+
+    if attempt > 1:
+        logger.info("  Image generation retry: Generating a completely different quote and design...")
+        from wisdom.agents import quote, design
+        state["_quote_attempt"] = 0
+        state["_valid_quote"] = None
+        state["_quote_fallback"] = None
+        state["quote"] = None
+        state["_chosen_style"] = None
+        state["brief"] = None
+        state = quote.build().invoke(state)
+        state = design.build().invoke(state)
+
+    brief = state.get("brief")
+    theme_key = state["theme_key"]
 
     if state.get("offline"):
         from wisdom.providers.image import GradientFallback
@@ -144,13 +157,22 @@ def judge(state: PipelineState) -> PipelineState:
             new_state["_fallback_to_overlay"] = True
         else:
             failed = list(state.get("failed_providers", []))
+            failures_dict = dict(state.get("provider_failures", {}))
             current = state.get("current_provider")
             if current and current not in failed and current != "gradient":
-                failed.append(current)
-                logger.info(
-                    f"  Provider '{current}' blacklisted for this run due to poor quality/gibberish"
-                )
+                count = failures_dict.get(current, 0) + 1
+                failures_dict[current] = count
+                if count >= 2:
+                    failed.append(current)
+                    logger.info(
+                        f"  Provider '{current}' blacklisted for this run after {count} failures due to poor quality/gibberish"
+                    )
+                else:
+                    logger.info(
+                        f"  Provider '{current}' failed {count} time(s). Will blacklist if it reaches 2."
+                    )
             new_state["failed_providers"] = failed
+            new_state["provider_failures"] = failures_dict
 
     return new_state
 

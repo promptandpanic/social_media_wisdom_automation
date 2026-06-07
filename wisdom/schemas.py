@@ -175,6 +175,7 @@ class PipelineState(TypedDict, total=False):
     _fallback_to_overlay: bool
     current_provider: str
     failed_providers: list[str]
+    provider_failures: dict[str, int]
 
     # Post metadata
     meta: PostMeta | None
