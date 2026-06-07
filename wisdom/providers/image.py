@@ -232,12 +232,24 @@ class GradientFallback(BaseImageProvider):
 
     def generate(self, prompt: str, native_text: bool = False) -> bytes:
         import os
-        fallback_path = "assets/fallback_bg.jpg"
+        import random
+        
+        # We have 6 fallback images in assets/ (fallback_bg_1.jpg to fallback_bg_6.jpg)
+        bg_idx = random.randint(1, 6)
+        fallback_path = f"assets/fallback_bg_{bg_idx}.jpg"
+        
+        # If the chosen random one is missing for some reason, try to fallback to any of the 6
+        if not os.path.exists(fallback_path):
+            for i in range(1, 7):
+                if os.path.exists(f"assets/fallback_bg_{i}.jpg"):
+                    fallback_path = f"assets/fallback_bg_{i}.jpg"
+                    break
+
         if os.path.exists(fallback_path):
             with open(fallback_path, "rb") as f:
                 return f.read()
                 
-        # Pure black fallback if file is missing
+        # Pure black fallback if absolutely all files are missing
         img = Image.new("RGB", (_W, _H), (0, 0, 0))
         buf = io.BytesIO()
         img.save(buf, "JPEG", quality=85)
