@@ -230,19 +230,8 @@ def _build_meta(state: PipelineState, theme: ThemeConfig) -> PipelineState:
     else:
         llm_caption, hashtags, llm_title = _generate_caption_and_tags(quote, theme, state)
 
-    # Build caption: quote + attribution + body. No quote = body only.
-    parts = []
-    if text:
-        attribution = (
-            f"— {author}"
-            if author and author.lower() not in ("original", "unknown")
-            else ""
-        )
-        parts.append(text + (f"\n{attribution}" if attribution else ""))
-    if llm_caption:
-        parts.append(llm_caption)
-
-    caption = "\n\n".join(parts)
+    # Build caption: just the body.
+    caption = llm_caption if llm_caption else ""
     snippet = text.split(".")[0][:80] if text else theme.name
     title = llm_title or f"{snippet} | {theme.name}"
 

@@ -336,20 +336,20 @@ def _drop_shadow_text(
     text,
     font,
     fill,
-    shadow_color=(0, 0, 0, 180),
-    offset=(4, 6),
+    shadow_color=(0, 0, 0, 240),
+    offset=(3, 4),
     stroke_width=0,
     stroke_fill=None,
 ):
     x, y = xy
-    # For a sharp 3D shadow (which looks modern), we just draw multiple offset layers
+    # For a sharp 3D shadow (which looks modern), we draw multiple offset layers
     if shadow_color and len(shadow_color) >= 4 and shadow_color[3] > 0:
-        for i in range(1, 4):
+        for i in range(1, 6):
             draw.text(
-                (x + (offset[0] * i / 3), y + (offset[1] * i / 3)),
+                (x + (offset[0] * i / 5), y + (offset[1] * i / 5)),
                 text,
                 font=font,
-                fill=(*shadow_color[:3], int(shadow_color[3] * (4 - i) / 3)),
+                fill=(*shadow_color[:3], int(shadow_color[3] * (6 - i) / 5)),
             )
     # Draw main text with optional translucent outline
     if stroke_width > 0 and stroke_fill:
@@ -392,31 +392,20 @@ def _render_line(
 
     # Smart shadow & outline: white outline for dark text, dark outline for light text
     is_dark_text = (fill[0] * 0.299 + fill[1] * 0.587 + fill[2] * 0.114) < 128
-    base_alpha = 100 if stroke > 0 else 50
 
     stroke_width = min(2, stroke) if stroke > 0 else 0
     stroke_fill = None
 
-    if stroke_width > 0:
-        if is_dark_text:
-            stroke_fill = (250, 249, 246, 120)
-            shadow_color = (250, 249, 246, 40)
-        else:
-            stroke_fill = (26, 26, 26, 80)
-            shadow_color = (26, 26, 26, 40)
+    if is_dark_text:
+        shadow_color = (255, 255, 255, 200)
+        if stroke_width > 0:
+            stroke_fill = (255, 255, 255, 140)
     else:
-        shadow_color = (
-            (255, 255, 255, base_alpha) if is_dark_text else (0, 0, 0, base_alpha)
-        )
+        shadow_color = (0, 0, 0, 240)
+        if stroke_width > 0:
+            stroke_fill = (0, 0, 0, 180)
 
-    letter_spacing = 0
-    font_name = font.path.lower()
-    if font_name.endswith(("montserrat.ttf", "montserrat_bold.ttf", "inter.ttf", "jost.ttf", "outfit.ttf", "cinzel.ttf", "nunito.ttf")):
-        letter_spacing = 6 if "minimalist" in text_zone else 2
-    elif "minimalist" in text_zone:
-        letter_spacing = 3
-
-    if letter_spacing == 0:
+    if not highlight_text:
         _drop_shadow_text(
             draw,
             (x, y),
@@ -431,24 +420,6 @@ def _render_line(
 
     words = line.split(" ")
     current_x = x
-
-    # Custom render function to handle letter spacing
-    def _draw_text_custom(draw, xy, text, font, fill, ls):
-        curr_x, curr_y = xy
-        for char in text:
-            _drop_shadow_text(
-                draw,
-                (curr_x, curr_y),
-                char,
-                font,
-                fill=fill,
-                shadow_color=shadow_color,
-                stroke_width=stroke_width,
-                stroke_fill=stroke_fill,
-            )
-            curr_x += draw.textlength(char, font=font) + ls
-        return curr_x
-
     hl_words = [hw.strip(".,!?\\\"'").lower() for hw in highlight_text.split()] if highlight_text else []
 
     for w in words:
@@ -457,12 +428,13 @@ def _render_line(
             is_hl = word_clean in hl_words and word_clean
             word_fill = hi_color if is_hl else fill
 
-            current_x = _draw_text_custom(
-                draw, (current_x, y), w, font, fill=word_fill, ls=letter_spacing
+            _drop_shadow_text(
+                draw, (current_x, y), w, font, fill=word_fill, 
+                shadow_color=shadow_color, stroke_width=stroke_width, stroke_fill=stroke_fill
             )
+            current_x += draw.textlength(w, font=font)
 
-        # Add space with letter spacing
-        current_x += draw.textlength(" ", font=font) + letter_spacing
+        current_x += draw.textlength(" ", font=font)
 
 
 # ---------------------------------------------------------------------------
