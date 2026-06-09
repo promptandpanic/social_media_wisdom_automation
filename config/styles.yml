@@ -1,80 +1,79 @@
 styles:
 
+  cinematic_mood:
+    summary: "Cinematic Mood. Relatable, beautifully lit real-world moments."
+    categories: [latenight, wisdom, love, mindfulness, morning]
+    weight: high
+    description: >
+      Cinematic, moody atmospheric photography. Think neo-noir, beautiful twilight or overcast skies, moody atmospheric environments, 
+      glowing reflections on wet surfaces, or breathtaking natural landscapes at dusk. The colors are rich, moody, and highly stylized. 
+      Focus on a striking solitary subject (a person, an animal, a vehicle) or a beautiful liminal space.
+      Highly immersive, breathtaking, and relatable for a modern audience.
+    rendering:
+      font: playfair
+      font_variants: [playfair, cormorant, lora, merriweather, spectral, cinzel]
+      text_color: "#F8F8F8"
+      author_color: "#E0E0E0"
+      overlay: {type: gradient_center, opacity: 180, color: "#000000", blur: 0}
+      text_zone: center
+      layout: big_center
+      decoration: none
+      voice_gender: male
+
   editorial_chic:
     summary: "Editorial Chic. High-fashion, elegant, well-dressed, confident."
     categories: [womenpower, morning, wisdom]
     weight: high
     description: >
-      High-fashion editorial style. Aspirational, elegant, and confident. For women, it should feature beautifully
-      dressed, stylish subjects in high-end environments (street style, modern architecture, or minimal studio). 
-      Not over-the-top, but undeniably chic and put-together. Clean lines, neutral or sophisticated color palettes.
-      Lighting is highly professional, like a Vogue or Harper's Bazaar editorial spread.
+      High-end editorial lifestyle photography. Aspirational, elegant, and confident. Beautifully dressed, 
+      stylish subjects in high-end environments (street style, modern architecture, or moody studio). 
+      Lighting is highly professional, like a cinematic Vogue or Harper's Bazaar editorial spread. Focus on
+      rich, moody lighting and elegant composition.
     rendering:
-      font: montserrat
-      font_variants: [montserrat, inter, jost, outfit, poppins]
+      font: cormorant
+      font_variants: [cormorant, playfair, lora, spectral, cinzel]
       text_color: "#FFFFFF"
       author_color: "#D4AF37"
-      overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
+      overlay: {type: gradient_bottom, opacity: 180, color: "#000000", blur: 0}
       text_zone: bottom_minimalist
       layout: minimalist
       decoration: none
       voice_gender: female
 
-  cinematic_mood:
-    summary: "Cinematic Mood. Relatable, beautifully lit real-world moments."
-    categories: [latenight, wisdom, love, mindfulness]
-    weight: high
-    description: >
-      Cinematic, moody atmospheric rendering. Think neo-noir or moody atmospheric environments, heavy mist, 
-      glowing neon reflections on wet surfaces, or a dimly lit, highly detailed room with volumetric fog and 
-      anamorphic lens flares. The colors are rich and cinematic. Lighting is highly stylized and moody. 
-      Highly immersive and breathtaking for a modern youth demographic.
-    rendering:
-      font: outfit
-      font_variants: [outfit, inter, jost, montserrat, nunito]
-      text_color: "#F8F8F8"
-      author_color: "#B0B0B0"
-      overlay: {type: gradient_top, opacity: 160, color: "#000000", blur: 0}
-      text_zone: top_minimalist
-      layout: asymmetric
-      decoration: rule
-      voice_gender: male
-
   quiet_luxury:
-    summary: "Quiet Luxury. Expensive minimalism, natural light, clean space."
+    summary: "Quiet Luxury. Expensive minimalism, liminal space, clean lines."
     categories: [mindfulness, wisdom, morning, love]
     weight: high
     description: >
-      The epitome of 'quiet luxury' and high-end aesthetics. Focus on hyper-minimalist liminal spaces, 
-      vast empty modern architecture, softly glowing frosted glass, pristine white marble, and impossibly 
-      perfect lighting. It feels incredibly expensive, pristine, and understated. Color palette is strictly 
-      neutral (beige, cream, slate, soft olive). Very calming, grounded, and intensely modern.
+      The epitome of 'quiet luxury' and high-end aesthetic photography. Focus on hyper-minimalist liminal spaces, 
+      vast empty architecture, serene nature at dusk, pristine textures, and impossibly perfect moody lighting. 
+      It feels incredibly expensive, pristine, and understated. Color palette is strictly muted/neutral (slate, soft olive, beige, dark grey).
     rendering:
-      font: jost
-      font_variants: [jost, outfit, inter, montserrat, poppins]
-      text_color: "#2C2C2C"
-      author_color: "#8B7355"
-      overlay: {type: glass, opacity: 180, color: "#FFFFFF", blur: 30}
-      text_zone: center_minimalist
-      layout: minimalist
+      font: lora
+      font_variants: [lora, merriweather, spectral, playfair, cormorant]
+      text_color: "#F2F2F2"
+      author_color: "#A8A8A8"
+      overlay: {type: gradient_top, opacity: 170, color: "#000000", blur: 0}
+      text_zone: top_minimalist
+      layout: asymmetric
       decoration: none
       voice_gender: female
 
   golden_hour_lifestyle:
-    summary: "Golden Hour Lifestyle. Warm, inviting, relatable moments."
+    summary: "Golden Hour Lifestyle. Warm, inviting, twilight moments."
     categories: [love, morning, mindfulness, wisdom]
     weight: medium
     description: >
-      Warm, inviting photography shot during golden hour or with beautiful sun flare. Subjects can be nature,
-      animals, or humans in a candid, authentic moment. The focus is on the warmth of the light and a feeling
-      of hope or peacefulness. Colors are warm, glowing oranges, soft yellows, and deep shadow contrast.
+      Warm, inviting cinematic photography shot during golden hour, sunset, or dusk with beautiful sun flare. 
+      Subjects can be nature, solitary figures, or humans in a candid, authentic moment. 
+      Colors are warm, glowing oranges, soft yellows, and deep shadow contrast.
     rendering:
-      font: inter
-      font_variants: [inter, montserrat, poppins, jost, nunito]
+      font: merriweather
+      font_variants: [merriweather, lora, playfair, spectral, cormorant]
       text_color: "#FFFFFF"
       author_color: "#FFD700"
-      overlay: {type: gradient_bottom, opacity: 130, color: "#1A0F00", blur: 0}
-      text_zone: bottom_minimalist
+      overlay: {type: gradient_center, opacity: 160, color: "#1A0F00", blur: 0}
+      text_zone: center
       layout: big_center
       decoration: none
       voice_gender: female
@@ -84,14 +83,14 @@ styles:
     categories: [wisdom, womenpower, latenight]
     weight: medium
     description: >
-      Striking black and white 3D art with extreme high contrast. Deep, pure blacks and bright, glowing whites.
-      Focus on harsh, dramatic chiaroscuro lighting, massive brutalist architecture or floating obsidian geometry, 
-      deep shadows, and luminous white elements in pure monochrome. Unapologetic, modern, and powerful.
+      Striking black and white cinematic photography with extreme high contrast. Deep, pure blacks and bright, glowing whites.
+      Focus on harsh, dramatic chiaroscuro lighting, massive architecture, striking silhouettes, deep shadows.
+      Unapologetic, modern, and powerful.
     rendering:
       font: cinzel
-      font_variants: [cinzel, bebas, oswald, montserrat]
+      font_variants: [cinzel, playfair, cormorant, lora]
       text_color: "#FFFFFF"
-      author_color: "#A0A0A0"
+      author_color: "#C0C0C0"
       overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
       text_zone: center
       layout: big_center

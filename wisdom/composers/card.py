@@ -342,15 +342,27 @@ def _drop_shadow_text(
     stroke_fill=None,
 ):
     x, y = xy
-    # For a sharp 3D shadow (which looks modern), we draw multiple offset layers
+    # Soft, multi-layered diffuse shadow for better serif readability on mixed backgrounds
     if shadow_color and len(shadow_color) >= 4 and shadow_color[3] > 0:
-        for i in range(1, 6):
+        # Create a diffuse "glow/shadow" effect by drawing the text multiple times in a radius
+        for dx in [-2, 0, 2]:
+            for dy in [-2, 0, 2]:
+                if dx == 0 and dy == 0: continue
+                draw.text(
+                    (x + dx, y + dy + 1),
+                    text,
+                    font=font,
+                    fill=(*shadow_color[:3], int(shadow_color[3] * 0.3)),
+                )
+        # Core directional offset shadow
+        for i in range(1, 4):
             draw.text(
-                (x + (offset[0] * i / 5), y + (offset[1] * i / 5)),
+                (x + (offset[0] * i / 3), y + (offset[1] * i / 3)),
                 text,
                 font=font,
-                fill=(*shadow_color[:3], int(shadow_color[3] * (6 - i) / 5)),
+                fill=(*shadow_color[:3], int(shadow_color[3] * 0.8)),
             )
+
     # Draw main text with optional translucent outline
     if stroke_width > 0 and stroke_fill:
         draw.text(
@@ -692,7 +704,8 @@ def _draw_text(
             width=1,
         )
 
-    text_stroke = 0 if font_key in _CURSIVE_FONTS else 3
+    _SERIF_FONTS = {"playfair", "cormorant", "lora", "merriweather", "spectral", "cinzel"}
+    text_stroke = 0 if font_key in _CURSIVE_FONTS or font_key in _SERIF_FONTS else 2
 
     for line in lines:
         _render_line(

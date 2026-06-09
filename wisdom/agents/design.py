@@ -32,6 +32,11 @@ _VALID_FONTS = frozenset(
         "cinzel",
         "montserrat",
         "nunito",
+        "playfair",
+        "cormorant",
+        "lora",
+        "merriweather",
+        "spectral",
     }
 )
 
@@ -97,12 +102,12 @@ STYLE: {style_name}
 {style_description}
 
 SCENE PARAMETERS — what world to build:
-  - SCENE & SUBJECT: Tell a vivid story through the visual. Do NOT just put a person standing in a landscape. IMPORTANT: The scene MUST be highly polished, sleek, and exceptionally beautiful. Use unique metaphors and magical realism, but absolutely NO dark, gritty, horrific, or depressing surrealism. Keep the composition elegant, luminous, and visually harmonious. Every single prompt must feel wildly imaginative but pristine.
+  - SCENE & SUBJECT: Tell a vivid story through the visual. Focus on breathtaking, cinematic photography. Use a high-end 35mm lens look with beautiful depth of field. Create relatable, aspirational, or deeply atmospheric scenes (e.g., twilight landscapes, solitary figures, elegant liminal spaces, or striking subjects). The scene MUST be highly polished, sleek, and exceptionally beautiful. Absolutely NO dark, gritty, horrific, or depressing surrealism. Keep the composition elegant, luminous, and visually harmonious.
   - EMOTIONAL ANCHOR: The overall mood, lighting, and expression of the subject MUST be dictated strictly by the emotion of the quote. If the quote is fierce, the mood should be fierce; if serene, serene. Let the words lead the vibe.
 {image_hint_block}
 RULES:
 1. GENERAL AUDIENCE: Beautiful, relatable, emotionally resonant. Must stop someone scrolling.
-2. 8K IMMERSIVE 3D/4D: Create a high-end, sleek, hyper-polished 3D render (e.g., Unreal Engine 5, Octane Render). Focus on bright, luminous atmospheric lighting, gorgeous materials (glass, glowing elements, soft polished textures), and a breathtaking cinematic quality. It must look incredibly premium and pristine, not dirty or gritty.
+2. CINEMATIC PHOTOGRAPHY: Create a high-end, sleek, hyper-polished photographic image. Focus on dramatic atmospheric lighting (e.g., golden hour, twilight, overcast, moody studio), gorgeous organic textures, and a breathtaking cinematic quality. It must look incredibly premium and pristine, not dirty or gritty.
 3. CREATIVE FREEDOM: The scene is entirely up to your imagination. The style only defines how it is shot (lighting, grading, technique).
 4. VAST NEGATIVE SPACE: The designated text zone MUST have a vast, perfectly clean, low-contrast area so text can be read easily. Do not place busy, floating, or high-contrast objects in this zone. Non-negotiable.{subject_constraint}
 

@@ -38,10 +38,15 @@ def generate(prompt: str, role: str) -> tuple[str, str]:
             continue
         try:
             extra = {}
-            if role_cfg.disable_thinking and p.model.startswith("gemini/"):
-                extra["extra_body"] = {
-                    "generationConfig": {"thinkingConfig": {"thinkingBudget": 0}}
-                }
+            if role_cfg.disable_thinking:
+                if p.model.startswith("gemini/"):
+                    extra["extra_body"] = {
+                        "generationConfig": {"thinkingConfig": {"thinkingBudget": 0}}
+                    }
+                elif "deepseek" in p.model:
+                    extra["extra_body"] = {
+                        "thinking": {"type": "disabled"}
+                    }
             resp = litellm.completion(
                 model=p.model,
                 messages=[{"role": "user", "content": prompt}],
