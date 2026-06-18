@@ -108,7 +108,7 @@ SCENE PARAMETERS — what world to build:
 RULES:
 1. GENERAL AUDIENCE: Beautiful, relatable, emotionally resonant. Must stop someone scrolling.
 2. CINEMATIC PHOTOGRAPHY: Create a high-end, sleek, hyper-polished photographic image. Focus on dramatic atmospheric lighting (e.g., golden hour, twilight, overcast, moody studio), gorgeous organic textures, and a breathtaking cinematic quality. It must look incredibly premium and pristine, not dirty or gritty.
-3. CREATIVE FREEDOM: The scene is entirely up to your imagination. The style only defines how it is shot (lighting, grading, technique).
+3. STRICT STYLE COMPLIANCE: The scene must NOT be a random wild imagination. It must strictly adhere to the visual grammar, environment, and aesthetic trend described in the STYLE block. Construct a grounded, realistic scene that perfectly embodies the requested aesthetic trend.
 4. VAST NEGATIVE SPACE: The designated text zone MUST have a vast, perfectly clean, low-contrast area so text can be read easily. Do not place busy, floating, or high-contrast objects in this zone. Non-negotiable.{subject_constraint}
 
 Write 4–6 sentences:

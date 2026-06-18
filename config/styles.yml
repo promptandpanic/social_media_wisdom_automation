@@ -1,62 +1,99 @@
 styles:
 
-  studio_ghibli:
-    summary: "Studio Ghibli Art. Lush, vibrant, colorful anime landscapes."
-    categories: [wisdom, morning, mindfulness, love, latenight, womenpower, darkacademia]
+  cinematic_realism:
+    summary: "Cinematic Realism. Moody, atmospheric, beautifully lit real-world moments."
+    categories: [latenight, wisdom, love, mindfulness]
     weight: high
     description: >
-      Studio Ghibli style anime background art. Lush green landscapes, highly detailed volumetric clouds, 
-      vibrant blue skies, and rich colorful environments. Extremely attention-grabbing, nostalgic, 
-      and beautiful painterly anime aesthetic. Exploding with life, magic, and vibrant colors. 
-      Ensure there is ample negative space and uncluttered sky or foreground to allow for clean text overlay.
+      Cinematic, moody real-world photography. Grounded in reality but shot beautifully with a 35mm film aesthetic.
+      Features natural, atmospheric lighting, soft film grain, and rich, relatable environments (e.g., quiet coffee
+      shops in the rain, dimly lit street corners, solitary figures). Colors are rich, deep, and cinematic.
+      Must feature ample clean negative space to ensure pristine text overlay legibility.
     rendering:
-      font: playfair
-      font_variants: [playfair, cormorant, lora, merriweather, spectral, cinzel]
-      text_color: "#FFFFFF"
-      author_color: "#FFD700"
-      overlay: {type: gradient_center, opacity: 160, color: "#000000", blur: 0}
-      text_zone: center
-      layout: big_center
-      decoration: none
-      voice_gender: female
-
-  vibrant_minimalism:
-    summary: "Vibrant Minimalism. Bold colors, clean lines, abundant negative space."
-    categories: [wisdom, morning, mindfulness, love, latenight, womenpower, darkacademia]
-    weight: high
-    description: >
-      Vibrant, highly saturated minimalist aesthetic. Bold, striking color palettes (like deep magenta, 
-      electric orange, or vivid teal) paired with clean lines, liminal spaces, or vast empty architecture. 
-      Visually dazzling and attention-grabbing while maintaining extreme simplicity. 
-      Must feature massive amounts of negative space and perfectly clean areas for text overlay.
-    rendering:
-      font: cinzel
-      font_variants: [cinzel, playfair, cormorant, lora]
-      text_color: "#FFFFFF"
-      author_color: "#FFD700"
-      overlay: {type: gradient_bottom, opacity: 160, color: "#000000", blur: 0}
-      text_zone: bottom_minimalist
-      layout: minimalist
-      decoration: none
-      voice_gender: male
-
-  vibrant_wildlife:
-    summary: "Vibrant Wildlife. Lush jungles, savannas, magnificent wild animals."
-    categories: [wisdom, morning, mindfulness, love, latenight, womenpower, darkacademia]
-    weight: high
-    description: >
-      Vibrant wildlife and majestic nature aesthetic. Stunning, crystal-clear depictions of diverse and magnificent wild animals 
-      (such as tigers, lions, panthers, elephants, hyenas, zebras, giraffes, various antelopes, kudus, wolves, hippos, rhinos, Amazon rainforest birds, and weird or unique looking animals) 
-      in incredibly lush, deeply colorful environments ranging from deep dark jungles to vast savanna plains. 
-      Extremely rich lighting, glowing sunlight, and highly saturated, attention-grabbing colors. 
-      Must feature massive amounts of negative space—such as an empty misty background, soft depth-of-field, or an uncluttered dark foreground—to ensure text remains highly legible.
-    rendering:
-      font: lora
-      font_variants: [lora, merriweather, spectral, playfair, cormorant]
-      text_color: "#FFFFFF"
-      author_color: "#FFD700"
+      font: inter
+      font_variants: [cormorant, playfair, spectral, inter, merriweather]
+      text_color: "#F8F8F8"
+      author_color: "#B0B0B0"
       overlay: {type: gradient_top, opacity: 160, color: "#000000", blur: 0}
       text_zone: top_minimalist
       layout: asymmetric
+      decoration: rule
+      voice_gender: male
+
+  quiet_luxury:
+    summary: "Quiet Luxury. Expensive minimalism, natural light, clean space."
+    categories: [mindfulness, wisdom, morning, love]
+    weight: high
+    description: >
+      The epitome of 'quiet luxury' and high-end aesthetics. Relies on beautiful negative space,
+      clean architectural lines, soft natural lighting, and high-quality textures (linen, marble, warm wood).
+      Feels incredibly expensive but entirely understated. Color palette is strictly neutral (beige, cream,
+      slate, soft olive). Very calming, grounded, and modern.
+    rendering:
+      font: playfair
+      font_variants: [playfair, cormorant, outfit, spectral, lora]
+      text_color: "#2C2C2C"
+      author_color: "#8B7355"
+      overlay: {type: glass, opacity: 180, color: "#FFFFFF", blur: 30}
+      text_zone: center_minimalist
+      layout: minimalist
+      decoration: none
+      voice_gender: female
+
+  editorial_chic:
+    summary: "Editorial Chic. High-fashion, elegant, sophisticated and confident."
+    categories: [womenpower, morning, wisdom]
+    weight: high
+    description: >
+      High-fashion editorial style. Aspirational, elegant, and confident. Features stylish subjects in high-end
+      environments (street style, modern architecture, or minimal studio). Clean lines, neutral or sophisticated
+      color palettes. Lighting is highly professional, like a Vogue or Harper's Bazaar editorial spread.
+      Ensure the designated text zone is perfectly clean and low-contrast for readable typography.
+    rendering:
+      font: montserrat
+      font_variants: [montserrat, raleway, oswald, inter, lora]
+      text_color: "#FFFFFF"
+      author_color: "#D4AF37"
+      overlay: {type: gradient_bottom, opacity: 140, color: "#000000", blur: 0}
+      text_zone: bottom_minimalist
+      layout: minimalist
+      decoration: none
+      voice_gender: female
+
+  stark_monochrome:
+    summary: "Stark Monochrome. High contrast B&W, striking silhouettes, powerful minimalism."
+    categories: [wisdom, womenpower, latenight]
+    weight: medium
+    description: >
+      Striking black and white photography with high contrast. Deep, pure blacks and bright, clean whites.
+      Focus on strong shapes, silhouettes, and dramatic directional lighting. Very modern, unapologetic,
+      and powerful. The composition must rely heavily on striking dark negative space.
+    rendering:
+      font: cinzel
+      font_variants: [cinzel, bebas, oswald, montserrat]
+      text_color: "#FFFFFF"
+      author_color: "#A0A0A0"
+      overlay: {type: none, opacity: 0, color: "#000000", blur: 0}
+      text_zone: center
+      layout: big_center
+      decoration: rule
+      voice_gender: male
+
+  golden_hour_warmth:
+    summary: "Golden Hour Warmth. Warm, inviting, glowing sunlight, hopeful."
+    categories: [love, morning, mindfulness, wisdom]
+    weight: medium
+    description: >
+      Warm, inviting photography shot exclusively during golden hour or with beautiful sun flare.
+      The focus is on the warmth of the light and a feeling of hope or peacefulness. Colors are warm,
+      glowing oranges, soft yellows, and deep shadow contrast. Keep the foreground uncluttered.
+    rendering:
+      font: playfair
+      font_variants: [montserrat, poppins, jost, inter, nunito]
+      text_color: "#FFFFFF"
+      author_color: "#FFD700"
+      overlay: {type: gradient_bottom, opacity: 130, color: "#1A0F00", blur: 0}
+      text_zone: bottom_minimalist
+      layout: big_center
       decoration: none
       voice_gender: female
