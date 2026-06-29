@@ -87,6 +87,12 @@ or a traditional proverb / folk saying. Author may be known or unknown.
 
 Rules:
 - DO NOT write or invent — find things that genuinely exist
+- CRITICAL: Focus entirely on viral, bitter-truth, street-smart realizations, and sharp psychological themes (e.g. subtle gaslighting dynamics, boundary setting, and raw social observations).
+- Example vibes/quotes of the exact type desired:
+  * "Horses that go to war don't dance at weddings."
+  * "The same people who mock you when you are nothing will pretend they knew you when you are something."
+  * "When people throw stones at you, don't throw them back. Keep them, and build an empire."
+  * "The people you would take a bullet for are often the ones holding the gun."
 - BREVITY: Favor shorter quotes (8-15 words) that hit hard immediately.
 - Maximum {max_words} words per quote
 - Must feel instantly shareable — the kind people screenshot and send

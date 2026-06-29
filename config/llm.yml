@@ -15,6 +15,9 @@ providers:
   gemini:
     model: gemini/gemini-3.1-flash-lite
     key_env: GEMINI_API_KEY
+  gemini_3_flash_preview:
+    model: gemini/gemini-3-flash-preview
+    key_env: GEMINI_API_KEY
   huggingface:
     model: huggingface/Qwen/Qwen2.5-7B-Instruct
     key_env: HF_API_KEY
@@ -24,7 +27,7 @@ providers:
 # image_judge stays gemini-only — deepseek chat has no vision support.
 roles:
   quote_generation:
-    providers: [deepseek, kimi, gemini]
+    providers: [gemini_3_flash_preview, deepseek, kimi]
     temperature: 1.0
     max_tokens: 8192
     disable_thinking: true

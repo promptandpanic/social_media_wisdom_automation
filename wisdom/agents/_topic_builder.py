@@ -17,17 +17,16 @@ def build_topic_block(theme_key: str) -> tuple[str, str]:
     brief = cat.get("brief", "").strip()
 
     # Feature author spotlight ~30% of the time for ANY theme that has them
-    featured = cat.get("featured_authors", [])
-    if featured and random.random() < 0.30:
-        pick = random.choice(featured)
-        block = (
-            f"TODAY: Find a quote by {pick['name'].upper()}.\n"
-            f"Context: {pick['note']}\n"
-            f"Choose a lesser-known gem — not their most-circulated line."
-        )
-        # We removed the hardcoded dark academia marble statue hint
-        # so it uses the dynamic, vibrant image style prompt instead!
-        return block, ""
+    # TEMP DISABLED: Disabled author spotlight to focus purely on internet viral quotes
+    # featured = cat.get("featured_authors", [])
+    # if featured and random.random() < 0.30:
+    #     pick = random.choice(featured)
+    #     block = (
+    #         f"TODAY: Find a quote by {pick['name'].upper()}.\n"
+    #         f"Context: {pick['note']}\n"
+    #         f"Choose a lesser-known gem — not their most-circulated line."
+    #     )
+    #     return block, ""
 
     # Latenight: pick a weighted topic group for variety
     if "topic_groups" in cat:
