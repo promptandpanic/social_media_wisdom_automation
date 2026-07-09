@@ -17,7 +17,7 @@ themes:
   morning:
     name: Morning Motivation
     format: reel
-    styles: [moody_cinematic_film, cyberpunk_neon, brutalist_minimalism]
+    styles: [quiet_luxury_noir, vintage_cinematic_grain, warm_brutalist_minimal]
     max_words: 35
     platforms: [instagram, youtube, facebook]
     hashtags: ["#MorningVibes", "#WorkoutMotivation", "#FreshStart", "#DailyDiscipline", "#SuccessMindset", "#FitnessAesthetic"]
@@ -31,7 +31,7 @@ themes:
   wisdom:
     name: Life Wisdom
     format: reel
-    styles: [moody_cinematic_film, cyberpunk_neon, brutalist_minimalism]
+    styles: [quiet_luxury_noir, vintage_cinematic_grain, warm_brutalist_minimal]
     max_words: 35
     platforms: [instagram, youtube, facebook]
     hashtags: ["#Stoicism", "#DeepThoughts", "#WisdomQuotes", "#PhilosophyOfLife", "#CarlJung"]
@@ -45,7 +45,7 @@ themes:
   love:
     name: Love & Relationships
     format: reel
-    styles: [moody_cinematic_film, cyberpunk_neon, brutalist_minimalism]
+    styles: [quiet_luxury_noir, vintage_cinematic_grain, warm_brutalist_minimal]
     max_words: 35
     platforms: [instagram, youtube, facebook]
     hashtags: ["#LoveQuotes", "#RelationshipAdvice", "#Heartbreak", "#TwinFlame", "#DeepLoveQuotes"]
@@ -59,7 +59,7 @@ themes:
   mindfulness:
     name: Mindfulness & Inner Peace
     format: reel
-    styles: [moody_cinematic_film, cyberpunk_neon, brutalist_minimalism]
+    styles: [quiet_luxury_noir, vintage_cinematic_grain, warm_brutalist_minimal]
     max_words: 32
     platforms: [instagram, youtube, facebook]
     hashtags: ["#MindfulnessPractice", "#SpiritualAwakening", "#InnerPeace", "#MentalClarity", "#ZenLife"]
@@ -73,7 +73,7 @@ themes:
   goodnight:
     name: Goodnight & Gratitude
     format: reel
-    styles: [moody_cinematic_film, cyberpunk_neon, brutalist_minimalism]
+    styles: [quiet_luxury_noir, vintage_cinematic_grain, warm_brutalist_minimal]
     max_words: 40
     platforms: [instagram, youtube, facebook]
     hashtags: ["#GoodNight", "#NightThoughts", "#GratitudePractice", "#PeacefulMind", "#SleepWell"]
@@ -87,7 +87,7 @@ themes:
   darkacademia:
     name: Dark Academia
     format: reel
-    styles: [moody_cinematic_film, cyberpunk_neon, brutalist_minimalism]
+    styles: [quiet_luxury_noir, vintage_cinematic_grain, warm_brutalist_minimal]
     max_words: 40
     platforms: [instagram, youtube, facebook]
     hashtags: ["#AestheticVibes", "#DeepThinking", "#DarkAcademia", "#PhilosophyQuotes", "#Intellectual"]
@@ -101,7 +101,7 @@ themes:
   latenight:
     name: Late Night Feels
     format: reel
-    styles: [moody_cinematic_film, cyberpunk_neon, brutalist_minimalism]
+    styles: [quiet_luxury_noir, vintage_cinematic_grain, warm_brutalist_minimal]
     max_words: 38
     platforms: [instagram, youtube, facebook]
     hashtags: ["#LateNightThoughts", "#Overthinking", "#MidnightThoughts", "#Melancholy", "#DeepQuotes"]
@@ -115,7 +115,7 @@ themes:
   womenpower:
     name: She Feels
     format: reel
-    styles: [moody_cinematic_film, cyberpunk_neon, brutalist_minimalism]
+    styles: [quiet_luxury_noir, vintage_cinematic_grain, warm_brutalist_minimal]
     max_words: 35
     platforms: [instagram, youtube, facebook]
     hashtags: ["#SheFeels", "#WomenEmpowerment", "#DarkFeminine", "#GlowUp", "#IndependentWoman", "#Aesthetic"]

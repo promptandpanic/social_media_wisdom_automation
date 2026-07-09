@@ -55,14 +55,13 @@ Generate 5 DISTINCT real quotes from real named persons for a {_AUDIENCE}.
 {no_cliches}
 
 Rules:
-- REAL quote — do not invent, paraphrase, or composite
-- BREVITY: Favor shorter quotes (10-15 words) that hit hard immediately.
-- Maximum {max_words} words per quote
-- Named author — not "Unknown"
-- Choose lesser-known gems over widely-circulated lines
-- Specific and concrete — not vague philosophy
-- Must be a visceral, raw truth about modern life, ambition, or relationships
-- It should make the reader instantly think "This is exactly how I feel"
+- REAL quote — do not invent, paraphrase, or composite.
+- BREVITY: Focus on extreme brevity. Target 6-15 words so it can be read in under 5 seconds.
+- Maximum {max_words} words per quote.
+- Named author — not "Unknown" or "Anonymous".
+- Choose lesser-known gems over widely-circulated lines.
+- Specific and concrete — must be a visceral, raw truth about modern life, human nature, power, strategy, or relationships.
+- Must feel instantly shareable and have high psychological impact (makes the reader pause and reflect).
 
 Uniqueness / Viral Potential score (1–10): how fresh, relatable, and shareable is this exact phrasing?
   10 = mind-blowing truth almost nobody has seen  |  1 = posted on every motivational page
@@ -86,19 +85,19 @@ or a traditional proverb / folk saying. Author may be known or unknown.
 {no_cliches}
 
 Rules:
-- DO NOT write or invent — find things that genuinely exist
-- CRITICAL: Focus entirely on viral, bitter-truth, street-smart realizations, and sharp psychological themes (e.g. subtle gaslighting dynamics, boundary setting, and raw social observations).
+- DO NOT write or invent — find things that genuinely exist.
+- BREVITY: Focus on extreme brevity. Target 6-15 words so it can be read in under 5 seconds.
+- CRITICAL: Focus entirely on viral, bitter-truth, street-smart realizations, and sharp psychological observations (e.g., subtle gaslighting dynamics, boundaries, human nature, power, strategy, and street-smart wisdom).
 - Example vibes/quotes of the exact type desired:
   * "Horses that go to war don't dance at weddings."
   * "The same people who mock you when you are nothing will pretend they knew you when you are something."
-  * "When people throw stones at you, don't throw them back. Keep them, and build an empire."
   * "The people you would take a bullet for are often the ones holding the gun."
-- BREVITY: Favor shorter quotes (8-15 words) that hit hard immediately.
-- Maximum {max_words} words per quote
-- Must feel instantly shareable — the kind people screenshot and send
-- Must be a visceral, raw truth about modern life, ambition, or relationships
-- It should make the reader instantly think "This is exactly how I feel"
-- Author: real name if known, "Unknown" otherwise
+  * "You don't lose friends. You just learn who the real ones are."
+- Maximum {max_words} words per quote.
+- Must feel instantly shareable — the kind people screenshot and send.
+- Must be a visceral, raw truth about modern life, ambition, or relationships.
+- It should make the reader instantly think "This is exactly how I feel" or "This is a cheat code to life".
+- Author: real name if known, "Unknown" otherwise.
 
 Uniqueness / Viral Potential score (1–10): how fresh, relatable, and shareable is this exact phrasing?
   10 = mind-blowing truth almost nobody has seen  |  1 = posted on every motivational page

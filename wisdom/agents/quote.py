@@ -95,8 +95,11 @@ def _build_prompt(
 
 
 def select_mode(state: PipelineState) -> PipelineState:
-    # Forced to internet_found to focus entirely on viral internet quotes as requested by the user
-    mode = "offline" if state.get("offline") else "internet_found"
+    mode = (
+        "offline"
+        if state.get("offline")
+        else random.choice(["real_author", "internet_found"])
+    )
     logger.info(f"Quote mode: {mode}")
     return {**state, "_quote_mode": mode, "_quote_attempt": 0, "_quote_fallback": None}
 

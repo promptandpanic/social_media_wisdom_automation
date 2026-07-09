@@ -1,55 +1,51 @@
 styles:
 
-  moody_cinematic_film:
-    summary: "Moody Cinematic Film. Dark, grainy, atmospheric, 35mm film street and interior moments."
+  quiet_luxury_noir:
+    summary: "Quiet Luxury Noir. Dark desaturated high-contrast scenes, minimal high-fashion elements, deep shadows."
     categories: [morning, wisdom, love, mindfulness, goodnight, darkacademia, latenight, womenpower]
     weight: high
     description: >
-      Moody, atmospheric, real-world street and interior photography. Grounded in reality but shot beautifully with a 35mm film aesthetic.
-      Features dark night environments, wet streets, rain-streaked windows, quiet coffee shops, and low-key lighting.
-      Colors are deep, desaturated, and cinematic. Ample dark negative space for readable text.
+      Sleek, high-end quiet luxury and noir photography. Dark desaturated tones, minimal high-fashion elements (e.g. elegant dark coat, luxury watch, desaturated street/liminal space at night, luxury car interior at night), wet streets, quiet high-end libraries, and deep low-key cinematic shadows. Perfect for a clean, rich aesthetic. Ample dark negative space for readable white text.
     rendering:
-      font: inter
-      font_variants: [inter, raleway, montserrat]
+      font: cormorant
+      font_variants: [cormorant, playfair, lora, spectral, cinzel]
       text_color: "#FFFFFF"
       author_color: "#D4AF37"
-      overlay: {type: gradient_bottom, opacity: 160, color: "#000000", blur: 0}
+      overlay: {type: gradient_bottom, opacity: 170, color: "#000000", blur: 0}
       text_zone: center_minimalist
-      layout: asymmetric
-      decoration: rule
+      layout: minimalist
+      decoration: none
       voice_gender: male
 
-  cyberpunk_neon:
-    summary: "Cyberpunk Neon. Moody rainy night with futuristic neon accents."
+  vintage_cinematic_grain:
+    summary: "Vintage Cinematic Grain. Nostalgic 90s film aesthetic, warm tones, and cinematic shadows."
     categories: [morning, wisdom, love, mindfulness, goodnight, darkacademia, latenight, womenpower]
     weight: high
     description: >
-      Futuristic street photography at night in the rain. High contrast dark scenes with reflective wet asphalt and glowing neon signs in cyan, magenta, and amber.
-      Ample dark shadow space to keep the text overlay fully legible.
+      Warm vintage 35mm film street photography. Features classic film grain, nostalgic golden hour or warm interior lighting, soft retro reflections, vintage clothing, and candid cinematic moments. Beautifully textured and deeply personal. Colors are rich but faded.
     rendering:
-      font: montserrat
-      font_variants: [montserrat, oswald, inter]
-      text_color: "#FFFFFF"
-      author_color: "#00FFFF"
-      overlay: {type: gradient_bottom, opacity: 180, color: "#000000", blur: 0}
-      text_zone: bottom_minimalist
-      layout: big_center
+      font: raleway
+      font_variants: [raleway, montserrat, lora, inter]
+      text_color: "#FDFCFA"
+      author_color: "#E5A93B"
+      overlay: {type: gradient_bottom, opacity: 160, color: "#0B0907", blur: 0}
+      text_zone: center_minimalist
+      layout: asymmetric
       decoration: none
-      voice_gender: female
+      voice_gender: male
 
-  brutalist_minimalism:
-    summary: "Brutalist Minimalism. Luxury concrete, clean lines, and soft architectural shadows."
+  warm_brutalist_minimal:
+    summary: "Warm Brutalist Minimal. Clean luxury architecture, striking diagonal shadows, beige/sand tones."
     categories: [morning, wisdom, love, mindfulness, goodnight, darkacademia, latenight, womenpower]
     weight: high
     description: >
-      Sleek, high-end minimalist architecture. Features neutral off-white concrete, clean lines, shadow plays from tropical leaves, linen textures, and warm wood accents.
-      Very calming and high-end. Neutral palette (beige, warm gray, sand).
+      Luxurious modern brutalist architecture. Features warm off-white concrete, clean geometric lines, striking diagonal shadows cast by palm leaves, serene linen textures, and clear water ripples. Colors are warm neutrals (beige, cream, sand, muted gold, charcoal).
     rendering:
-      font: playfair
-      font_variants: [playfair, cormorant, lora]
-      text_color: "#1A1A1A"
-      author_color: "#666666"
-      overlay: {type: glass, opacity: 200, color: "#F5F5F5", blur: 40}
+      font: jost
+      font_variants: [jost, montserrat, outfit, inter]
+      text_color: "#1C1B19"
+      author_color: "#7E756B"
+      overlay: {type: glass, opacity: 200, color: "#F7F5F0", blur: 40}
       text_zone: center_minimalist
       layout: minimalist
       decoration: none
