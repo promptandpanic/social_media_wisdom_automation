@@ -102,14 +102,15 @@ STYLE: {style_name}
 {style_description}
 
 SCENE PARAMETERS — what world to build:
-  - SCENE & SUBJECT: Tell a vivid story through the visual. Focus on breathtaking, cinematic photography. Use a high-end 35mm lens look with beautiful depth of field. Create relatable, aspirational, or deeply atmospheric scenes (e.g., twilight landscapes, solitary figures, elegant liminal spaces, or striking subjects). The scene MUST be highly polished, sleek, and exceptionally beautiful. Absolutely NO dark, gritty, horrific, or depressing surrealism. Keep the composition elegant, luminous, and visually harmonious.
-  - EMOTIONAL ANCHOR: The overall mood, lighting, and expression of the subject MUST be dictated strictly by the emotion of the quote. If the quote is fierce, the mood should be fierce; if serene, serene. Let the words lead the vibe.
+  - SCENE & SUBJECT: Tell a vivid story dynamically derived from the quote's unique sentiment and metaphor. The central subject must NOT always be a person — intelligently vary between human figures, meaningful objects (e.g. hourglass, glowing key, lone tree, open book, broken compass, architectural element), or symbolic natural/urban scenes based on what fits the quote best. When a human figure is featured, vary naturally across male and female genders, as well as age groups (kids, young adults, adults, elderly) according to what best aligns with the quote's message.
+  - LIGHTING & ATMOSPHERE: Do NOT default to dark, moody, or black tones unless explicitly required by the quote's core emotion. Embrace bright, soft, pastel, golden hour, studio, or serene lighting depending on the selected style.
+  - EMOTIONAL ANCHOR: The overall mood, lighting, and visual elements MUST be dictated strictly by the sentiment of the quote (e.g., uplifting, reflective, decisive, peaceful, sharp).
 {image_hint_block}
 RULES:
 1. GENERAL AUDIENCE: Beautiful, relatable, emotionally resonant. Must stop someone scrolling.
-2. CINEMATIC PHOTOGRAPHY: Create a high-end, sleek, hyper-polished photographic image. Focus on dramatic atmospheric lighting (e.g., golden hour, twilight, overcast, moody studio), gorgeous organic textures, and a breathtaking cinematic quality. It must look incredibly premium and pristine, not dirty or gritty.
-3. STRICT STYLE COMPLIANCE: The scene must NOT be a random wild imagination. It must strictly adhere to the visual grammar, environment, and aesthetic trend described in the STYLE block. Construct a grounded, realistic scene that perfectly embodies the requested aesthetic trend.
-4. VAST NEGATIVE SPACE: The designated text zone MUST have a vast, perfectly clean, low-contrast area so text can be read easily. Do not place busy, floating, or high-contrast objects in this zone. Non-negotiable.{subject_constraint}
+2. HIGH QUALITY ARTISTRY: Create a sleek, hyper-polished visual image adhering strictly to the chosen style. Focus on atmospheric lighting, refined textures, and pristine composition.
+3. STRICT STYLE COMPLIANCE: The scene must strictly adhere to the visual grammar, environment, lighting, and aesthetic trend described in the STYLE block.
+4. VAST NEGATIVE SPACE: The designated text zone MUST have a vast, perfectly clean, low-contrast, uncluttered area (either light or dark depending on style) so text can be read with zero effort. Do not place busy objects in this zone. Non-negotiable.{subject_constraint}
 
 Write 4–6 sentences:
   location & setting → subject & emotional action → atmospheric detail → exact color palette (hex values) → lighting & composition.
@@ -122,14 +123,7 @@ Constraints:
 Reply with ONLY the image prompt — plain text, no JSON, no preamble.
 """
 
-_THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {
-    "womenpower": (
-        "\n  - THEMATIC MANDATE: STRICTLY BLACK AND WHITE editorial style. Large image of a stylish woman. "
-        "Rotate between different modern outfits (e.g., high-fashion ramp wear, sharp professional corporate attire). "
-        "The focus MUST be entirely on the woman, her attitude, clothing, and posture. "
-        "Keep the background/scene minimal and mostly out of focus."
-    ),
-}
+_THEME_SUBJECT_CONSTRAINTS: dict[str, str] = {}
 
 
 # ---------------------------------------------------------------------------

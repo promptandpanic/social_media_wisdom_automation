@@ -50,3 +50,21 @@ styles:
       layout: minimalist
       decoration: none
       voice_gender: female
+
+  trendy_aesthetic_cartoon:
+    summary: "Trendy Aesthetic Cartoon Photo Editing. Soft pastel lighting, smooth skin details, expressive eyes, sticker-like outlines, pastel background, small doodle elements, clean composition."
+    categories: [morning, wisdom, love, mindfulness, goodnight, darkacademia, latenight, womenpower]
+    weight: high
+    description: >
+      Trendy aesthetic cartoon photo editing style. Features soft dreamy studio lighting, smooth refined skin details, expressive eyes, subtle white sticker-like outlines around the main subjects, pastel background colors (soft blush pink, pastel sage, lavender, baby blue, muted cream), small cute doodle and line-art elements in negative space (sparkles, floating stars, subtle hearts, minimal outline icons), and a clean, high-impact social media composition with generous empty negative space.
+    rendering:
+      font: outfit
+      font_variants: [outfit, poppins, nunito, jost, inter]
+      text_color: "#1A1A1A"
+      author_color: "#4A4A4A"
+      overlay: {type: glass, opacity: 180, color: "#FFFFFF", blur: 30}
+      text_zone: center_minimalist
+      layout: minimalist
+      decoration: none
+      voice_gender: female
+

@@ -26,9 +26,7 @@ _RETRY_SUFFIXES = [
     "Go bolder — extreme contrast, dramatic scale, or stark minimalism.",
 ]
 
-_THEME_PROMPT_PREFIXES: dict[str, str] = {
-    "womenpower": "A woman — ",
-}
+_THEME_PROMPT_PREFIXES: dict[str, str] = {}
 
 
 # ---------------------------------------------------------------------------
