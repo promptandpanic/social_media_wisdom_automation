@@ -52,6 +52,8 @@ def _styles_for_theme(
     all_styles = cfg.styles()
     result = []
     for name, s in all_styles.items():
+        if not s.get("enabled", True):
+            continue
         if locked and name not in locked:
             continue
         if not locked and theme_key not in s.get("categories", []):

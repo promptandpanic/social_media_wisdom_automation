@@ -4,6 +4,7 @@ styles:
     summary: "Quiet Luxury Noir. Dark desaturated high-contrast scenes, minimal high-fashion elements, deep shadows."
     categories: [morning, wisdom, love, mindfulness, goodnight, darkacademia, latenight, womenpower]
     weight: high
+    enabled: false
     description: >
       Sleek, high-end quiet luxury and noir photography. Dark desaturated tones, minimal high-fashion elements (e.g. elegant dark coat, luxury watch, desaturated street/liminal space at night, luxury car interior at night), wet streets, quiet high-end libraries, and deep low-key cinematic shadows. Perfect for a clean, rich aesthetic. Ample dark negative space for readable white text.
     rendering:
@@ -21,6 +22,7 @@ styles:
     summary: "Vintage Cinematic Grain. Nostalgic 90s film aesthetic, warm tones, and cinematic shadows."
     categories: [morning, wisdom, love, mindfulness, goodnight, darkacademia, latenight, womenpower]
     weight: high
+    enabled: false
     description: >
       Warm vintage 35mm film street photography. Features classic film grain, nostalgic golden hour or warm interior lighting, soft retro reflections, vintage clothing, and candid cinematic moments. Beautifully textured and deeply personal. Colors are rich but faded.
     rendering:
@@ -38,6 +40,7 @@ styles:
     summary: "Warm Brutalist Minimal. Clean luxury architecture, striking diagonal shadows, beige/sand tones."
     categories: [morning, wisdom, love, mindfulness, goodnight, darkacademia, latenight, womenpower]
     weight: high
+    enabled: false
     description: >
       Luxurious modern brutalist architecture. Features warm off-white concrete, clean geometric lines, striking diagonal shadows cast by palm leaves, serene linen textures, and clear water ripples. Colors are warm neutrals (beige, cream, sand, muted gold, charcoal).
     rendering:
