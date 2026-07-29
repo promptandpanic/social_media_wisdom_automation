@@ -196,7 +196,7 @@ class GeminiFlashProvider(BaseImageProvider):
 
     name = "gemini_flash"
 
-    def __init__(self, model: str = "gemini-3.5-flash-image", **_):
+    def __init__(self, model: str = "gemini-3.1-flash-lite-image", **_):
         self.model = model
 
     def available(self) -> bool:

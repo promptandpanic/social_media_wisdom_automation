@@ -9,7 +9,7 @@ providers:
 
   gemini_flash:
     class: wisdom.providers.image.GeminiFlashProvider
-    model: gemini-3.1-flash-lite
+    model: gemini-3.1-flash-lite-image
     key_env: GEMINI_API_KEY
     timeout: 60
 
@@ -32,4 +32,4 @@ providers:
     # Zero-dependency PIL fallback — always works
 
 # Tried left-to-right; first success wins.
-fallback_chain: [leonardo_flux_pro, gemini_imagen, gemini_flash, huggingface, gradient]
+fallback_chain: [leonardo_flux_pro, gemini_flash, gemini_imagen, huggingface, gradient]
