@@ -46,8 +46,8 @@ styles:
     rendering:
       font: jost
       font_variants: [jost, montserrat, outfit, inter]
-      text_color: "#1C1B19"
-      author_color: "#7E756B"
+      text_color: "#050505"
+      author_color: "#444444"
       overlay: {type: glass, opacity: 200, color: "#F7F5F0", blur: 40}
       text_zone: center_minimalist
       layout: minimalist
@@ -63,8 +63,8 @@ styles:
     rendering:
       font: outfit
       font_variants: [outfit, poppins, nunito, jost, inter]
-      text_color: "#1C1B19"
-      author_color: "#4A4A4A"
+      text_color: "#050505"
+      author_color: "#222222"
       overlay: {type: none, opacity: 0, color: "#FFFFFF", blur: 0}
       text_zone: center_minimalist
       layout: minimalist

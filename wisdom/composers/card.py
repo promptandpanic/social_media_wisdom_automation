@@ -609,7 +609,7 @@ def _draw_text(
             txt_color = (255, 255, 255)
         else:
             # Dark BG -> Light glass box -> Dark text
-            txt_color = (30, 30, 30)
+            txt_color = (5, 5, 5)
 
     font_size = max(28, brief.font_size)
     all_lines, f, font_size = _fit_text(
