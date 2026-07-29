@@ -40,7 +40,7 @@ styles:
     summary: "Warm Brutalist Minimal. Clean luxury architecture, striking diagonal shadows, beige/sand tones."
     categories: [morning, wisdom, love, mindfulness, goodnight, darkacademia, latenight, womenpower]
     weight: high
-    enabled: false
+    enabled: true
     description: >
       Luxurious modern brutalist architecture. Features warm off-white concrete, clean geometric lines, striking diagonal shadows cast by palm leaves, serene linen textures, and clear water ripples. Colors are warm neutrals (beige, cream, sand, muted gold, charcoal).
     rendering:
