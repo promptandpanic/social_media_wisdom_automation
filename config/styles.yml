@@ -40,7 +40,7 @@ styles:
     summary: "Warm Brutalist Minimal. Clean luxury architecture, striking diagonal shadows, beige/sand tones."
     categories: [morning, wisdom, love, mindfulness, goodnight, darkacademia, latenight, womenpower]
     weight: high
-    enabled: true
+    enabled: false
     description: >
       Luxurious modern brutalist architecture. Features warm off-white concrete, clean geometric lines, striking diagonal shadows cast by palm leaves, serene linen textures, and clear water ripples. Colors are warm neutrals (beige, cream, sand, muted gold, charcoal).
     rendering:
@@ -48,7 +48,7 @@ styles:
       font_variants: [jost, montserrat, outfit, inter]
       text_color: "#050505"
       author_color: "#444444"
-      overlay: {type: glass, opacity: 200, color: "#F7F5F0", blur: 40}
+      overlay: {type: none, opacity: 0, color: "#F7F5F0", blur: 0}
       text_zone: center_minimalist
       layout: minimalist
       decoration: none
@@ -58,6 +58,7 @@ styles:
     summary: "Premium vibrant digital painting, cartoonish, and vector art mix. Light background, clean composition, dark text overlay, high viral appeal."
     categories: [morning, wisdom, love, mindfulness, goodnight, darkacademia, latenight, womenpower]
     weight: high
+    enabled: true
     description: >
       A premium, high-end artistic blend of modern digital painting, clean vector illustration, and trendy aesthetic cartooning. Features high-key bright lighting, smooth soft-color gradients, clean crisp vector outlines, and highly relatable expressive characters or premium lifestyle elements. Colors must be bright, light-filled, optimistic, and warm (strictly no dark, blackish, or low-contrast backgrounds). The scene must feature a vast, perfectly clean, high-key light background or negative space (such as soft off-white, light cream, or extremely light pastel color) that is entirely empty and free of any objects or busy textures, specifically designed for a dark text overlay to stand out clearly in a single color. Visually striking, premium-quality, and instantly viral.
     rendering:
@@ -70,6 +71,7 @@ styles:
       layout: minimalist
       decoration: none
       voice_gender: female
+
 
 
 
